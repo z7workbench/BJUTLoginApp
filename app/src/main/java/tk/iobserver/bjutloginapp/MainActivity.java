@@ -23,8 +23,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
@@ -76,11 +78,11 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.action_login: {
-
+                login(prefs.getString("user", null), prefs.getString("password", null));
             }
             break;
             case R.id.action_logout: {
-
+                logout();
             }
             break;
             case R.id.action_sync: {
@@ -89,6 +91,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void login(String user, String password){
+        RequestBody requestBody = new FormBody.Builder()
+                .add("DDDDD", user)
+                .add("upass", password)
+                .add("6MKKey", "123")
+                .build();
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url("http://wlgn.bjut.edu.cn/")
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Snackbar.make(coordinatorLayout, "Login Failed! " + e, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.body().string().indexOf("In use")>0){
+                    Snackbar.make(coordinatorLayout, "Login Failed! " + "This account is in use. ", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(coordinatorLayout, "Login Succeeded! ", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
     }
 
     void refresh() {
@@ -125,4 +158,29 @@ public class MainActivity extends AppCompatActivity {
                 .setAction("Action", null).show();
     }
 
+    void logout(){
+        Request request = new Request.Builder()
+                .get()
+                .url("http://wlgn.bjut.edu.cn/F.htm")
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Snackbar.make(coordinatorLayout, "Logout Failed! " + e, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.body().string().indexOf("注销成功") > 0) {
+                    Snackbar.make(coordinatorLayout, "Logout Succeeded! ", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(coordinatorLayout, "Logout Failed! ", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
+    }
 }
