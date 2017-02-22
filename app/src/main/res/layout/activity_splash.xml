@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context="tk.iobserver.bjutloginapp.SplashActivity">
+
+    <TextView
+        android:id="@+id/splash_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/main_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_title" />
+    <TextView
+        android:id="@+id/splash_tv_designer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|bottom"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/app_designer"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_mini"
+        android:layout_marginBottom="@dimen/text_margin"/>
+    <TextView
+        android:id="@+id/splash_tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|bottom"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_mini"
+        android:layout_marginBottom="@dimen/text_second_margin"/>
+
+</android.support.design.widget.CoordinatorLayout>

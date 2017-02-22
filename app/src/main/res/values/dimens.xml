@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="app_bar_height">145dp</dimen>
+    <dimen name="app_toolbar_height">145dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_check_margin">68dp</dimen>
+    <dimen name="text_margin">8dp</dimen>
+    <dimen name="text_size">24sp</dimen>
+    <dimen name="text_second_margin">32dp</dimen>
+    <dimen name="text_title">30sp</dimen>
+    <dimen name="text_mini">16sp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+</resources>

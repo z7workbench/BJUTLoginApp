@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BJUT登录</string>
+    <string name="action_settings">设置</string>
+    <string name="main_name">BJUT登录程序重制版</string>
+    <string name="user_dialog_account_hint">用户名</string>
+    <string name="user_dialog_cb_text">明码显示</string>
+    <string name="user_dialog_package_text">套餐</string>
+    <string name="user_dialog_password_hint">密码</string>
+    <string name="main_tv_usedFlux">正在刷新已用流量......</string>
+    <string name="app_aboutActivity_name">关于我</string>
+    <string name="app_designer">ZeroGo 设计出品</string>
+    <string name="main_tv_userList">用户列表</string>
+    <string name="user_dialog_cancel">下次再说</string>
+    <string name="user_dialog_ok">就这样了</string>
+    <string name="user_dailog_title">用户</string>
+</resources>
