@@ -7,7 +7,7 @@
     <string name="action_sync">Sync</string>
     <string name="main_name">BJUT Login</string>
     <string name="main_tv_description">2333</string>
-    <string name="main_tv_usedFlux">Refreshing used flux</string>
+    <string name="main_tv_usedFlux">Refreshing used flux......</string>
     <string name="main_tv_userList">User List:</string>
 
     <string name="settings_about_content">2333</string>
