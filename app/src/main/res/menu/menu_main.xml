@@ -2,10 +2,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="tk.iobserver.bjutloginapp.MainActivity">
+
+    <item
+        android:id="@+id/action_login"
+        android:icon="@drawable/ic_file_upload_24dp"
+        android:orderInCategory="1"
+        android:title="@string/action_login"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_file_download_24dp"
+        android:orderInCategory="2"
+        android:title="@string/action_logout"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_sync"
+        android:icon="@drawable/ic_sync_24dp"
+        android:orderInCategory="3"
+        android:title="@string/action_sync"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
         android:icon="@drawable/ic_settings_24dp"
+        android:orderInCategory="4"
+        android:title="@string/action_settings"
         app:showAsAction="ifRoom" />
 </menu>

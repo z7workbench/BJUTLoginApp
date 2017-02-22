@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">BJUT Login App</string>
     <string name="app_designer">Designed by ZeroGo</string>
+    <string name="action_login">Login</string>
+    <string name="action_logout">Logout</string>
     <string name="action_settings">Settings</string>
+    <string name="action_sync">Sync</string>
     <string name="main_name">BJUT Login</string>
     <string name="main_tv_description">2333</string>
     <string name="main_tv_usedFlux">Refreshing used flux</string>
