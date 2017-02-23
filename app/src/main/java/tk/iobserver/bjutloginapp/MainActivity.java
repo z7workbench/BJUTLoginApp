@@ -32,7 +32,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
     private SharedPreferences prefs;
-    final OkHttpClient okHttpClient = new OkHttpClient();
+    Operator operator = new Operator(TAG);
     @BindView(R.id.main_toolbar) Toolbar toolbar;
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.main_tv_usedFlux) TextView usedFlux;
@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            refresh();
+            operator.refresh(coordinatorLayout, usedFlux, this);
         });
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        refresh();
+        operator.refresh(coordinatorLayout, usedFlux, this);
     }
 
     @Override
@@ -78,109 +78,19 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.action_login: {
-                login(prefs.getString("user", null), prefs.getString("password", null));
+                operator.login(coordinatorLayout, prefs.getString("user", null), prefs.getString("password", null));
             }
             break;
             case R.id.action_logout: {
-                logout();
+                operator.logout(coordinatorLayout);
             }
             break;
             case R.id.action_sync: {
-                refresh();
+                operator.refresh(coordinatorLayout, usedFlux, this);
             }
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    void login(String user, String password){
-        RequestBody requestBody = new FormBody.Builder()
-                .add("DDDDD", user)
-                .add("upass", password)
-                .add("6MKKey", "123")
-                .build();
-        Request request = new Request.Builder()
-                .post(requestBody)
-                .url("http://wlgn.bjut.edu.cn/")
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Snackbar.make(coordinatorLayout, "Login Failed! " + e, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.body().string().indexOf("In use")>0){
-                    Snackbar.make(coordinatorLayout, "Login Failed! " + "This account is in use. ", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } else {
-                    Snackbar.make(coordinatorLayout, "Login Succeeded! ", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            }
-        });
-
-    }
-
-    void refresh() {
-        Snackbar.make(coordinatorLayout, "Refresh data...", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-        Request request = new Request.Builder()
-                .get()
-                .url("http://lgn.bjut.edu.cn/")
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e(TAG, "", e);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Pattern pattern = Pattern.compile("flow='(\\d+)");
-                Matcher matcher = pattern.matcher(response.body().string());
-
-                if (matcher.find()) {
-                    final Double flux = (double) ((int) (Double.parseDouble(matcher.group(1)) / 1024 * 100)) / 100;
-                    runOnUiThread(() -> {
-                        try {
-                            usedFlux.setText("Used Flux: " + flux + "MB");
-                        } catch (Exception e) {
-                            Log.e(TAG, "", e);
-                        }
-                    });
-                }
-            }
-        });
-        Snackbar.make(coordinatorLayout, "Completed! ", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
-    void logout(){
-        Request request = new Request.Builder()
-                .get()
-                .url("http://wlgn.bjut.edu.cn/F.htm")
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Snackbar.make(coordinatorLayout, "Logout Failed! " + e, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if(response.body().string().indexOf("注销成功") > 0) {
-                    Snackbar.make(coordinatorLayout, "Logout Succeeded! ", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } else {
-                    Snackbar.make(coordinatorLayout, "Logout Failed! ", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            }
-        });
-
-    }
 }
