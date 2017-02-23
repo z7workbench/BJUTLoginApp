@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/text_margin"
         android:text="@string/main_tv_description"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size"
+        android:textSize="22sp"
         app:layout_scrollFlags=""
         android:id="@+id/textView" />
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="@string/main_tv_usedFlux"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size"
+        android:textSize="26sp"
         app:layout_scrollFlags=""
         android:layout_below="@+id/textView"
         android:layout_marginTop="@dimen/text_margin"

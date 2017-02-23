@@ -1,6 +1,7 @@
 package tk.iobserver.bjutloginapp;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -66,8 +67,6 @@ public class Operator {
     }
 
     void refresh(View view, TextView textView, Activity activity) {
-        Snackbar.make(view, "Refresh data...", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
         Request request = new Request.Builder()
                 .get()
                 .url("http://lgn.bjut.edu.cn/")
@@ -87,7 +86,7 @@ public class Operator {
                     final Double flux = (double) ((int) (Double.parseDouble(matcher.group(1)) / 1024 * 100)) / 100;
                     activity.runOnUiThread(() -> {
                         try {
-                            textView.setText("Used Flux: " + flux + "MB");
+                            textView.setText(activity.getString(R.string.main_tv_usedFlux_finished) + flux + "MB");
                         } catch (Exception e) {
                             Log.e(TAG, "", e);
                         }
