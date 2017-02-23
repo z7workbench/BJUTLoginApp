@@ -10,7 +10,7 @@
     <string name="action_login">登录</string>
     <string name="action_logout">登出</string>
     <string name="action_sync">更新数据</string>
-    <string name="main_tv_description"></string>
+    <string name="main_tv_description">此应用用于登陆[bjut_wifi]的WiFi网络</string>
     <string name="settings_about_title">关于我</string>
     <string name="settings_category_about">关于</string>
     <string name="settings_category_language">语言</string>
@@ -23,4 +23,5 @@
     <string name="settings_user_hint">在此输入你的用户名</string>
     <string name="settings_user_title">用户名</string>
     <string name="settings_version_title">版本</string>
+    <string name="settings_about_content">ZeroGoYoosee @GitHub: https://github.com/ZeroGoYoosee</string>
 </resources>

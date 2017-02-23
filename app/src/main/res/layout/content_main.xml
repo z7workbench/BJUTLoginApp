@@ -29,5 +29,6 @@
         app:layout_scrollFlags=""
         android:layout_below="@+id/textView"
         android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/text_margin"
         android:layout_alignStart="@+id/textView" />
 </RelativeLayout>
