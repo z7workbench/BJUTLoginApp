@@ -33,7 +33,7 @@ public class Operator {
     }
 
     void login(View view, String user, String password){
-        if(!user.isEmpty()){
+        if(user != null && !user.isEmpty()){
             RequestBody requestBody = new FormBody.Builder()
                     .add("DDDDD", user)
                     .add("upass", password)
