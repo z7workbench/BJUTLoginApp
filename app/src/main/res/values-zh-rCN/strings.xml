@@ -24,4 +24,5 @@
     <string name="settings_user_title">用户名</string>
     <string name="settings_version_title">版本</string>
     <string name="settings_about_content">ZeroGoYoosee @GitHub: https://github.com/ZeroGoYoosee</string>
+    <string name="action_help">帮助</string>
 </resources>

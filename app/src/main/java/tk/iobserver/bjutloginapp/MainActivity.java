@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_toolbar) Toolbar toolbar;
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.main_tv_usedFlux) TextView usedFlux;
+    @BindView(R.id.fab_refresh) FloatingActionButton refreshFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
+        refreshFAB.setOnClickListener(view -> {
             operator.refresh(coordinatorLayout, usedFlux, this);
         });
     }
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_sync: {
                 operator.refresh(coordinatorLayout, usedFlux, this);
             }
+            break;
         }
 
         return super.onOptionsItemSelected(item);
