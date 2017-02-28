@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/text_margin"
         android:text="@string/main_tv_description"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size_l"
+        android:textSize="22sp"
         app:layout_scrollFlags=""
         android:id="@+id/textView" />
 
@@ -25,19 +25,10 @@
         android:layout_height="wrap_content"
         android:text="@string/main_tv_usedFlux"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size_xxl"
+        android:textSize="26sp"
         app:layout_scrollFlags=""
         android:layout_below="@+id/textView"
         android:layout_marginTop="@dimen/text_margin"
         android:layout_marginEnd="@dimen/text_margin"
         android:layout_alignStart="@+id/textView" />
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/main_tv_usedFlux"
-        android:layout_marginStart="@dimen/text_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginEnd="@dimen/text_margin"
-        layout="@layout/status_card" />
 </RelativeLayout>
