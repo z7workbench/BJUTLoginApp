@@ -15,7 +15,7 @@
     <string name="card_status">●</string>
     <string name="card_time">Time</string>
     <string name="card_time_default">NaN min</string>
-    <string name="card_user">Current User</string>
+    <string name="card_user">Empty User Name</string>
 
     <string name="main_name">BJUT Login App</string>
     <string name="main_tv_description">This App is a Login Application for [bjut_wifi] network. </string>

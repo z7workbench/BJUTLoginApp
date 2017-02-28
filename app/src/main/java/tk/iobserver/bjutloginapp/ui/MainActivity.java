@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public SharedPreferences prefs;
     Operator operator = new Operator(TAG);
     StatusCard statusCard;
+    TextView userView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        userView = ButterKnife.findById(statusCardView, R.id.card_user);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         refreshFAB.setOnClickListener(view -> {
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        if (prefs.getString("user", null) != null && !prefs.getString("user", null).isEmpty())
+            userView.setText(prefs.getString("user", null));
+        else userView.setText(getResources().getString(R.string.card_user));
         operator.refresh(coordinatorLayout, usedFlux, this);
         statusCard.onSync();
     }

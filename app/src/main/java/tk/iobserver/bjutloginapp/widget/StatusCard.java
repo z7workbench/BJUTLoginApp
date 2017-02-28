@@ -19,40 +19,48 @@ import tk.iobserver.bjutloginapp.util.Operator;
  */
 
 public class StatusCard {
-    @BindView(R.id.card_user) TextView userView;
-    @BindView(R.id.card_status) TextView statusView;
-    @BindView(R.id.card_time) TextView timeView;
-    @BindView(R.id.card_fee) TextView feeView;
-    @BindView(R.id.card_network) TextView networkView;
-    @BindView(R.id.card_flux) TextView fluxView;
+    @BindView(R.id.card_user)
+    TextView userView;
+    @BindView(R.id.card_status)
+    TextView statusView;
+    @BindView(R.id.card_time)
+    TextView timeView;
+    @BindView(R.id.card_fee)
+    TextView feeView;
+    @BindView(R.id.card_network)
+    TextView networkView;
+    @BindView(R.id.card_flux)
+    TextView fluxView;
     CoordinatorLayout coordinatorLayout;
     SharedPreferences prefs;
     private CardView cardView;
     private MainActivity activity;
     Operator operator;
 
-    public StatusCard(CardView cardView, MainActivity activity){
+    public StatusCard(CardView cardView, MainActivity activity) {
         this.cardView = cardView;
         this.activity = activity;
-        operator= new Operator(activity.TAG);
+        operator = new Operator(activity.TAG);
         ButterKnife.bind(this, cardView);
-        userView.setText(activity.prefs.getString("user", null));
+        if (activity.prefs.getString("user", null) != null && !activity.prefs.getString("user", null).isEmpty())
+            userView.setText(activity.prefs.getString("user", null));
+        else userView.setText(activity.getResources().getString(R.string.card_user));
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         coordinatorLayout = ButterKnife.findById(activity, R.id.main_layout);
     }
 
     @OnClick(R.id.card_btn_login)
-    public void onLogin(){
+    public void onLogin() {
         operator.login(coordinatorLayout, prefs.getString("user", null), prefs.getString("password", null));
     }
 
     @OnClick(R.id.card_btn_sync)
-    public void onSync(){
+    public void onSync() {
         operator.refresh(coordinatorLayout, fluxView, activity);
     }
 
     @OnClick(R.id.card_btn_logout)
-    public void onLogout(){
+    public void onLogout() {
         operator.logout(coordinatorLayout);
     }
 }
