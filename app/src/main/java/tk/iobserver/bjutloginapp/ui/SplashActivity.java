@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp;
+package tk.iobserver.bjutloginapp.ui;
 
 import android.content.Intent;
 import android.os.Handler;

@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp;
+package tk.iobserver.bjutloginapp.util;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import tk.iobserver.bjutloginapp.R;
 
 /**
  * Created by ZeroGo on 2017.2.23.
@@ -32,7 +33,7 @@ public class Operator {
         this.TAG = TAG;
     }
 
-    void login(View view, String user, String password){
+    public void login(View view, String user, String password){
         if(user != null && !user.isEmpty()){
             RequestBody requestBody = new FormBody.Builder()
                     .add("DDDDD", user)
@@ -65,7 +66,7 @@ public class Operator {
         }
     }
 
-    void refresh(View view, TextView textView, Activity activity) {
+    public void refresh(View view, TextView textView, Activity activity) {
         Request request = new Request.Builder()
                 .get()
                 .url("http://lgn.bjut.edu.cn/")
@@ -102,7 +103,7 @@ public class Operator {
         });
     }
 
-    void logout(View view){
+    public void logout(View view){
         Request request = new Request.Builder()
                 .get()
                 .url("http://wlgn.bjut.edu.cn/F.htm")

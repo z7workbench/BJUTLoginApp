@@ -14,9 +14,9 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/text_margin"
         android:columnCount="3"
-        android:rowCount="5">
+        android:rowCount="6">
 
-        <TextView
+        <TextView android:id="@+id/card_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
@@ -51,11 +51,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_row="1"
             android:gravity="center"
-            android:text="Time"
+            android:text="@string/card_time"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_xxl" />
+            android:textSize="@dimen/text_size_l" />
 
-        <TextView
+        <TextView android:id="@+id/card_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -63,44 +63,84 @@
             android:layout_gravity="center_horizontal"
             android:layout_row="1"
             android:gravity="center_horizontal"
-        android:text="1329min"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size_xxl" />
+            android:text="@string/card_time_default"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_l" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_columnSpan="3"
+            android:layout_columnWeight="1"
             android:layout_gravity="center_horizontal"
             android:layout_row="2"
             android:gravity="center_horizontal"
-            android:text="WiFi: bjut_wifi"
+            android:text="@string/card_fee"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_xxl" />
+            android:textSize="@dimen/text_size_l" />
 
-        <TextView
+        <TextView android:id="@+id/card_fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center_horizontal"
             android:layout_row="2"
             android:gravity="center_horizontal"
-            android:text=""
+            android:text="@string/card_fee_default"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_xxl" />
+            android:textSize="@dimen/text_size_l" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_columnSpan="3"
+            android:layout_columnWeight="1"
             android:layout_gravity="center_horizontal"
             android:layout_row="3"
             android:gravity="center_horizontal"
-            android:text="Used Flux: 9999.99MB"
+            android:text="@string/card_network"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_xxl" />
+            android:textSize="@dimen/text_size_l" />
+
+        <TextView android:id="@+id/card_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="3"
+            android:gravity="center_horizontal"
+            android:text="@string/card_network_default"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_l" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="4"
+            android:gravity="center_horizontal"
+            android:text="@string/card_flux"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_l" />
+
+        <TextView android:id="@+id/card_flux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="4"
+            android:gravity="center_horizontal"
+            android:text="@string/card_flux_default"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_l" />
 
         <LinearLayout
             android:id="@+id/status_layout"
@@ -109,7 +149,7 @@
             android:layout_column="0"
             android:layout_columnSpan="3"
             android:layout_gravity="fill_horizontal"
-            android:layout_row="4"
+            android:layout_row="5"
             android:gravity="center"
             android:orientation="horizontal">
 

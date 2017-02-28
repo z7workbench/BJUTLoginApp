@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp;
+package tk.iobserver.bjutloginapp.ui;
 
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import tk.iobserver.bjutloginapp.R;
+import tk.iobserver.bjutloginapp.BuildConfig;
 
 /**
  * Created by ZeroGo on 2017.2.22.
