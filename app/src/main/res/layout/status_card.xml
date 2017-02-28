@@ -16,7 +16,8 @@
         android:columnCount="3"
         android:rowCount="6">
 
-        <TextView android:id="@+id/card_user"
+        <TextView
+            android:id="@+id/card_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
@@ -31,6 +32,7 @@
             android:textStyle="italic" />
 
         <TextView
+            android:id="@+id/card_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="2"
@@ -40,7 +42,7 @@
             android:layout_rowSpan="2"
             android:gravity="center_horizontal"
             android:text="@string/card_status"
-            android:textColor="@android:color/black"
+            android:textColor="@color/alert_yellow"
             android:textSize="@dimen/text_size_xxxl" />
 
         <TextView
@@ -55,7 +57,8 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_l" />
 
-        <TextView android:id="@+id/card_time"
+        <TextView
+            android:id="@+id/card_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -79,7 +82,8 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_l" />
 
-        <TextView android:id="@+id/card_fee"
+        <TextView
+            android:id="@+id/card_fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -104,7 +108,8 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_l" />
 
-        <TextView android:id="@+id/card_network"
+        <TextView
+            android:id="@+id/card_network"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -129,7 +134,8 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_l" />
 
-        <TextView android:id="@+id/card_flux"
+        <TextView
+            android:id="@+id/card_flux"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -153,9 +159,8 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-
             <Button
-                android:id="@+id/sign_in_button"
+                android:id="@+id/card_btn_login"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,17 +170,7 @@
                 android:text="@string/action_login" />
 
             <Button
-                android:id="@+id/sign_out_button"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:minWidth="60dp"
-                android:text="@string/action_logout" />
-
-            <Button
-                android:id="@+id/refresh_button"
+                android:id="@+id/card_btn_sync"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,6 +178,16 @@
                 android:layout_marginStart="0dp"
                 android:minWidth="60dp"
                 android:text="@string/action_sync" />
+
+            <Button
+                android:id="@+id/card_btn_logout"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:minWidth="60dp"
+                android:text="@string/action_logout" />
         </LinearLayout>
 
     </GridLayout>

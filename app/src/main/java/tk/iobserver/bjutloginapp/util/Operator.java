@@ -1,7 +1,6 @@
 package tk.iobserver.bjutloginapp.util;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +24,8 @@ import tk.iobserver.bjutloginapp.R;
  */
 
 public class Operator {
-    final OkHttpClient okHttpClient = new OkHttpClient();
+    private final OkHttpClient okHttpClient = new OkHttpClient();
     private String TAG;
-    private View view;
 
     public Operator(String TAG){
         this.TAG = TAG;
@@ -88,7 +86,8 @@ public class Operator {
                     final Double flux = (double) ((int) (Double.parseDouble(matcher.group(1)) / 1024 * 100)) / 100;
                     activity.runOnUiThread(() -> {
                         try {
-                            textView.setText(activity.getString(R.string.main_tv_usedFlux_finished) + flux + "MB");
+                            textView.setText(flux + "MB");
+//                            TODO textView.setText(activity.getString(R.string.main_tv_usedFlux_finished) + flux + "MB");
                         } catch (Exception e) {
                             Log.e(TAG, "", e);
                         }

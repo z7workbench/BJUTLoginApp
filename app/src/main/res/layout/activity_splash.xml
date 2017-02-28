@@ -17,7 +17,7 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/main_name"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/text_title" />
     <TextView
         android:id="@+id/splash_tv_designer"
@@ -26,7 +26,7 @@
         android:layout_gravity="center_vertical|bottom"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/app_designer"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/text_mini"
         android:layout_marginBottom="@dimen/text_margin"/>
     <TextView
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|bottom"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/text_mini"
         android:layout_marginBottom="@dimen/text_second_margin"/>
 

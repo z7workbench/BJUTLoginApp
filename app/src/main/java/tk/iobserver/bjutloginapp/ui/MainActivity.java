@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,15 +17,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import tk.iobserver.bjutloginapp.R;
 import tk.iobserver.bjutloginapp.util.Operator;
+import tk.iobserver.bjutloginapp.widget.StatusCard;
 
 public class MainActivity extends AppCompatActivity {
-    private final String TAG = "MainActivity";
-    private SharedPreferences prefs;
-    Operator operator = new Operator(TAG);
     @BindView(R.id.main_toolbar) Toolbar toolbar;
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.main_tv_usedFlux) TextView usedFlux;
     @BindView(R.id.fab_refresh) FloatingActionButton refreshFAB;
+    @BindView(R.id.status_card) CardView statusCardView;
+    public final String TAG = "MainActivity";
+    public SharedPreferences prefs;
+    Operator operator = new Operator(TAG);
+    StatusCard statusCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,16 @@ public class MainActivity extends AppCompatActivity {
         refreshFAB.setOnClickListener(view -> {
             operator.refresh(coordinatorLayout, usedFlux, this);
         });
+
+        statusCard = new StatusCard(statusCardView, this);
+
     }
 
     @Override
     public void onResume(){
         super.onResume();
         operator.refresh(coordinatorLayout, usedFlux, this);
+        statusCard.onSync();
     }
 
     @Override
