@@ -6,7 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="action_sync">Sync</string>
 
-    <string name="card_status_title">Status</string>
+    <string name="card_user">User</string>
+    <string name="card_status">●</string>
+    <string name="card_flux">Refreshing used flux......</string>
 
     <string name="main_name">BJUT Login App</string>
     <string name="main_tv_description">This App is a Login Application for [bjut_wifi] network. </string>
