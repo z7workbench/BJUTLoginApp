@@ -15,16 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/main_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-        android:name=".SettingsActivity"
+        android:name=".ui.SettingsActivity"
         android:label="@string/action_settings"
         android:theme="@style/AppTheme.NoActionBar">
     </activity>
-        <activity android:name=".SplashActivity"
+        <activity android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar"
             >
             <intent-filter>
