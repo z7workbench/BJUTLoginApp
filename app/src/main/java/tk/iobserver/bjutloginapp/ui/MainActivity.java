@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         if (prefs.getString("user", null) != null && !prefs.getString("user", null).isEmpty())
             userView.setText(prefs.getString("user", null));
         else userView.setText(getResources().getString(R.string.card_user));
-        statusCard.sync(coordinatorLayout);
+        statusCard.sync(coordinatorLayout, true);
     }
 
     @Override

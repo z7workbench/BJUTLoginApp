@@ -12,7 +12,10 @@
     <string name="card_flux_default">NaN MB</string>
     <string name="card_network">Network</string>
     <string name="card_network_default">NaN</string>
-    <string name="card_status">●</string>
+    <string name="card_status_error">● ERR</string>
+    <string name="card_status_out">● OUT</string>
+    <string name="card_status_synced">● SYN</string>
+    <string name="card_status_syncing">● ING</string>
     <string name="card_time">Time</string>
     <string name="card_time_default">NaN min</string>
     <string name="card_user">Empty User Name</string>
