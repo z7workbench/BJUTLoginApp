@@ -155,15 +155,24 @@ public class StatusCard {
                 String content = response.body().string();
                 Pattern checkPattern = Pattern.compile("Please enter Account");
                 Matcher checkMatcher = checkPattern.matcher(content);
-                if(!checkMatcher.find()){
-                    Pattern fluxPattern = Pattern.compile("flow='(\\d+)");
-                    Matcher fluxMatcher = fluxPattern.matcher(content);
 
-                    if (fluxMatcher.find()) {
-                        final Double flux = (double) ((int) (Double.parseDouble(fluxMatcher.group(1)) / 1024 * 100)) / 100;
+                if(!checkMatcher.find()){
+                    Pattern pattern = Pattern.compile("time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'");
+                    Matcher matcher = pattern.matcher(content);
+/*                    Pattern timePattern = Pattern.compile("time='(\\d+)");
+                    Matcher timeMatcher = timePattern.matcher(content);
+                    Pattern feePattern = Pattern.compile("fee='(\\d+)");
+                    Matcher feeMatcher = feePattern.matcher(content);*/
+
+                    if (matcher.find()) {
+                        final Double time = Double.parseDouble(matcher.group(1));
+                        final Double flux = (double) ((int) (Double.parseDouble(matcher.group(1)) / 1024 * 100)) / 100;
+                        final Double fee = Double.parseDouble(matcher.group(3))/10000;
                         activity.runOnUiThread(() -> {
                             try {
+                                timeView.setText(time+"min");
                                 fluxView.setText(flux + "MB");
+                                feeView.setText("¥"+fee);
                                 statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_green));
                                 statusView.setText(R.string.card_status_synced);
                             } catch (Exception e) {

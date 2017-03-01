@@ -22,18 +22,18 @@
             android:summary="@string/settings_password_hint"
             android:title="@string/settings_password_title"/>
     </PreferenceCategory>
+    <!--
+        <PreferenceCategory android:title="@string/settings_category_language">
 
-    <PreferenceCategory android:title="@string/settings_category_language">
-        <!--
-                <ListPreference
-                    android:key="language"
-                    android:title="@string/settings_language_title"
-                    android:summary="@string/settings_language_summary"
-                    android:entries="@array/language"
-                    android:entryValues="@array/language_value"/>
-        -->
+                    <ListPreference
+                        android:key="language"
+                        android:title="@string/settings_language_title"
+                        android:summary="@string/settings_language_summary"
+                        android:entries="@array/language"
+                        android:entryValues="@array/language_value"/>
+
     </PreferenceCategory>
-
+    -->
     <PreferenceCategory android:title="@string/settings_category_about">
         <Preference
             android:summary="@string/settings_about_content"
