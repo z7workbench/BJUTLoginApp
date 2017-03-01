@@ -4,7 +4,6 @@
     <string name="action_settings">设置</string>
     <string name="main_name">BJUT登录应用</string>
     <string name="main_tv_usedFlux">正在刷新已用流量......</string>
-    <string name="app_aboutActivity_name">关于我</string>
     <string name="app_designer">ZeroGo 设计出品</string>
     <string name="main_tv_usedFlux_finished">已用流量：</string>
     <string name="action_login">登录</string>
@@ -25,4 +24,17 @@
     <string name="settings_version_title">版本</string>
     <string name="settings_about_content">ZeroGoYoosee @GitHub: https://github.com/ZeroGoYoosee</string>
     <string name="action_help">帮助</string>
+    <string name="card_fee">剩余费用</string>
+    <string name="card_fee_default">\???</string>
+    <string name="card_flux">已用流量</string>
+    <string name="card_flux_default">\??? MB</string>
+    <string name="card_network">当前网络</string>
+    <string name="card_network_default">\???</string>
+    <string name="card_status_error">● 错误</string>
+    <string name="card_status_out">● 离线</string>
+    <string name="card_status_synced">● 完成</string>
+    <string name="card_status_syncing">● 同步</string>
+    <string name="card_time">已用时间</string>
+    <string name="card_time_default">\??? 分钟</string>
+    <string name="card_user">未输入用户名</string>
 </resources>

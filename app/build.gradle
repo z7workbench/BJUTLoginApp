@@ -9,12 +9,12 @@ android {
         minSdkVersion 23
         targetSdkVersion 25
         versionCode 2
-        versionName "2.3.9 Dev"
+        versionName "2.3 Stable"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

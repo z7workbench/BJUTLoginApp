@@ -38,4 +38,5 @@
     <string name="settings_user_hint">Enter user name here</string>
     <string name="settings_user_title">User Number</string>
     <string name="settings_version_title">Version</string>
+    <string name="action_help">Help</string>
 </resources>

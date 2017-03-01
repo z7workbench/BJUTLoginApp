@@ -37,7 +37,7 @@ public class StatusCard {
     @BindView(R.id.card_status) TextView statusView;
     @BindView(R.id.card_time) TextView timeView;
     @BindView(R.id.card_fee) TextView feeView;
-    @BindView(R.id.card_network) TextView networkView;
+//    @BindView(R.id.card_network) TextView networkView;
     @BindView(R.id.card_flux) TextView fluxView;
     private final OkHttpClient okHttpClient = new OkHttpClient();
     CoordinatorLayout coordinatorLayout;

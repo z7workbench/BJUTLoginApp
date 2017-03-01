@@ -16,7 +16,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.util.Operator;
 import tk.iobserver.bjutloginapp.widget.StatusCard;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         statusView = ButterKnife.findById(statusCardView, R.id.card_status);
         timeView = ButterKnife.findById(statusCardView, R.id.card_time);
         feeView = ButterKnife.findById(statusCardView, R.id.card_fee);
-        networkView = ButterKnife.findById(statusCardView, R.id.card_network);
+//        networkView = ButterKnife.findById(statusCardView, R.id.card_network);
         fluxView = ButterKnife.findById(statusCardView, R.id.card_flux);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
