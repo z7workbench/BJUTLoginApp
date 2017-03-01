@@ -2,6 +2,7 @@ package tk.iobserver.bjutloginapp.util;
 
 import android.app.Activity;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -25,10 +26,12 @@ import tk.iobserver.bjutloginapp.R;
 
 public class Operator {
     private final OkHttpClient okHttpClient = new OkHttpClient();
+    private Activity activity;
     private String TAG;
 
-    public Operator(String TAG){
+    public Operator(String TAG, Activity activity){
         this.TAG = TAG;
+        this.activity = activity;
     }
 
     public void login(View view, String user, String password){
@@ -64,7 +67,8 @@ public class Operator {
         }
     }
 
-    public void refresh(View view, TextView textView, Activity activity) {
+    public void refresh(View view, TextView fluxView, TextView statusView) {
+        statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_yellow));
         Request request = new Request.Builder()
                 .get()
                 .url("http://lgn.bjut.edu.cn/")
@@ -75,6 +79,13 @@ public class Operator {
                 Snackbar.make(view, "Refresh Failed! ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Log.e(TAG, "Failed! ", e);
+                activity.runOnUiThread(()->{
+                    try{
+                        statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
+                    } catch (Exception e1){
+                        Log.e(TAG, "", e1);
+                    }
+                });
             }
 
             @Override
@@ -86,8 +97,8 @@ public class Operator {
                     final Double flux = (double) ((int) (Double.parseDouble(matcher.group(1)) / 1024 * 100)) / 100;
                     activity.runOnUiThread(() -> {
                         try {
-                            textView.setText(flux + "MB");
-//                            TODO textView.setText(activity.getString(R.string.main_tv_usedFlux_finished) + flux + "MB");
+                            fluxView.setText(flux + "MB");
+                            statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_green));
                         } catch (Exception e) {
                             Log.e(TAG, "", e);
                         }
@@ -95,6 +106,7 @@ public class Operator {
                     Snackbar.make(view, "Refresh successfully completed! ", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } else {
+                    statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
                     Snackbar.make(view, "Can't get data! ", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -102,7 +114,7 @@ public class Operator {
         });
     }
 
-    public void logout(View view){
+    public void logout(View view, TextView statusView){
         Request request = new Request.Builder()
                 .get()
                 .url("http://wlgn.bjut.edu.cn/F.htm")
@@ -126,6 +138,7 @@ public class Operator {
                 }
             }
         });
+        statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_yellow));
 
     }
 

@@ -42,7 +42,7 @@
             android:layout_rowSpan="2"
             android:gravity="center_horizontal"
             android:text="@string/card_status"
-            android:textColor="@color/alert_yellow"
+            android:textColor="@color/alert_grey"
             android:textSize="@dimen/text_size_xxxl" />
 
         <TextView

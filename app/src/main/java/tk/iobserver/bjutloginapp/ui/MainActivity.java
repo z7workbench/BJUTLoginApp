@@ -22,14 +22,17 @@ import tk.iobserver.bjutloginapp.widget.StatusCard;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_toolbar) Toolbar toolbar;
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.main_tv_usedFlux) TextView usedFlux;
     @BindView(R.id.fab_refresh) FloatingActionButton refreshFAB;
     @BindView(R.id.status_card) CardView statusCardView;
     public final String TAG = "MainActivity";
     public SharedPreferences prefs;
-    Operator operator = new Operator(TAG);
     StatusCard statusCard;
     TextView userView;
+    TextView statusView;
+    TextView timeView;
+    TextView feeView;
+    TextView networkView;
+    TextView fluxView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +42,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         userView = ButterKnife.findById(statusCardView, R.id.card_user);
+        statusView = ButterKnife.findById(statusCardView, R.id.card_status);
+        timeView = ButterKnife.findById(statusCardView, R.id.card_time);
+        feeView = ButterKnife.findById(statusCardView, R.id.card_fee);
+        networkView = ButterKnife.findById(statusCardView, R.id.card_network);
+        fluxView = ButterKnife.findById(statusCardView, R.id.card_flux);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        refreshFAB.setOnClickListener(view -> {
+
+        //TODO FAB Action
+/*        refreshFAB.setOnClickListener(view -> {
             operator.refresh(coordinatorLayout, usedFlux, this);
-        });
+        });*/
 
         statusCard = new StatusCard(statusCardView, this);
 
@@ -55,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
         if (prefs.getString("user", null) != null && !prefs.getString("user", null).isEmpty())
             userView.setText(prefs.getString("user", null));
         else userView.setText(getResources().getString(R.string.card_user));
-        operator.refresh(coordinatorLayout, usedFlux, this);
-        statusCard.onSync();
+        statusCard.sync(coordinatorLayout);
     }
 
     @Override
@@ -78,19 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
             }
-            break;
-            case R.id.action_login: {
-                operator.login(coordinatorLayout, prefs.getString("user", null), prefs.getString("password", null));
-            }
-            break;
-            case R.id.action_logout: {
-                operator.logout(coordinatorLayout);
-            }
-            break;
-            case R.id.action_sync: {
-                operator.refresh(coordinatorLayout, usedFlux, this);
-            }
-            break;
         }
 
         return super.onOptionsItemSelected(item);
