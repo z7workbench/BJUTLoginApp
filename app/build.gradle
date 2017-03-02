@@ -9,7 +9,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 25
         versionCode 2
-        versionName "2.3 Stable"
+        versionName "2.3.1 Stable"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

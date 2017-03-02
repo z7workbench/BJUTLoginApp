@@ -159,14 +159,10 @@ public class StatusCard {
                 if(!checkMatcher.find()){
                     Pattern pattern = Pattern.compile("time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'");
                     Matcher matcher = pattern.matcher(content);
-/*                    Pattern timePattern = Pattern.compile("time='(\\d+)");
-                    Matcher timeMatcher = timePattern.matcher(content);
-                    Pattern feePattern = Pattern.compile("fee='(\\d+)");
-                    Matcher feeMatcher = feePattern.matcher(content);*/
 
                     if (matcher.find()) {
                         final Double time = Double.parseDouble(matcher.group(1));
-                        final Double flux = (double) ((int) (Double.parseDouble(matcher.group(1)) / 1024 * 100)) / 100;
+                        final Double flux = (double) ((int) (Double.parseDouble(matcher.group(2)) / 1024 * 100)) / 100;
                         final Double fee = Double.parseDouble(matcher.group(3))/10000;
                         activity.runOnUiThread(() -> {
                             try {
