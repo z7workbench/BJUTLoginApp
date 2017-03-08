@@ -9,30 +9,31 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_login_stable"
+        android:icon="@mipmap/ic_login_dev"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_login_stable"
+        android:roundIcon="@mipmap/ic_login_dev"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/main_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-        android:name=".ui.SettingsActivity"
-        android:label="@string/action_settings"
-        android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-        <activity android:name=".ui.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:name=".ui.SettingsActivity"
+            android:label="@string/action_settings"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.ReleaseNoteActivity"
+            android:label="@string/action_rn"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

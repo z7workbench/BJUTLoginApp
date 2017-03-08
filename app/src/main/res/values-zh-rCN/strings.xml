@@ -37,4 +37,7 @@
     <string name="card_time">已用时间</string>
     <string name="card_time_default">\??? 分钟</string>
     <string name="card_user">未输入用户名</string>
+    <string name="card_note">日志</string>
+    <string name="card_iv_rn">BJUT登录程序更新日志</string>
+    <string name="action_rn">更新日志</string>
 </resources>

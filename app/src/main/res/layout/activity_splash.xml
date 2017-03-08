@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    tools:context="tk.iobserver.bjutloginapp.SplashActivity">
+    tools:context="tk.iobserver.bjutloginapp.ui.SplashActivity">
 
     <TextView
         android:id="@+id/splash_tv_title"

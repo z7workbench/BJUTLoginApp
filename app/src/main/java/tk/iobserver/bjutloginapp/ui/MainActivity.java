@@ -16,6 +16,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tk.iobserver.bjutloginapp.R;
+import tk.iobserver.bjutloginapp.widget.NoteCard;
 import tk.iobserver.bjutloginapp.widget.StatusCard;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.fab_refresh) FloatingActionButton refreshFAB;
     @BindView(R.id.status_card) CardView statusCardView;
+    @BindView(R.id.note_card) CardView noteCardView;
     public final String TAG = "MainActivity";
     public SharedPreferences prefs;
     StatusCard statusCard;
+    NoteCard noteCard;
     TextView userView;
     TextView statusView;
     TextView timeView;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         statusCard = new StatusCard(statusCardView, this);
+        noteCard = new NoteCard(noteCardView, this);
 
     }
 
@@ -85,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings: {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
+            } break;
+            case R.id.action_help: {
+
             }
         }
 
