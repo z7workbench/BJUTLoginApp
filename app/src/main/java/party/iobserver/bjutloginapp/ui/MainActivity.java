@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.ui;
+package party.iobserver.bjutloginapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.widget.NoteCard;
-import tk.iobserver.bjutloginapp.widget.StatusCard;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.widget.NoteCard;
+import party.iobserver.bjutloginapp.widget.StatusCard;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_toolbar) Toolbar toolbar;

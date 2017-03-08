@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.widget;
+package party.iobserver.bjutloginapp.widget;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,8 +6,8 @@ import android.support.v7.widget.CardView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.ui.ReleaseNoteActivity;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.ui.ReleaseNoteActivity;
 
 /**
  * Created by ZeroGo on 2017.3.2.

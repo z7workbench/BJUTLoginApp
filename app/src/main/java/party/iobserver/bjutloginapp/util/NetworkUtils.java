@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.util;
+package party.iobserver.bjutloginapp.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

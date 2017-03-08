@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.util;
+package party.iobserver.bjutloginapp.util;
 
 import android.app.Activity;
 import android.support.design.widget.Snackbar;
@@ -18,7 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import tk.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.R;
 
 /**
  * Created by ZeroGo on 2017.2.23.

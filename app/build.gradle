@@ -5,11 +5,11 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "tk.iobserver.bjutloginapp"
+        applicationId "party.iobserver.bjutloginapp"
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 2
-        versionName "2.4.1 Dev"
+        versionCode 3
+        versionName "3.0.0 Dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.widget;
+package party.iobserver.bjutloginapp.widget;
 
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -25,8 +25,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.ui.MainActivity;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.ui.MainActivity;
 
 /**
  * Created by ZeroGo on 2017.2.28.
