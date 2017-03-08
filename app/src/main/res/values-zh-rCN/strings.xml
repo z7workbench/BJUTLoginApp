@@ -9,7 +9,6 @@
     <string name="action_login">登录</string>
     <string name="action_logout">登出</string>
     <string name="action_sync">更新数据</string>
-    <string name="main_tv_description">此应用用于登陆[bjut_wifi]的WiFi网络</string>
     <string name="settings_about_title">关于我</string>
     <string name="settings_category_about">关于</string>
     <string name="settings_category_language">语言</string>
@@ -40,4 +39,7 @@
     <string name="card_note">日志</string>
     <string name="card_iv_rn">BJUT登录程序更新日志</string>
     <string name="action_rn">更新日志</string>
+    <string name="help_alert_button">懂了！</string>
+    <string name="help_alert_des">此应用用于登陆[bjut_wifi]的WiFi网络。\n你可以按右上角的设置按钮来修改登录所用的用户名和密码。</string>
+    <string name="help_alert_title">帮助</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -91,7 +92,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             } break;
             case R.id.action_help: {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.help_alert_title)
+                        .setIcon(R.drawable.ic_help_outline_acc_24dp)
+                        .setMessage(R.string.help_alert_des)
+                        .setNeutralButton(R.string.help_alert_button, (dialog, which)-> {
 
+                        })
+                        .show();
             }
         }
 

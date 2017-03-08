@@ -42,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (value.isEmpty()) {
                 preference.setSummary("Nothing");
             } else if (preference.getKey().equals("password")) {
-                preference.setSummary("********");
+                preference.setSummary("●●●●●●●●");
             } else {
                 preference.setSummary(value);
             }
