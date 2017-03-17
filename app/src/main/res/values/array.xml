@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rn_title_content">
+        <item>Patch 3.0 Stable</item>
+        <item>Patch 2.3.1 Stable</item>
+        <item>Patch 2.3 Stable</item>
+        <item>Patch 2.2 Stable</item>
+    </string-array>
+
+    <string-array name="rn_note_content">
+        <item>
+            New BJUT Login App arrived with new packages! \n
+            General:\n
+            - Add help feature.\n
+            - Add note CardView.\n
+            - Add release note.\n
+            Optimized:\n
+            - Change packages.\n
+            - Redesign menu in MainActivity.\n
+            Further Plan:\n
+            - Get Network status\n
+            - Easter Eggs\n
+            - ......
+        </item>
+        <item>
+            Fixed:\n
+            - Fixed Regular Expressions
+        </item>
+        <item>
+            The second Stable Version!\n
+            General:\n
+            - Add Status CardView! Now you can check used flux in the CardView!\n
+            - Add Time, Fee status on CardView.\n
+            - Add more Regular Expressions for Time, Fee.\n
+            Optimized:\n
+            - Optimize packages.\n
+            - Delete Operator(Move its code to the new StatusCard).\n
+            - Change Theme colors.\n
+            Further Plan:\n
+            - Help Screen\n
+            - Get Network status\n
+            - Easter Eggs\n
+            - ......
+        </item>
+        <item>
+            The first Stable Version! \nThanks for all people who help test this App!\n
+            General:\n
+            - The standard function: login and logout bjut_wifi.\n
+            - Add permissions and sync function.\n
+            - Add Operator for login, sync and logout.\n
+            Further Plan:\n
+            - Help View\n
+            - Status Card\n
+            - ......
+        </item>
+    </string-array>
+</resources>

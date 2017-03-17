@@ -174,7 +174,7 @@ public class StatusCard {
                     Matcher matcher = pattern.matcher(content);
 
                     if (matcher.find()) {
-                        final Double time = Double.parseDouble(matcher.group(1));
+                        final int time = Integer.parseInt(matcher.group(1));
                         final Double flux = (double) ((int) (Double.parseDouble(matcher.group(2)) / 1024 * 100)) / 100;
                         final Double fee = Double.parseDouble(matcher.group(3))/10000;
                         activity.runOnUiThread(() -> {
