@@ -166,6 +166,7 @@ public class StatusCard {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String content = response.body().string();
+                content = content.replace(" ", "");
                 Pattern checkPattern = Pattern.compile("Please enter Account");
                 Matcher checkMatcher = checkPattern.matcher(content);
 
