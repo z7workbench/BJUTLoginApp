@@ -9,9 +9,9 @@
 
     <string-array name="rn_note_content">
         <item>
-            New BJUT Login App arrived with new packages! \n
+            New BJUT Login App arrived! In this version I redesigned the packages! \n
             General:\n
-            - Add help feature.\n
+            - Add help View.\n
             - Add note CardView.\n
             - Add release note.\n
             Optimized:\n
@@ -19,6 +19,7 @@
             - Redesign menu in MainActivity.\n
             Further Plan:\n
             - Get Network status\n
+            - Status sync on Notification Bar\n
             - Easter Eggs\n
             - ......
         </item>
@@ -37,7 +38,7 @@
             - Delete Operator(Move its code to the new StatusCard).\n
             - Change Theme colors.\n
             Further Plan:\n
-            - Help Screen\n
+            - Help View\n
             - Get Network status\n
             - Easter Eggs\n
             - ......
@@ -49,8 +50,8 @@
             - Add permissions and sync function.\n
             - Add Operator for login, sync and logout.\n
             Further Plan:\n
-            - Help View\n
             - Status Card\n
+            - Help View\n
             - ......
         </item>
     </string-array>

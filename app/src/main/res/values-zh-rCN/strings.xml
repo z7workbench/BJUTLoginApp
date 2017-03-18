@@ -21,7 +21,7 @@
     <string name="settings_user_hint">在此输入你的用户名</string>
     <string name="settings_user_title">用户名</string>
     <string name="settings_version_title">版本</string>
-    <string name="settings_about_content">ZeroGoYoosee @GitHub: https://github.com/ZeroGoYoosee</string>
+    <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
     <string name="action_help">帮助</string>
     <string name="card_fee">剩余费用</string>
     <string name="card_fee_default">\???</string>

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -23,7 +22,6 @@ import party.iobserver.bjutloginapp.widget.StatusCard;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_toolbar) Toolbar toolbar;
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.fab_refresh) FloatingActionButton refreshFAB;
     @BindView(R.id.status_card) CardView statusCardView;
     @BindView(R.id.note_card) CardView noteCardView;
     public final String TAG = "MainActivity";

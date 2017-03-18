@@ -9,49 +9,50 @@
 
     <string-array name="rn_note_content">
         <item>
-            New BJUT Login App arrived with new packages! \n
-            General:\n
-            - Add help feature.\n
-            - Add note CardView.\n
-            - Add release note.\n
-            Optimized:\n
-            - Change packages.\n
-            - Redesign menu in MainActivity.\n
-            Further Plan:\n
-            - Get Network status\n
-            - Easter Eggs\n
-            - ......
+            新版本登录程序3.0版本闪亮登场！此版本我重新规划了包！\n
+            综述：\n
+            - 加入帮助页面\n
+            - 新组件！日志卡片\n
+            - 增加了日志卡片中的第一部分：更新日志\n
+            优化：\n
+            - 重新规划了包名\n
+            - 主界面重新规划\n
+            未来计划：\n
+            - 检测网络状态\n
+            - 在通知栏里显示网络状态\n
+            - 彩蛋\n
+            - 未完待续......
         </item>
         <item>
-            Fixed:\n
-            - Fixed Regular Expressions
+            修复\n
+            - 修复正则表达式中的错误
         </item>
         <item>
-            The second Stable Version!\n
-            General:\n
-            - Add Status CardView! Now you can check used flux in the CardView!\n
-            - Add Time, Fee status on CardView.\n
-            - Add more Regular Expressions for Time, Fee.\n
-            Optimized:\n
-            - Optimize packages.\n
-            - Delete Operator(Move its code to the new StatusCard).\n
-            - Change Theme colors.\n
-            Further Plan:\n
-            - Help Screen\n
-            - Get Network status\n
-            - Easter Eggs\n
-            - ......
+            第二个稳定版本！\n
+            综述：\n
+            - 新组件！状态卡片：你可以在状态卡片部分查看自己当前网络状态！\n
+            - 增加两个状态属性：已用时间、剩余费用\n
+            - 为已用时间和剩余费用增加正则表达式\n
+            优化：\n
+            - 优化包\n
+            - 去掉上个版本增加的操作器(将其代码移植到新的状态卡片中)\n
+            - 更改之前的主题色\n
+            未来计划：\n
+            - 增加帮助页面\n
+            - 检测网络状态\n
+            - 彩蛋\n
+            - 未完待续......
         </item>
         <item>
-            The first Stable Version! \nThanks for all people who help test this App!\n
-            General:\n
-            - The standard function: login and logout bjut_wifi.\n
-            - Add permissions and sync function.\n
-            - Add Operator for login, sync and logout.\n
-            Further Plan:\n
-            - Help View\n
-            - Status Card\n
-            - ......
+            首个稳定版本! \n谢谢所有帮助测试的人们！\n
+            综述：\n
+            - 基础功能的实现: 登录与登出bjut_wifi\n
+            - 增加权限和同步数据功能\n
+            - 增加一个操作器，用于控制登录登出同步等操作\n
+            未来计划：\n
+            - 状态栏的优化\n
+            - 增加帮助页面\n
+            - 未完待续......
         </item>
     </string-array>
 </resources>
