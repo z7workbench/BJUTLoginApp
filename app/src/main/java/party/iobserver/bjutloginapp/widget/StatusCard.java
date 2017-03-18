@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.widget;
+package party.iobserver.bjutloginapp.widget;
 
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -25,8 +26,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.ui.MainActivity;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.ui.MainActivity;
 
 /**
  * Created by ZeroGo on 2017.2.28.
@@ -37,6 +38,8 @@ public class StatusCard {
     @BindView(R.id.card_status) TextView statusView;
     @BindView(R.id.card_time) TextView timeView;
     @BindView(R.id.card_fee) TextView feeView;
+    @BindView(R.id.card_btn_login) Button loginBtn;
+    @BindView(R.id.card_btn_logout) Button logoutBtn;
 //    @BindView(R.id.card_network) TextView networkView;
     @BindView(R.id.card_flux) TextView fluxView;
     private final OkHttpClient okHttpClient = new OkHttpClient();
@@ -60,7 +63,7 @@ public class StatusCard {
     void onLogin() {
         login(coordinatorLayout, prefs.getString("user", null), prefs.getString("password", null));
         new Handler().postDelayed(() -> {
-            sync(coordinatorLayout, true);
+            sync(coordinatorLayout, false);
         }, 1000);
     }
 
@@ -97,6 +100,8 @@ public class StatusCard {
                         try{
                             statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
                             statusView.setText(R.string.card_status_error);
+                            loginBtn.setEnabled(true);
+                            logoutBtn.setEnabled(false);
                         } catch(Exception e1){
                             Log.e(activity.TAG, "setTextColor", e1);
                         }
@@ -112,6 +117,8 @@ public class StatusCard {
                             try{
                                 statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
                                 statusView.setText(R.string.card_status_error);
+                                loginBtn.setEnabled(true);
+                                logoutBtn.setEnabled(false);
                             } catch(Exception e1){
                                 Log.e(activity.TAG, "setTextColor", e1);
                             }
@@ -119,6 +126,10 @@ public class StatusCard {
                     } else {
                         Snackbar.make(view, "Login Succeeded! ", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
+                        activity.runOnUiThread(()-> {
+                            loginBtn.setEnabled(false);
+                            logoutBtn.setEnabled(true);
+                        });
                     }
                 }
             });
@@ -144,6 +155,8 @@ public class StatusCard {
                     try{
                         statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
                         statusView.setText(R.string.card_status_error);
+                        loginBtn.setEnabled(true);
+                        logoutBtn.setEnabled(false);
                     } catch (Exception e1){
                         Log.e(activity.TAG, "", e1);
                     }
@@ -153,6 +166,7 @@ public class StatusCard {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String content = response.body().string();
+                content = content.replace(" ", "");
                 Pattern checkPattern = Pattern.compile("Please enter Account");
                 Matcher checkMatcher = checkPattern.matcher(content);
 
@@ -161,7 +175,7 @@ public class StatusCard {
                     Matcher matcher = pattern.matcher(content);
 
                     if (matcher.find()) {
-                        final Double time = Double.parseDouble(matcher.group(1));
+                        final int time = Integer.parseInt(matcher.group(1));
                         final Double flux = (double) ((int) (Double.parseDouble(matcher.group(2)) / 1024 * 100)) / 100;
                         final Double fee = Double.parseDouble(matcher.group(3))/10000;
                         activity.runOnUiThread(() -> {
@@ -171,23 +185,27 @@ public class StatusCard {
                                 feeView.setText("¥"+fee);
                                 statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_green));
                                 statusView.setText(R.string.card_status_synced);
+                                loginBtn.setEnabled(false);
+                                logoutBtn.setEnabled(true);
                             } catch (Exception e) {
                                 Log.e(activity.TAG, "", e);
                             }
                         });
                         if(needMsg) {
-                            Snackbar.make(view, "Refresh successfully completed! ", Snackbar.LENGTH_LONG)
+                            Snackbar.make(view, "Your status refreshed! ", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
                     } else {
                         if(needMsg) {
-                            Snackbar.make(view, "Can't get data! ", Snackbar.LENGTH_LONG)
+                            Snackbar.make(view, "Your status refreshed! ", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
                         activity.runOnUiThread(()->{
                             try{
-                                statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
-                                statusView.setText(R.string.card_status_error);
+                                statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_grey));
+                                statusView.setText(R.string.card_status_out);
+                                loginBtn.setEnabled(true);
+                                logoutBtn.setEnabled(false);
                             } catch(Exception e1){
                                 Log.e(activity.TAG, "setTextColor", e1);
                             }
@@ -201,6 +219,8 @@ public class StatusCard {
                         try{
                             statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_grey));
                             statusView.setText(R.string.card_status_out);
+                            loginBtn.setEnabled(true);
+                            logoutBtn.setEnabled(false);
                         } catch(Exception e1){
                             Log.e(activity.TAG, "setTextColor", e1);
                         }
@@ -228,6 +248,8 @@ public class StatusCard {
                     try{
                         statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
                         statusView.setText(R.string.card_status_error);
+                        loginBtn.setEnabled(true);
+                        logoutBtn.setEnabled(false);
                     } catch(Exception e1){
                         Log.e(activity.TAG, "setTextColor", e1);
                     }
@@ -243,6 +265,8 @@ public class StatusCard {
                         try{
                             statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_grey));
                             statusView.setText(R.string.card_status_out);
+                            loginBtn.setEnabled(true);
+                            logoutBtn.setEnabled(false);
                         } catch(Exception e1){
                             Log.e(activity.TAG, "setTextColor", e1);
                         }
@@ -254,6 +278,8 @@ public class StatusCard {
                         try{
                             statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red));
                             statusView.setText(R.string.card_status_error);
+                            loginBtn.setEnabled(false);
+                            logoutBtn.setEnabled(true);
                         } catch(Exception e1){
                             Log.e(activity.TAG, "setTextColor", e1);
                         }
@@ -261,6 +287,5 @@ public class StatusCard {
                 }
             }
         });
-
     }
 }

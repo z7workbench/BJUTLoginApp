@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.ui;
+package party.iobserver.bjutloginapp.ui;
 
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -10,8 +10,8 @@ import android.support.v7.widget.Toolbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.BuildConfig;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.BuildConfig;
 
 /**
  * Created by ZeroGo on 2017.2.22.
@@ -42,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (value.isEmpty()) {
                 preference.setSummary("Nothing");
             } else if (preference.getKey().equals("password")) {
-                preference.setSummary("********");
+                preference.setSummary("●●●●●●●●");
             } else {
                 preference.setSummary(value);
             }

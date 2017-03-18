@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">BJUT Login</string>
     <string name="app_designer">Designed by ZeroGo</string>
+    <string name="action_help">Help</string>
     <string name="action_login">Login</string>
     <string name="action_logout">Logout</string>
+    <string name="action_rn">Release Note</string>
     <string name="action_settings">Settings</string>
     <string name="action_sync">Sync</string>
 
@@ -20,10 +22,15 @@
     <string name="card_time_default">NaN min</string>
     <string name="card_user">Empty User Name</string>
 
+    <string name="card_note">Note</string>
+    <string name="card_iv_rn">BJUT Login Release Note</string>
+
     <string name="main_name">BJUT Login App</string>
-    <string name="main_tv_description">This App is a Login Application for [bjut_wifi] network. </string>
     <string name="main_tv_usedFlux">Refreshing used flux......</string>
     <string name="main_tv_usedFlux_finished">Used Flux: </string>
+    <string name="help_alert_title">Help</string>
+    <string name="help_alert_des">This App is a Login Application for [bjut_wifi] network. \nYou can press Settings button in the upper right corner to change the user name and password.</string>
+    <string name="help_alert_button">Got it! </string>
 
     <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
     <string name="settings_about_title">About me</string>
@@ -38,5 +45,4 @@
     <string name="settings_user_hint">Enter user name here</string>
     <string name="settings_user_title">User Number</string>
     <string name="settings_version_title">Version</string>
-    <string name="action_help">Help</string>
 </resources>

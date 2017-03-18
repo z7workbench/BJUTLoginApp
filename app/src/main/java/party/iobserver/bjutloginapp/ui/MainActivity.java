@@ -1,11 +1,11 @@
-package tk.iobserver.bjutloginapp.ui;
+package party.iobserver.bjutloginapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -15,17 +15,19 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.widget.StatusCard;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.widget.NoteCard;
+import party.iobserver.bjutloginapp.widget.StatusCard;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_toolbar) Toolbar toolbar;
     @BindView(R.id.main_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.fab_refresh) FloatingActionButton refreshFAB;
     @BindView(R.id.status_card) CardView statusCardView;
+    @BindView(R.id.note_card) CardView noteCardView;
     public final String TAG = "MainActivity";
     public SharedPreferences prefs;
     StatusCard statusCard;
+    NoteCard noteCard;
     TextView userView;
     TextView statusView;
     TextView timeView;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         statusCard = new StatusCard(statusCardView, this);
+        noteCard = new NoteCard(noteCardView, this);
 
     }
 
@@ -85,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings: {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
+            } break;
+            case R.id.action_help: {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.help_alert_title)
+                        .setIcon(R.drawable.ic_help_outline_acc_24dp)
+                        .setMessage(R.string.help_alert_des)
+                        .setNeutralButton(R.string.help_alert_button, (dialog, which)-> {
+
+                        })
+                        .show();
             }
         }
 

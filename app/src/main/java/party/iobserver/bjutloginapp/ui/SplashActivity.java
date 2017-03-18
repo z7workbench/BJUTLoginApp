@@ -1,4 +1,4 @@
-package tk.iobserver.bjutloginapp.ui;
+package party.iobserver.bjutloginapp.ui;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import tk.iobserver.bjutloginapp.R;
-import tk.iobserver.bjutloginapp.BuildConfig;
+import party.iobserver.bjutloginapp.R;
+import party.iobserver.bjutloginapp.BuildConfig;
 
 public class SplashActivity extends AppCompatActivity {
 
