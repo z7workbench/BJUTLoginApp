@@ -47,6 +47,8 @@
     <string name="settings_category_user">User Settings</string>
     <string name="settings_language_title">Change language</string>
     <string name="settings_language_summary">Select your language here</string>
+    <string name="settings_pack">Package</string>
+    <string name="settings_pack_summary">Select package here</string>
     <string name="settings_password_hint">Enter password here</string>
     <string name="settings_password_title">Password</string>
     <string name="settings_title">Settings</string>

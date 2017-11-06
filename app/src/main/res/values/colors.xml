@@ -22,4 +22,11 @@
     <color name="alert_green">#00ed00</color>
     <color name="alert_white">#FFFFFF</color>
     <color name="alert_grey">#888888</color>
+
+    <color name="login_default">#7ab800</color>
+    <color name="login_focused">#9bd823</color>
+    <color name="sync_default">#039be5</color>
+    <color name="sync_focused">#63ccff</color>
+    <color name="logout_default">#b71c1c</color>
+    <color name="logout_focused">#f05545</color>
 </resources>

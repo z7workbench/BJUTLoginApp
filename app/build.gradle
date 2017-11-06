@@ -6,13 +6,13 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.0'
     defaultConfig {
         applicationId "party.iobserver.bjutloginapp"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 4
-        versionName "4.0.0 Dev"
+        versionName "4.0.1 Dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

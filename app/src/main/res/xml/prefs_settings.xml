@@ -21,6 +21,15 @@
             android:selectAllOnFocus="true"
             android:summary="@string/settings_password_hint"
             android:title="@string/settings_password_title"/>
+
+        <ListPreference
+            android:id="@+id/settings_pack"
+            android:title="@string/settings_pack"
+            android:key="pack"
+            android:hint="@string/settings_pack_summary"
+            android:summary="@string/settings_pack_summary"
+            android:entries="@array/pack"
+            android:entryValues="@array/pack" />
     </PreferenceCategory>
     <!--
         <PreferenceCategory android:title="@string/settings_category_language">

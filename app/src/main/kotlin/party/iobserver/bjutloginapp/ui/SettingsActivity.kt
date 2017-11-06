@@ -1,10 +1,7 @@
 package party.iobserver.bjutloginapp.ui
 
 import android.os.Bundle
-import android.preference.EditTextPreference
-import android.preference.Preference
-import android.preference.PreferenceFragment
-import android.preference.PreferenceManager
+import android.preference.*
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_prefs.*
 import party.iobserver.bjutloginapp.BuildConfig
@@ -32,12 +29,14 @@ class SettingsActivity : AppCompatActivity() {
 
             val userNamePreference = findPreference("user") as EditTextPreference
             val psdNamePreference = findPreference("password") as EditTextPreference
+            val packPreference = findPreference("pack") as ListPreference
             val versionPreference = findPreference("version")
 
             versionPreference.summary = BuildConfig.VERSION_NAME
 
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
+            bindPreferenceSummaryToValue(packPreference)
         }
 
         companion object {

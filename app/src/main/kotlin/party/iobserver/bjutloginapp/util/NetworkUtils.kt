@@ -65,11 +65,14 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
+                var string = p1.body()?.string()
+                string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onResponse(p1)
+                    uiBlock.onResponse(string)
                 }
             }
         })
+        uiBlock.onFinished()
     }
 
     fun sync(uiBlock: UIBlock) {
@@ -88,11 +91,14 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
+                var string = p1.body()?.string()
+                string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onResponse(p1)
+                    uiBlock.onResponse(string)
                 }
             }
         })
+        uiBlock.onFinished()
     }
 
     fun logout(uiBlock: UIBlock) {
@@ -111,10 +117,13 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
+                var string = p1.body()?.string()
+                string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onResponse(p1)
+                    uiBlock.onResponse(string)
                 }
             }
         })
+        uiBlock.onFinished()
     }
 }

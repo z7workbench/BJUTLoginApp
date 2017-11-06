@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user"
 
-        app:percent="75"
+        app:percent="0"
         app:startAngle="0"
         app:strokeWidth="15dp" />
 
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toStartOf="@+id/pack" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/status_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -136,14 +136,14 @@
         android:text="@string/main_time"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_l"
-        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintEnd_toStartOf="@+id/time_view"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status" />
+        app:layout_constraintTop_toBottomOf="@+id/status_view" />
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/time_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -155,7 +155,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/last"
-        app:layout_constraintTop_toBottomOf="@+id/status" />
+        app:layout_constraintTop_toBottomOf="@+id/status_view" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/login"
@@ -174,8 +174,8 @@
         app:layout_constraintTop_toBottomOf="@+id/last"
         fancy:fb_borderColor="@color/colorPrimaryLight"
         fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="#7ab800"
-        fancy:fb_focusColor="#9bd823"
+        fancy:fb_defaultColor="@color/login_default"
+        fancy:fb_focusColor="@color/login_focused"
         fancy:fb_radius="30dp"
         fancy:fb_textColor="#FFFFFF" />
 
@@ -195,8 +195,8 @@
         app:layout_constraintTop_toBottomOf="@+id/last"
         fancy:fb_borderColor="@color/colorPrimaryLight"
         fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="#039be5"
-        fancy:fb_focusColor="#63ccff"
+        fancy:fb_defaultColor="@color/sync_default"
+        fancy:fb_focusColor="@color/sync_focused"
         fancy:fb_radius="30dp"
         fancy:fb_textColor="#FFFFFF" />
 
@@ -217,8 +217,8 @@
         app:layout_constraintTop_toBottomOf="@+id/last"
         fancy:fb_borderColor="@color/colorPrimaryLight"
         fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="#b71c1c"
-        fancy:fb_focusColor="#f05545"
+        fancy:fb_defaultColor="@color/logout_default"
+        fancy:fb_focusColor="@color/logout_focused"
         fancy:fb_radius="30dp"
         fancy:fb_textColor="#FFFFFF" />
 
