@@ -8,6 +8,7 @@
     <uses-permission android:name="cyanogenmod.permission.PUBLISH_CUSTOM_TILE" />
 
     <application
+        android:name=".LoginApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_login_dev"
         android:label="@string/app_name"
@@ -16,12 +17,34 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/main_name"
+            android:label=" "
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/action_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="party.iobserver.bjutloginapp.SETTINGS_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="forceTouch"
+                android:value="force" />
+        </activity>
+
+        <activity-alias
+            android:name=".ui.SettingsActivityAlias"
+            android:targetActivity=".ui.SettingsActivity">
+            <intent-filter>
+                <action android:name="party.iobserver.bjutloginapp.SETTINGS_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="forceTouch"
+                android:value="force" />
+        </activity-alias>
+
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,10 +53,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.ReleaseNoteActivity"
             android:label="@string/action_rn"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="party.iobserver.bjutloginapp.RN_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="forceTouch"
+                android:value="force" />
+        </activity>
+
+        <activity-alias
+            android:name=".ui.ReleaseNoteActivityAlias"
+            android:targetActivity=".ui.ReleaseNoteActivity">
+            <intent-filter>
+                <action android:name="party.iobserver.bjutloginapp.RN_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="forceTouch"
+                android:value="force" />
+        </activity-alias>
+
     </application>
 
 </manifest>

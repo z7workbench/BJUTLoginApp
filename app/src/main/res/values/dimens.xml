@@ -5,11 +5,12 @@
     <dimen name="text_margin">8dp</dimen>
     <dimen name="text_margin_s">2dp</dimen>
     <dimen name="text_margin_m">4dp</dimen>
-    <dimen name="text_size_s">18sp</dimen>
-    <dimen name="text_size_m">20sp</dimen>
-    <dimen name="text_size_l">22sp</dimen>
-    <dimen name="text_size_xl">24sp</dimen>
-    <dimen name="text_size_xxl">26sp</dimen>
+    <dimen name="text_size_s">12sp</dimen>
+    <dimen name="text_size_m">14sp</dimen>
+    <dimen name="text_size_l">16sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
+    <dimen name="text_size_xxl">22sp</dimen>
+    <dimen name="text_size_h">32sp</dimen>
     <dimen name="text_size_title">32sp</dimen>
     <dimen name="text_second_margin">32dp</dimen>
     <dimen name="text_title">30sp</dimen>

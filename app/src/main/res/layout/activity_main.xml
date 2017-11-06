@@ -1,32 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/AppTheme.PageLayout">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/main_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
-<!--    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/user_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_sync_24dp" />-->
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/main_user"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintEnd_toStartOf="@+id/user"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/user_title"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <com.timqi.sectorprogressview.ColorfulRingProgressView
+        android:id="@+id/progress"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        app:bgColor="@color/colorPrimaryLight"
+        app:fgColorEnd="@color/colorPrimaryDarkDev"
+        app:fgColorStart="@color/colorPrimaryDev"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user"
+
+        app:percent="75"
+        app:startAngle="0"
+        app:strokeWidth="15dp" />
+
+    <TextView
+        android:id="@+id/now_flux"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="95dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_h"
+        app:layout_constraintStart_toStartOf="@+id/progress"
+        app:layout_constraintTop_toTopOf="@+id/progress" />
+
+    <TextView
+        android:id="@+id/pack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="95dp"
+        android:layout_marginEnd="60dp"
+        android:gravity="center_vertical|end"
+        android:text="TextView"
+        android:textColor="@color/alert_grey"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintBottom_toBottomOf="@+id/progress"
+        app:layout_constraintEnd_toEndOf="@+id/progress" />
+
+    <TextView
+        android:id="@+id/split"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="95dp"
+        android:layout_marginEnd="4dp"
+        android:text="/"
+        android:textColor="@color/alert_grey"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintBottom_toBottomOf="@+id/progress"
+        app:layout_constraintEnd_toStartOf="@+id/pack" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xxl"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress" />
+
+    <TextView
+        android:id="@+id/last"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/main_time"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/last"
+        app:layout_constraintTop_toBottomOf="@+id/status" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/login"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/action_login"
+        app:layout_constraintEnd_toStartOf="@+id/sync"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/last"
+        fancy:fb_borderColor="@color/colorPrimaryLight"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="#7ab800"
+        fancy:fb_focusColor="#9bd823"
+        fancy:fb_radius="30dp"
+        fancy:fb_textColor="#FFFFFF" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/sync"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/action_sync"
+        app:layout_constraintEnd_toStartOf="@+id/logout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/last"
+        fancy:fb_borderColor="@color/colorPrimaryLight"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="#039be5"
+        fancy:fb_focusColor="#63ccff"
+        fancy:fb_radius="30dp"
+        fancy:fb_textColor="#FFFFFF" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/logout"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:enabled="false"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/action_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/sync"
+        app:layout_constraintTop_toBottomOf="@+id/last"
+        fancy:fb_borderColor="@color/colorPrimaryLight"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="#b71c1c"
+        fancy:fb_focusColor="#f05545"
+        fancy:fb_radius="30dp"
+        fancy:fb_textColor="#FFFFFF" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_details_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

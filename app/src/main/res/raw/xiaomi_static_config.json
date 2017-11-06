@@ -1,0 +1,18 @@
+{
+  data: [
+    {
+      title: "force_rn_title",
+      desc: "force_rn_desc",
+      type: "activity",
+      image: "barrage",
+      intent: "#Intent;component=party.iobserver.bjutloginapp/.ui.ReleaseNoteActivity;end"
+    },
+    {
+      title: "force_settings_title",
+      desc: "force_settings_desc",
+      type: "activity",
+      image: "settings",
+      intent: "#Intent;component=party.iobserver.bjutloginapp/.ui.SettingsActivity;end"
+    }
+  ]
+}

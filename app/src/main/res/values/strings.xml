@@ -25,9 +25,17 @@
     <string name="card_note">Note</string>
     <string name="card_iv_rn">BJUT Login Release Note</string>
 
+    <string name="force_rn_title">Release Note</string>
+    <string name="force_rn_desc">Open Release Note</string>
+    <string name="force_settings_title">Settings</string>
+    <string name="force_settings_desc">Open Settings</string>
+
     <string name="main_name">BJUT Login App</string>
     <string name="main_tv_usedFlux">Refreshing used flux......</string>
     <string name="main_tv_usedFlux_finished">Used Flux: </string>
+    <string name="main_user">User - </string>
+    <string name="main_time">Last sync - </string>
+
     <string name="help_alert_title">Help</string>
     <string name="help_alert_des">This App is a Login Application for [bjut_wifi] network. \nYou can press Settings button in the upper right corner to change the user name and password.</string>
     <string name="help_alert_button">Got it! </string>
