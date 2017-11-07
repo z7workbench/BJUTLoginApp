@@ -6,6 +6,7 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/rn_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -22,7 +23,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below = "@+id/rn_appbar"
+        android:layout_below = "@id/rn_appbar"
         android:layout_marginTop="@dimen/text_margin_m"
         android:layout_marginStart="@dimen/text_margin_m"
         android:layout_marginEnd="@dimen/text_margin_m"

@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     fee_view.text = resources.getString(R.string.unknown)
                     progress.percent = 0F
                     status = LogStatus.ERROR
-                    status_view.text = status.description
+                    status_view.text = resources.getString(status.description)
                     last_view.text
                     login.isEnabled = true
                     sync.isEnabled = true
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onResponse(bodyString: String?) {
                     status = LogStatus.OFFLINE
-                    status_view.text = status.description
+                    status_view.text = resources.getString(status.description)
                     progress.percent = 0F
                     login.isEnabled = true
                     sync.isEnabled = true
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity() {
         time_view.text = resources.getString(R.string.unknown)
         fee_view.text = resources.getString(R.string.unknown)
         progress.percent = 0F
-        status_view.text = status.description
+        status_view.text = resources.getString(status.description)
         login.isEnabled = false
         logout.isEnabled = false
         sync.isEnabled = false
@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity() {
                 fee_view.text = resources.getString(R.string.unknown)
                 progress.percent = 0F
                 status = LogStatus.ERROR
-                status_view.text = status.description
+                status_view.text = resources.getString(status.description)
                 last_view.text
                 login.isEnabled = true
                 sync.isEnabled = true
@@ -236,7 +236,7 @@ class MainActivity : AppCompatActivity() {
                     fee_view.text = resources.getString(R.string.unknown)
                     progress.percent = 0F
                     status = LogStatus.ERROR
-                    status_view.text = status.description
+                    status_view.text = resources.getString(status.description)
                     login.isEnabled = true
                     sync.isEnabled = true
                 } else {
@@ -251,10 +251,10 @@ class MainActivity : AppCompatActivity() {
                         val result2 = offline.find(bodyString)
                         if (result2 == null || result2.groups.isEmpty()) {
                             status = LogStatus.ERROR
-                            status_view.text = status.description
+                            status_view.text = resources.getString(status.description)
                         } else {
                             status = LogStatus.OFFLINE
-                            status_view.text = status.description
+                            status_view.text = resources.getString(status.description)
                         }
                         login.isEnabled = true
                         sync.isEnabled = true
@@ -266,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                         time_view.text = time.toString() + " min"
                         fee_view.text = "￥" + fee / 10000
                         status = LogStatus.ONLINE
-                        status_view.text = status.description
+                        status_view.text = resources.getString(status.description)
                         val fl = when (app.prefs.getString("pack", "NaN")) {
                             "8 GB" -> 8F
                             "25 GB" -> 25F

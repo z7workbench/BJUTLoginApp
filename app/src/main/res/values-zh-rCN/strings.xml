@@ -2,10 +2,10 @@
 <resources>
     <string name="app_name">BJUT登录</string>
     <string name="action_settings">设置</string>
-    <string name="app_designer">ZeroGo 设计出品</string>
+    <string name="app_designer">由 ZeroGo 设计</string>
     <string name="action_login">登录</string>
     <string name="action_logout">登出</string>
-    <string name="action_sync">更新数据</string>
+    <string name="action_sync">同步</string>
     <string name="settings_about_title">关于我</string>
     <string name="settings_category_about">关于</string>
     <string name="settings_category_language">语言</string>
@@ -20,21 +20,6 @@
     <string name="settings_version_title">版本</string>
     <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
     <string name="action_help">帮助</string>
-    <string name="card_fee">剩余费用</string>
-    <string name="card_fee_default">\???</string>
-    <string name="card_flux">已用流量</string>
-    <string name="card_flux_default">\??? MB</string>
-    <string name="card_network">当前网络</string>
-    <string name="card_network_default">\???</string>
-    <string name="card_status_error">● 错误</string>
-    <string name="card_status_out">● 离线</string>
-    <string name="card_status_synced">● 完成</string>
-    <string name="card_status_syncing">● 同步</string>
-    <string name="card_time">已用时间</string>
-    <string name="card_time_default">\??? 分钟</string>
-    <string name="card_user">未输入用户名</string>
-    <string name="card_note">日志</string>
-    <string name="card_iv_rn">BJUT登录程序更新日志</string>
     <string name="action_rn">更新日志</string>
     <string name="help_alert_button">懂了！</string>
     <string name="help_alert_des">此应用用于登陆[bjut_wifi]的WiFi网络。\n你可以按右上角的设置按钮来修改登录所用的用户名和密码。</string>
@@ -42,4 +27,17 @@
     <string name="unknown">未知</string>
     <string name="settings_pack">套餐</string>
     <string name="settings_pack_summary">在此选择套餐</string>
+    <string name="force_rn_title">更新日志</string>
+    <string name="force_rn_desc">打开日志</string>
+    <string name="force_settings_title">设置</string>
+    <string name="force_settings_desc">打开设置</string>
+    <string name="main_fee">余额</string>
+    <string name="main_last">上次同步</string>
+    <string name="main_time">已用时间</string>
+    <string name="main_user">"用户 - "</string>
+    <string name="main_hide">已隐藏</string>
+    <string name="status_offline">离线</string>
+    <string name="status_syncing">同步中</string>
+    <string name="status_error">错误</string>
+    <string name="status_online">在线</string>
 </resources>
