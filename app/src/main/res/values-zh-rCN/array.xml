@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="pack">
+        <item>8 GB</item>
+        <item>25 GB</item>
+        <item>30 GB</item>
+    </string-array>
+
     <string-array name="rn_title_content">
         <item>版本 3.0 Stable</item>
         <item>版本 2.3.1 Stable</item>
