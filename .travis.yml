@@ -18,8 +18,3 @@ deploy:
   on:
     repo: ZeroGoYoosee/BJUTLoginApp
     branch: dev
-
-after_script:
-- gem install fir-cli
-- fir login $fir_token
-- fir p app/build/outputs/apk/release/app-release.apk -c "$TRAVIS_COMMIT_MESSAGE"
