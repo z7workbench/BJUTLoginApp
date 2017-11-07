@@ -2,10 +2,7 @@
 <resources>
     <string name="app_name">BJUT登录</string>
     <string name="action_settings">设置</string>
-    <string name="main_name">BJUT登录应用</string>
-    <string name="main_tv_usedFlux">正在刷新已用流量......</string>
     <string name="app_designer">ZeroGo 设计出品</string>
-    <string name="main_tv_usedFlux_finished">已用流量：</string>
     <string name="action_login">登录</string>
     <string name="action_logout">登出</string>
     <string name="action_sync">更新数据</string>
@@ -42,4 +39,7 @@
     <string name="help_alert_button">懂了！</string>
     <string name="help_alert_des">此应用用于登陆[bjut_wifi]的WiFi网络。\n你可以按右上角的设置按钮来修改登录所用的用户名和密码。</string>
     <string name="help_alert_title">帮助</string>
+    <string name="unknown">未知</string>
+    <string name="settings_pack">套餐</string>
+    <string name="settings_pack_summary">在此选择套餐</string>
 </resources>

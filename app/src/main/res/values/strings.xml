@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BJUT Login</string>
+    <string name="app_name">BJUT Login App</string>
     <string name="app_designer">Designed by ZeroGo</string>
     <string name="action_help">Help</string>
     <string name="action_login">Login</string>
@@ -30,11 +30,11 @@
     <string name="force_settings_title">Settings</string>
     <string name="force_settings_desc">Open Settings</string>
 
-    <string name="main_name">BJUT Login App</string>
-    <string name="main_tv_usedFlux">Refreshing used flux......</string>
-    <string name="main_tv_usedFlux_finished">Used Flux: </string>
+    <string name="main_fee">Fee - </string>
+    <string name="main_last">Last sync - </string>
+    <string name="main_time">Time - </string>
     <string name="main_user">User - </string>
-    <string name="main_time">Last sync - </string>
+    <string name="main_hide">Hidden</string>
 
     <string name="help_alert_title">Help</string>
     <string name="help_alert_des">This App is a Login Application for [bjut_wifi] network. \nYou can press Settings button in the upper right corner to change the user name and password.</string>
@@ -55,4 +55,6 @@
     <string name="settings_user_hint">Enter user name here</string>
     <string name="settings_user_title">User Number</string>
     <string name="settings_version_title">Version</string>
+
+    <string name="unknown">Unknown</string>
 </resources>

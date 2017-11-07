@@ -61,6 +61,7 @@ object NetworkUtils {
                 p1.printStackTrace()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onFailure(p1)
+                    uiBlock.onFinished()
                 }
             }
 
@@ -69,10 +70,10 @@ object NetworkUtils {
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
+                    uiBlock.onFinished()
                 }
             }
         })
-        uiBlock.onFinished()
     }
 
     fun sync(uiBlock: UIBlock) {
@@ -87,6 +88,7 @@ object NetworkUtils {
                 p1.printStackTrace()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onFailure(p1)
+                    uiBlock.onFinished()
                 }
             }
 
@@ -95,10 +97,10 @@ object NetworkUtils {
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
+                    uiBlock.onFinished()
                 }
             }
         })
-        uiBlock.onFinished()
     }
 
     fun logout(uiBlock: UIBlock) {
@@ -113,6 +115,7 @@ object NetworkUtils {
                 p1.printStackTrace()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onFailure(p1)
+                    uiBlock.onFinished()
                 }
             }
 
@@ -121,9 +124,9 @@ object NetworkUtils {
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
+                    uiBlock.onFinished()
                 }
             }
         })
-        uiBlock.onFinished()
     }
 }

@@ -1,15 +1,19 @@
 package party.iobserver.bjutloginapp.ui
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
+import android.net.TrafficStats
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.format.Formatter
 import android.view.Menu
 import android.view.MenuItem
+import android.view.animation.DecelerateInterpolator
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.alert
 import party.iobserver.bjutloginapp.R
 import party.iobserver.bjutloginapp.model.User
 import party.iobserver.bjutloginapp.util.LogStatus
@@ -25,8 +29,36 @@ class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     var status = LogStatus.OFFLINE
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    var fee = -1
-    var time = -1
+    var oldUp = TrafficStats.getTotalTxBytes()
+    var oldDown = TrafficStats.getTotalRxBytes()
+    var oldTime = System.currentTimeMillis()
+
+    val handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            if (msg.what == 1) {
+                val arr = msg.obj as Array<String>
+                up_speed.text = arr[0]
+                down_speed.text = arr[1]
+            }
+        }
+    }
+
+    val task = object : TimerTask() {
+        override fun run() {
+            val msg = Message.obtain(handler)
+            msg.what = 1
+            val newUp = TrafficStats.getTotalTxBytes()
+            val newDown = TrafficStats.getTotalRxBytes()
+            val newTime = System.currentTimeMillis()
+            msg.obj = arrayOf(Formatter.formatFileSize(this@MainActivity, (newUp - oldUp) * 1000 / (newTime - oldTime)) + "/s",
+                    Formatter.formatFileSize(this@MainActivity, (newDown - oldDown) * 1000 / (newTime - oldTime)) + "/s")
+            handler.sendMessage(msg)
+            oldUp = newUp
+            oldDown = newDown
+            oldTime = newTime
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,25 +67,27 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.title = ""
 
+        Timer().schedule(task, 1000L, 3000L)
+
+        hideAndShow.setOnClickListener {
+            hideOrNot(true)
+        }
+
         login.setOnClickListener {
-            NetworkUtils.login(User(name = app.prefs.getString("user", ""),
-                    password = app.prefs.getString("password", "")), object : UIBlock {
+            NetworkUtils.login(User(name = app.prefs.getString("user", resources.getString(R.string.unknown)),
+                    password = app.prefs.getString("password", resources.getString(R.string.unknown))), object : UIBlock {
                 override val context: Context = this@MainActivity
 
-                override fun onPrepare() {
-                    now_flux.text = Formatter.formatFileSize(context, 0L)
-                    status = LogStatus.SYNCING
-                    status_view.text = status.description
-                    login.isEnabled = false
-                    logout.isEnabled = false
-                    sync.isEnabled = false
-                }
+                override fun onPrepare() = this@MainActivity.onPrepared()
 
                 override fun onFailure(exception: IOException) {
-                    now_flux.text = "NaN"
+                    now_flux.text = resources.getString(R.string.unknown)
+                    time_view.text = resources.getString(R.string.unknown)
+                    fee_view.text = resources.getString(R.string.unknown)
+                    progress.percent = 0F
                     status = LogStatus.ERROR
                     status_view.text = status.description
-                    time_view.text
+                    last_view.text
                     login.isEnabled = true
                     sync.isEnabled = true
                 }
@@ -65,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onFinished() {
                     val time = System.currentTimeMillis()
                     val date = Date(time)
-                    time_view.text = sdf.format(date)
+                    last_view.text = sdf.format(date)
                 }
             })
         }
@@ -76,13 +110,7 @@ class MainActivity : AppCompatActivity() {
             NetworkUtils.logout(object : UIBlock {
                 override val context: Context = this@MainActivity
 
-                override fun onPrepare() {
-                    status = LogStatus.SYNCING
-                    status_view.text = status.description
-                    login.isEnabled = false
-                    logout.isEnabled = false
-                    sync.isEnabled = false
-                }
+                override fun onPrepare() = this@MainActivity.onPrepared()
 
                 override fun onFailure(exception: IOException) {
                     syncing()
@@ -91,6 +119,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(bodyString: String?) {
                     status = LogStatus.OFFLINE
                     status_view.text = status.description
+                    progress.percent = 0F
                     login.isEnabled = true
                     sync.isEnabled = true
                 }
@@ -98,31 +127,21 @@ class MainActivity : AppCompatActivity() {
                 override fun onFinished() {
                     val time = System.currentTimeMillis()
                     val date = Date(time)
-                    time_view.text = sdf.format(date)
+                    last_view.text = sdf.format(date)
                 }
             })
         }
 
-        detail.setOnClickListener {
-            if (fee == -1 || time == -1) {
-                alert {
-                    title = "Oops! "
-                    message = "You haven't synced yet! "
-                    positiveButton("OK") { }
-                }.show()
-            } else {
-                alert {
-                    title = "Info"
-                    positiveButton("OK") { }
-                }.show()
-            }
-        }
+        oldUp = TrafficStats.getTotalTxBytes()
+        oldDown = TrafficStats.getTotalRxBytes()
+        oldTime = System.currentTimeMillis()
     }
 
     override fun onResume() {
         super.onResume()
-        user.text = app.prefs.getString("user", "null")
-        pack.text = app.prefs.getString("pack", "NaN")
+        pack.text = app.prefs.getString("pack", resources.getString(R.string.unknown))
+        syncing()
+        hideOrNot(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -157,23 +176,54 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun onPrepared() {
+        status = LogStatus.SYNCING
+        now_flux.text = resources.getString(R.string.unknown)
+        time_view.text = resources.getString(R.string.unknown)
+        fee_view.text = resources.getString(R.string.unknown)
+        progress.percent = 0F
+        status_view.text = status.description
+        login.isEnabled = false
+        logout.isEnabled = false
+        sync.isEnabled = false
+    }
+
+    private fun hideOrNot(edit: Boolean) {
+        val hide = app.prefs.getBoolean("hide", true)
+        if ((!hide && edit) || (hide && !edit)) {
+            hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_show))
+            user.text = resources.getString(R.string.main_hide)
+            if (edit) {
+                val editor = app.prefs.edit()
+                editor.putBoolean("hide", true)
+                editor.apply()
+            }
+
+        } else {
+            hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_hide))
+            user.text = app.prefs.getString("user", resources.getString(R.string.unknown))
+            if (edit) {
+                val editor = app.prefs.edit()
+                editor.putBoolean("hide", false)
+                editor.apply()
+            }
+        }
+    }
+
     private fun syncing() {
         NetworkUtils.sync(object : UIBlock {
             override val context = this@MainActivity
 
-            override fun onPrepare() {
-                status = LogStatus.SYNCING
-                status_view.text = status.description
-                login.isEnabled = false
-                logout.isEnabled = false
-                sync.isEnabled = false
-            }
+            override fun onPrepare() = this@MainActivity.onPrepared()
 
             override fun onFailure(exception: IOException) {
-                now_flux.text = "NaN"
+                now_flux.text = resources.getString(R.string.unknown)
+                time_view.text = resources.getString(R.string.unknown)
+                fee_view.text = resources.getString(R.string.unknown)
+                progress.percent = 0F
                 status = LogStatus.ERROR
                 status_view.text = status.description
-                time_view.text
+                last_view.text
                 login.isEnabled = true
                 sync.isEnabled = true
             }
@@ -181,7 +231,10 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(bodyString: String?) {
                 val regex = """time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'""".toRegex()
                 if (bodyString == null) {
-                    now_flux.text = "NaN"
+                    now_flux.text = resources.getString(R.string.unknown)
+                    time_view.text = resources.getString(R.string.unknown)
+                    fee_view.text = resources.getString(R.string.unknown)
+                    progress.percent = 0F
                     status = LogStatus.ERROR
                     status_view.text = status.description
                     login.isEnabled = true
@@ -189,30 +242,46 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     val result = regex.find(bodyString)
                     if (result == null || result.groups.isEmpty()) {
-                        now_flux.text = "NaN"
-                        status = LogStatus.ERROR
-                        status_view.text = status.description
+                        now_flux.text = resources.getString(R.string.unknown)
+                        time_view.text = resources.getString(R.string.unknown)
+                        fee_view.text = resources.getString(R.string.unknown)
+                        progress.percent = 0F
+
+                        val offline = """Please enter Account""".toRegex()
+                        val result2 = offline.find(bodyString)
+                        if (result2 == null || result2.groups.isEmpty()) {
+                            status = LogStatus.ERROR
+                            status_view.text = status.description
+                        } else {
+                            status = LogStatus.OFFLINE
+                            status_view.text = status.description
+                        }
                         login.isEnabled = true
                         sync.isEnabled = true
                     } else {
-                        time = result.groups[1]?.value?.toInt()!!
+                        val time = result.groups[1]?.value?.toInt()!!
                         val flow = result.groups[2]?.value?.toLong()!!
-                        fee = result.groups[3]?.value?.toInt()!!
-                        now_flux.text = Formatter.formatFileSize(this@MainActivity, flow)
+                        val fee = result.groups[3]?.value?.toDouble()!!
+                        now_flux.text = Formatter.formatFileSize(this@MainActivity, flow * 1024)
+                        time_view.text = time.toString() + " min"
+                        fee_view.text = "￥" + fee / 10000
                         status = LogStatus.ONLINE
                         status_view.text = status.description
-                        var fl = when (app.prefs.getString("pack", "NaN")) {
+                        val fl = when (app.prefs.getString("pack", "NaN")) {
                             "8 GB" -> 8F
                             "25 GB" -> 25F
                             "30 GB" -> 30F
                             else -> -1F
                         }
                         if (fl != -1F) {
-                            val percent = flow.toFloat() / (fl * 1024 * 1024 * 1024)
-                            if (percent < 1)
-                                progress.percent = percent
-                            else
-                                progress.percent = 100F
+                            var percent = flow.toFloat() / (fl * 1024 * 1024) * 100
+                            if (percent > 100F) {
+                                percent = 100F
+                            }
+                            val animator = ObjectAnimator.ofFloat(progress, "percent", percent)
+                            animator.duration = 1500L
+                            animator.interpolator = DecelerateInterpolator(2F)
+                            animator.start()
                         }
                         logout.isEnabled = true
                         sync.isEnabled = true
@@ -223,7 +292,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFinished() {
                 val time = System.currentTimeMillis()
                 val date = Date(time)
-                time_view.text = sdf.format(date)
+                last_view.text = sdf.format(date)
             }
         })
     }

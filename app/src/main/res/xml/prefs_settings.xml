@@ -6,10 +6,11 @@
             android:hint="@string/settings_user_hint"
             android:inputType="text"
             android:key="user"
+            android:maxLength="12"
             android:maxLines="1"
             android:selectAllOnFocus="true"
             android:summary="@string/settings_user_hint"
-            android:title="@string/settings_user_title"/>
+            android:title="@string/settings_user_title" />
 
         <EditTextPreference
             android:id="@+id/settings_password"

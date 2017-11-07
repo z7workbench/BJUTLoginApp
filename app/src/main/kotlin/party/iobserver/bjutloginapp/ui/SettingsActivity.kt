@@ -39,24 +39,22 @@ class SettingsActivity : AppCompatActivity() {
             bindPreferenceSummaryToValue(packPreference)
         }
 
-        companion object {
-            private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
-                val value = newValue.toString()
-                when {
-                    value.isEmpty() -> preference.summary = "Nothing"
-                    preference.key == "password" -> preference.summary = "●●●●●●●●"
-                    else -> preference.summary = value
-                }
-                true
+        private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+            val value = newValue.toString()
+            when {
+                value.isEmpty() -> preference.summary = activity.resources.getString(R.string.unknown)
+                preference.key == "password" -> preference.summary = "●●●●●●●●"
+                else -> preference.summary = value
             }
+            true
+        }
 
-            private fun bindPreferenceSummaryToValue(preference: Preference) {
-                preference.onPreferenceChangeListener = onPreferenceChangeListener
-                onPreferenceChangeListener.onPreferenceChange(preference,
-                        PreferenceManager
-                                .getDefaultSharedPreferences(preference.context)
-                                .getString(preference.key, ""))
-            }
+        private fun bindPreferenceSummaryToValue(preference: Preference) {
+            preference.onPreferenceChangeListener = onPreferenceChangeListener
+            onPreferenceChangeListener.onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.context)
+                            .getString(preference.key, ""))
         }
     }
 }

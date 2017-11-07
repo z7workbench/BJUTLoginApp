@@ -28,32 +28,49 @@
         android:id="@+id/user_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/main_user"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_xl"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
         app:layout_constraintEnd_toStartOf="@+id/user"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:ellipsize="end"
+        android:minLines="1"
+        android:text="@string/unknown"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_xl"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/user_title"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
+
+    <ImageView
+        android:id="@+id/hideAndShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout"
+        app:srcCompat="@drawable/ic_hide" />
 
     <com.timqi.sectorprogressview.ColorfulRingProgressView
         android:id="@+id/progress"
@@ -66,13 +83,13 @@
         app:bgColor="@color/colorPrimaryLight"
         app:fgColorEnd="@color/colorPrimaryDarkDev"
         app:fgColorStart="@color/colorPrimaryDev"
-        app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user"
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:percent="0"
         app:startAngle="0"
         app:strokeWidth="15dp" />
@@ -81,9 +98,9 @@
         android:id="@+id/now_flux"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="95dp"
-        android:text="TextView"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="75dp"
+        android:text="@string/unknown"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_h"
         app:layout_constraintStart_toStartOf="@+id/progress"
@@ -93,33 +110,33 @@
         android:id="@+id/pack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="95dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_vertical|end"
-        android:text="TextView"
+        android:text="@string/unknown"
         android:textColor="@color/alert_grey"
         android:textSize="@dimen/text_size_xl"
-        app:layout_constraintBottom_toBottomOf="@+id/progress"
-        app:layout_constraintEnd_toEndOf="@+id/progress" />
+        app:layout_constraintEnd_toEndOf="@+id/progress"
+        app:layout_constraintTop_toBottomOf="@+id/now_flux" />
 
     <TextView
         android:id="@+id/split"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="95dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginTop="4dp"
         android:text="/"
         android:textColor="@color/alert_grey"
         android:textSize="@dimen/text_size_xl"
-        app:layout_constraintBottom_toBottomOf="@+id/progress"
-        app:layout_constraintEnd_toStartOf="@+id/pack" />
+        app:layout_constraintEnd_toStartOf="@+id/pack"
+        app:layout_constraintTop_toBottomOf="@+id/now_flux" />
 
     <TextView
         android:id="@+id/status_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="@string/unknown"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_xxl"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -133,23 +150,23 @@
         android:layout_marginEnd="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/main_time"
+        android:text="@string/main_last"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_l"
-        app:layout_constraintEnd_toStartOf="@+id/time_view"
+        app:layout_constraintEnd_toStartOf="@+id/last_view"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_view" />
 
     <TextView
-        android:id="@+id/time_view"
+        android:id="@+id/last_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="@string/unknown"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_l"
         app:layout_constraintEnd_toEndOf="parent"
@@ -173,8 +190,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last"
         fancy:fb_borderColor="@color/colorPrimaryLight"
-        fancy:fb_borderWidth="2dp"
+        fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/login_default"
+        fancy:fb_disabledColor="@color/colorDisabled"
         fancy:fb_focusColor="@color/login_focused"
         fancy:fb_radius="30dp"
         fancy:fb_textColor="#FFFFFF" />
@@ -194,8 +212,9 @@
         app:layout_constraintStart_toEndOf="@+id/login"
         app:layout_constraintTop_toBottomOf="@+id/last"
         fancy:fb_borderColor="@color/colorPrimaryLight"
-        fancy:fb_borderWidth="2dp"
+        fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/sync_default"
+        fancy:fb_disabledColor="@color/colorDisabled"
         fancy:fb_focusColor="@color/sync_focused"
         fancy:fb_radius="30dp"
         fancy:fb_textColor="#FFFFFF" />
@@ -216,11 +235,142 @@
         app:layout_constraintStart_toEndOf="@+id/sync"
         app:layout_constraintTop_toBottomOf="@+id/last"
         fancy:fb_borderColor="@color/colorPrimaryLight"
-        fancy:fb_borderWidth="2dp"
+        fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/logout_default"
+        fancy:fb_disabledColor="@color/colorDisabled"
         fancy:fb_focusColor="@color/logout_focused"
         fancy:fb_radius="30dp"
         fancy:fb_textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/fee_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/main_fee"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintBottom_toBottomOf="@+id/progress"
+        app:layout_constraintEnd_toStartOf="@+id/fee_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/fee_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/unknown"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintBottom_toBottomOf="@+id/progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fee_title" />
+
+    <TextView
+        android:id="@+id/time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/main_time"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintBottom_toTopOf="@+id/fee_title"
+        app:layout_constraintEnd_toStartOf="@+id/time_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/time_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/unknown"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        app:layout_constraintBottom_toTopOf="@+id/fee_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/time_title" />
+
+    <TextView
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_arrow_upward_24dp" />
+
+            <TextView
+                android:id="@+id/up_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/unknown"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_xl" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_arrow_downward_24dp" />
+
+            <TextView
+                android:id="@+id/down_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/unknown"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_xl" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/detail"
@@ -230,6 +380,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_details_24dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

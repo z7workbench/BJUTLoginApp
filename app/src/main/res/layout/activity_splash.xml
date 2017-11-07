@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center_vertical|center_horizontal"
-        android:text="@string/main_name"
+        android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_title" />
     <TextView
