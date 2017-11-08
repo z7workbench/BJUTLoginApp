@@ -248,8 +248,8 @@ class MainActivity : AppCompatActivity() {
                         progress.percent = 0F
 
                         val offline = """Please enter Account""".toRegex()
-                        val result2 = offline.find(bodyString)
-                        if (result2 == null || result2.groups.isEmpty()) {
+                        val result2 = offline.matches(bodyString)
+                        if (!result2) {
                             status = LogStatus.ERROR
                             status_view.text = resources.getString(status.description)
                         } else {
