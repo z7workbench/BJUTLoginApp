@@ -9,8 +9,8 @@ android:
   - android-27
 
 before_install:
-- openssl aes-256-cbc -K $encrypted_b70cf3070932_key -iv $encrypted_b70cf3070932_iv -in zero-own-keystore.jks.enc -out zero-own-keystore.jks -d
 - chmod +x gradlew
+- openssl aes-256-cbc -K $encrypted_b70cf3070932_key -iv $encrypted_b70cf3070932_iv -in zero-own-keystore.jks.enc -out zero-own-keystore.jks -d
 
 script:
 - "./gradlew assembleRelease"
@@ -19,7 +19,7 @@ deploy:
   provider: releases
   api_key:
     secure: WfYtQr8K9nwsxIKK1MFCgCOOrn6VFjfQ7DxYymnQ8vKu0UQ2LBUa/jY0uNKgEffNW0xTTvGeoUPgKmOkXHtyFKVERLJlQ5WzgD5z9pXOVkl3RRxn5poNDwq7767pqOV+VPIkn971imwkyj7Jd5oYM+TGXqQc8OZKJNNst9fxGrh1dVAbGEEJmf/Y+/4k5JGPScOx0GytKjNKT67YqBuc4JzkYl0MiS1r0wGOnCFJ+94TGZRpdq/+fo0ccURJEeQOFzSGqJhJpJhoi24jqcMXcQMkGYnFw7VnYJUFTfJZFreh+QTu4rDjqtkt7b2J0DA6xuw4oVSbZMzCVTUJLAyZ3c2X2VWqzSLUWXg2qT544NAeyAPy0lVKVN8c6bdZB0sZl8qmsjLpDhAQ5R4JuHTuf+LGz+mvbp1mFB8QOjXh/Us31bLFpwQC70/C+a/NvhcRe0iEE4SM84hwMXwadNlQmURB3HV1ZyxxdL1fVEq6s0TER0EqEzM/d9yOHcrzt6gxt+nDXvxBTA8iYrKnJPZyYXbewzBf+HKM2tlprN6WBhKlKUpEdPMVBC9cqFtGWqUSFcJJKHdBPRk6bJYiQJCWkDbJXcWfs/8AM4hseQHbcZUu9Pz6F8lLCf5lpGhpmUgXHgUcqhlOoznyCAECudlZ8nshap8ll1KDCZY9jZw19Qo=
-  file: app/build/outputs/apk/release/app-release-unsigned.apk
+  file: app/build/outputs/apk/release/app-release.apk
   overwrite: true
   skip_cleanup: true
   on:
