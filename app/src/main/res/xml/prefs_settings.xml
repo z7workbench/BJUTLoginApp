@@ -10,6 +10,7 @@
             android:maxLines="1"
             android:selectAllOnFocus="true"
             android:summary="@string/settings_user_hint"
+            android:layout="@layout/layout_prefs"
             android:title="@string/settings_user_title" />
 
         <EditTextPreference
@@ -21,6 +22,7 @@
             android:password="true"
             android:selectAllOnFocus="true"
             android:summary="@string/settings_password_hint"
+            android:layout="@layout/layout_prefs"
             android:title="@string/settings_password_title"/>
 
         <ListPreference
@@ -30,6 +32,7 @@
             android:hint="@string/settings_pack_summary"
             android:summary="@string/settings_pack_summary"
             android:entries="@array/pack"
+            android:layout="@layout/layout_prefs"
             android:entryValues="@array/pack" />
     </PreferenceCategory>
     <!--
@@ -47,10 +50,12 @@
     <PreferenceCategory android:title="@string/settings_category_about">
         <Preference
             android:summary="@string/settings_about_content"
+            android:layout="@layout/layout_prefs"
             android:title="@string/settings_about_title"/>
 
         <Preference
             android:key="version"
+            android:layout="@layout/layout_prefs"
             android:title="@string/settings_version_title"/>
     </PreferenceCategory>
 </PreferenceScreen>
