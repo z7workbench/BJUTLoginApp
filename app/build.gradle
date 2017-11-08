@@ -15,6 +15,14 @@ android {
         versionName "4.0.5 Dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        github {
+            storeFile file("../zero-own-keystore.jks")
+            storePassword System.getenv("STORE_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+        }
+    }
     buildTypes {
         debug {
             minifyEnabled false
