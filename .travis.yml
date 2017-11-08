@@ -1,4 +1,5 @@
 language: android
+
 jdk: oraclejdk8
 android:
   components:
@@ -6,10 +7,15 @@ android:
   - tools
   - build-tools-27.0.0
   - android-27
+
 before_install:
+- openssl aes-256-cbc -K $encrypted_cbdf21dbb035_key -iv $encrypted_cbdf21dbb035_iv 
+  -in zero-own-keystore.jks.enc -out zero-own-keystore.jks -d
 - chmod +x gradlew
+
 script:
 - "./gradlew assembleRelease"
+
 deploy:
   provider: releases
   api_key:
