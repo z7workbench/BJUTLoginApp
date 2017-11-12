@@ -9,8 +9,9 @@ android:
   - android-27
 
 before_install:
-- chmod +x gradlew
-- openssl aes-256-cbc -K $encrypted_b70cf3070932_key -iv $encrypted_b70cf3070932_iv -in zero-own-keystore.jks.enc -out zero-own-keystore.jks -d
+  - chmod +x gradlew
+  - openssl aes-256-cbc -K $encrypted_b70cf3070932_key -iv $encrypted_b70cf3070932_iv -in zero-own-keystore.jks.enc -out zero-own-keystore.jks -d
+  - gem install fir-cli
 
 script:
 - "./gradlew assembleRelease"
@@ -25,3 +26,7 @@ deploy:
   on:
     repo: ZeroGoYoosee/BJUTLoginApp
     tags: true
+
+after_script:
+  - fir login $fir_token
+  - fir p app/build/outputs/apk/release/app-release.apk
