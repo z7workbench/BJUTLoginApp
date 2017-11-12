@@ -12,7 +12,10 @@ import android.support.v7.app.AppCompatActivity
 import android.text.format.Formatter
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.widget.Button
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import party.iobserver.bjutloginapp.R
 import party.iobserver.bjutloginapp.model.User
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     var oldUp = TrafficStats.getTotalTxBytes()
     var oldDown = TrafficStats.getTotalRxBytes()
     var oldTime = System.currentTimeMillis()
+    var emsg = ""
 
     val handler = object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -81,6 +85,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onPrepare() = this@MainActivity.onPrepared()
 
                 override fun onFailure(exception: IOException) {
+                    emsg = exception.message ?: ""
+                    errMsg.visibility = View.VISIBLE
                     now_flux.text = resources.getString(R.string.unknown)
                     time_view.text = resources.getString(R.string.unknown)
                     fee_view.text = resources.getString(R.string.unknown)
@@ -113,6 +119,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onPrepare() = this@MainActivity.onPrepared()
 
                 override fun onFailure(exception: IOException) {
+                    emsg = exception.message ?: ""
+                    errMsg.visibility = View.VISIBLE
                     syncing()
                 }
 
@@ -130,6 +138,19 @@ class MainActivity : AppCompatActivity() {
                     last_view.text = sdf.format(date)
                 }
             })
+        }
+
+        errMsg.setOnClickListener {
+            val alertDialog = AlertDialog.Builder(this).create()
+            alertDialog.show()
+            val window = alertDialog.window
+            window.setContentView(R.layout.dialog_error)
+            val tv = window.findViewById<TextView>(R.id.dialog_message)
+            val btn = window.findViewById<Button>(R.id.dialog_ok)
+            tv.text = emsg
+            btn.setOnClickListener {
+                alertDialog.dismiss()
+            }
         }
 
         oldUp = TrafficStats.getTotalTxBytes()
@@ -177,6 +198,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onPrepared() {
+        emsg = ""
+        errMsg.visibility = View.GONE
         status = LogStatus.SYNCING
         now_flux.text = resources.getString(R.string.unknown)
         time_view.text = resources.getString(R.string.unknown)
@@ -217,6 +240,8 @@ class MainActivity : AppCompatActivity() {
             override fun onPrepare() = this@MainActivity.onPrepared()
 
             override fun onFailure(exception: IOException) {
+                emsg = exception.message ?: ""
+                errMsg.visibility = View.VISIBLE
                 now_flux.text = resources.getString(R.string.unknown)
                 time_view.text = resources.getString(R.string.unknown)
                 fee_view.text = resources.getString(R.string.unknown)
@@ -247,9 +272,7 @@ class MainActivity : AppCompatActivity() {
                         fee_view.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
 
-                        val offline = """Please enter Account""".toRegex()
-                        val result2 = offline.matches(bodyString)
-                        if (!result2) {
+                        if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm"""")) {
                             status = LogStatus.ERROR
                             status_view.text = resources.getString(status.description)
                         } else {

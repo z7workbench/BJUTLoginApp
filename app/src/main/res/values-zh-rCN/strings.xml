@@ -40,4 +40,6 @@
     <string name="status_syncing">同步中</string>
     <string name="status_error">错误</string>
     <string name="status_online">在线</string>
+    <string name="action_version">版本</string>
+    <string name="OK">确定</string>
 </resources>

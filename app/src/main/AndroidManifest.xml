@@ -14,15 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_login_dev"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ui.MainActivity"
-            android:label=" "
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label=" " />
         <activity
             android:name=".ui.SettingsActivity"
-            android:label="@string/action_settings"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/action_settings">
 
             <intent-filter>
                 <action android:name="party.iobserver.bjutloginapp.SETTINGS_ACTIVITY" />
@@ -45,9 +43,7 @@
                 android:value="force" />
         </activity-alias>
 
-        <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -56,8 +52,7 @@
 
         <activity
             android:name=".ui.ReleaseNoteActivity"
-            android:label="@string/action_rn"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/action_rn">
             <intent-filter>
                 <action android:name="party.iobserver.bjutloginapp.RN_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -66,6 +61,9 @@
                 android:name="forceTouch"
                 android:value="force" />
         </activity>
+        <activity
+            android:name=".ui.VersionActivity"
+            android:label="@string/action_version" />
 
         <activity-alias
             android:name=".ui.ReleaseNoteActivityAlias"

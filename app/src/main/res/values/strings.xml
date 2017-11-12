@@ -7,6 +7,7 @@
     <string name="action_rn">Release Note</string>
     <string name="action_settings">Settings</string>
     <string name="action_sync">Sync</string>
+    <string name="action_version">Version</string>
 
     <string name="force_rn_title">Release Note</string>
     <string name="force_rn_desc">Open Release Note</string>
@@ -22,6 +23,8 @@
     <string name="help_alert_title">Help</string>
     <string name="help_alert_des">This App is a Login Application for [bjut_wifi] network. \nYou can press Settings button in the upper right corner to change the user name and password.</string>
     <string name="help_alert_button">Got it! </string>
+
+    <string name="OK">OK</string>
 
     <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
     <string name="settings_about_title">About me</string>

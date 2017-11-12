@@ -7,4 +7,5 @@ object Constants {
     val WLGN_URL = "http://wlgn.bjut.edu.cn/"
     val LGN_URL = "https://lgn.bjut.edu.cn/"
     val QUIT_TAIL = "F.htm"
+    val VERSION_URL = "https://fir.im/BJUTLoginApp"
 }

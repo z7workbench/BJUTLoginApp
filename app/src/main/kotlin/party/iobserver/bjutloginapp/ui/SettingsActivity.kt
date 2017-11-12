@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.preference.*
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_prefs.*
+import org.jetbrains.anko.startActivity
 import party.iobserver.bjutloginapp.BuildConfig
 import party.iobserver.bjutloginapp.R
 
@@ -33,6 +34,10 @@ class SettingsActivity : AppCompatActivity() {
             val versionPreference = findPreference("version")
 
             versionPreference.summary = BuildConfig.VERSION_NAME
+            versionPreference.setOnPreferenceClickListener {
+                startActivity<VersionActivity>()
+                true
+            }
 
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
