@@ -111,7 +111,6 @@ object NetworkUtils {
                 .build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(p0: Call, p1: IOException) {
-                println("Failure")
                 p1.printStackTrace()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onFailure(p1)
@@ -122,6 +121,31 @@ object NetworkUtils {
             override fun onResponse(p0: Call, p1: Response) {
                 var string = p1.body()?.string()
                 string = string?.replace(" ", "")
+                uiBlock.context.runOnUiThread {
+                    uiBlock.onResponse(string)
+                    uiBlock.onFinished()
+                }
+            }
+        })
+    }
+
+    fun checkNewVersion(uiBlock: UIBlock) {
+        uiBlock.onPrepare()
+        val request = Request.Builder()
+                .get()
+                .url(Constants.CHECK_URL)
+                .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(p0: Call, p1: IOException) {
+                p1.printStackTrace()
+                uiBlock.context.runOnUiThread {
+                    uiBlock.onFailure(p1)
+                    uiBlock.onFinished()
+                }
+            }
+
+            override fun onResponse(p0: Call, p1: Response) {
+                val string = p1.body()?.string()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
                     uiBlock.onFinished()

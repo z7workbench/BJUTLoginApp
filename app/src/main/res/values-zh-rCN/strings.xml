@@ -42,4 +42,5 @@
     <string name="status_online">在线</string>
     <string name="action_version">版本</string>
     <string name="OK">确定</string>
+    <string name="settings_version_new">" 新版本 - "</string>
 </resources>
