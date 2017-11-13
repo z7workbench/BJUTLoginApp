@@ -50,7 +50,7 @@ class SettingsActivity : AppCompatActivity() {
                     val regex = """"version":"(.*? \((.*?)\))","build":"(.*?)"""".toRegex()
                     if (bodyString != null) {
                         val result = regex.find(bodyString)
-                        if (result != null && result.groups.size == 5) {
+                        if (result != null && result.groups.size == 4) {
                             val newStr = resources.getString(R.string.settings_version_new)
                             val numRegex = """.*? \((.*?)\)""".toRegex()
                             val oldCommit = numRegex.find(BuildConfig.VERSION_NAME)!!.groups[1]!!.value.toInt()
