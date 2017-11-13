@@ -42,6 +42,7 @@
     <string name="settings_user_title">User Number</string>
     <string name="settings_version_title">Version</string>
     <string name="settings_version_new"> New Version - </string>
+    <string name="settings_version_loading">Loading...</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_syncing">Syncing</string>

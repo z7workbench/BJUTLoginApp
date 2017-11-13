@@ -36,6 +36,8 @@ class SettingsActivity : AppCompatActivity() {
             val packPreference = findPreference("pack") as ListPreference
             val versionPreference = findPreference("version")
 
+            versionPreference.summary = BuildConfig.VERSION_NAME
+
             NetworkUtils.checkNewVersion(object : UIBlock {
                 override val context = activity
 
@@ -75,10 +77,15 @@ class SettingsActivity : AppCompatActivity() {
                 }
             })
 
+            versionPreference.setOnPreferenceClickListener {
+                startActivity<VersionActivity>()
+                true
+            }
+
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
             bindPreferenceSummaryToValue(packPreference)
-            bindPreferenceSummaryToValue(versionPreference)
+
         }
 
         private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
