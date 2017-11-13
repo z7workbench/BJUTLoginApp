@@ -78,6 +78,7 @@ class SettingsActivity : AppCompatActivity() {
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
             bindPreferenceSummaryToValue(packPreference)
+            bindPreferenceSummaryToValue(versionPreference)
         }
 
         private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
