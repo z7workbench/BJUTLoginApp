@@ -36,7 +36,7 @@ class SettingsActivity : AppCompatActivity() {
             val packPreference = findPreference("pack") as ListPreference
             val versionPreference = findPreference("version")
 
-            versionPreference.summary = BuildConfig.VERSION_NAME
+            versionPreference.summary = resources.getString(R.string.settings_version_loading)
 
             NetworkUtils.checkNewVersion(object : UIBlock {
                 override val context = activity
