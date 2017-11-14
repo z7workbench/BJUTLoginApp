@@ -54,15 +54,6 @@
             android:layout="@layout/layout_prefs"
             android:title="@string/settings_about_title"/>
 
-        <ListPreference
-            android:id="@+id/settings_vc"
-            android:title="@string/settings_vc"
-            android:key="versionControl"
-            android:defaultValue="@string/settings_default_vc"
-            android:entries="@array/vc"
-            android:layout="@layout/layout_prefs"
-            android:entryValues="@array/vc_entry" />
-
         <Preference
             android:key="version"
             android:layout="@layout/layout_prefs"

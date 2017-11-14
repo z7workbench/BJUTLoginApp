@@ -34,7 +34,6 @@ class SettingsActivity : AppCompatActivity() {
             val userNamePreference = findPreference("user") as EditTextPreference
             val psdNamePreference = findPreference("password") as EditTextPreference
             val packPreference = findPreference("pack") as ListPreference
-            val vcPreference = findPreference("versionControl") as ListPreference
             val versionPreference = findPreference("version")
 
             versionPreference.summary = resources.getString(R.string.settings_version_loading)
@@ -59,8 +58,8 @@ class SettingsActivity : AppCompatActivity() {
                         val newCommit = result.groups[3]!!.value.toInt()
 
                         if (oldCommit < newCommit) {
-                            val newVersion = result.groups[2]!!.value
-                            versionPreference.summary = BuildConfig.VERSION_NAME + newStr + newVersion
+                            val newVersion = result.groups[1]!!.value
+                            versionPreference.summary = BuildConfig.VERSION_NAME + "\n" + newStr + " " + newVersion
                         } else {
                             versionPreference.summary = BuildConfig.VERSION_NAME
                         }
@@ -81,7 +80,6 @@ class SettingsActivity : AppCompatActivity() {
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
             bindPreferenceSummaryToValue(packPreference)
-            bindPreferenceSummaryToValue(vcPreference)
         }
 
         private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->

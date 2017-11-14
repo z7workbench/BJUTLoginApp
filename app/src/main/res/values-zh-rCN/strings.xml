@@ -42,8 +42,7 @@
     <string name="status_online">在线</string>
     <string name="action_version">版本</string>
     <string name="OK">确定</string>
-    <string name="settings_version_new">" 新版本 - "</string>
+    <string name="settings_version_new">发现新版本:</string>
     <string name="settings_version_loading">加载中...</string>
     <string name="settings_default_vc">稳定版</string>
-    <string name="settings_vc">版本频道</string>
 </resources>
