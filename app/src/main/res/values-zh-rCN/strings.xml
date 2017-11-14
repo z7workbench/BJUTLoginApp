@@ -45,4 +45,5 @@
     <string name="settings_version_new">" 新版本 - "</string>
     <string name="settings_version_loading">加载中...</string>
     <string name="settings_default_vc">稳定版</string>
+    <string name="settings_vc">版本频道</string>
 </resources>
