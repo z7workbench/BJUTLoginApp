@@ -31,6 +31,7 @@
     <string name="settings_category_about">About</string>
     <string name="settings_category_language">Language</string>
     <string name="settings_category_user">User Settings</string>
+    <string name="settings_default_vc">Stable</string>
     <string name="settings_language_title">Change language</string>
     <string name="settings_language_summary">Select your language here</string>
     <string name="settings_pack">Package</string>
@@ -40,6 +41,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_user_hint">Enter user name here</string>
     <string name="settings_user_title">User Number</string>
+    <string name="settings_vc">Version Channel</string>
     <string name="settings_version_title">Version</string>
     <string name="settings_version_new"> New Version - </string>
     <string name="settings_version_loading">Loading...</string>

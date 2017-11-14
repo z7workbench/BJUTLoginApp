@@ -34,6 +34,7 @@ class SettingsActivity : AppCompatActivity() {
             val userNamePreference = findPreference("user") as EditTextPreference
             val psdNamePreference = findPreference("password") as EditTextPreference
             val packPreference = findPreference("pack") as ListPreference
+            val vcPreference = findPreference("versionControl") as ListPreference
             val versionPreference = findPreference("version")
 
             versionPreference.summary = resources.getString(R.string.settings_version_loading)
@@ -49,25 +50,20 @@ class SettingsActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(bodyString: String?) {
-                    val regex = """"version":"(.*? \((.*?)\))","build":"(.*?)"""".toRegex()
-                    if (bodyString != null) {
-                        val result = regex.find(bodyString)
-                        if (result != null && result.groups.size == 4) {
-                            val newStr = resources.getString(R.string.settings_version_new)
-                            val numRegex = """.*? \((.*?)\)""".toRegex()
-                            val oldCommit = numRegex.find(BuildConfig.VERSION_NAME)!!.groups[1]!!.value.toInt()
-                            val newCommit = result.groups[2]!!.value.toInt()
+                    val regex = """"version":"(.*? ([D,S])E \((.*?)\))","build":"(.*?)"""".toRegex()
+                    val result = regex.find(bodyString ?: "")
+                    if (result != null) {
+                        val newStr = resources.getString(R.string.settings_version_new)
+                        val numRegex = """.*? \((.*?)\)""".toRegex()
+                        val oldCommit = numRegex.find(BuildConfig.VERSION_NAME)!!.groups[1]!!.value.toInt()
+                        val newCommit = result.groups[2]!!.value.toInt()
 
-                            if (oldCommit < newCommit) {
-                                val newVersion = result.groups[1]!!.value
-                                versionPreference.summary = BuildConfig.VERSION_NAME + newStr + newVersion
-                            } else {
-                                versionPreference.summary = BuildConfig.VERSION_NAME
-                            }
+                        if (oldCommit < newCommit) {
+                            val newVersion = result.groups[1]!!.value
+                            versionPreference.summary = BuildConfig.VERSION_NAME + newStr + newVersion
                         } else {
                             versionPreference.summary = BuildConfig.VERSION_NAME
                         }
-
                     } else {
                         versionPreference.summary = BuildConfig.VERSION_NAME
                     }
@@ -85,7 +81,7 @@ class SettingsActivity : AppCompatActivity() {
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
             bindPreferenceSummaryToValue(packPreference)
-
+            bindPreferenceSummaryToValue(vcPreference)
         }
 
         private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->

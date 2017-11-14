@@ -6,6 +6,16 @@
         <item>30 GB</item>
     </string-array>
 
+    <string-array name="vc">
+        <item>Stable</item>
+        <item>Dev</item>
+    </string-array>
+
+    <string-array name="vc_entry">
+        <item>Stable</item>
+        <item>Dev</item>
+    </string-array>
+
     <string-array name="rn_title_content">
         <item>Patch 3.0 Stable</item>
         <item>Patch 2.3.1 Stable</item>
