@@ -1,6 +1,6 @@
 language: android
 git:
-  depth:9999999
+  depth: 9999999
 
 jdk: oraclejdk8
 android:
