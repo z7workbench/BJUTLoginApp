@@ -56,10 +56,10 @@ class SettingsActivity : AppCompatActivity() {
                         val newStr = resources.getString(R.string.settings_version_new)
                         val numRegex = """.*? \((.*?)\)""".toRegex()
                         val oldCommit = numRegex.find(BuildConfig.VERSION_NAME)!!.groups[1]!!.value.toInt()
-                        val newCommit = result.groups[2]!!.value.toInt()
+                        val newCommit = result.groups[3]!!.value.toInt()
 
                         if (oldCommit < newCommit) {
-                            val newVersion = result.groups[1]!!.value
+                            val newVersion = result.groups[2]!!.value
                             versionPreference.summary = BuildConfig.VERSION_NAME + newStr + newVersion
                         } else {
                             versionPreference.summary = BuildConfig.VERSION_NAME
