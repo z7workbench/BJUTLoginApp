@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/ZeroGoYoosee/BJUTLoginApp.svg)](https://travis-ci.org/ZeroGoYoosee/BJUTLoginApp) [![API](https://img.shields.io/badge/API-23%2B-blue.svg?style=flat)](https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#M) [![GitHub release](https://img.shields.io/github/release/ZeroGoYoosee/BJUTLoginApp.svg)](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases) [![Github All Releases](https://img.shields.io/github/downloads/ZeroGoYoosee/BJUTLoginApp/total.svg)](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases)
 
 ---
-## Overview & Screenshot
+## Overview & Screenshots
 BJUT Login App is an Android App for students from Beijing University of Technology. It helps log in BJUT gateway. 
 It is written in Kotlin. If you want Java version, you would check out '3.0.0' branch. 
 
@@ -15,6 +15,9 @@ However, it is deprecated.
 
 ### Main View
 ![](screenshots/main.png)
+
+### Settings
+![](screenshots/settings.png)
 
 ## How to use
 Give your student ID and password in [Settings], then press [Login] button. 
