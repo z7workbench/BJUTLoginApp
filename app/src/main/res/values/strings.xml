@@ -51,4 +51,7 @@
     <string name="status_online">Online</string>
 
     <string name="unknown">Unknown</string>
+
+    <string name="not_set">User or password isn\'t set yet! </string>
+    <string name="goto_settings">Go to</string>
 </resources>

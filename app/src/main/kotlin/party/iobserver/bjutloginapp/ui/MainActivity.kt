@@ -2,11 +2,11 @@ package party.iobserver.bjutloginapp.ui
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.content.Intent
 import android.net.TrafficStats
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.format.Formatter
@@ -17,6 +17,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import party.iobserver.bjutloginapp.R
 import party.iobserver.bjutloginapp.model.User
 import party.iobserver.bjutloginapp.util.LogStatus
@@ -78,8 +79,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            NetworkUtils.login(User(name = app.prefs.getString("user", resources.getString(R.string.unknown)),
-                    password = app.prefs.getString("password", resources.getString(R.string.unknown))), object : UIBlock {
+            val name = app.prefs.getString("user", resources.getString(R.string.unknown))
+            val password = app.prefs.getString("password", resources.getString(R.string.unknown))
+
+            if (name == resources.getString(R.string.unknown) ||
+                    password == resources.getString(R.string.unknown)) {
+                Snackbar.make(main_layout, R.string.not_set, 2000)
+                        .setAction(resources.getString(R.string.goto_settings)) {
+                            startActivity<SettingsActivity>()
+                        }
+                        .show()
+                return@setOnClickListener
+            }
+            NetworkUtils.login(User(name = name, password = password), object : UIBlock {
                 override val context: Context = this@MainActivity
 
                 override fun onPrepare() = this@MainActivity.onPrepared()
@@ -179,8 +191,7 @@ class MainActivity : AppCompatActivity() {
 
         when (id) {
             R.id.action_settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
+                startActivity<SettingsActivity>()
             }
             R.id.action_help -> {
                 AlertDialog.Builder(this)

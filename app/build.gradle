@@ -8,13 +8,13 @@ def gitCommitCount = "git rev-list HEAD --count".execute().text.trim()
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.0'
+    buildToolsVersion '27.0.2'
     defaultConfig {
         applicationId "party.iobserver.bjutloginapp"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 4
-        versionName "4.0.0-dev10 DE"
+        versionName "4.0.0"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

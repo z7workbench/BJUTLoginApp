@@ -45,4 +45,6 @@
     <string name="settings_version_new">发现新版本:</string>
     <string name="settings_version_loading">加载中...</string>
     <string name="settings_default_vc">稳定版</string>
+    <string name="not_set">用户名或密码还未设置</string>
+    <string name="goto_settings">转到设置</string>
 </resources>
