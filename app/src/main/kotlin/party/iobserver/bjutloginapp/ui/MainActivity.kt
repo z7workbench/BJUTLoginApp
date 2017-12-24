@@ -79,11 +79,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            val name = app.prefs.getString("user", resources.getString(R.string.unknown))
-            val password = app.prefs.getString("password", resources.getString(R.string.unknown))
+            val name = app.prefs.getString("user", "")
+            val password = app.prefs.getString("password", "")
 
-            if (name == resources.getString(R.string.unknown) ||
-                    password == resources.getString(R.string.unknown)) {
+            if (name == "" || password == "") {
                 Snackbar.make(main_layout, R.string.not_set, 2000)
                         .setAction(resources.getString(R.string.goto_settings)) {
                             startActivity<SettingsActivity>()

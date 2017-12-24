@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        splash_tv_version.text = BuildConfig.VERSION_NAME
+        splash_tv_version.text = "Version " + BuildConfig.VERSION_NAME
 
         Handler().postDelayed({
             val mainIntent = Intent(this@SplashActivity, MainActivity::class.java)
