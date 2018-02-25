@@ -65,6 +65,15 @@
             android:name=".ui.VersionActivity"
             android:label="@string/action_version" />
 
+        <activity
+            android:name=".ui.UsersActivity"
+            android:label="@string/action_users">
+            <intent-filter>
+                <action android:name="party.iobserver.bjutloginapp.USERS_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity-alias
             android:name=".ui.ReleaseNoteActivityAlias"
             android:targetActivity=".ui.ReleaseNoteActivity">
@@ -75,6 +84,16 @@
             <meta-data
                 android:name="forceTouch"
                 android:value="force" />
+        </activity-alias>
+
+
+        <activity-alias
+            android:name=".ui.UsersActivity"
+            android:targetActivity=".ui.UsersActivity">
+            <intent-filter>
+                <action android:name="party.iobserver.bjutloginapp.USERS_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity-alias>
 
     </application>

@@ -8,11 +8,15 @@
     <string name="action_settings">Settings</string>
     <string name="action_sync">Sync</string>
     <string name="action_version">Version</string>
+    <string name="action_users">Users</string>
+    <string name="action_add">Add</string>
 
     <string name="force_rn_title">Release Note</string>
     <string name="force_rn_desc">Open Release Note</string>
     <string name="force_settings_title">Settings</string>
     <string name="force_settings_desc">Open Settings</string>
+    <string name="force_user_title">User</string>
+    <string name="force_user_desc">Edit or Select User</string>
 
     <string name="main_fee">Fee - </string>
     <string name="main_last">Last sync - </string>
@@ -25,6 +29,7 @@
     <string name="help_alert_button">Got it! </string>
 
     <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
 
     <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
     <string name="settings_about_title">About me</string>
@@ -44,6 +49,8 @@
     <string name="settings_version_loading">Loading...</string>
     <string name="settings_version_new">Update available:</string>
     <string name="settings_version_title">Version</string>
+    <string name="settings_users_title">User Settings</string>
+    <string name="settings_users_summary">Edit or Select User</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_syncing">Syncing</string>
@@ -51,6 +58,7 @@
     <string name="status_online">Online</string>
 
     <string name="unknown">Unknown</string>
+    <string name="users_placeholder">Whoops, it is empty!</string>
 
     <string name="not_set">User or password isn\'t set yet! </string>
     <string name="goto_settings">Go to</string>

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/settings_category_user">
+        <Preference
+            android:key="users"
+            android:layout="@layout/layout_prefs"
+            android:summary="@string/settings_users_summary"
+            android:title="@string/settings_users_title" />
+
         <EditTextPreference
             android:id="@+id/settings_user"
             android:hint="@string/settings_user_hint"
             android:inputType="text"
             android:key="user"
+            android:layout="@layout/layout_prefs"
             android:maxLength="12"
             android:maxLines="1"
             android:selectAllOnFocus="true"
             android:summary="@string/settings_user_hint"
-            android:layout="@layout/layout_prefs"
             android:title="@string/settings_user_title" />
 
         <EditTextPreference
@@ -18,23 +24,23 @@
             android:hint="@string/settings_password_hint"
             android:inputType="textPassword"
             android:key="password"
+            android:layout="@layout/layout_prefs"
             android:maxLines="1"
             android:password="true"
             android:selectAllOnFocus="true"
             android:summary="@string/settings_password_hint"
-            android:layout="@layout/layout_prefs"
-            android:title="@string/settings_password_title"/>
+            android:title="@string/settings_password_title" />
 
         <ListPreference
             android:id="@+id/settings_pack"
-            android:title="@string/settings_pack"
-            android:key="pack"
-            android:hint="@string/settings_pack_summary"
-            android:summary="@string/settings_pack_summary"
             android:defaultValue="8 GB"
             android:entries="@array/pack"
+            android:entryValues="@array/pack"
+            android:hint="@string/settings_pack_summary"
+            android:key="pack"
             android:layout="@layout/layout_prefs"
-            android:entryValues="@array/pack" />
+            android:summary="@string/settings_pack_summary"
+            android:title="@string/settings_pack" />
     </PreferenceCategory>
     <!--
         <PreferenceCategory android:title="@string/settings_category_language">
@@ -50,13 +56,13 @@
     -->
     <PreferenceCategory android:title="@string/settings_category_about">
         <Preference
-            android:summary="@string/settings_about_content"
             android:layout="@layout/layout_prefs"
-            android:title="@string/settings_about_title"/>
+            android:summary="@string/settings_about_content"
+            android:title="@string/settings_about_title" />
 
         <Preference
             android:key="version"
             android:layout="@layout/layout_prefs"
-            android:title="@string/settings_version_title"/>
+            android:title="@string/settings_version_title" />
     </PreferenceCategory>
 </PreferenceScreen>

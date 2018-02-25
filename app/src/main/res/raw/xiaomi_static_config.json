@@ -13,6 +13,14 @@
       type: "activity",
       image: "settings",
       intent: "#Intent;component=party.iobserver.bjutloginapp/.ui.SettingsActivity;end"
+    },
+    {
+      title: "force_user_title",
+      desc: "force_user_desc",
+      type: "activity",
+      image: "ic_settings_24dp",
+      intent: "#Intent;component=party.iobserver.bjutloginapp/.ui.UsersActivity;end"
     }
+
   ]
 }

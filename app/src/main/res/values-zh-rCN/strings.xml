@@ -47,4 +47,12 @@
     <string name="settings_default_vc">稳定版</string>
     <string name="not_set">用户名或密码还未设置</string>
     <string name="goto_settings">转到设置</string>
+    <string name="action_users">用户</string>
+    <string name="cancel">取消</string>
+    <string name="force_user_title">用户</string>
+    <string name="force_user_desc">编辑或选择用户
+    <string name="action_add">添加</string></string>
+    <string name="settings_users_title">用户设置</string>
+    <string name="settings_users_summary">编辑或选择用户</string>
+    <string name="users_placeholder">尴尬，这里是空的哟！</string>
 </resources>

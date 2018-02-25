@@ -35,6 +35,12 @@ class SettingsActivity : AppCompatActivity() {
             val psdNamePreference = findPreference("password") as EditTextPreference
             val packPreference = findPreference("pack") as ListPreference
             val versionPreference = findPreference("version")
+            val usersPreference = findPreference("users")
+
+            usersPreference.setOnPreferenceClickListener {
+                startActivity<UsersActivity>()
+                true
+            }
 
             versionPreference.summary = resources.getString(R.string.settings_version_loading)
 
