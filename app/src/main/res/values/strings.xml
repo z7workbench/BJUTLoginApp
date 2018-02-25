@@ -49,8 +49,8 @@
     <string name="settings_version_loading">Loading...</string>
     <string name="settings_version_new">Update available:</string>
     <string name="settings_version_title">Version</string>
-    <string name="settings_users_title">User Settings</string>
-    <string name="settings_users_summary">Edit or Select User</string>
+    <string name="settings_users_title">Select User</string>
+    <string name="settings_users_summary">Current:\u0020</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_syncing">Syncing</string>

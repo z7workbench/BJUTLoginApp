@@ -12,6 +12,9 @@ interface UserDao {
     @Query("select * from user order by id")
     fun all(): LiveData<MutableList<User>>
 
+    @Query("select * from user where id = :id")
+    fun find(id: Int): MutableList<User>
+
     @Insert
     fun insert(user: User)
 

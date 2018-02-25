@@ -1,5 +1,6 @@
 package party.iobserver.bjutloginapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.preference.*
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +10,7 @@ import party.iobserver.bjutloginapp.BuildConfig
 import party.iobserver.bjutloginapp.R
 import party.iobserver.bjutloginapp.util.NetworkUtils
 import party.iobserver.bjutloginapp.util.UIBlock
+import party.iobserver.bjutloginapp.util.app
 import java.io.IOException
 
 /**
@@ -17,6 +19,8 @@ import java.io.IOException
 
 
 class SettingsActivity : AppCompatActivity() {
+    val prefs by lazy { app.prefs }
+    val userDao by lazy { app.appDatabase.userDao() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prefs)
@@ -26,16 +30,17 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
-    class SettingsFragment : PreferenceFragment() {
+    @SuppressLint("ValidFragment")
+    inner class SettingsFragment : PreferenceFragment() {
+        val userNamePreference by lazy { findPreference("user") as EditTextPreference }
+        val psdNamePreference by lazy { findPreference("password") as EditTextPreference }
+        val packPreference by lazy { findPreference("pack") as ListPreference }
+        val versionPreference by lazy { findPreference("version") }
+        val usersPreference by lazy { findPreference("users") }
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.prefs_settings)
-            val userNamePreference = findPreference("user") as EditTextPreference
-            val psdNamePreference = findPreference("password") as EditTextPreference
-            val packPreference = findPreference("pack") as ListPreference
-            val versionPreference = findPreference("version")
-            val usersPreference = findPreference("users")
 
             usersPreference.setOnPreferenceClickListener {
                 startActivity<UsersActivity>()
@@ -55,13 +60,13 @@ class SettingsActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(bodyString: String?) {
-                    val regex = """"version":"(.*? ([D,S])E \((.*?)\))","build":"(.*?)"""".toRegex()
+                    val regex = """"version":"(.*? \((.*?)\))","build":"(.*?)"""".toRegex()
                     val result = regex.find(bodyString ?: "")
                     if (result != null) {
                         val newStr = resources.getString(R.string.settings_version_new)
                         val numRegex = """.*? \((.*?)\)""".toRegex()
                         val oldCommit = numRegex.find(BuildConfig.VERSION_NAME)!!.groups[1]!!.value.toInt()
-                        val newCommit = result.groups[3]!!.value.toInt()
+                        val newCommit = result.groups[2]!!.value.toInt()
 
                         if (oldCommit < newCommit) {
                             val newVersion = result.groups[1]!!.value
@@ -86,6 +91,14 @@ class SettingsActivity : AppCompatActivity() {
             bindPreferenceSummaryToValue(userNamePreference)
             bindPreferenceSummaryToValue(psdNamePreference)
             bindPreferenceSummaryToValue(packPreference)
+
+            val currentId = prefs.getInt("current_user", -1)
+            val result = userDao.find(currentId)
+            if (result.isEmpty()) {
+                usersPreference.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
+            } else {
+                usersPreference.summary = getString(R.string.settings_users_summary) + result.first().name
+            }
         }
 
         private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
@@ -97,6 +110,17 @@ class SettingsActivity : AppCompatActivity() {
                 else -> preference.summary = value
             }
             true
+        }
+
+        override fun onResume() {
+            super.onResume()
+            val currentId = prefs.getInt("current_user", -1)
+            val result = userDao.find(currentId)
+            if (result.isEmpty()) {
+                usersPreference.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
+            } else {
+                usersPreference.summary = getString(R.string.settings_users_summary) + result.first().name
+            }
         }
 
         private fun bindPreferenceSummaryToValue(preference: Preference) {
