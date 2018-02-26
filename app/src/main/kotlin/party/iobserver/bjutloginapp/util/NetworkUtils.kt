@@ -44,17 +44,23 @@ object NetworkUtils {
     }
 
 
-    fun login(user: User, uiBlock: UIBlock) {
+    fun login(user: User, isWlgn: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
         val body = FormBody.Builder()
                 .add("DDDDD", user.name)
                 .add("upass", user.password)
                 .add("6MKKey", "123")
                 .build()
-        val request = Request.Builder()
+        val request = when(isWlgn) {
+            true -> Request.Builder()
                 .post(body)
                 .url(Constants.WLGN_URL)
                 .build()
+            false -> Request.Builder()
+                    .post(body)
+                    .url(Constants.LGN_URL)
+                    .build()
+        }
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(p0: Call, p1: IOException) {
                 println("Failure")
@@ -76,12 +82,18 @@ object NetworkUtils {
         })
     }
 
-    fun sync(uiBlock: UIBlock) {
+    fun sync(isWlgn: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
-        val request = Request.Builder()
-                .get()
-                .url(Constants.WLGN_URL)
-                .build()
+        val request = when(isWlgn) {
+            true -> Request.Builder()
+                    .get()
+                    .url(Constants.WLGN_URL)
+                    .build()
+            false -> Request.Builder()
+                    .get()
+                    .url(Constants.LGN_URL)
+                    .build()
+        }
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(p0: Call, p1: IOException) {
                 println("Failure")

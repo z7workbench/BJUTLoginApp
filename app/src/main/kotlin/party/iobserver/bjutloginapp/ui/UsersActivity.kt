@@ -19,7 +19,6 @@ import party.iobserver.bjutloginapp.util.app
 
 class UsersActivity : AppCompatActivity() {
     private var currentId = 0
-    private var currentPackage: Int = 0
     val prefs by lazy { app.prefs }
     private val userDao by lazy { app.appDatabase.userDao() }
 
@@ -64,13 +63,15 @@ class UsersActivity : AppCompatActivity() {
         override fun areContentsTheSame(p0: Int, p1: Int) = old[p0] == new[p1]
     }
 
-    internal fun openUserDialog(newUser: Boolean, user: User) {
+    fun openUserDialog(newUser: Boolean, user: User) {
+        var currentPackage: Int = 0
         val view: View = layoutInflater.inflate(R.layout.dialog_user, null, false)
         view.name.setText(user.name)
         view.name.setSelection(user.name.length)
         view.password.setText(user.password)
         if (!newUser) {
             view.spinner_pack.setSelection(user.pack)
+            currentPackage = user.pack
         }
         view.spinner_pack.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -85,8 +86,8 @@ class UsersActivity : AppCompatActivity() {
             positiveButton(R.string.OK) { _ ->
                 user.name = view.name.text.toString()
                 user.password = view.password.text.toString()
+                user.pack = currentPackage
                 if (!newUser) {
-                    user.pack = currentPackage
                     userDao.update(user)
                 } else {
                     userDao.insert(user)

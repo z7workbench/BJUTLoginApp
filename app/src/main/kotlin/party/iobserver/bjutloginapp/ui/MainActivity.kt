@@ -19,7 +19,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import party.iobserver.bjutloginapp.R
-import party.iobserver.bjutloginapp.model.User
 import party.iobserver.bjutloginapp.util.LogStatus
 import party.iobserver.bjutloginapp.util.NetworkUtils
 import party.iobserver.bjutloginapp.util.UIBlock
@@ -37,6 +36,9 @@ class MainActivity : AppCompatActivity() {
     var oldDown = TrafficStats.getTotalRxBytes()
     var oldTime = System.currentTimeMillis()
     var emsg = ""
+    var currentId = -1
+    var currentName = ""
+    var currentPack = -1
 
     val handler = object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -78,19 +80,27 @@ class MainActivity : AppCompatActivity() {
             hideOrNot(true)
         }
 
-        login.setOnClickListener {
-            val name = app.prefs.getString("user", "")
-            val password = app.prefs.getString("password", "")
+        currentId = app.prefs.getInt("current_user", -1)
+        val currentUser = app.appDatabase.userDao().find(currentId)
+        currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
+        currentPack = currentUser.firstOrNull()?.pack ?: -1
+        pack.text = when (currentPack) {
+            0 -> resources.getStringArray(R.array.pack)[0]
+            1 -> resources.getStringArray(R.array.pack)[1]
+            2 -> resources.getStringArray(R.array.pack)[2]
+            else -> getString(R.string.unknown)
+        }
 
-            if (name == "" || password == "") {
+        login.setOnClickListener {
+            if (currentUser.isEmpty()) {
                 Snackbar.make(main_layout, R.string.not_set, 2000)
                         .setAction(resources.getString(R.string.goto_settings)) {
-                            startActivity<SettingsActivity>()
+                            startActivity<UsersActivity>()
                         }
                         .show()
                 return@setOnClickListener
             }
-            NetworkUtils.login(User(name = name, password = password), object : UIBlock {
+            NetworkUtils.login(currentUser.first(), app.prefs.getBoolean("website", true), object : UIBlock {
                 override val context: Context = this@MainActivity
 
                 override fun onPrepare() = this@MainActivity.onPrepared()
@@ -171,7 +181,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        pack.text = app.prefs.getString("pack", resources.getString(R.string.unknown))
+        currentId = app.prefs.getInt("current_user", -1)
+        val currentUser = app.appDatabase.userDao().find(currentId)
+        currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
+        currentPack = currentUser.firstOrNull()?.pack ?: -1
+        pack.text = when (currentPack) {
+            0 -> resources.getStringArray(R.array.pack)[0]
+            1 -> resources.getStringArray(R.array.pack)[1]
+            2 -> resources.getStringArray(R.array.pack)[2]
+            else -> getString(R.string.unknown)
+        }
+
         syncing()
         hideOrNot(false)
     }
@@ -234,7 +254,7 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_hide))
-            user.text = app.prefs.getString("user", resources.getString(R.string.unknown))
+            user.text = currentName
             if (edit) {
                 val editor = app.prefs.edit()
                 editor.putBoolean("hide", false)
@@ -244,7 +264,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun syncing() {
-        NetworkUtils.sync(object : UIBlock {
+        NetworkUtils.sync(app.prefs.getBoolean("website", true), object : UIBlock {
             override val context = this@MainActivity
 
             override fun onPrepare() = this@MainActivity.onPrepared()
@@ -300,10 +320,10 @@ class MainActivity : AppCompatActivity() {
                         fee_view.text = "￥" + fee / 10000
                         status = LogStatus.ONLINE
                         status_view.text = resources.getString(status.description)
-                        val fl = when (app.prefs.getString("pack", "NaN")) {
-                            "8 GB" -> 8F
-                            "25 GB" -> 25F
-                            "30 GB" -> 30F
+                        val fl = when (currentPack) {
+                            0 -> 8F
+                            1 -> 25F
+                            2 -> 30F
                             else -> -1F
                         }
                         if (fl != -1F) {

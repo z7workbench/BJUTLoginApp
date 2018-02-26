@@ -7,40 +7,13 @@
             android:summary="@string/settings_users_summary"
             android:title="@string/settings_users_title" />
 
-        <EditTextPreference
-            android:id="@+id/settings_user"
-            android:hint="@string/settings_user_hint"
-            android:inputType="text"
-            android:key="user"
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="website"
             android:layout="@layout/layout_prefs"
-            android:maxLength="12"
-            android:maxLines="1"
-            android:selectAllOnFocus="true"
-            android:summary="@string/settings_user_hint"
-            android:title="@string/settings_user_title" />
-
-        <EditTextPreference
-            android:id="@+id/settings_password"
-            android:hint="@string/settings_password_hint"
-            android:inputType="textPassword"
-            android:key="password"
-            android:layout="@layout/layout_prefs"
-            android:maxLines="1"
-            android:password="true"
-            android:selectAllOnFocus="true"
-            android:summary="@string/settings_password_hint"
-            android:title="@string/settings_password_title" />
-
-        <ListPreference
-            android:id="@+id/settings_pack"
-            android:defaultValue="8 GB"
-            android:entries="@array/pack"
-            android:entryValues="@array/pack"
-            android:hint="@string/settings_pack_summary"
-            android:key="pack"
-            android:layout="@layout/layout_prefs"
-            android:summary="@string/settings_pack_summary"
-            android:title="@string/settings_pack" />
+            android:summaryOn="@string/settings_web_on"
+            android:summaryOff="@string/settings_web_off"
+            android:title="@string/settings_web_title" />
     </PreferenceCategory>
     <!--
         <PreferenceCategory android:title="@string/settings_category_language">

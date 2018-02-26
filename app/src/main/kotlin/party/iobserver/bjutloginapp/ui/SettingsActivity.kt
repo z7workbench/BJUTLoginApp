@@ -2,7 +2,8 @@ package party.iobserver.bjutloginapp.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.preference.*
+import android.preference.PreferenceFragment
+import android.preference.SwitchPreference
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_prefs.*
 import org.jetbrains.anko.startActivity
@@ -32,9 +33,7 @@ class SettingsActivity : AppCompatActivity() {
 
     @SuppressLint("ValidFragment")
     inner class SettingsFragment : PreferenceFragment() {
-        val userNamePreference by lazy { findPreference("user") as EditTextPreference }
-        val psdNamePreference by lazy { findPreference("password") as EditTextPreference }
-        val packPreference by lazy { findPreference("pack") as ListPreference }
+        val webPreference by lazy { findPreference("website") as SwitchPreference }
         val versionPreference by lazy { findPreference("version") }
         val usersPreference by lazy { findPreference("users") }
 
@@ -88,10 +87,6 @@ class SettingsActivity : AppCompatActivity() {
                 true
             }
 
-            bindPreferenceSummaryToValue(userNamePreference)
-            bindPreferenceSummaryToValue(psdNamePreference)
-            bindPreferenceSummaryToValue(packPreference)
-
             val currentId = prefs.getInt("current_user", -1)
             val result = userDao.find(currentId)
             if (result.isEmpty()) {
@@ -99,17 +94,6 @@ class SettingsActivity : AppCompatActivity() {
             } else {
                 usersPreference.summary = getString(R.string.settings_users_summary) + result.first().name
             }
-        }
-
-        private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
-            val value = newValue.toString()
-            when {
-                value.isEmpty() -> preference.summary = activity.resources.getString(R.string.unknown)
-                preference.key == "password" -> preference.summary = "●●●●●●●●"
-                preference.key == "version" -> startActivity<VersionActivity>()
-                else -> preference.summary = value
-            }
-            true
         }
 
         override fun onResume() {
@@ -123,12 +107,5 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        private fun bindPreferenceSummaryToValue(preference: Preference) {
-            preference.onPreferenceChangeListener = onPreferenceChangeListener
-            onPreferenceChangeListener.onPreferenceChange(preference,
-                    PreferenceManager
-                            .getDefaultSharedPreferences(preference.context)
-                            .getString(preference.key, ""))
-        }
     }
 }

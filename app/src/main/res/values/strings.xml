@@ -51,6 +51,9 @@
     <string name="settings_version_title">Version</string>
     <string name="settings_users_title">Select User</string>
     <string name="settings_users_summary">Current:\u0020</string>
+    <string name="settings_web_on">WLGN</string>
+    <string name="settings_web_off">LGN</string>
+    <string name="settings_web_title">Website</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_syncing">Syncing</string>
