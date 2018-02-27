@@ -1,6 +1,5 @@
 package party.iobserver.bjutloginapp.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.preference.PreferenceFragment
 import android.preference.SwitchPreference
@@ -20,8 +19,6 @@ import java.io.IOException
 
 
 class SettingsActivity : AppCompatActivity() {
-    val prefs by lazy { app.prefs }
-    val userDao by lazy { app.appDatabase.userDao() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prefs)
@@ -31,8 +28,9 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("ValidFragment")
-    inner class SettingsFragment : PreferenceFragment() {
+    class SettingsFragment : PreferenceFragment() {
+        val prefs by lazy { activity.app.prefs }
+        val userDao by lazy { activity.app.appDatabase.userDao() }
         val webPreference by lazy { findPreference("website") as SwitchPreference }
         val versionPreference by lazy { findPreference("version") }
         val usersPreference by lazy { findPreference("users") }
