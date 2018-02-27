@@ -26,12 +26,12 @@ class LoginApp : Application() {
         val dm = resources.displayMetrics
         val config = resources.configuration
         when (prefs.getString("language", "")) {
-            "0" -> config.locale = Locale.getDefault()
-            "1" -> config.locale = Locale.SIMPLIFIED_CHINESE
-            "2" -> config.locale = Locale.ENGLISH
+            "0" -> config.setLocale(Locale.getDefault())
+            "1" -> config.setLocale(Locale.SIMPLIFIED_CHINESE)
+            "2" -> config.setLocale(Locale.ENGLISH)
             "" -> {
                 prefs.edit().putString("language", "0").apply()
-                config.locale = Locale.getDefault()
+                config.setLocale(Locale.getDefault())
             }
         }
         resources.updateConfiguration(config, dm)
