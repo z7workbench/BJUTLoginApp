@@ -58,4 +58,6 @@
     <string name="settings_web_on">WLGN</string>
     <string name="settings_web_off">LGN</string>
     <string name="settings_web_title">网站</string>
+    <string name="save_changes">按返回键保存更改</string>
+    <string name="undo">撤销更改</string>
 </resources>

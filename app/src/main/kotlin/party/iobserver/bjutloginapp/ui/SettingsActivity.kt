@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.PreferenceFragment
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_prefs.*
 import org.jetbrains.anko.startActivity
@@ -42,6 +43,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragment() {
+        lateinit var language: String
         private val prefs by lazy { activity.app.prefs }
         private val userDao by lazy { activity.app.appDatabase.userDao() }
         private val languagePreference by lazy { findPreference("language") as ListPreference }
@@ -61,9 +63,13 @@ class SettingsActivity : AppCompatActivity() {
             versionPreference.summary = resources.getString(R.string.settings_version_loading)
 
             languagePreference.summary = array[prefs.getString("language", "0").toInt()]
+            language = prefs.getString("language", "0")
 
             languagePreference.setOnPreferenceChangeListener { preference, newValue ->
                 preference.summary = array[newValue.toString().toInt()]
+                if (language == prefs.getString("language", language)){
+                    Snackbar.make(activity.prefs_layout, R.string.save_changes, 3000).show()
+                }
                 true
             }
 

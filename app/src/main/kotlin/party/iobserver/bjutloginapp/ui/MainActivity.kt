@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
 
         login.setOnClickListener {
             if (currentUser.isEmpty()) {
-                Snackbar.make(main_layout, R.string.not_set, 2000)
+                Snackbar.make(main_layout, R.string.not_set, 3000)
                         .setAction(resources.getString(R.string.goto_settings)) {
                             startActivity<UsersActivity>()
                         }
