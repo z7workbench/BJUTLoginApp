@@ -11,22 +11,21 @@
             android:defaultValue="true"
             android:key="website"
             android:layout="@layout/layout_prefs"
-            android:summaryOn="@string/settings_web_on"
             android:summaryOff="@string/settings_web_off"
+            android:summaryOn="@string/settings_web_on"
             android:title="@string/settings_web_title" />
     </PreferenceCategory>
-    <!--
-        <PreferenceCategory android:title="@string/settings_category_language">
+    <PreferenceCategory android:title="@string/settings_category_language">
 
-                    <ListPreference
-                        android:key="language"
-                        android:title="@string/settings_language_title"
-                        android:summary="@string/settings_language_summary"
-                        android:entries="@array/language"
-                        android:entryValues="@array/language_value"/>
+        <ListPreference
+            android:entries="@array/language"
+            android:entryValues="@array/language_values"
+            android:key="language"
+            android:layout="@layout/layout_prefs"
+            android:summary="@string/settings_language_summary"
+            android:title="@string/settings_language_title" />
 
     </PreferenceCategory>
-    -->
     <PreferenceCategory android:title="@string/settings_category_about">
         <Preference
             android:layout="@layout/layout_prefs"

@@ -71,4 +71,16 @@
             - 未完待续......
         </item>
     </string-array>
+
+    <string-array name="language">
+        <item>自动</item>
+        <item>简体中文</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

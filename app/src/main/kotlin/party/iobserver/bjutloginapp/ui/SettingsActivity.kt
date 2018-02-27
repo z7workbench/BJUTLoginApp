@@ -1,8 +1,9 @@
 package party.iobserver.bjutloginapp.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.preference.ListPreference
 import android.preference.PreferenceFragment
-import android.preference.SwitchPreference
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_prefs.*
 import org.jetbrains.anko.startActivity
@@ -17,8 +18,8 @@ import java.io.IOException
  * Created by ZeroGo on 2017.2.22.
  */
 
-
 class SettingsActivity : AppCompatActivity() {
+    lateinit var language: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prefs)
@@ -26,14 +27,27 @@ class SettingsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
 
+        language = app.prefs.getString("language", "0")
+    }
+
+    override fun onBackPressed() {
+        if (language == app.prefs.getString("language", "0"))
+            super.onBackPressed()
+        else {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
     }
 
     class SettingsFragment : PreferenceFragment() {
-        val prefs by lazy { activity.app.prefs }
-        val userDao by lazy { activity.app.appDatabase.userDao() }
-        val webPreference by lazy { findPreference("website") as SwitchPreference }
-        val versionPreference by lazy { findPreference("version") }
-        val usersPreference by lazy { findPreference("users") }
+        private val prefs by lazy { activity.app.prefs }
+        private val userDao by lazy { activity.app.appDatabase.userDao() }
+        private val languagePreference by lazy { findPreference("language") as ListPreference }
+        private val versionPreference by lazy { findPreference("version") }
+        private val usersPreference by lazy { findPreference("users") }
+        private val array by lazy { resources.getStringArray(R.array.language) }
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -45,6 +59,13 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             versionPreference.summary = resources.getString(R.string.settings_version_loading)
+
+            languagePreference.summary = array[prefs.getString("language", "0").toInt()]
+
+            languagePreference.setOnPreferenceChangeListener { preference, newValue ->
+                preference.summary = array[newValue.toString().toInt()]
+                true
+            }
 
             NetworkUtils.checkNewVersion(object : UIBlock {
                 override val context = activity

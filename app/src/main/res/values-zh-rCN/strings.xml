@@ -53,7 +53,7 @@
     <string name="force_user_desc">编辑或选择用户
     <string name="action_add">添加</string></string>
     <string name="settings_users_title">选择用户</string>
-    <string name="settings_users_summary">当前账号</string>
+    <string name="settings_users_summary">当前账号：</string>
     <string name="users_placeholder">尴尬，这里是空的哟！</string>
     <string name="settings_web_on">WLGN</string>
     <string name="settings_web_off">LGN</string>
