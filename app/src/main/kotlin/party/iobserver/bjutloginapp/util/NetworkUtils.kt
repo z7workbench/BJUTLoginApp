@@ -54,11 +54,11 @@ object NetworkUtils {
         val request = when(isWlgn) {
             true -> Request.Builder()
                 .post(body)
-                .url(Constants.WLGN_URL)
+                .url(Constants.WLGN_URL + Constants.LOGIN_TAIL)
                 .build()
             false -> Request.Builder()
                     .post(body)
-                    .url(Constants.LGN_URL)
+                    .url(Constants.LGN_URL + Constants.LOGIN_TAIL)
                     .build()
         }
         client.newCall(request).enqueue(object : Callback {

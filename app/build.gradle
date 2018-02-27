@@ -16,7 +16,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 4
-        versionName "4.1.0-beta1"
+        versionName "4.1.0-rc1"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -60,6 +60,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.21'
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.timqi.sectorprogressview:library:2.0.1'
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     testImplementation 'junit:junit:4.12'
