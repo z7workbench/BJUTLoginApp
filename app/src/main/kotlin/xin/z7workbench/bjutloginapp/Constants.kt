@@ -1,4 +1,4 @@
-package party.iobserver.bjutloginapp
+package xin.z7workbench.bjutloginapp
 
 /**
  * Created by ZeroGo on 2017/10/24.

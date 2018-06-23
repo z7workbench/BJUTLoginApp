@@ -1,6 +1,6 @@
-package party.iobserver.bjutloginapp.util
+package xin.z7workbench.bjutloginapp.util
 
-import party.iobserver.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.R
 
 /**
  * Created by ZeroGo on 2017/11/6.

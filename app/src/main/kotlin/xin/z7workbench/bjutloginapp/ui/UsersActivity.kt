@@ -1,21 +1,21 @@
-package party.iobserver.bjutloginapp.ui
+package xin.z7workbench.bjutloginapp.ui
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.dialog_user.view.*
 import kotlinx.android.synthetic.main.item_users.view.*
 import org.jetbrains.anko.alert
-import party.iobserver.bjutloginapp.R
-import party.iobserver.bjutloginapp.model.User
-import party.iobserver.bjutloginapp.util.app
+import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.model.User
+import xin.z7workbench.bjutloginapp.util.app
 
 class UsersActivity : AppCompatActivity() {
     private var currentId = 0

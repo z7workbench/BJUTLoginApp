@@ -1,7 +1,7 @@
-package party.iobserver.bjutloginapp.util
+package xin.z7workbench.bjutloginapp.util
 
 import android.app.Activity
-import party.iobserver.bjutloginapp.LoginApp
+import xin.z7workbench.bjutloginapp.LoginApp
 
 /**
  * Created by ZeroGo on 2017/11/6.

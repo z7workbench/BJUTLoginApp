@@ -1,10 +1,10 @@
-package party.iobserver.bjutloginapp.ui
+package xin.z7workbench.bjutloginapp.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_version.*
-import party.iobserver.bjutloginapp.Constants
-import party.iobserver.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.Constants
+import xin.z7workbench.bjutloginapp.R
 
 /**
  * Created by ZeroGo on 2017/11/12.

@@ -1,13 +1,13 @@
-package party.iobserver.bjutloginapp.util
+package xin.z7workbench.bjutloginapp.util
 
 import android.app.Activity
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import okhttp3.*
-import party.iobserver.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.R
 import java.io.IOException
 import java.util.regex.Pattern
 
@@ -31,7 +31,7 @@ class Operator(private val TAG: String, private val activity: Activity) {
                     .build()
             okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Snackbar.make(view, "Login Failed! ", Snackbar.LENGTH_LONG)
+                    com.google.android.material.snackbar.Snackbar.make(view, "Login Failed! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                     Log.e(TAG, "Failed! ", e)
                 }
@@ -39,10 +39,10 @@ class Operator(private val TAG: String, private val activity: Activity) {
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
                     if (response.body()!!.string().indexOf("In use") > 0) {
-                        Snackbar.make(view, "Login Failed! " + "This account is in use. ", Snackbar.LENGTH_LONG)
+                        com.google.android.material.snackbar.Snackbar.make(view, "Login Failed! " + "This account is in use. ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show()
                     } else {
-                        Snackbar.make(view, "Login Succeeded! ", Snackbar.LENGTH_LONG)
+                        com.google.android.material.snackbar.Snackbar.make(view, "Login Succeeded! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show()
                     }
                 }
@@ -58,7 +58,7 @@ class Operator(private val TAG: String, private val activity: Activity) {
                 .build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Snackbar.make(view, "Refresh Failed! ", Snackbar.LENGTH_LONG)
+                com.google.android.material.snackbar.Snackbar.make(view, "Refresh Failed! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 Log.e(TAG, "Failed! ", e)
                 activity.runOnUiThread {
@@ -85,11 +85,11 @@ class Operator(private val TAG: String, private val activity: Activity) {
                             Log.e(TAG, "", e)
                         }
                     }
-                    Snackbar.make(view, "Refresh successfully completed! ", Snackbar.LENGTH_LONG)
+                    com.google.android.material.snackbar.Snackbar.make(view, "Refresh successfully completed! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 } else {
                     statusView.setTextColor(ContextCompat.getColor(activity, R.color.alert_red))
-                    Snackbar.make(view, "Can't get data! ", Snackbar.LENGTH_LONG)
+                    com.google.android.material.snackbar.Snackbar.make(view, "Can't get data! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 }
             }
@@ -103,7 +103,7 @@ class Operator(private val TAG: String, private val activity: Activity) {
                 .build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Snackbar.make(view, "Logout Failed! ", Snackbar.LENGTH_LONG)
+                com.google.android.material.snackbar.Snackbar.make(view, "Logout Failed! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 Log.e(TAG, "Failed!", e)
             }
@@ -111,10 +111,10 @@ class Operator(private val TAG: String, private val activity: Activity) {
             @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
                 if (response.body()!!.string().indexOf("注销成功") > 0) {
-                    Snackbar.make(view, "Logout Succeeded! ", Snackbar.LENGTH_LONG)
+                    com.google.android.material.snackbar.Snackbar.make(view, "Logout Succeeded! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 } else {
-                    Snackbar.make(view, "Logout Failed! ", Snackbar.LENGTH_LONG)
+                    com.google.android.material.snackbar.Snackbar.make(view, "Logout Failed! ", com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 }
             }

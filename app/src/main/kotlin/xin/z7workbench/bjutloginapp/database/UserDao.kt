@@ -1,8 +1,8 @@
-package party.iobserver.bjutloginapp.database
+package xin.z7workbench.bjutloginapp.database
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
-import party.iobserver.bjutloginapp.model.User
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import xin.z7workbench.bjutloginapp.model.User
 
 /**
  * Created by ZeroGo on 2017/11/2.
