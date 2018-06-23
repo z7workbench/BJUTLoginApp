@@ -1,12 +1,12 @@
-package party.iobserver.bjutloginapp.adapter
+package xin.z7workbench.bjutloginapp.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.release_note_item.view.*
-import party.iobserver.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.R
 
 /**
  * Created by ZeroGo on 2017.3.14.

@@ -1,4 +1,4 @@
-package party.iobserver.bjutloginapp.util
+package xin.z7workbench.bjutloginapp.util
 
 import android.content.Context
 import java.io.IOException

@@ -1,7 +1,7 @@
-package party.iobserver.bjutloginapp.model
+package xin.z7workbench.bjutloginapp.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * Created by ZeroGo on 2017/8/20.

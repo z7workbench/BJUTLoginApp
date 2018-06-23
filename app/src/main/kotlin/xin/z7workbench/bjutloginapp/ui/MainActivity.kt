@@ -1,4 +1,4 @@
-package party.iobserver.bjutloginapp.ui
+package xin.z7workbench.bjutloginapp.ui
 
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -6,9 +6,9 @@ import android.net.TrafficStats
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.text.format.Formatter
 import android.view.Menu
 import android.view.MenuItem
@@ -18,11 +18,11 @@ import android.widget.Button
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
-import party.iobserver.bjutloginapp.R
-import party.iobserver.bjutloginapp.util.LogStatus
-import party.iobserver.bjutloginapp.util.NetworkUtils
-import party.iobserver.bjutloginapp.util.UIBlock
-import party.iobserver.bjutloginapp.util.app
+import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.util.LogStatus
+import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.util.UIBlock
+import xin.z7workbench.bjutloginapp.util.app
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="party.iobserver.bjutloginapp">
+    package="xin.z7workbench.bjutloginapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -23,7 +23,7 @@
             android:label="@string/action_settings">
 
             <intent-filter>
-                <action android:name="party.iobserver.bjutloginapp.SETTINGS_ACTIVITY" />
+                <action android:name="xin.z7workbench.bjutloginapp.SETTINGS_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
@@ -35,7 +35,7 @@
             android:name=".ui.SettingsActivityAlias"
             android:targetActivity=".ui.SettingsActivity">
             <intent-filter>
-                <action android:name="party.iobserver.bjutloginapp.SETTINGS_ACTIVITY" />
+                <action android:name="xin.z7workbench.bjutloginapp.SETTINGS_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
@@ -54,7 +54,7 @@
             android:name=".ui.ReleaseNoteActivity"
             android:label="@string/action_rn">
             <intent-filter>
-                <action android:name="party.iobserver.bjutloginapp.RN_ACTIVITY" />
+                <action android:name="xin.z7workbench.bjutloginapp.RN_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
@@ -69,7 +69,7 @@
             android:name=".ui.UsersActivity"
             android:label="@string/action_users">
             <intent-filter>
-                <action android:name="party.iobserver.bjutloginapp.USERS_ACTIVITY" />
+                <action android:name="xin.z7workbench.bjutloginapp.USERS_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -78,7 +78,7 @@
             android:name=".ui.ReleaseNoteActivityAlias"
             android:targetActivity=".ui.ReleaseNoteActivity">
             <intent-filter>
-                <action android:name="party.iobserver.bjutloginapp.RN_ACTIVITY" />
+                <action android:name="xin.z7workbench.bjutloginapp.RN_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
@@ -91,7 +91,7 @@
             android:name=".ui.UsersActivity"
             android:targetActivity=".ui.UsersActivity">
             <intent-filter>
-                <action android:name="party.iobserver.bjutloginapp.USERS_ACTIVITY" />
+                <action android:name="xin.z7workbench.bjutloginapp.USERS_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity-alias>

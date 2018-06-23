@@ -1,12 +1,12 @@
-package party.iobserver.bjutloginapp.ui
+package xin.z7workbench.bjutloginapp.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_release_note.*
 import kotlinx.android.synthetic.main.content_release_note.*
-import party.iobserver.bjutloginapp.R
-import party.iobserver.bjutloginapp.adapter.ReleaseNoteAdapter
+import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.adapter.ReleaseNoteAdapter
 
 class ReleaseNoteActivity : AppCompatActivity() {
 

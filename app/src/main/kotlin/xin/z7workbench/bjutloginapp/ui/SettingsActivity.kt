@@ -1,18 +1,18 @@
-package party.iobserver.bjutloginapp.ui
+package xin.z7workbench.bjutloginapp.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.PreferenceFragment
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_prefs.*
 import org.jetbrains.anko.startActivity
-import party.iobserver.bjutloginapp.BuildConfig
-import party.iobserver.bjutloginapp.R
-import party.iobserver.bjutloginapp.util.NetworkUtils
-import party.iobserver.bjutloginapp.util.UIBlock
-import party.iobserver.bjutloginapp.util.app
+import xin.z7workbench.bjutloginapp.BuildConfig
+import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.util.UIBlock
+import xin.z7workbench.bjutloginapp.util.app
 import java.io.IOException
 
 /**

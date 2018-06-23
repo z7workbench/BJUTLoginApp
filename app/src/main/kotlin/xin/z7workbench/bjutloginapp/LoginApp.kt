@@ -1,11 +1,11 @@
-package party.iobserver.bjutloginapp
+package xin.z7workbench.bjutloginapp
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
-import party.iobserver.bjutloginapp.database.AppDatabase
+import xin.z7workbench.bjutloginapp.database.AppDatabase
 import java.util.*
 
 

@@ -1,8 +1,8 @@
-package party.iobserver.bjutloginapp.database
+package xin.z7workbench.bjutloginapp.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import party.iobserver.bjutloginapp.model.User
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import xin.z7workbench.bjutloginapp.model.User
 
 /**
  * Created by ZeroGo on 2017/11/2.

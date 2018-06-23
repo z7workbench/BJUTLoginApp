@@ -9,16 +9,15 @@ apply plugin: 'kotlin-kapt'
 def gitCommitCount = "git rev-list HEAD --count".execute().text.trim()
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
     defaultConfig {
-        applicationId "party.iobserver.bjutloginapp"
+        applicationId "xin.z7workbench.bjutloginapp"
         minSdkVersion 23
-        targetSdkVersion 27
-        versionCode 4
-        versionName "4.1.0"
+        targetSdkVersion 28
+        versionCode 5
+        versionName "5.0.0-alpha1"
         versionNameSuffix = " (${gitCommitCount})"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         github {
@@ -47,20 +46,20 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "com.android.support:appcompat-v7:$support_libs_version"
-    implementation "com.android.support:recyclerview-v7:$support_libs_version"
-    implementation "com.android.support:cardview-v7:$support_libs_version"
-    implementation "com.android.support:design:$support_libs_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta5'
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha3'
+    implementation 'androidx.cardview:cardview:1.0.0-alpha3'
+    implementation 'com.google.android.material:material:1.0.0-alpha3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'com.github.medyo:fancybuttons:1.8.4'
     implementation "org.jetbrains.anko:anko:$anko_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.21'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -73,17 +72,17 @@ dependencies {
     implementation 'com.jrummyapps:colorpicker:2.1.7'
 
     // ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:1.1.0"
-    kapt "android.arch.lifecycle:compiler:1.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1"
     // Room
-    implementation "android.arch.persistence.room:runtime:1.0.0"
-    kapt "android.arch.persistence.room:compiler:1.0.0"
+    implementation "androidx.room:room-runtime:2.0.0-alpha1"
+    kapt "androidx.room:room-compiler:2.0.0-alpha1"
     // Paging
-    implementation "android.arch.paging:runtime:1.0.0-alpha4-1"
+    implementation "androidx.paging:paging-runtime:2.0.0-alpha1"
     // Test helpers for LiveData
-    testImplementation "android.arch.core:core-testing:1.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.0.0-alpha1"
     // Test helpers for Room
-    testImplementation "android.arch.persistence.room:testing:1.0.0"
+    testImplementation "androidx.room:room-testing:2.0.0-alpha1"
 
     implementation 'com.google.code.gson:gson:2.8.2'
 }

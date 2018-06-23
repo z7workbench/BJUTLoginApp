@@ -1,12 +1,12 @@
-package party.iobserver.bjutloginapp.util
+package xin.z7workbench.bjutloginapp.util
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import okhttp3.*
 import org.jetbrains.anko.runOnUiThread
-import party.iobserver.bjutloginapp.Constants
-import party.iobserver.bjutloginapp.model.User
+import xin.z7workbench.bjutloginapp.Constants
+import xin.z7workbench.bjutloginapp.model.User
 import java.io.IOException
 
 /**
