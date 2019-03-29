@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     style="@style/AppTheme.PageLayout">
 
@@ -393,5 +394,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/progress"
         app:layout_constraintEnd_toEndOf="@+id/progress"
         app:srcCompat="@drawable/ic_error" />
+
+    <ImageView
+        android:id="@+id/wifi_slide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/progress"
+        app:layout_constraintStart_toStartOf="@+id/progress"
+        app:srcCompat="@drawable/ic_wifi_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
