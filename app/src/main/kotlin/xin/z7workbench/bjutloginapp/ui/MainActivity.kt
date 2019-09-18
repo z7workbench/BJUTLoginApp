@@ -174,6 +174,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        wifi_slide.setOnClickListener {
+
+        }
+
         oldUp = TrafficStats.getTotalTxBytes()
         oldDown = TrafficStats.getTotalRxBytes()
         oldTime = System.currentTimeMillis()
@@ -316,7 +320,7 @@ class MainActivity : AppCompatActivity() {
                         val flow = result.groups[2]?.value?.toLong()!!
                         val fee = result.groups[3]?.value?.toDouble()!!
                         now_flux.text = Formatter.formatFileSize(this@MainActivity, flow * 1024)
-                        time_view.text = time.toString() + " min"
+                        time_view.text = "$time min"
                         fee_view.text = "￥" + fee / 10000
                         status = LogStatus.ONLINE
                         status_view.text = resources.getString(status.description)
