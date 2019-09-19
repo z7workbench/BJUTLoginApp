@@ -165,11 +165,11 @@ class MainActivity : AppCompatActivity() {
             val alertDialog = AlertDialog.Builder(this).create()
             alertDialog.show()
             val window = alertDialog.window
-            window.setContentView(R.layout.dialog_error)
-            val tv = window.findViewById<TextView>(R.id.dialog_message)
-            val btn = window.findViewById<Button>(R.id.dialog_ok)
-            tv.text = emsg
-            btn.setOnClickListener {
+            window?.setContentView(R.layout.dialog_error)
+            val tv = window?.findViewById<TextView>(R.id.dialog_message)
+            val btn = window?.findViewById<Button>(R.id.dialog_ok)
+            tv?.text = emsg
+            btn?.setOnClickListener {
                 alertDialog.dismiss()
             }
         }

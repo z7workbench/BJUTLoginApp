@@ -28,7 +28,7 @@ class SettingsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
 
-        language = app.prefs.getString("language", "0")
+        language = app.prefs.getString("language", "0") ?: "Auto"
     }
 
     override fun onBackPressed() {
@@ -62,12 +62,12 @@ class SettingsActivity : AppCompatActivity() {
 
             versionPreference.summary = resources.getString(R.string.settings_version_loading)
 
-            languagePreference.summary = array[prefs.getString("language", "0").toInt()]
-            language = prefs.getString("language", "0")
+            languagePreference.summary = array[(prefs.getString("language", "0") ?: "0").toInt()]
+            language = prefs.getString("language", "0") ?: "Auto"
 
             languagePreference.setOnPreferenceChangeListener { preference, newValue ->
                 preference.summary = array[newValue.toString().toInt()]
-                if (language == prefs.getString("language", language)){
+                if (language == prefs.getString("language", language)) {
                     Snackbar.make(activity.prefs_layout, R.string.save_changes, 3000).show()
                 }
                 true
