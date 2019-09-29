@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.text.format.Formatter
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -84,12 +85,13 @@ class MainActivity : AppCompatActivity() {
         val currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-        pack.text = when (currentPack) {
+/*        pack.text = when (currentPack) {
             0 -> resources.getStringArray(R.array.pack)[0]
             1 -> resources.getStringArray(R.array.pack)[1]
             2 -> resources.getStringArray(R.array.pack)[2]
             else -> getString(R.string.unknown)
-        }
+        }*/
+        pack.text = "${currentPack} GB"
 
         login.setOnClickListener {
             if (currentUser.isEmpty()) {
@@ -189,12 +191,13 @@ class MainActivity : AppCompatActivity() {
         val currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-        pack.text = when (currentPack) {
+/*        pack.text = when (currentPack) {
             0 -> resources.getStringArray(R.array.pack)[0]
             1 -> resources.getStringArray(R.array.pack)[1]
             2 -> resources.getStringArray(R.array.pack)[2]
             else -> getString(R.string.unknown)
-        }
+        }*/
+        pack.text = "${currentPack} GB"
 
         syncing()
         hideOrNot(false)
@@ -321,7 +324,7 @@ class MainActivity : AppCompatActivity() {
                         val fee = result.groups[3]?.value?.toDouble()!!
                         now_flux.text = Formatter.formatFileSize(this@MainActivity, flow * 1024)
                         time_view.text = "$time min"
-                        fee_view.text = "￥" + fee / 10000
+                        fee_view.text = """￥${fee / 10000}"""
                         status = LogStatus.ONLINE
                         status_view.text = resources.getString(status.description)
                         val fl = when (currentPack) {
@@ -352,5 +355,7 @@ class MainActivity : AppCompatActivity() {
                 last_view.text = sdf.format(date)
             }
         })
+
+        Log.d("e", emsg)
     }
 }

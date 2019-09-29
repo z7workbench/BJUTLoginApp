@@ -39,18 +39,26 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
         android:layout_weight="1"
+        android:layout_margin="4dp"
         android:text="@string/settings_pack"
-        android:textSize="12sp" />
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
 
-    <Spinner
-        android:id="@+id/spinner_pack"
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seek_pack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_weight="1"
-        android:entries="@array/pack" />
+        android:padding="0dp"
+        android:progress="8"
+        android:max="26"
+        android:min="1" />
+
+    <TextView
+        android:id="@+id/text_pack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"/>
 
 </LinearLayout>
 
