@@ -2,7 +2,7 @@ package xin.z7workbench.bjutloginapp.ui
 
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -64,22 +64,30 @@ class UsersActivity : AppCompatActivity() {
     }
 
     fun openUserDialog(newUser: Boolean, user: User) {
-        var currentPackage: Int = 0
+        var currentPackage = 8
         val view: View = layoutInflater.inflate(R.layout.dialog_user, null, false)
         view.name.setText(user.name)
         view.name.setSelection(user.name.length)
         view.password.setText(user.password)
         if (!newUser) {
-            view.spinner_pack.setSelection(user.pack)
             currentPackage = user.pack
+            view.seek_pack.progress = user.pack
         }
-        view.spinner_pack.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                currentPackage = position
+        view.text_pack.text = """$currentPackage GB"""
+
+        view.seek_pack.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                view.text_pack.text = """${view.seek_pack.progress} GB"""
+                currentPackage = view.seek_pack.progress
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+
+        })
 
         alert(R.string.action_users) {
             customView = view
