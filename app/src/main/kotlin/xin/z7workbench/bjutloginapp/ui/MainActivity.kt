@@ -28,7 +28,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     var status = LogStatus.OFFLINE
@@ -309,7 +308,7 @@ class MainActivity : AppCompatActivity() {
                         fee_view.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
 
-                        if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm"""")) {
+                        if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm""")) {
                             status = LogStatus.ERROR
                             status_view.text = resources.getString(status.description)
                         } else {
@@ -322,17 +321,13 @@ class MainActivity : AppCompatActivity() {
                         val time = result.groups[1]?.value?.toInt()!!
                         val flow = result.groups[2]?.value?.toLong()!!
                         val fee = result.groups[3]?.value?.toDouble()!!
-                        now_flux.text = Formatter.formatFileSize(this@MainActivity, flow * 1024)
+                        now_flux.text = Formatter.formatFileSize(this@MainActivity, 1024)
+//                        now_flux.text = flow.toString()
                         time_view.text = "$time min"
                         fee_view.text = """￥${fee / 10000}"""
                         status = LogStatus.ONLINE
                         status_view.text = resources.getString(status.description)
-                        val fl = when (currentPack) {
-                            0 -> 8F
-                            1 -> 25F
-                            2 -> 30F
-                            else -> -1F
-                        }
+                        val fl = currentPack.toFloat()
                         if (fl != -1F) {
                             var percent = flow.toFloat() / (fl * 1024 * 1024) * 100
                             if (percent > 100F) {
