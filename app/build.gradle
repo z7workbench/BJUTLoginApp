@@ -11,7 +11,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 5
-        versionName "5.0.0-beta3"
+        versionName "5.0.0-beta4"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

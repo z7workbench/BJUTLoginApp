@@ -1,6 +1,7 @@
 package xin.z7workbench.bjutloginapp.util
 
 import kotlin.math.absoluteValue
+import kotlin.math.round
 
 enum class ByteSize(val display: String) {
     B("B"),
@@ -8,7 +9,7 @@ enum class ByteSize(val display: String) {
     MB("MB"),
     GB("GB"),
     TB("TB"),
-    PB("PB")
+    PB("PB");
 }
 
 fun formatByteSize(byte: Long): String {
@@ -37,5 +38,5 @@ fun formatByteSize(byte: Long): String {
     }
     if (byte < 0) absByte = -absByte
 
-    return "$absByte ${byteSize.display}"
+    return "${round(absByte * 1000) / 1000} ${byteSize.display}"
 }
