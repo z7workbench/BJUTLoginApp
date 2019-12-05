@@ -20,16 +20,13 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.R
-import xin.z7workbench.bjutloginapp.util.LogStatus
-import xin.z7workbench.bjutloginapp.util.NetworkUtils
-import xin.z7workbench.bjutloginapp.util.UIBlock
-import xin.z7workbench.bjutloginapp.util.app
+import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    val TAG = "MainActivity"
+    val tag = "MainActivity"
     var status = LogStatus.OFFLINE
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     var oldUp = TrafficStats.getTotalTxBytes()
@@ -321,7 +318,7 @@ class MainActivity : AppCompatActivity() {
                         val time = result.groups[1]?.value?.toInt()!!
                         val flow = result.groups[2]?.value?.toLong()!!
                         val fee = result.groups[3]?.value?.toDouble()!!
-                        now_flux.text = Formatter.formatFileSize(this@MainActivity, 1024)
+                        now_flux.text = formatByteSize(flow * 1024)
 //                        now_flux.text = flow.toString()
                         time_view.text = "$time min"
                         fee_view.text = """￥${fee / 10000}"""
@@ -351,6 +348,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        Log.d("e", emsg)
+        Log.d("$tag e", emsg)
     }
 }

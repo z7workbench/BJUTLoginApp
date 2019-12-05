@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0f0f1f</color>
-    <color name="colorPrimaryDark">#0f0f1f</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
     <color name="colorPrimaryLight">#474797</color>
     <color name="colorDisabled">#888888</color>
 
@@ -12,11 +12,6 @@
 
     <color name="colorPrimaryStable">#7878FF</color>
     <color name="colorPrimaryDarkStable">#5555FF</color>
-
-    <color name="colorPrimaryOld">#3F51B5</color>
-    <color name="colorPrimaryDarkOld">#303f9f</color>
-
-    <color name="colorAccentOld">#FF4081</color>
 
     <color name="alert_red">#FF0000</color>
     <color name="alert_yellow">#FFBC00</color>

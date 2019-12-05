@@ -8,13 +8,16 @@ import org.jetbrains.anko.runOnUiThread
 import xin.z7workbench.bjutloginapp.Constants
 import xin.z7workbench.bjutloginapp.model.User
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by ZeroGo on 2017.2.28.
  */
 
 object NetworkUtils {
-    private val client = OkHttpClient()
+    private val client = OkHttpClient.Builder()
+            .cache(null).readTimeout(5, TimeUnit.SECONDS).writeTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(3, TimeUnit.SECONDS).build()
     val STATE_NO_NETWORK = 0
     val STATE_MOBILE = 1
     val STATE_BJUT_WIFI = 2
@@ -51,11 +54,11 @@ object NetworkUtils {
                 .add("upass", user.password)
                 .add("6MKKey", "123")
                 .build()
-        val request = when(isWlgn) {
+        val request = when (isWlgn) {
             true -> Request.Builder()
-                .post(body)
-                .url(Constants.WLGN_URL + Constants.LOGIN_TAIL)
-                .build()
+                    .post(body)
+                    .url(Constants.WLGN_URL + Constants.LOGIN_TAIL)
+                    .build()
             false -> Request.Builder()
                     .post(body)
                     .url(Constants.LGN_URL + Constants.LOGIN_TAIL)
@@ -84,7 +87,7 @@ object NetworkUtils {
 
     fun sync(isWlgn: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
-        val request = when(isWlgn) {
+        val request = when (isWlgn) {
             true -> Request.Builder()
                     .get()
                     .url(Constants.WLGN_URL)
