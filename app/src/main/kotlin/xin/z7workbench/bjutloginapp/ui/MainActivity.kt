@@ -17,9 +17,9 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.databinding.ActivityMainBinding
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -36,14 +36,15 @@ class MainActivity : AppCompatActivity() {
     var currentId = -1
     var currentName = ""
     var currentPack = -1
+    lateinit var binding: ActivityMainBinding
 
     val handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             if (msg.what == 1) {
                 val arr = msg.obj as Array<String>
-                up_speed.text = arr[0]
-                down_speed.text = arr[1]
+                binding.upSpeed.text = arr[0]
+                binding.downSpeed.text = arr[1]
             }
         }
     }
@@ -66,14 +67,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        toolbar.title = ""
+        binding.toolbar.title = ""
 
         Timer().schedule(task, 1000L, 3000L)
 
-        hideAndShow.setOnClickListener {
+        binding.hideAndShow.setOnClickListener {
             hideOrNot(true)
         }
 
@@ -87,11 +89,11 @@ class MainActivity : AppCompatActivity() {
             2 -> resources.getStringArray(R.array.pack)[2]
             else -> getString(R.string.unknown)
         }*/
-        pack.text = "${currentPack} GB"
+        binding.pack.text = "${currentPack} GB"
 
-        login.setOnClickListener {
+        binding.login.setOnClickListener {
             if (currentUser.isEmpty()) {
-                Snackbar.make(main_layout, R.string.not_set, 3000)
+                Snackbar.make(binding.mainLayout, R.string.not_set, 3000)
                         .setAction(resources.getString(R.string.goto_settings)) {
                             startActivity<UsersActivity>()
                         }
@@ -105,16 +107,18 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(exception: IOException) {
                     emsg = exception.message ?: ""
-                    errMsg.visibility = View.VISIBLE
-                    now_flux.text = resources.getString(R.string.unknown)
-                    time_view.text = resources.getString(R.string.unknown)
-                    fee_view.text = resources.getString(R.string.unknown)
-                    progress.percent = 0F
+                    binding.apply {
+                        errMsg.visibility = View.VISIBLE
+                        nowFlux.text = resources.getString(R.string.unknown)
+                        timeView.text = resources.getString(R.string.unknown)
+                        feeView.text = resources.getString(R.string.unknown)
+                        progress.percent = 0F
+                        statusView.text = resources.getString(status.description)
+                        lastView.text
+                        login.isEnabled = true
+                        sync.isEnabled = true
+                    }
                     status = LogStatus.ERROR
-                    status_view.text = resources.getString(status.description)
-                    last_view.text
-                    login.isEnabled = true
-                    sync.isEnabled = true
                 }
 
                 override fun onResponse(bodyString: String?) {
@@ -124,14 +128,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onFinished() {
                     val time = System.currentTimeMillis()
                     val date = Date(time)
-                    last_view.text = sdf.format(date)
+                    binding.lastView.text = sdf.format(date)
                 }
             })
         }
 
-        sync.setOnClickListener { syncing() }
+        binding.sync.setOnClickListener { syncing() }
 
-        logout.setOnClickListener {
+        binding.logout.setOnClickListener {
             NetworkUtils.logout(object : UIBlock {
                 override val context: Context = this@MainActivity
 
@@ -139,27 +143,29 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(exception: IOException) {
                     emsg = exception.message ?: ""
-                    errMsg.visibility = View.VISIBLE
+                    binding.errMsg.visibility = View.VISIBLE
                     syncing()
                 }
 
                 override fun onResponse(bodyString: String?) {
                     status = LogStatus.OFFLINE
-                    status_view.text = resources.getString(status.description)
-                    progress.percent = 0F
-                    login.isEnabled = true
-                    sync.isEnabled = true
+                    binding.apply {
+                        statusView.text = resources.getString(status.description)
+                        progress.percent = 0F
+                        login.isEnabled = true
+                        sync.isEnabled = true
+                    }
                 }
 
                 override fun onFinished() {
                     val time = System.currentTimeMillis()
                     val date = Date(time)
-                    last_view.text = sdf.format(date)
+                    binding.lastView.text = sdf.format(date)
                 }
             })
         }
 
-        errMsg.setOnClickListener {
+        binding.errMsg.setOnClickListener {
             val alertDialog = AlertDialog.Builder(this).create()
             alertDialog.show()
             val window = alertDialog.window
@@ -172,7 +178,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        wifi_slide.setOnClickListener {
+        binding.wifiSlide.setOnClickListener {
 
         }
 
@@ -193,7 +199,7 @@ class MainActivity : AppCompatActivity() {
             2 -> resources.getStringArray(R.array.pack)[2]
             else -> getString(R.string.unknown)
         }*/
-        pack.text = "${currentPack} GB"
+        binding.pack.text = "${currentPack} GB"
 
         syncing()
         hideOrNot(false)
@@ -232,23 +238,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun onPrepared() {
         emsg = ""
-        errMsg.visibility = View.GONE
         status = LogStatus.SYNCING
-        now_flux.text = resources.getString(R.string.unknown)
-        time_view.text = resources.getString(R.string.unknown)
-        fee_view.text = resources.getString(R.string.unknown)
-        progress.percent = 0F
-        status_view.text = resources.getString(status.description)
-        login.isEnabled = false
-        logout.isEnabled = false
-        sync.isEnabled = false
+        binding.apply {
+            errMsg.visibility = View.GONE
+            nowFlux.text = resources.getString(R.string.unknown)
+            timeView.text = resources.getString(R.string.unknown)
+            feeView.text = resources.getString(R.string.unknown)
+            progress.percent = 0F
+            statusView.text = resources.getString(status.description)
+            login.isEnabled = false
+            logout.isEnabled = false
+            sync.isEnabled = false
+        }
     }
 
     private fun hideOrNot(edit: Boolean) {
         val hide = app.prefs.getBoolean("hide", true)
         if ((!hide && edit) || (hide && !edit)) {
-            hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_show))
-            user.text = resources.getString(R.string.main_hide)
+            binding.hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_show))
+            binding.user.text = resources.getString(R.string.main_hide)
             if (edit) {
                 val editor = app.prefs.edit()
                 editor.putBoolean("hide", true)
@@ -256,8 +264,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         } else {
-            hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_hide))
-            user.text = currentName
+            binding.hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_hide))
+            binding.user.text = currentName
             if (edit) {
                 val editor = app.prefs.edit()
                 editor.putBoolean("hide", false)
@@ -274,69 +282,78 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(exception: IOException) {
                 emsg = exception.message ?: ""
-                errMsg.visibility = View.VISIBLE
-                now_flux.text = resources.getString(R.string.unknown)
-                time_view.text = resources.getString(R.string.unknown)
-                fee_view.text = resources.getString(R.string.unknown)
-                progress.percent = 0F
+                binding.apply {
+                    errMsg.visibility = View.VISIBLE
+                    nowFlux.text = resources.getString(R.string.unknown)
+                    timeView.text = resources.getString(R.string.unknown)
+                    feeView.text = resources.getString(R.string.unknown)
+                    progress.percent = 0F
+                    statusView.text = resources.getString(status.description)
+                    lastView.text
+                    login.isEnabled = true
+                    sync.isEnabled = true
+                }
                 status = LogStatus.ERROR
-                status_view.text = resources.getString(status.description)
-                last_view.text
-                login.isEnabled = true
-                sync.isEnabled = true
             }
 
             override fun onResponse(bodyString: String?) {
                 val regex = """time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'""".toRegex()
                 if (bodyString == null) {
-                    now_flux.text = resources.getString(R.string.unknown)
-                    time_view.text = resources.getString(R.string.unknown)
-                    fee_view.text = resources.getString(R.string.unknown)
-                    progress.percent = 0F
+                    binding.apply {
+                        nowFlux.text = resources.getString(R.string.unknown)
+                        timeView.text = resources.getString(R.string.unknown)
+                        feeView.text = resources.getString(R.string.unknown)
+                        progress.percent = 0F
+                        statusView.text = resources.getString(status.description)
+                        login.isEnabled = true
+                        sync.isEnabled = true
+                    }
+
                     status = LogStatus.ERROR
-                    status_view.text = resources.getString(status.description)
-                    login.isEnabled = true
-                    sync.isEnabled = true
                 } else {
                     val result = regex.find(bodyString)
                     if (result == null || result.groups.isEmpty()) {
-                        now_flux.text = resources.getString(R.string.unknown)
-                        time_view.text = resources.getString(R.string.unknown)
-                        fee_view.text = resources.getString(R.string.unknown)
-                        progress.percent = 0F
+                        binding.apply {
+                            nowFlux.text = resources.getString(R.string.unknown)
+                            timeView.text = resources.getString(R.string.unknown)
+                            feeView.text = resources.getString(R.string.unknown)
+                            progress.percent = 0F
+                        }
 
                         if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm""")) {
                             status = LogStatus.ERROR
-                            status_view.text = resources.getString(status.description)
+                            binding.statusView.text = resources.getString(status.description)
                         } else {
                             status = LogStatus.OFFLINE
-                            status_view.text = resources.getString(status.description)
+                            binding.statusView.text = resources.getString(status.description)
                         }
-                        login.isEnabled = true
-                        sync.isEnabled = true
+                        binding.login.isEnabled = true
+                        binding.sync.isEnabled = true
                     } else {
                         val time = result.groups[1]?.value?.toInt()!!
                         val flow = result.groups[2]?.value?.toLong()!!
                         val fee = result.groups[3]?.value?.toDouble()!!
-                        now_flux.text = formatByteSize(flow * 1024)
-//                        now_flux.text = flow.toString()
-                        time_view.text = "$time min"
-                        fee_view.text = """￥${fee / 10000}"""
+                        binding.apply {
+                            nowFlux.text = formatByteSize(flow * 1024)
+//                            nowFlux.text = flow.toString()
+                            timeView.text = "$time min"
+                            feeView.text = """￥${fee / 10000}"""
+                            statusView.text = resources.getString(status.description)
+                        }
                         status = LogStatus.ONLINE
-                        status_view.text = resources.getString(status.description)
                         val fl = currentPack.toFloat()
                         if (fl != -1F) {
                             var percent = flow.toFloat() / (fl * 1024 * 1024) * 100
                             if (percent > 100F) {
                                 percent = 100F
                             }
-                            val animator = ObjectAnimator.ofFloat(progress, "percent", percent)
+                            val animator = ObjectAnimator.ofFloat(binding.progress, "percent", percent)
                             animator.duration = 1500L
                             animator.interpolator = DecelerateInterpolator(2F)
                             animator.start()
                         }
-                        logout.isEnabled = true
-                        sync.isEnabled = true
+                        binding.logout.isEnabled = true
+                        binding.sync.isEnabled = true
                     }
                 }
             }
@@ -344,7 +361,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFinished() {
                 val time = System.currentTimeMillis()
                 val date = Date(time)
-                last_view.text = sdf.format(date)
+                binding.lastView.text = sdf.format(date)
             }
         })
 
