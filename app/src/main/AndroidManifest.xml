@@ -52,17 +52,6 @@
         </activity>
 
         <activity
-            android:name=".ui.ReleaseNoteActivity"
-            android:label="@string/action_rn">
-            <intent-filter>
-                <action android:name="xin.z7workbench.bjutloginapp.RN_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="forceTouch"
-                android:value="force" />
-        </activity>
-        <activity
             android:name=".ui.VersionActivity"
             android:label="@string/action_version" />
 
@@ -74,19 +63,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity-alias
-            android:name=".ui.ReleaseNoteActivityAlias"
-            android:targetActivity=".ui.ReleaseNoteActivity">
-            <intent-filter>
-                <action android:name="xin.z7workbench.bjutloginapp.RN_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="forceTouch"
-                android:value="force" />
-        </activity-alias>
-
 
         <activity-alias
             android:name=".ui.UsersActivity"

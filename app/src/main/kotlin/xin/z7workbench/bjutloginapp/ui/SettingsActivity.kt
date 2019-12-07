@@ -6,10 +6,10 @@ import android.preference.ListPreference
 import android.preference.PreferenceFragment
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_prefs.*
 import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.BuildConfig
 import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.databinding.ActivityPrefsBinding
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
 import xin.z7workbench.bjutloginapp.util.UIBlock
 import xin.z7workbench.bjutloginapp.util.app
@@ -21,12 +21,14 @@ import java.io.IOException
 
 class SettingsActivity : AppCompatActivity() {
     lateinit var language: String
+    lateinit var binding: ActivityPrefsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_prefs)
+        binding = ActivityPrefsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         fragmentManager.beginTransaction().replace(R.id.content, SettingsFragment()).commit()
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
         language = app.prefs.getString("language", "0") ?: "Auto"
     }
@@ -68,7 +70,8 @@ class SettingsActivity : AppCompatActivity() {
             languagePreference.setOnPreferenceChangeListener { preference, newValue ->
                 preference.summary = array[newValue.toString().toInt()]
                 if (language == prefs.getString("language", language)) {
-                    Snackbar.make(activity.prefs_layout, R.string.save_changes, 3000).show()
+                    Snackbar.make((activity as SettingsActivity)
+                            .binding.prefsLayout, R.string.save_changes, 3000).show()
                 }
                 true
             }
