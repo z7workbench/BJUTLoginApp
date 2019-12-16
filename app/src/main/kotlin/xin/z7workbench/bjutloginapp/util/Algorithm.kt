@@ -1,5 +1,7 @@
 package xin.z7workbench.bjutloginapp.util
 
+import android.os.Bundle
+import org.jetbrains.anko.bundleOf
 import kotlin.math.absoluteValue
 import kotlin.math.round
 
@@ -39,4 +41,21 @@ fun formatByteSize(byte: Long): String {
     if (byte < 0) absByte = -absByte
 
     return "${round(absByte * 1000) / 1000} ${byteSize.display}"
+}
+
+fun exceededByteSizeBundle(flow: Long, pack: Int, money: Float): Bundle {
+    val sizeOfMoneyInByte = (money / 100 / 0.2 * 1024 * 1024).toLong()
+    val stringOfMoneyByte = formatByteSize(sizeOfMoneyInByte)
+    val sizeOfUsedExtraInByte =
+            if (flow > pack * 1024 * 1024)
+                flow - pack * 1024 * 1024
+            else
+                0L
+    val stringOfUsedExtraByte = formatByteSize(sizeOfUsedExtraInByte * 1024)
+    val percent = sizeOfUsedExtraInByte * 100L / (sizeOfMoneyInByte + sizeOfUsedExtraInByte)
+    return bundleOf(
+            "remained" to stringOfMoneyByte,
+            "exceeded" to stringOfUsedExtraByte,
+            "percent" to percent.toInt()
+    )
 }

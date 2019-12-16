@@ -18,7 +18,7 @@
     <string name="settings_user_hint">在此输入你的用户名</string>
     <string name="settings_user_title">用户名</string>
     <string name="settings_version_title">版本</string>
-    <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
+    <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/z7workbench</string>
     <string name="action_help">帮助</string>
     <string name="action_rn">更新日志</string>
     <string name="help_alert_button">懂了！</string>
@@ -31,10 +31,10 @@
     <string name="force_rn_desc">打开日志</string>
     <string name="force_settings_title">设置</string>
     <string name="force_settings_desc">打开设置</string>
-    <string name="main_fee">余额</string>
-    <string name="main_last">上次同步</string>
-    <string name="main_time">已用时间</string>
-    <string name="main_user">"用户 - "</string>
+    <string name="main_fee">余额：</string>
+    <string name="main_last">上次同步：</string>
+    <string name="main_time">已用时间：</string>
+    <string name="main_user">"用户："</string>
     <string name="main_hide">已隐藏</string>
     <string name="status_offline">离线</string>
     <string name="status_syncing">同步中</string>
@@ -50,14 +50,16 @@
     <string name="action_users">用户</string>
     <string name="cancel">取消</string>
     <string name="force_user_title">用户</string>
-    <string name="force_user_desc">编辑或选择用户
-    <string name="action_add">添加</string></string>
+    <string name="force_user_desc">编辑或选择用户</string>
     <string name="settings_users_title">选择用户</string>
     <string name="settings_users_summary">当前账号：</string>
     <string name="users_placeholder">尴尬，这里是空的哟！</string>
-    <string name="settings_web_on">WLGN</string>
-    <string name="settings_web_off">LGN</string>
+    <string name="settings_web_on">无线网关接口（WLGN网站）</string>
+    <string name="settings_web_off">有线网址接口（LGN网站）</string>
     <string name="settings_web_title">网站</string>
     <string name="save_changes">按返回键保存更改</string>
     <string name="undo">撤销更改</string>
+    <string name="action_add">添加</string>
+    <string name="exceeded">超出流量：</string>
+    <string name="remained">剩余流量：</string>
 </resources>

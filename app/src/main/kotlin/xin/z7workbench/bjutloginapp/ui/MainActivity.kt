@@ -113,10 +113,14 @@ class MainActivity : AppCompatActivity() {
                         timeView.text = resources.getString(R.string.unknown)
                         feeView.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
+                        numberBar.progress = 0
                         statusView.text = resources.getString(status.description)
                         lastView.text
                         login.isEnabled = true
                         sync.isEnabled = true
+                        exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
+                        remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
+
                     }
                     status = LogStatus.ERROR
                 }
@@ -152,6 +156,7 @@ class MainActivity : AppCompatActivity() {
                     binding.apply {
                         statusView.text = resources.getString(status.description)
                         progress.percent = 0F
+                        numberBar.progress = 0
                         login.isEnabled = true
                         sync.isEnabled = true
                     }
@@ -193,12 +198,6 @@ class MainActivity : AppCompatActivity() {
         val currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-/*        pack.text = when (currentPack) {
-            0 -> resources.getStringArray(R.array.pack)[0]
-            1 -> resources.getStringArray(R.array.pack)[1]
-            2 -> resources.getStringArray(R.array.pack)[2]
-            else -> getString(R.string.unknown)
-        }*/
         binding.pack.text = "${currentPack} GB"
 
         syncing()
@@ -221,16 +220,17 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> {
                 startActivity<SettingsActivity>()
             }
-            R.id.action_help -> {
-                AlertDialog.Builder(this)
-                        .setTitle(R.string.help_alert_title)
-                        .setIcon(R.drawable.ic_help_outline_acc_24dp)
-                        .setMessage(R.string.help_alert_des)
-                        .setNeutralButton(R.string.help_alert_button) { dialog, which ->
-
-                        }
-                        .show()
-            }
+//            TODO design action help
+//            R.id.action_help -> {
+//                AlertDialog.Builder(this)
+//                        .setTitle(R.string.help_alert_title)
+//                        .setIcon(R.drawable.ic_help_outline_acc_24dp)
+//                        .setMessage(R.string.help_alert_des)
+//                        .setNeutralButton(R.string.help_alert_button) { dialog, which ->
+//
+//                        }
+//                        .show()
+//            }
         }
 
         return super.onOptionsItemSelected(item)
@@ -245,10 +245,13 @@ class MainActivity : AppCompatActivity() {
             timeView.text = resources.getString(R.string.unknown)
             feeView.text = resources.getString(R.string.unknown)
             progress.percent = 0F
+            numberBar.progress = 0
             statusView.text = resources.getString(status.description)
             login.isEnabled = false
             logout.isEnabled = false
             sync.isEnabled = false
+            exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
+            remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
         }
     }
 
@@ -288,10 +291,13 @@ class MainActivity : AppCompatActivity() {
                     timeView.text = resources.getString(R.string.unknown)
                     feeView.text = resources.getString(R.string.unknown)
                     progress.percent = 0F
+                    numberBar.progress = 0
                     statusView.text = resources.getString(status.description)
                     lastView.text
                     login.isEnabled = true
                     sync.isEnabled = true
+                    exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
+                    remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
                 }
                 status = LogStatus.ERROR
             }
@@ -304,9 +310,12 @@ class MainActivity : AppCompatActivity() {
                         timeView.text = resources.getString(R.string.unknown)
                         feeView.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
+                        numberBar.progress = 0
                         statusView.text = resources.getString(status.description)
                         login.isEnabled = true
                         sync.isEnabled = true
+                        exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
+                        remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
                     }
 
                     status = LogStatus.ERROR
@@ -318,6 +327,9 @@ class MainActivity : AppCompatActivity() {
                             timeView.text = resources.getString(R.string.unknown)
                             feeView.text = resources.getString(R.string.unknown)
                             progress.percent = 0F
+                            numberBar.progress = 0
+                            exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
+                            remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
                         }
 
                         if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm""")) {
@@ -330,19 +342,28 @@ class MainActivity : AppCompatActivity() {
                         binding.login.isEnabled = true
                         binding.sync.isEnabled = true
                     } else {
-                        val time = result.groups[1]?.value?.toInt()!!
-                        val flow = result.groups[2]?.value?.toLong()!!
-                        val fee = result.groups[3]?.value?.toDouble()!!
+                        val time = result.groups[1]?.value?.toInt() ?: -1
+                        val flow = result.groups[2]?.value?.toLong() ?: -1L
+                        val fee = result.groups[3]?.value?.toFloat() ?: -1F
+                        status = LogStatus.ONLINE
+                        val bundle = exceededByteSizeBundle(flow, currentPack, fee)
+                        val numberBarProgress = bundle["percent"] as Int
+                        val exceededFlow = bundle["exceeded"] as String
+                        val remainedFlow = bundle["remained"] as String
+                        // Change UI
                         binding.apply {
                             nowFlux.text = formatByteSize(flow * 1024)
-//                            nowFlux.text = flow.toString()
                             timeView.text = "$time min"
                             feeView.text = """￥${fee / 10000}"""
                             statusView.text = resources.getString(status.description)
+                            exceeded.text = "${getString(R.string.exceeded)}$exceededFlow"
+                            remained.text = "${getString(R.string.remained)}$remainedFlow"
+                            logout.isEnabled = true
+                            sync.isEnabled = true
                         }
-                        status = LogStatus.ONLINE
+                        // Deal with ColorfulRingProgressView and NumberProgressBar
                         val fl = currentPack.toFloat()
-                        if (fl != -1F) {
+                        if (fl >= 0F && flow >= 0L) {
                             var percent = flow.toFloat() / (fl * 1024 * 1024) * 100
                             if (percent > 100F) {
                                 percent = 100F
@@ -351,9 +372,18 @@ class MainActivity : AppCompatActivity() {
                             animator.duration = 1500L
                             animator.interpolator = DecelerateInterpolator(2F)
                             animator.start()
+
+                            val PGBanimator = ObjectAnimator.ofInt(binding.numberBar, "progress", numberBarProgress)
+                            PGBanimator.duration = 1500L
+                            PGBanimator.interpolator = DecelerateInterpolator(0.5F)
+                            PGBanimator.start()
+                            binding.numberBar
+                        } else {
+                            binding.apply {
+                                progress.percent = 0F
+                                numberBar.progress = 0
+                            }
                         }
-                        binding.logout.isEnabled = true
-                        binding.sync.isEnabled = true
                     }
                 }
             }

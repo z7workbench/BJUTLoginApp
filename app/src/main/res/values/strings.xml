@@ -18,10 +18,10 @@
     <string name="force_user_title">User</string>
     <string name="force_user_desc">Edit or Select User</string>
 
-    <string name="main_fee">Fee - </string>
-    <string name="main_last">Last sync - </string>
-    <string name="main_time">Time - </string>
-    <string name="main_user">User - </string>
+    <string name="main_fee">Fee -&#160;</string>
+    <string name="main_last">Last sync -&#160;</string>
+    <string name="main_time">Time -&#160;</string>
+    <string name="main_user">User -&#160;</string>
     <string name="main_hide">Hidden</string>
 
     <string name="help_alert_title">Help</string>
@@ -31,7 +31,7 @@
     <string name="OK">OK</string>
     <string name="cancel">Cancel</string>
 
-    <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/ZeroGoYoosee</string>
+    <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/z7workbench</string>
     <string name="settings_about_title">About me</string>
     <string name="settings_category_about">About</string>
     <string name="settings_category_language">Language</string>
@@ -51,8 +51,8 @@
     <string name="settings_version_title">Version</string>
     <string name="settings_users_title">Select User</string>
     <string name="settings_users_summary">Current:\u0020</string>
-    <string name="settings_web_on">WLGN</string>
-    <string name="settings_web_off">LGN</string>
+    <string name="settings_web_on">Wireless Gateway (WLGN)</string>
+    <string name="settings_web_off">Wired Gateway (LGN)</string>
     <string name="settings_web_title">Website</string>
 
     <string name="status_offline">Offline</string>
@@ -67,4 +67,6 @@
     <string name="goto_settings">Go to</string>
     <string name="save_changes">Press back button to save the change</string>
     <string name="undo">Undo</string>
+    <string name="exceeded">Exceeded -&#160;</string>
+    <string name="remained">Remained -&#160;</string>
 </resources>
