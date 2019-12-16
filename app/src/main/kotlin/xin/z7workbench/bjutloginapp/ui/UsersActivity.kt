@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_users.*
-import kotlinx.android.synthetic.main.dialog_user.view.*
-import kotlinx.android.synthetic.main.item_users.view.*
 import org.jetbrains.anko.alert
 import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.databinding.ActivityUsersBinding
+import xin.z7workbench.bjutloginapp.databinding.DialogUserBinding
+import xin.z7workbench.bjutloginapp.databinding.ItemUsersBinding
 import xin.z7workbench.bjutloginapp.model.User
 import xin.z7workbench.bjutloginapp.util.app
 
@@ -21,12 +21,14 @@ class UsersActivity : AppCompatActivity() {
     private var currentId = 0
     val prefs by lazy { app.prefs }
     private val userDao by lazy { app.appDatabase.userDao() }
+    lateinit var binding: ActivityUsersBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_users)
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        binding = ActivityUsersBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         val usersAdapter = UsersAdapter()
         val llm = LinearLayoutManager(this)
         llm.orientation = LinearLayoutManager.VERTICAL
@@ -38,16 +40,16 @@ class UsersActivity : AppCompatActivity() {
                 usersAdapter.users = it
                 diffUtil.dispatchUpdatesTo(usersAdapter)
                 if (it.isEmpty()) {
-                    placeholder1.visibility = View.VISIBLE
-                    placeholder2.visibility = View.VISIBLE
+                    binding.placeholder1.visibility = View.VISIBLE
+                    binding.placeholder2.visibility = View.VISIBLE
                 } else {
-                    placeholder1.visibility = View.GONE
-                    placeholder2.visibility = View.GONE
+                    binding.placeholder1.visibility = View.GONE
+                    binding.placeholder2.visibility = View.GONE
                 }
             }
         })
 
-        recycler.apply {
+        binding.recycler.apply {
             adapter = usersAdapter
             layoutManager = llm
             itemAnimator = DefaultItemAnimator()
@@ -65,20 +67,21 @@ class UsersActivity : AppCompatActivity() {
 
     fun openUserDialog(newUser: Boolean, user: User) {
         var currentPackage = 8
-        val view: View = layoutInflater.inflate(R.layout.dialog_user, null, false)
-        view.name.setText(user.name)
-        view.name.setSelection(user.name.length)
-        view.password.setText(user.password)
+        val dialogBinding = DialogUserBinding.inflate(layoutInflater)
+//        val view: View = layoutInflater.inflate(R.layout.dialog_user, null, false)
+        dialogBinding.name.setText(user.name)
+        dialogBinding.name.setSelection(user.name.length)
+        dialogBinding.password.setText(user.password)
         if (!newUser) {
             currentPackage = user.pack
-            view.seek_pack.progress = user.pack
+            dialogBinding.seekPack.progress = user.pack
         }
-        view.text_pack.text = """$currentPackage GB"""
+        dialogBinding.textPack.text = """$currentPackage GB"""
 
-        view.seek_pack.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
+        dialogBinding.seekPack.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                view.text_pack.text = """${view.seek_pack.progress} GB"""
-                currentPackage = view.seek_pack.progress
+                dialogBinding.textPack.text = """${dialogBinding.seekPack.progress} GB"""
+                currentPackage = dialogBinding.seekPack.progress
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -90,10 +93,10 @@ class UsersActivity : AppCompatActivity() {
         })
 
         alert(R.string.action_users) {
-            customView = view
+            customView = dialogBinding.root
             positiveButton(R.string.OK) { _ ->
-                user.name = view.name.text.toString()
-                user.password = view.password.text.toString()
+                user.name = dialogBinding.name.text.toString()
+                user.password = dialogBinding.password.text.toString()
                 user.pack = currentPackage
                 if (!newUser) {
                     userDao.update(user)
@@ -107,7 +110,7 @@ class UsersActivity : AppCompatActivity() {
 
     inner class UsersAdapter(var users: MutableList<User> = mutableListOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-                UsersViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_users, parent, false))
+                UsersViewHolder(ItemUsersBinding.inflate(layoutInflater))
 
         override fun getItemCount() = users.size
 
@@ -118,19 +121,19 @@ class UsersActivity : AppCompatActivity() {
                 prefs.edit().putInt("current_user", user.id).apply()
                 this@UsersActivity.finish()
             }
-            holder.view.user.text = user.name
-            holder.view.edit.setOnClickListener {
+            holder.binding.user.text = user.name
+            holder.binding.edit.setOnClickListener {
                 openUserDialog(false, user.copy())
             }
-            holder.view.trash.setOnClickListener {
+            holder.binding.trash.setOnClickListener {
                 userDao.delete(user)
             }
             if (currentId == user.id) {
-                holder.view.user.toggle()
+                holder.binding.user.toggle()
             }
         }
 
-        inner class UsersViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+        inner class UsersViewHolder(val binding: ItemUsersBinding) : RecyclerView.ViewHolder(binding.root)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

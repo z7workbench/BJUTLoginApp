@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="tk.iobserver.bjutloginapp.MainActivity">
 
-   <item
-        android:id="@+id/action_help"
-        android:icon="@drawable/ic_help_outline_24dp"
-        android:orderInCategory="3"
-        android:title="@string/action_help"
-        app:showAsAction="ifRoom" />
+<!--   <item-->
+<!--        android:id="@+id/action_help"-->
+<!--        android:icon="@drawable/ic_help_outline_24dp"-->
+<!--        android:orderInCategory="3"-->
+<!--        android:title="@string/action_help"-->
+<!--        app:showAsAction="ifRoom" />-->
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings_24dp"
