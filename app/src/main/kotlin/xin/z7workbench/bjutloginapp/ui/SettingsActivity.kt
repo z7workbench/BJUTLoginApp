@@ -2,9 +2,10 @@ package xin.z7workbench.bjutloginapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.ListPreference
-import android.preference.PreferenceFragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
 import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.BuildConfig
@@ -26,7 +27,9 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPrefsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        fragmentManager.beginTransaction().replace(R.id.content, SettingsFragment()).commit()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.pref_content, SettingsFragment())
+                .commit()
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
@@ -41,35 +44,35 @@ class SettingsActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             android.os.Process.killProcess(android.os.Process.myPid())
+            System.exit(0)
         }
     }
 
-    class SettingsFragment : PreferenceFragment() {
+    class SettingsFragment : PreferenceFragmentCompat() {
         lateinit var language: String
-        private val prefs by lazy { activity.app.prefs }
-        private val userDao by lazy { activity.app.appDatabase.userDao() }
-        private val languagePreference by lazy { findPreference("language") as ListPreference }
-        private val versionPreference by lazy { findPreference("version") }
-        private val usersPreference by lazy { findPreference("users") }
+        private val prefs by lazy { activity?.app?.prefs }
+        private val userDao by lazy { activity?.app?.appDatabase?.userDao() }
+        private val languagePreference by lazy { findPreference<ListPreference>("language") }
+        private val versionPreference by lazy { findPreference<Preference>("version") }
+        private val usersPreference by lazy { findPreference<Preference>("users") }
         private val array by lazy { resources.getStringArray(R.array.language) }
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            addPreferencesFromResource(R.xml.prefs_settings)
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.prefs_settings, rootKey)
 
-            usersPreference.setOnPreferenceClickListener {
-                startActivity<UsersActivity>()
+            usersPreference?.setOnPreferenceClickListener {
+                activity?.startActivity<UsersActivity>()
                 true
             }
 
-            versionPreference.summary = resources.getString(R.string.settings_version_loading)
+            versionPreference?.summary = resources.getString(R.string.settings_version_loading)
 
-            languagePreference.summary = array[(prefs.getString("language", "0") ?: "0").toInt()]
-            language = prefs.getString("language", "0") ?: "Auto"
+            languagePreference?.summary = array[(prefs?.getString("language", "0") ?: "0").toInt()]
+            language = prefs?.getString("language", "0") ?: "Auto"
 
-            languagePreference.setOnPreferenceChangeListener { preference, newValue ->
+            languagePreference?.setOnPreferenceChangeListener { preference, newValue ->
                 preference.summary = array[newValue.toString().toInt()]
-                if (language == prefs.getString("language", language)) {
+                if (language == prefs?.getString("language", language)) {
                     Snackbar.make((activity as SettingsActivity)
                             .binding.prefsLayout, R.string.save_changes, 3000).show()
                 }
@@ -77,13 +80,13 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             NetworkUtils.checkNewVersion(object : UIBlock {
-                override val context = activity
+                override val context = activity!!
 
                 override fun onPrepare() {
                 }
 
                 override fun onFailure(exception: IOException) {
-                    versionPreference.summary = BuildConfig.VERSION_NAME
+                    versionPreference?.summary = BuildConfig.VERSION_NAME
                 }
 
                 override fun onResponse(bodyString: String?) {
@@ -97,12 +100,12 @@ class SettingsActivity : AppCompatActivity() {
 
                         if (oldCommit < newCommit) {
                             val newVersion = result.groups[1]!!.value
-                            versionPreference.summary = BuildConfig.VERSION_NAME + "\n" + newStr + " " + newVersion
+                            versionPreference?.summary = BuildConfig.VERSION_NAME + "\n" + newStr + " " + newVersion
                         } else {
-                            versionPreference.summary = BuildConfig.VERSION_NAME
+                            versionPreference?.summary = BuildConfig.VERSION_NAME
                         }
                     } else {
-                        versionPreference.summary = BuildConfig.VERSION_NAME
+                        versionPreference?.summary = BuildConfig.VERSION_NAME
                     }
                 }
 
@@ -110,30 +113,29 @@ class SettingsActivity : AppCompatActivity() {
                 }
             })
 
-            versionPreference.setOnPreferenceClickListener {
-                startActivity<VersionActivity>()
+            versionPreference?.setOnPreferenceClickListener {
+                activity?.startActivity<VersionActivity>()
                 true
             }
 
-            val currentId = prefs.getInt("current_user", -1)
-            val result = userDao.find(currentId)
+            val currentId = prefs?.getInt("current_user", -1) ?: -1
+            val result = userDao?.find(currentId) ?: mutableListOf()
             if (result.isEmpty()) {
-                usersPreference.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
+                usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
             } else {
-                usersPreference.summary = getString(R.string.settings_users_summary) + result.first().name
+                usersPreference?.summary = getString(R.string.settings_users_summary) + result.first().name
             }
         }
 
         override fun onResume() {
             super.onResume()
-            val currentId = prefs.getInt("current_user", -1)
-            val result = userDao.find(currentId)
+            val currentId = prefs?.getInt("current_user", -1) ?: -1
+            val result = userDao?.find(currentId) ?: mutableListOf()
             if (result.isEmpty()) {
-                usersPreference.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
+                usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
             } else {
-                usersPreference.summary = getString(R.string.settings_users_summary) + result.first().name
+                usersPreference?.summary = getString(R.string.settings_users_summary) + result.first().name
             }
         }
-
     }
 }

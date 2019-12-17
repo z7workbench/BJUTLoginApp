@@ -7,7 +7,7 @@
             android:summary="@string/settings_users_summary"
             android:title="@string/settings_users_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="website"
             android:layout="@layout/layout_prefs"
