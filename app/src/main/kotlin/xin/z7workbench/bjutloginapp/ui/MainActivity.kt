@@ -20,6 +20,7 @@ import android.widget.TextView
 import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityMainBinding
+import xin.z7workbench.bjutloginapp.model.User
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -27,8 +28,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val tag = "MainActivity"
-    var status = LogStatus.OFFLINE
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val handler = Handler()
+    var status = LogStatus.OFFLINE
     var oldUp = TrafficStats.getTotalTxBytes()
     var oldDown = TrafficStats.getTotalRxBytes()
     var oldTime = System.currentTimeMillis()
@@ -36,32 +38,21 @@ class MainActivity : AppCompatActivity() {
     var currentId = -1
     var currentName = ""
     var currentPack = -1
+    lateinit var currentUser: MutableList<User>
     lateinit var binding: ActivityMainBinding
-
-    val handler = object : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if (msg.what == 1) {
-                val arr = msg.obj as Array<String>
-                binding.upSpeed.text = arr[0]
-                binding.downSpeed.text = arr[1]
-            }
-        }
-    }
-
-    val task = object : TimerTask() {
+    private val task = object : TimerTask() {
         override fun run() {
-            val msg = Message.obtain(handler)
-            msg.what = 1
             val newUp = TrafficStats.getTotalTxBytes()
             val newDown = TrafficStats.getTotalRxBytes()
             val newTime = System.currentTimeMillis()
-            msg.obj = arrayOf(Formatter.formatFileSize(this@MainActivity, (newUp - oldUp) * 1000 / (newTime - oldTime)) + "/s",
-                    Formatter.formatFileSize(this@MainActivity, (newDown - oldDown) * 1000 / (newTime - oldTime)) + "/s")
-            handler.sendMessage(msg)
-            oldUp = newUp
-            oldDown = newDown
-            oldTime = newTime
+            if (newTime != 0L && oldTime != 0L && newTime - oldTime != 0L)
+                handler.post {
+                    binding.upSpeed.text = "${formatByteSize((newUp - oldUp) * 1024 / (newTime - oldTime))}/s"
+                    binding.downSpeed.text = "${formatByteSize((newDown - oldDown) * 1024 / (newTime - oldTime))}/s"
+                    oldUp = newUp
+                    oldDown = newDown
+                    oldTime = newTime
+                }
         }
     }
 
@@ -70,25 +61,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        Timer().scheduleAtFixedRate(task, 500L, 3500L)
 
         binding.toolbar.title = ""
-
-        Timer().schedule(task, 1000L, 3000L)
-
         binding.hideAndShow.setOnClickListener {
             hideOrNot(true)
         }
 
         currentId = app.prefs.getInt("current_user", -1)
-        val currentUser = app.appDatabase.userDao().find(currentId)
+        currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-/*        pack.text = when (currentPack) {
-            0 -> resources.getStringArray(R.array.pack)[0]
-            1 -> resources.getStringArray(R.array.pack)[1]
-            2 -> resources.getStringArray(R.array.pack)[2]
-            else -> getString(R.string.unknown)
-        }*/
         binding.pack.text = "${currentPack} GB"
 
         binding.login.setOnClickListener {
@@ -107,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(exception: IOException) {
                     emsg = exception.message ?: ""
+                    status = LogStatus.ERROR
                     binding.apply {
                         errMsg.visibility = View.VISIBLE
                         nowFlux.text = resources.getString(R.string.unknown)
@@ -122,10 +106,10 @@ class MainActivity : AppCompatActivity() {
                         remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
 
                     }
-                    status = LogStatus.ERROR
                 }
 
                 override fun onResponse(bodyString: String?) {
+                    Snackbar.make(binding.constraint, "Log in complete, syncing...", Snackbar.LENGTH_LONG).show()
                     syncing()
                 }
 
@@ -186,16 +170,12 @@ class MainActivity : AppCompatActivity() {
         binding.wifiSlide.setOnClickListener {
 
         }
-
-        oldUp = TrafficStats.getTotalTxBytes()
-        oldDown = TrafficStats.getTotalRxBytes()
-        oldTime = System.currentTimeMillis()
     }
 
     override fun onResume() {
         super.onResume()
         currentId = app.prefs.getInt("current_user", -1)
-        val currentUser = app.appDatabase.userDao().find(currentId)
+        currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
         binding.pack.text = "${currentPack} GB"
@@ -265,6 +245,7 @@ class MainActivity : AppCompatActivity() {
                 editor.putBoolean("hide", true)
                 editor.apply()
             }
+            Snackbar.make(binding.constraint, getString(R.string.main_hide), Snackbar.LENGTH_LONG).show()
 
         } else {
             binding.hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_hide))
@@ -274,6 +255,7 @@ class MainActivity : AppCompatActivity() {
                 editor.putBoolean("hide", false)
                 editor.apply()
             }
+            Snackbar.make(binding.constraint, getString(R.string.main_hide), Snackbar.LENGTH_LONG).show()
         }
     }
 
@@ -285,6 +267,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(exception: IOException) {
                 emsg = exception.message ?: ""
+                status = LogStatus.ERROR
                 binding.apply {
                     errMsg.visibility = View.VISIBLE
                     nowFlux.text = resources.getString(R.string.unknown)
@@ -299,7 +282,6 @@ class MainActivity : AppCompatActivity() {
                     exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
                     remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
                 }
-                status = LogStatus.ERROR
             }
 
             override fun onResponse(bodyString: String?) {

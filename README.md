@@ -1,33 +1,32 @@
-# BJUT Login App
-[![Build Status](https://travis-ci.org/ZeroGoYoosee/BJUTLoginApp.svg)](https://travis-ci.org/ZeroGoYoosee/BJUTLoginApp)
-[![API](https://img.shields.io/badge/API-23%2B-blue.svg?style=flat)](https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#M)
-[![GitHub release](https://img.shields.io/github/release/ZeroGoYoosee/BJUTLoginApp.svg)](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases)
-[![Github All Releases](https://img.shields.io/github/downloads/ZeroGoYoosee/BJUTLoginApp/total.svg)](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases)
+<center><img src="app/src/main/res/mipmap-xxxhdpi/ic_login_stable.png"></center>
 
----
-## Overview & Screenshots
-BJUT Login App is an Android App for students from Beijing University of Technology. It helps log in BJUT gateway. 
-It is written in Kotlin. If you want Java version, you would check out '3.0.0' branch. 
+[![Build Status](https://travis-ci.org/z7workbench/BJUTLoginApp.svg)](https://travis-ci.org/z7workbench/BJUTLoginApp)
+[![API](https://img.shields.io/badge/API-26%2B-blue.svg?style=flat)](https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#O)
+[![GitHub release](https://img.shields.io/github/release/z7workbench/BJUTLoginApp.svg)](https://github.com/z7workbench/BJUTLoginApp/releases)
+[![Github All Releases](https://img.shields.io/github/downloads/z7workbench/BJUTLoginApp/total.svg)](https://github.com/z7workbench/BJUTLoginApp/releases)
+[![GitHub license](https://img.shields.io/github/license/z7workbench/BJUTLoginApp)](https://github.com/z7workbench/BJUTLoginApp/blob/master/LICENSE)
 
-```
-git clone https://github.com/ZeroGoYoosee/BJUTLoginApp.git
-git checkout 3.0.0
-```
+# Downloads & Requirement
+You can download this app by accessing [GitHub Releases](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases) or [fir.im(latest release)](https://fir.im/BJUTLoginApp). Beta builds in **version 5** are availble for **Android Oreo and above**. 
 
-However, it is deprecated. 
+For devices between Android Marshmallow(6.0) and Android Nougat(7.1), You can download this app [GitHub 4.1.0 Releases](https://github.com/z7workbench/BJUTLoginApp/releases/tag/v4.1.0) or [fir.im(build 4)](https://fir.im/BJUTLoginAppOld). 
 
-### Main View
-![](screenshots/main.png)
+# Overview
+BJUT Login App is a simple Android App for students from Beijing University of Technology. It helps log in BJUT gateway. 
 
-### Settings
-![](screenshots/settings.png)
+It is written in Kotlin. If you want Java version, you would check out ```version-3``` branch. However, the Java version is **deprecated**. 
 
-### User
-![](screenshots/users.png)
+The beta release of Version 5 is out! Please check out the [GitHub Releases](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases) or [fir.im(latest release)](https://fir.im/BJUTLoginApp).
 
-## How to use
+For more details of the developing edition, please watch the ```dev``` branch. 
+
+# How to use
 Give your student ID and password in [Settings], then press [Login] button. 
-Make sure your phone is in 'bjut_wifi'.
 
-## Downloads
-[GitHub Releases](https://github.com/ZeroGoYoosee/BJUTLoginApp/releases) or [fir.im](https://fir.im/BJUTLoginApp)
+Make sure your phone has already connect to ```bjut_wifi``` network.
+
+# Features
+...
+# Used Framework
+...
+
