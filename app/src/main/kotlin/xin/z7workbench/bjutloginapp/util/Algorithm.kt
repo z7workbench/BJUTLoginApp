@@ -44,8 +44,8 @@ fun formatByteSize(byte: Long): String {
 }
 
 fun exceededByteSizeBundle(flow: Long, pack: Int, money: Float): Bundle {
-    val sizeOfMoneyInByte = (money / 100 / 0.2 * 1024 * 1024).toLong()
-    val stringOfMoneyByte = formatByteSize(sizeOfMoneyInByte)
+    val sizeOfMoneyInByte = (money / 100 / 0.2 * 1024).toLong()
+    val stringOfMoneyByte = formatByteSize(sizeOfMoneyInByte * 1024)
     val sizeOfUsedExtraInByte =
             if (flow > pack * 1024 * 1024)
                 flow - pack * 1024 * 1024

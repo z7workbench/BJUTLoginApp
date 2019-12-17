@@ -23,13 +23,14 @@ class LoginApp : Application() {
         res = resources
         appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "login.db").allowMainThreadQueries().build()
 
+        // Language switching
         val dm = resources.displayMetrics
         val config = resources.configuration
         when (prefs.getString("language", "")) {
             "0" -> config.setLocale(Locale.getDefault())
             "1" -> config.setLocale(Locale.SIMPLIFIED_CHINESE)
             "2" -> config.setLocale(Locale.ENGLISH)
-            "" -> {
+            else -> {
                 prefs.edit().putString("language", "0").apply()
                 config.setLocale(Locale.getDefault())
             }
