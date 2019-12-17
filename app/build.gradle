@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 def gitCommitCount = "git rev-list HEAD --count".execute().text.trim()
@@ -11,7 +10,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 5
-        versionName "5.0.0-beta6"
+        versionName "5.0.0-beta7"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

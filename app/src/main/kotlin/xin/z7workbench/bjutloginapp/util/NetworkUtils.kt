@@ -47,14 +47,14 @@ object NetworkUtils {
     }
 
 
-    fun login(user: User, isWlgn: Boolean, uiBlock: UIBlock) {
+    fun login(user: User, isWireless: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
         val body = FormBody.Builder()
                 .add("DDDDD", user.name)
                 .add("upass", user.password)
                 .add("6MKKey", "123")
                 .build()
-        val request = when (isWlgn) {
+        val request = when (isWireless) {
             true -> Request.Builder()
                     .post(body)
                     .url(Constants.WLGN_URL + Constants.LOGIN_TAIL)
@@ -85,9 +85,9 @@ object NetworkUtils {
         })
     }
 
-    fun sync(isWlgn: Boolean, uiBlock: UIBlock) {
+    fun sync(isWireless: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
-        val request = when (isWlgn) {
+        val request = when (isWireless) {
             true -> Request.Builder()
                     .get()
                     .url(Constants.WLGN_URL)
