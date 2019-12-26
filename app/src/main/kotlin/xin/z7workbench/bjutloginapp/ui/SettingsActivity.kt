@@ -92,7 +92,7 @@ class SettingsActivity : AppCompatActivity() {
                 override fun onResponse(bodyString: String?) {
                     val regex = """"version":"(.*? \((.*?)\))","build":"(.*?)"""".toRegex()
                     val result = regex.find(bodyString ?: "")
-                    if (result != null) {
+                    if (result != null && activity != null) {
                         val newStr = resources.getString(R.string.settings_version_new)
                         val numRegex = """.*? \((.*?)\)""".toRegex()
                         val oldCommit = numRegex.find(BuildConfig.VERSION_NAME)!!.groups[1]!!.value.toInt()

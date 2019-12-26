@@ -45,14 +45,15 @@ class MainActivity : AppCompatActivity() {
             val newUp = TrafficStats.getTotalTxBytes()
             val newDown = TrafficStats.getTotalRxBytes()
             val newTime = System.currentTimeMillis()
-            if (newTime != 0L && oldTime != 0L && newTime - oldTime != 0L)
-                handler.post {
+            handler.post {
+                if (newTime != 0L && oldTime != 0L && newTime - oldTime != 0L) {
                     binding.upSpeed.text = "${formatByteSize((newUp - oldUp) * 1024 / (newTime - oldTime))}/s"
                     binding.downSpeed.text = "${formatByteSize((newDown - oldDown) * 1024 / (newTime - oldTime))}/s"
-                    oldUp = newUp
-                    oldDown = newDown
-                    oldTime = newTime
                 }
+                oldUp = newUp
+                oldDown = newDown
+                oldTime = newTime
+            }
         }
     }
 
@@ -63,8 +64,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         Timer().scheduleAtFixedRate(task, 500L, 3500L)
 
-        binding.toolbar.title = ""
-        binding.hideAndShow.setOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             hideOrNot(true)
         }
 
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-        binding.pack.text = "${currentPack} GB"
+        binding.pack.text = "$currentPack GB"
 
         binding.login.setOnClickListener {
             if (currentUser.isEmpty()) {
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() {
         currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-        binding.pack.text = "${currentPack} GB"
+        binding.pack.text = "$currentPack GB"
 
         syncing()
         hideOrNot(false)
@@ -238,24 +238,30 @@ class MainActivity : AppCompatActivity() {
     private fun hideOrNot(edit: Boolean) {
         val hide = app.prefs.getBoolean("hide", true)
         if ((!hide && edit) || (hide && !edit)) {
-            binding.hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_show))
-            binding.user.text = resources.getString(R.string.main_hide)
+            binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_show)
+            binding.toolbar.title = "${getString(R.string.main_user)}${getString(R.string.main_hide)}"
             if (edit) {
                 val editor = app.prefs.edit()
                 editor.putBoolean("hide", true)
                 editor.apply()
             }
-            Snackbar.make(binding.constraint, getString(R.string.main_hide), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.constraint, getString(R.string.main_hint_hide), Snackbar.LENGTH_LONG)
+                    .setAction(R.string.undo){
+                        hideOrNot(true)
+                    }.show()
 
         } else {
-            binding.hideAndShow.setImageDrawable(resources.getDrawable(R.drawable.ic_hide))
-            binding.user.text = currentName
+            binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_hide)
+            binding.toolbar.title = "${getString(R.string.main_user)}${currentName}"
             if (edit) {
                 val editor = app.prefs.edit()
                 editor.putBoolean("hide", false)
                 editor.apply()
             }
-            Snackbar.make(binding.constraint, getString(R.string.main_hide), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.constraint, getString(R.string.main_hint_reveal), Snackbar.LENGTH_LONG)
+                    .setAction(R.string.undo){
+                        hideOrNot(true)
+                    }.show()
         }
     }
 

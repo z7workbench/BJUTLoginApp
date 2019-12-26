@@ -62,4 +62,6 @@
     <string name="action_add">添加</string>
     <string name="exceeded">超出流量：</string>
     <string name="remained">剩余流量：</string>
+    <string name="main_hint_reveal">用户名现已显示</string>
+    <string name="main_hint_hide">用户名现已隐藏</string>
 </resources>
