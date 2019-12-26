@@ -11,6 +11,8 @@ You can download this app by accessing [GitHub Releases](https://github.com/Zero
 
 For devices between Android Marshmallow(6.0) and Android Nougat(7.1), You can download this app [GitHub 4.1.0 Releases](https://github.com/z7workbench/BJUTLoginApp/releases/tag/v4.1.0) or [fir.im(build 4)](https://fir.im/BJUTLoginAppOld). 
 
+You can always get the latest updates on branch ``dev``.
+
 # Overview
 BJUT Login App is a simple Android App for students from Beijing University of Technology. It helps log in BJUT gateway. 
 
@@ -27,6 +29,15 @@ Make sure your phone has already connect to ```bjut_wifi``` network.
 
 # Features
 ...
-# Used Framework
-...
-
+# Materials that I used
+- [Kotlin](https://github.com/JetBrains/kotlin)
+- [Android Jetpack](https://developer.android.com/jetpack)
+- [Okhttp 3](https://github.com/square/okhttp)
+- [JetBrains anko](https://github.com/Kotlin/anko)
+- [View Binding](https://developer.android.com/topic/libraries/view-binding)
+- [Fancybutton](https://github.com/medyo/Fancybuttons)
+- [NumberProgressBar](https://github.com/daimajia/NumberProgressBar)
+- [ColorfulRingProgressView](https://github.com/timqi/SectorProgressView)
+- [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)
+- [Travis CI](https://travis-ci.org/)
+- [Kotlin Android Extensions](https://kotlinlang.org/docs/tutorials/android-plugin.html) (deprecated in ``5.0.0-beta6``)
