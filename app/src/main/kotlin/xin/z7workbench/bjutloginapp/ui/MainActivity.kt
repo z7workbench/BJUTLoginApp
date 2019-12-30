@@ -2,14 +2,13 @@ package xin.z7workbench.bjutloginapp.ui
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.res.Configuration
 import android.net.TrafficStats
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import android.text.format.Formatter
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -178,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         currentUser = app.appDatabase.userDao().find(currentId)
         currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         currentPack = currentUser.firstOrNull()?.pack ?: -1
-        binding.pack.text = "$currentPack GB"
+        binding.pack.text = "$currentPack ${ByteSize.GB.display}"
 
         syncing()
         hideOrNot(false)
@@ -384,5 +383,13 @@ class MainActivity : AppCompatActivity() {
         })
 
         Log.d("$tag e", emsg)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleUtil.wrap(newBase))
+    }
+
+    override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
+        super.applyOverrideConfiguration(baseContext.resources.configuration)
     }
 }
