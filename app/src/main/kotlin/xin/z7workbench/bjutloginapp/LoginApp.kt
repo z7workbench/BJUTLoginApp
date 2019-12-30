@@ -1,13 +1,13 @@
 package xin.z7workbench.bjutloginapp
 
 import android.app.Application
-import androidx.room.Room
-import android.content.SharedPreferences
+import android.content.*
+import android.content.res.Configuration
 import android.content.res.Resources
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
+import androidx.room.Room
 import xin.z7workbench.bjutloginapp.database.AppDatabase
-import java.util.*
-
+import xin.z7workbench.bjutloginapp.util.LocaleUtil
 
 /**
  * Created by ZeroGo on 2017/11/2.
@@ -19,22 +19,12 @@ class LoginApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        prefs = getDefaultSharedPreferences(this)
         res = resources
         appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "login.db").allowMainThreadQueries().build()
+    }
 
-        // Language switching
-        val dm = resources.displayMetrics
-        val config = resources.configuration
-        when (prefs.getString("language", "")) {
-            "0" -> config.setLocale(Locale.getDefault())
-            "1" -> config.setLocale(Locale.SIMPLIFIED_CHINESE)
-            "2" -> config.setLocale(Locale.ENGLISH)
-            else -> {
-                prefs.edit().putString("language", "0").apply()
-                config.setLocale(Locale.getDefault())
-            }
-        }
-        resources.updateConfiguration(config, dm)
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleUtil.wrap(base))
     }
 }
