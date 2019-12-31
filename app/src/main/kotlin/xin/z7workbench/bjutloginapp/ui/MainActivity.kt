@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.login.setOnClickListener {
             if (currentUser.isEmpty()) {
-                Snackbar.make(binding.mainLayout, R.string.not_set, 3000)
+                Snackbar.make(binding.mainLayout, R.string.user_password_not_set, 3000)
                         .setAction(resources.getString(R.string.goto_settings)) {
                             startActivity<UsersActivity>()
                         }
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(bodyString: String?) {
-                    Snackbar.make(binding.constraint, "Log in complete, syncing...", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.constraint, getString(R.string.main_login_successful), Snackbar.LENGTH_SHORT).show()
                     syncing()
                 }
 
@@ -340,7 +340,7 @@ class MainActivity : AppCompatActivity() {
                         // Change UI
                         binding.apply {
                             nowFlux.text = formatByteSize(flow * 1024)
-                            timeView.text = "$time min"
+                            timeView.text = "$time ${getString(R.string.minutes)}"
                             feeView.text = """￥${fee / 10000}"""
                             statusView.text = resources.getString(status.description)
                             exceeded.text = "${getString(R.string.exceeded)}$exceededFlow"

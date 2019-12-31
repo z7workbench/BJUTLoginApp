@@ -4,20 +4,18 @@
     <style name="AppTheme" />
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar" >
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="appAccentBackground">@color/colorAccentBackground</item>
         <item name="appSubTextColor">@color/colorSubText</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="appAccentBackground">@color/colorAccentBackground</item>
         <item name="appSubTextColor">@color/colorSubText</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme.Dark.Pure">
+        <item name="colorAccent">@color/colorAccentPure</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundPure</item>
         <item name="colorPrimary">@color/colorPrimaryPure</item>
         <item name="colorPrimaryDark">@color/colorPrimaryPure</item>
         <item name="appBackground">@color/colorBackgroundPure</item>
@@ -25,6 +23,8 @@
     </style>
 
     <style name="AppTheme.Light.White">
+        <item name="colorAccent">@color/colorAccentWhite</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundWhite</item>
         <item name="colorPrimary">@color/colorPrimaryWhite</item>
         <item name="colorPrimaryDark">@color/colorPrimaryWhite</item>
         <item name="appBackground">@color/colorBackgroundWhite</item>

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorSubText">#888888</color>
-    <color name="colorAccent">#FFBC00</color>
-    <color name="colorAccentBackground">#8686FF</color>
 
+    <color name="colorAccentPure">#FFBC00</color>
+    <color name="colorAccentBackgroundPure">#8686FF</color>
     <color name="colorPrimaryPure">@android:color/black</color>
     <color name="colorTextPure">@android:color/white</color>
     <color name="colorBackgroundPure">@color/colorPrimaryPure</color>
 
+    <color name="colorAccentWhite">#FF4081</color>
+    <color name="colorAccentBackgroundWhite">#8686FF</color>
     <color name="colorPrimaryWhite">@android:color/white</color>
     <color name="colorTextWhite">@android:color/black</color>
     <color name="colorBackgroundWhite">@color/colorPrimaryWhite</color>

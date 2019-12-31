@@ -43,9 +43,9 @@
     <string name="action_version">版本</string>
     <string name="OK">确定</string>
     <string name="settings_version_new">发现新版本:</string>
-    <string name="settings_version_loading">加载中...</string>
+    <string name="settings_version_loading">加载中&#8230;</string>
     <string name="settings_default_vc">稳定版</string>
-    <string name="not_set">用户名或密码还未设置</string>
+    <string name="user_password_not_set">用户名或密码还未设置</string>
     <string name="goto_settings">转到设置</string>
     <string name="action_users">用户</string>
     <string name="cancel">取消</string>
@@ -64,4 +64,6 @@
     <string name="remained">剩余流量：</string>
     <string name="main_hint_reveal">用户名现已显示</string>
     <string name="main_hint_hide">用户名现已隐藏</string>
+    <string name="minutes">分钟</string>
+    <string name="main_login_successful">登录成功！同步数据中&#8230;</string>
 </resources>

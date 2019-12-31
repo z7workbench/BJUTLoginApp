@@ -50,13 +50,9 @@ object NetworkUtils {
         uiBlock.onPrepare()
         val body = when (isWireless) {
             true -> FormBody.Builder()
-                    // TODO wireless log-in has bug
                     .add("DDDDD", user.name)
                     .add("upass", user.password)
-                    .add("v46s", "1")
-                    .add("v6ip", "")
-                    .add("f4serip", "wlgn.bjut.edu.cn")
-                    .add("0MKKey", "")
+                    .add("6MKKey", "123")
                     .build()
 
             false -> FormBody.Builder()

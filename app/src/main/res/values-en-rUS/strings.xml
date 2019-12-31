@@ -23,6 +23,7 @@
     <string name="main_time">Time -&#160;</string>
     <string name="main_user">User -&#160;</string>
     <string name="main_hide">Hidden</string>
+    <string name="main_login_successful">Log in complete, syncing&#8230;</string>
 
     <string name="help_alert_title">Help</string>
     <string name="help_alert_des">This App is a Login Application for [bjut_wifi] network. \nYou can press Settings button in the upper right corner to change the user name and password.</string>
@@ -46,7 +47,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_user_hint">Enter user name here</string>
     <string name="settings_user_title">User Number</string>
-    <string name="settings_version_loading">Loading...</string>
+    <string name="settings_version_loading">Loading&#8230;</string>
     <string name="settings_version_new">Update available:</string>
     <string name="settings_version_title">Version</string>
     <string name="settings_users_title">Select User</string>
@@ -63,7 +64,7 @@
     <string name="unknown">Unknown</string>
     <string name="users_placeholder">Whoops, it is empty!</string>
 
-    <string name="not_set">User or password isn\'t set yet! </string>
+    <string name="user_password_not_set">User or password isn\'t set yet! </string>
     <string name="goto_settings">Go to</string>
     <string name="save_changes">Press back button to save the change</string>
     <string name="undo">Undo</string>
@@ -71,4 +72,5 @@
     <string name="remained">Remained -&#160;</string>
     <string name="main_hint_reveal">User name has been revealed.</string>
     <string name="main_hint_hide">User name has been hidden.</string>
+    <string name="minutes">min</string>
 </resources>
