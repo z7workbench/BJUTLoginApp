@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         binding.sync.setOnClickListener { syncing() }
 
         binding.logout.setOnClickListener {
-            NetworkUtils.logout(object : UIBlock {
+            NetworkUtils.logout(app.prefs.getBoolean("website", true), object : UIBlock {
                 override val context: Context = this@MainActivity
 
                 override fun onPrepare() = this@MainActivity.onPrepared()
@@ -244,7 +244,7 @@ class MainActivity : AppCompatActivity() {
                 editor.putBoolean("hide", true)
                 editor.apply()
             }
-            Snackbar.make(binding.constraint, getString(R.string.main_hint_hide), Snackbar.LENGTH_LONG)
+            Snackbar.make(binding.constraint, getString(R.string.main_hint_hide), Snackbar.LENGTH_SHORT)
                     .setAction(R.string.undo){
                         hideOrNot(true)
                     }.show()
@@ -257,7 +257,7 @@ class MainActivity : AppCompatActivity() {
                 editor.putBoolean("hide", false)
                 editor.apply()
             }
-            Snackbar.make(binding.constraint, getString(R.string.main_hint_reveal), Snackbar.LENGTH_LONG)
+            Snackbar.make(binding.constraint, getString(R.string.main_hint_reveal), Snackbar.LENGTH_SHORT)
                     .setAction(R.string.undo){
                         hideOrNot(true)
                     }.show()

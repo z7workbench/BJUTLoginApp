@@ -1,5 +1,7 @@
 package xin.z7workbench.bjutloginapp.ui
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.SeekBar
@@ -15,6 +17,7 @@ import xin.z7workbench.bjutloginapp.databinding.ActivityUsersBinding
 import xin.z7workbench.bjutloginapp.databinding.DialogUserBinding
 import xin.z7workbench.bjutloginapp.databinding.ItemUsersBinding
 import xin.z7workbench.bjutloginapp.model.User
+import xin.z7workbench.bjutloginapp.util.LocaleUtil
 import xin.z7workbench.bjutloginapp.util.app
 
 class UsersActivity : AppCompatActivity() {
@@ -27,6 +30,7 @@ class UsersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbar.title = getString(R.string.action_users)
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         val usersAdapter = UsersAdapter()
@@ -92,7 +96,7 @@ class UsersActivity : AppCompatActivity() {
 
         })
 
-        alert(R.string.action_users) {
+        alert {
             customView = dialogBinding.root
             positiveButton(R.string.OK) { _ ->
                 user.name = dialogBinding.name.text.toString()
@@ -106,6 +110,14 @@ class UsersActivity : AppCompatActivity() {
             }
             negativeButton(R.string.cancel) {}
         }.show()
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleUtil.wrap(newBase))
+    }
+
+    override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
+        super.applyOverrideConfiguration(baseContext.resources.configuration)
     }
 
     inner class UsersAdapter(var users: MutableList<User> = mutableListOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {

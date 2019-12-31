@@ -15,7 +15,7 @@ class MoveUpwardBehavior : CoordinatorLayout.Behavior<View> {
     }
 
     override fun onDependentViewChanged(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
-        child.translationY = min(0F, ViewCompat.getTranslationY(dependency) - dependency.height)
+        child.translationY = min(0F, dependency.translationY - dependency.height)
         return true
     }
 

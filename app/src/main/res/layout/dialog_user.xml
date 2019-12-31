@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/user_dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp" >
+    android:padding="24dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/appTextColor"
+        android:textSize="@dimen/text_size_xxl"
+        android:textStyle="bold"
+        android:padding="4dp"
+        android:text="@string/action_users"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -18,12 +25,15 @@
             android:hint="@string/settings_user_title"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions|textVisiblePassword"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="?attr/appTextColor"
+            android:textColorHint="?attr/appSubTextColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -32,33 +42,36 @@
             android:hint="@string/settings_password_title"
             android:imeOptions="actionDone"
             android:inputType="textNoSuggestions|textPassword"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="?attr/appTextColor"
+            android:textColorHint="?attr/appSubTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_margin="4dp"
+        android:layout_weight="1"
         android:text="@string/settings_pack"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/appTextColor"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_pack"
+        android:textColor="?attr/appSubTextColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seek_pack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="0dp"
-        android:progress="8"
         android:max="26"
-        android:min="1" />
-
-    <TextView
-        android:id="@+id/text_pack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"/>
+        android:min="1"
+        android:padding="0dp"
+        android:progress="8" />
 
 </LinearLayout>
 

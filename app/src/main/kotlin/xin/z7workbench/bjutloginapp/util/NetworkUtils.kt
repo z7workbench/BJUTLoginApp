@@ -46,14 +46,28 @@ object NetworkUtils {
         return wifiManager.connectionInfo.ssid
     }
 
-
     fun login(user: User, isWireless: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
-        val body = FormBody.Builder()
-                .add("DDDDD", user.name)
-                .add("upass", user.password)
-                .add("6MKKey", "123")
-                .build()
+        val body = when (isWireless) {
+            true -> FormBody.Builder()
+                    // TODO wireless log-in has bug
+                    .add("DDDDD", user.name)
+                    .add("upass", user.password)
+                    .add("v46s", "1")
+                    .add("v6ip", "")
+                    .add("f4serip", "wlgn.bjut.edu.cn")
+                    .add("0MKKey", "")
+                    .build()
+
+            false -> FormBody.Builder()
+                    .add("DDDDD", user.name)
+                    .add("upass", user.password)
+                    .add("v46s", "1")
+                    .add("v6ip", "")
+                    .add("f4serip", "lgn.bjut.edu.cn")
+                    .add("0MKKey", "")
+                    .build()
+        }
         val request = when (isWireless) {
             true -> Request.Builder()
                     .post(body)
@@ -118,12 +132,19 @@ object NetworkUtils {
         })
     }
 
-    fun logout(uiBlock: UIBlock) {
+    fun logout(isWireless: Boolean, uiBlock: UIBlock) {
         uiBlock.onPrepare()
-        val request = Request.Builder()
-                .get()
-                .url(Constants.WLGN_URL + Constants.QUIT_TAIL)
-                .build()
+        val request = when (isWireless) {
+            true -> Request.Builder()
+                    .get()
+                    .url(Constants.WLGN_URL + Constants.QUIT_TAIL)
+                    .build()
+            false -> Request.Builder()
+                    .get()
+                    .url(Constants.LGN_URL + Constants.QUIT_TAIL)
+                    .build()
+        }
+
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(p0: Call, p1: IOException) {
                 p1.printStackTrace()

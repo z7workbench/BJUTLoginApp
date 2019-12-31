@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BJUT登录</string>
+    <string name="app_name">BJUT网关登录</string>
     <string name="action_settings">设置</string>
-    <string name="app_designer">由 ZeroGo 设计</string>
+    <string name="app_designer">ZeroGo 设计出品</string>
     <string name="action_login">登录</string>
     <string name="action_logout">登出</string>
     <string name="action_sync">同步</string>
@@ -55,7 +55,7 @@
     <string name="settings_users_summary">当前账号：</string>
     <string name="users_placeholder">尴尬，这里是空的哟！</string>
     <string name="settings_web_on">无线网关接口（WLGN网站）</string>
-    <string name="settings_web_off">有线网址接口（LGN网站）</string>
+    <string name="settings_web_off">有线网关接口（LGN网站）</string>
     <string name="settings_web_title">网站</string>
     <string name="save_changes">按返回键保存更改</string>
     <string name="undo">撤销更改</string>

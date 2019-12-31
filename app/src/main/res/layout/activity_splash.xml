@@ -2,11 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_splash"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    style="@style/AppTheme.PageLayout">
 
     <TextView
         android:id="@+id/splash_tv_title"
@@ -15,7 +11,7 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/app_name"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/appTextColor"
         android:textSize="@dimen/text_title" />
     <TextView
         android:id="@+id/splash_tv_designer"
@@ -24,7 +20,7 @@
         android:layout_gravity="center_vertical|bottom"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/app_designer"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/appTextColor"
         android:textSize="@dimen/text_mini"
         android:layout_marginBottom="@dimen/text_margin"/>
     <TextView
@@ -33,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|bottom"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/appTextColor"
         android:textSize="@dimen/text_mini"
         android:layout_marginBottom="@dimen/text_second_margin"/>
 

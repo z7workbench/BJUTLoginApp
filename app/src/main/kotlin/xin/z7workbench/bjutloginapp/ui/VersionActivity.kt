@@ -1,9 +1,13 @@
 package xin.z7workbench.bjutloginapp.ui
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import xin.z7workbench.bjutloginapp.Constants
+import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityVersionBinding
+import xin.z7workbench.bjutloginapp.util.LocaleUtil
 
 /**
  * Created by ZeroGo on 2017/11/12.
@@ -14,6 +18,7 @@ class VersionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityVersionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbar.title = getString(R.string.action_version)
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         binding.web.loadUrl(Constants.VERSION_URL)
@@ -33,5 +38,13 @@ class VersionActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleUtil.wrap(newBase))
+    }
+
+    override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
+        super.applyOverrideConfiguration(baseContext.resources.configuration)
     }
 }

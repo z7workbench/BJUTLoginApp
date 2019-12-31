@@ -30,7 +30,8 @@
             android:drawablePadding="20dp"
             android:drawableStart="?android:attr/listChoiceIndicatorSingle"
             android:drawableTint="?attr/colorAccent"
-            android:textColor="@android:color/white"
+            android:textColor="?attr/appTextColor"
+            android:gravity="center_vertical"
             android:textSize="18sp" />
 
         <LinearLayout

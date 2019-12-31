@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">@color/colorPrimary</color>
-    <color name="colorPrimaryLight">#474797</color>
-    <color name="colorDisabled">#888888</color>
-
+    <color name="colorSubText">#888888</color>
     <color name="colorAccent">#FFBC00</color>
+    <color name="colorAccentBackground">#8686FF</color>
+
+    <color name="colorPrimaryPure">@android:color/black</color>
+    <color name="colorTextPure">@android:color/white</color>
+    <color name="colorBackgroundPure">@color/colorPrimaryPure</color>
+
+    <color name="colorPrimaryWhite">@android:color/white</color>
+    <color name="colorTextWhite">@android:color/black</color>
+    <color name="colorBackgroundWhite">@color/colorPrimaryWhite</color>
+
+    <color name="colorPrimaryLight">#474797</color>
+    <color name="colorDisabled">@color/colorSubText</color>
 
     <color name="colorPrimaryDev">#f57f17</color>
     <color name="colorPrimaryDarkDev">#bc5100</color>
 
     <color name="colorPrimaryStable">#7878FF</color>
     <color name="colorPrimaryDarkStable">#5555FF</color>
-
-    <color name="alert_red">#FF0000</color>
-    <color name="alert_yellow">#FFBC00</color>
-    <color name="alert_green">#00ed00</color>
-    <color name="alert_white">#ffffff</color>
-    <color name="alert_grey">#888888</color>
 
     <color name="login_default">#7ab800</color>
     <color name="login_focused">#9bd823</color>

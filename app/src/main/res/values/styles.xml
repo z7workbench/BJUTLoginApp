@@ -1,16 +1,34 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <style name="AppTheme" />
+
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar" >
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="appAccentBackground">@color/colorAccentBackground</item>
+        <item name="appSubTextColor">@color/colorSubText</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="appAccentBackground">@color/colorAccentBackground</item>
+        <item name="appSubTextColor">@color/colorSubText</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="AppTheme.Dark.Pure">
+        <item name="colorPrimary">@color/colorPrimaryPure</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryPure</item>
+        <item name="appBackground">@color/colorBackgroundPure</item>
+        <item name="appTextColor">@color/colorTextPure</item>
+    </style>
+
+    <style name="AppTheme.Light.White">
+        <item name="colorPrimary">@color/colorPrimaryWhite</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryWhite</item>
+        <item name="appBackground">@color/colorBackgroundWhite</item>
+        <item name="appTextColor">@color/colorTextWhite</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -20,11 +38,17 @@
     <style name="AppTheme.PageLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:background">?attr/appBackground</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
-    <style name="ToolBarStyle" >
+    <style name="AppTheme.DialogLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?attr/appBackground</item>
+    </style>
+
+    <style name="ToolBarStyle">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
@@ -35,6 +59,7 @@
 
     <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <!--Any text styling can be done here-->
-        <item name="android:textSize">@dimen/text_size_xl</item>
+        <item name="android:textSize">@dimen/text_size_xxl</item>
+        <item name="android:textColor">?attr/appTextColor</item>
     </style>
 </resources>
