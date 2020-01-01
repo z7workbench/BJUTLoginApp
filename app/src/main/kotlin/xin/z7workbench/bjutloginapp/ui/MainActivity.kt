@@ -101,7 +101,7 @@ class MainActivity : LoginAppActivity() {
                         login.isEnabled = true
                         sync.isEnabled = true
                         exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
-                        remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
+                        remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
 
                     }
                 }
@@ -229,7 +229,7 @@ class MainActivity : LoginAppActivity() {
             logout.isEnabled = false
             sync.isEnabled = false
             exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
-            remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
+            remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
         }
     }
 
@@ -286,7 +286,7 @@ class MainActivity : LoginAppActivity() {
                     login.isEnabled = true
                     sync.isEnabled = true
                     exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
-                    remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
+                    remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
                 }
             }
 
@@ -303,7 +303,7 @@ class MainActivity : LoginAppActivity() {
                         login.isEnabled = true
                         sync.isEnabled = true
                         exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
-                        remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
+                        remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
                     }
 
                     status = LogStatus.ERROR
@@ -317,7 +317,7 @@ class MainActivity : LoginAppActivity() {
                             progress.percent = 0F
                             numberBar.progress = 0
                             exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
-                            remained.text = "${getString(R.string.remained)}${getString(R.string.unknown)}"
+                            remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
                         }
 
                         if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm""")) {
@@ -345,7 +345,7 @@ class MainActivity : LoginAppActivity() {
                             feeView.text = """￥${fee / 10000}"""
                             statusView.text = resources.getString(status.description)
                             exceeded.text = "${getString(R.string.exceeded)}$exceededFlow"
-                            remained.text = "${getString(R.string.remained)}$remainedFlow"
+                            remained.text = "${getString(R.string.remaining)}$remainedFlow"
                             logout.isEnabled = true
                             sync.isEnabled = true
                         }

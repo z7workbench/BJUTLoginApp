@@ -70,7 +70,7 @@
     <string name="save_changes">Press back button to save the change</string>
     <string name="undo">Undo</string>
     <string name="exceeded">Exceeded -&#160;</string>
-    <string name="remained">Remained -&#160;</string>
+    <string name="remaining">Remaining -&#160;</string>
     <string name="main_hint_reveal">User name has been revealed.</string>
     <string name="main_hint_hide">User name has been hidden.</string>
     <string name="minutes">min</string>

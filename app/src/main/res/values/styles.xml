@@ -4,12 +4,12 @@
     <style name="AppTheme" />
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
-        <item name="appSubTextColor">@color/colorSubText</item>
+        <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="appSubTextColor">@color/colorSubText</item>
+        <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
@@ -41,6 +41,16 @@
         <item name="appSubTextColor">@color/colorSubTextAmber</item>
     </style>
 
+    <style name="AppTheme.Light.Yun">
+        <item name="colorAccent">@color/colorAccentYun</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundYun</item>
+        <item name="colorPrimary">@color/colorPrimaryYun</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryYun</item>
+        <item name="appBackground">@color/colorBackgroundYun</item>
+        <item name="appTextColor">@color/colorTextYun</item>
+        <item name="appSubTextColor">@color/colorSubTextYun</item>
+    </style>
+
     <style name="AppTheme.Dark.ZeroGoPurple">
         <item name="colorAccent">@color/colorAccentZGPurple</item>
         <item name="appAccentBackground">@color/colorAccentBackgroundZGPurple</item>
@@ -59,6 +69,16 @@
         <item name="appBackground">@color/colorBackgroundTeal</item>
         <item name="appTextColor">@color/colorTextTeal</item>
         <item name="appSubTextColor">@color/colorSubTextTeal</item>
+    </style>
+
+    <style name="AppTheme.Dark.Pink">
+        <item name="colorAccent">@color/colorAccentPink</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundPink</item>
+        <item name="colorPrimary">@color/colorPrimaryPink</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryPink</item>
+        <item name="appBackground">@color/colorBackgroundPink</item>
+        <item name="appTextColor">@color/colorTextPink</item>
+        <item name="appSubTextColor">@color/colorSubTextPink</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

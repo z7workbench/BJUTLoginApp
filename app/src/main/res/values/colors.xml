@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorSubText">#888888</color>
+    <color name="colorDefaultSubText">#888888</color>
 
     <color name="colorAccentPure">#FFCC00</color>
     <color name="colorAccentBackgroundPure">#8686FF</color>
@@ -14,12 +14,19 @@
     <color name="colorTextWhite">@android:color/black</color>
     <color name="colorBackgroundWhite">@color/colorPrimaryWhite</color>
 
-    <color name="colorAccentAmber">#BA68C8</color>
-    <color name="colorAccentBackgroundAmber">#00ACC1</color>
+    <color name="colorAccentAmber">#FB7299</color>
+    <color name="colorAccentBackgroundAmber">@android:color/white</color>
     <color name="colorPrimaryAmber">#FFD54F</color>
     <color name="colorTextAmber">@android:color/black</color>
     <color name="colorBackgroundAmber">#FFD54F</color>
     <color name="colorSubTextAmber">#555555</color>
+
+    <color name="colorAccentYun">#2196F3</color>
+    <color name="colorAccentBackgroundYun">@android:color/white</color>
+    <color name="colorPrimaryYun">#66ffa6</color>
+    <color name="colorTextYun">@android:color/black</color>
+    <color name="colorBackgroundYun">@color/colorPrimaryYun</color>
+    <color name="colorSubTextYun">#555555</color>
 
     <color name="colorAccentZGPurple">#FFCC00</color>
     <color name="colorAccentBackgroundZGPurple">@android:color/white</color>
@@ -29,24 +36,21 @@
     <color name="colorSubTextZGPurple">#DDDDDD</color>
 
     <color name="colorAccentTeal">#FFEB3B</color>
-    <color name="colorAccentBackgroundTeal">#1565C0</color>
+    <color name="colorAccentBackgroundTeal">#333333</color>
     <color name="colorPrimaryTeal">#008080</color>
     <color name="colorTextTeal">@android:color/white</color>
     <color name="colorBackgroundTeal">@color/colorPrimaryTeal</color>
     <color name="colorSubTextTeal">#DDDDDD</color>
 
-    <color name="colorPrimaryLight">#474797</color>
-    <color name="colorDisabled">@color/colorSubText</color>
-
-    <color name="colorPrimaryDev">#f57f17</color>
-    <color name="colorPrimaryDarkDev">#bc5100</color>
-
-    <color name="colorPrimaryStable">#7878FF</color>
-    <color name="colorPrimaryDarkStable">#5555FF</color>
+    <color name="colorAccentPink">#26C6DA</color>
+    <color name="colorAccentBackgroundPink">#333333</color>
+    <color name="colorPrimaryPink">#FB7299</color>
+    <color name="colorTextPink">@android:color/white</color>
+    <color name="colorBackgroundPink">@color/colorPrimaryPink</color>
+    <color name="colorSubTextPink">#DDDDDD</color>
 
     <color name="login_default">#7ab800</color>
     <color name="login_focused">#9bd823</color>
-    <color name="sync_default">#039be5</color>
     <color name="sync_focused">#63ccff</color>
     <color name="logout_default">#b71c1c</color>
     <color name="logout_focused">#f05545</color>

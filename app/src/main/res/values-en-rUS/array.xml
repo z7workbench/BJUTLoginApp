@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="pack">
-        <item>8 GB</item>
-        <item>25 GB</item>
-        <item>30 GB</item>
-    </string-array>
-
-    <string-array name="vc">
-        <item>Stable</item>
-        <item>Dev</item>
-    </string-array>
-
-    <string-array name="vc_entry">
-        <item>Stable</item>
-        <item>Dev</item>
-    </string-array>
-
     <string-array name="language">
         <item>Auto</item>
         <item>简体中文</item>
         <item>English (United States)</item>
-        <item>繁體中文（未完成）</item>
+        <item>繁體中文</item>
     </string-array>
 
     <string-array name="language_values">
@@ -34,15 +18,19 @@
         <item>ZeroGo Purple (Default Theme)</item>
         <item>White Light (Light Theme)</item>
         <item>Amber Light (Light Theme)</item>
+        <item>Yun Green Light (Light Theme)</item>
         <item>Pure Dark (Dark Theme)</item>
         <item>Teal Dark (Dark Theme)</item>
+        <item>Pink Dark (Dark Theme)</item>
     </string-array>
 
     <string-array name="theme_index">
         <item>ZGP</item>
         <item>WL</item>
         <item>AL</item>
+        <item>YUN</item>
         <item>PD</item>
         <item>TD</item>
+        <item>PNK</item>
     </string-array>
 </resources>

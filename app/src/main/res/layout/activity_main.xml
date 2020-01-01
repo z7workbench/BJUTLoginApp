@@ -277,7 +277,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/last"
             fancy:fb_defaultColor="@color/login_default"
-            fancy:fb_disabledColor="@color/colorDisabled"
+            fancy:fb_disabledColor="?attr/appSubTextColor"
             fancy:fb_focusColor="@color/login_focused"
             fancy:fb_radius="30dp"
             fancy:fb_textColor="#FFFFFF" />
@@ -296,8 +296,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/login"
             app:layout_constraintTop_toBottomOf="@+id/last"
-            fancy:fb_defaultColor="@color/sync_default"
-            fancy:fb_disabledColor="@color/colorDisabled"
+            fancy:fb_defaultColor="?attr/colorAccent"
+            fancy:fb_disabledColor="?attr/appSubTextColor"
             fancy:fb_focusColor="@color/sync_focused"
             fancy:fb_radius="30dp"
             fancy:fb_textColor="#FFFFFF" />
@@ -318,7 +318,7 @@
             app:layout_constraintStart_toEndOf="@+id/sync"
             app:layout_constraintTop_toBottomOf="@+id/last"
             fancy:fb_defaultColor="@color/logout_default"
-            fancy:fb_disabledColor="@color/colorDisabled"
+            fancy:fb_disabledColor="?attr/appSubTextColor"
             fancy:fb_focusColor="@color/logout_focused"
             fancy:fb_radius="30dp"
             fancy:fb_textColor="#FFFFFF" />

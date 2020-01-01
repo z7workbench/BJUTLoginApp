@@ -10,7 +10,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 5
-        versionName "5.0.0-rc3"
+        versionName "5.0.0"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,8 +63,6 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.3.1'
     testImplementation 'junit:junit:4.12'
 
-    implementation 'com.github.hotchemi:permissionsdispatcher:3.3.1'
-    kapt 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     implementation 'com.jrummyapps:colorpicker:2.1.7'
 
     // ViewModel and LiveData

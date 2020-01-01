@@ -27,6 +27,7 @@ object LocaleUtil {
             "Auto" -> Resources.getSystem().configuration.locales
             "zh_CN" -> LocaleList(Locale.SIMPLIFIED_CHINESE)
             "en_US" -> LocaleList(Locale.US)
+            "zh_TW" -> LocaleList(Locale.TRADITIONAL_CHINESE)
             else -> {
                 context.defaultSharedPreferences.edit().putString("language", "Auto").apply()
                 context.configuration.locales
