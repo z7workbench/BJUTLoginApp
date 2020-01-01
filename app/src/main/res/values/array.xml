@@ -29,4 +29,20 @@
         <item>en_US</item>
         <item>zh_TW</item>
     </string-array>
+
+    <string-array name="themes">
+        <item>ZeroGo Purple (Default Theme)</item>
+        <item>White Light (Light Theme)</item>
+        <item>Amber Light (Light Theme)</item>
+        <item>Pure Dark (Dark Theme)</item>
+        <item>Teal Dark (Dark Theme)</item>
+    </string-array>
+
+    <string-array name="theme_index">
+        <item>ZGP</item>
+        <item>WL</item>
+        <item>AL</item>
+        <item>PD</item>
+        <item>TD</item>
+    </string-array>
 </resources>

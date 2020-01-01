@@ -1,28 +1,22 @@
 package xin.z7workbench.bjutloginapp.ui
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.google.android.material.snackbar.Snackbar
 import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.BuildConfig
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityPrefsBinding
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
-import kotlin.system.exitProcess
 
 /**
  * Created by ZeroGo on 2017.2.22.
  */
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : LoginAppActivity() {
     lateinit var language: String
     lateinit var binding: ActivityPrefsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,37 +32,19 @@ class SettingsActivity : AppCompatActivity() {
                 .commit()
     }
 
-    override fun onBackPressed() {
-        val langString = app.prefs.getString("language", "Auto")
-        if ((language == langString) ||
-                (langString == "Auto" && Resources.getSystem().configuration.locales[0].language == language) ||
-                (language == "Auto" && Resources.getSystem().configuration.locales[0].language == langString))
-            super.onBackPressed()
-        else {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            android.os.Process.killProcess(android.os.Process.myPid())
-        }
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleUtil.wrap(newBase))
-    }
-
-    override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
-        super.applyOverrideConfiguration(baseContext.resources.configuration)
-    }
-
     class SettingsFragment : PreferenceFragmentCompat() {
-        lateinit var language: String
-        private val prefs by lazy { activity?.app?.prefs }
-        private val userDao by lazy { activity?.app?.appDatabase?.userDao() }
+        private val themeIndex by lazy { prefs.getString("theme_index", null) ?: "ZGP" }
+        private val language by lazy { prefs.getString("language", null) ?: "Auto" }
+        private val prefs by lazy { (activity as LoginAppActivity).app.prefs }
+        private val userDao by lazy { (activity as LoginAppActivity).app.appDatabase.userDao() }
         private val languagePreference by lazy { findPreference<ListPreference>("language") }
         private val versionPreference by lazy { findPreference<Preference>("version") }
         private val usersPreference by lazy { findPreference<Preference>("users") }
+        private val themesPreference by lazy { findPreference<ListPreference>("theme_index") }
+        private val themes by lazy { resources.getStringArray(R.array.themes) }
+        private val themeIndexes by lazy { resources.getStringArray(R.array.theme_index) }
         private val langEntities by lazy { resources.getStringArray(R.array.language) }
-        private val values by lazy { resources.getStringArray(R.array.language_values) }
+        private val langValues by lazy { resources.getStringArray(R.array.language_values) }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.prefs_settings, rootKey)
@@ -80,16 +56,17 @@ class SettingsActivity : AppCompatActivity() {
 
             versionPreference?.summary = resources.getString(R.string.settings_version_loading)
 
-            languagePreference?.summary = langEntities[values.indexOf(prefs?.getString("language", null)
-                    ?: values[0])]
-            language = prefs?.getString("language", null) ?: "Auto"
+            themesPreference?.summary = themes[themeIndexes.indexOf(themeIndex)]
+            themesPreference?.setOnPreferenceChangeListener { _, newValue ->
+                if (newValue == themeIndex) return@setOnPreferenceChangeListener false
+                restart()
+                true
+            }
 
-            languagePreference?.setOnPreferenceChangeListener { preference, newValue ->
-                if (language != newValue) {
-                    preference.summary = "*${langEntities[values.indexOf(newValue as String)]}"
-                    Snackbar.make((activity as SettingsActivity)
-                            .binding.prefsLayout, R.string.save_changes, 3000).show()
-                } else preference.summary = langEntities[values.indexOf(newValue as String)]
+            languagePreference?.summary = langEntities[langValues.indexOf(language)]
+            languagePreference?.setOnPreferenceChangeListener { _, newValue ->
+                if (newValue == language) return@setOnPreferenceChangeListener false
+                restart()
                 true
             }
 
@@ -132,8 +109,8 @@ class SettingsActivity : AppCompatActivity() {
                 true
             }
 
-            val currentId = prefs?.getInt("current_user", -1) ?: -1
-            val result = userDao?.find(currentId) ?: mutableListOf()
+            val currentId = prefs.getInt("current_user", -1)
+            val result = userDao.find(currentId)
             if (result.isEmpty()) {
                 usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
             } else {
@@ -143,13 +120,20 @@ class SettingsActivity : AppCompatActivity() {
 
         override fun onResume() {
             super.onResume()
-            val currentId = prefs?.getInt("current_user", -1) ?: -1
-            val result = userDao?.find(currentId) ?: mutableListOf()
+            val currentId = prefs.getInt("current_user", -1)
+            val result = userDao.find(currentId)
             if (result.isEmpty()) {
                 usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
             } else {
                 usersPreference?.summary = getString(R.string.settings_users_summary) + result.first().name
             }
+        }
+
+        private fun restart() {
+            val intent = Intent(activity as SettingsActivity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            (activity as SettingsActivity).startActivity<SettingsActivity>()
         }
     }
 }

@@ -66,4 +66,5 @@
     <string name="main_hint_hide">用户名现已隐藏</string>
     <string name="minutes">分钟</string>
     <string name="main_login_successful">登录成功！同步数据中&#8230;</string>
+    <string name="settings_theme_title">更换应用主题</string>
 </resources>

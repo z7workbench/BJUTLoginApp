@@ -3,12 +3,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" />
 
-    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar" >
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
         <item name="appSubTextColor">@color/colorSubText</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="appSubTextColor">@color/colorSubText</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
@@ -29,6 +29,36 @@
         <item name="colorPrimaryDark">@color/colorPrimaryWhite</item>
         <item name="appBackground">@color/colorBackgroundWhite</item>
         <item name="appTextColor">@color/colorTextWhite</item>
+    </style>
+
+    <style name="AppTheme.Light.Amber">
+        <item name="colorAccent">@color/colorAccentAmber</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundAmber</item>
+        <item name="colorPrimary">@color/colorPrimaryAmber</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryAmber</item>
+        <item name="appBackground">@color/colorBackgroundAmber</item>
+        <item name="appTextColor">@color/colorTextAmber</item>
+        <item name="appSubTextColor">@color/colorSubTextAmber</item>
+    </style>
+
+    <style name="AppTheme.Dark.ZeroGoPurple">
+        <item name="colorAccent">@color/colorAccentZGPurple</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundZGPurple</item>
+        <item name="colorPrimary">@color/colorPrimaryZGPurple</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryZGPurple</item>
+        <item name="appBackground">@color/colorBackgroundZGPurple</item>
+        <item name="appTextColor">@color/colorTextZGPurple</item>
+        <item name="appSubTextColor">@color/colorSubTextZGPurple</item>
+    </style>
+
+    <style name="AppTheme.Dark.Teal">
+        <item name="colorAccent">@color/colorAccentTeal</item>
+        <item name="appAccentBackground">@color/colorAccentBackgroundTeal</item>
+        <item name="colorPrimary">@color/colorPrimaryTeal</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryTeal</item>
+        <item name="appBackground">@color/colorBackgroundTeal</item>
+        <item name="appTextColor">@color/colorTextTeal</item>
+        <item name="appSubTextColor">@color/colorSubTextTeal</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

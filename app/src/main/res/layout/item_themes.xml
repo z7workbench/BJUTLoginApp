@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:background="?attr/colorPrimary"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/appBackground"
+    app:cardCornerRadius="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="center_vertical"
+        android:background="?attr/colorPrimary">
+
+        <CheckedTextView
+            android:id="@+id/theme_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="?android:attr/listChoiceIndicatorSingle"
+            android:drawableTint="?attr/colorAccent"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textColor="?attr/appTextColor"
+            android:textSize="@dimen/text_size_xl" />
+    </RelativeLayout>
+
+</LinearLayout>

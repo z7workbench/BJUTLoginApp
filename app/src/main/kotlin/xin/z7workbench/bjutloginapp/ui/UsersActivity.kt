@@ -1,11 +1,8 @@
 package xin.z7workbench.bjutloginapp.ui
 
-import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.SeekBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
@@ -17,14 +14,12 @@ import xin.z7workbench.bjutloginapp.databinding.ActivityUsersBinding
 import xin.z7workbench.bjutloginapp.databinding.DialogUserBinding
 import xin.z7workbench.bjutloginapp.databinding.ItemUsersBinding
 import xin.z7workbench.bjutloginapp.model.User
-import xin.z7workbench.bjutloginapp.util.LocaleUtil
-import xin.z7workbench.bjutloginapp.util.app
 
-class UsersActivity : AppCompatActivity() {
+class UsersActivity : LoginAppActivity() {
     private var currentId = 0
     val prefs by lazy { app.prefs }
     private val userDao by lazy { app.appDatabase.userDao() }
-    lateinit var binding: ActivityUsersBinding
+    private lateinit var binding: ActivityUsersBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +77,7 @@ class UsersActivity : AppCompatActivity() {
         }
         dialogBinding.textPack.text = """$currentPackage GB"""
 
-        dialogBinding.seekPack.setOnSeekBarChangeListener (object : SeekBar.OnSeekBarChangeListener {
+        dialogBinding.seekPack.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 dialogBinding.textPack.text = """${dialogBinding.seekPack.progress} GB"""
                 currentPackage = dialogBinding.seekPack.progress
@@ -110,14 +105,6 @@ class UsersActivity : AppCompatActivity() {
             }
             negativeButton(R.string.cancel) {}
         }.show()
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleUtil.wrap(newBase))
-    }
-
-    override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
-        super.applyOverrideConfiguration(baseContext.resources.configuration)
     }
 
     inner class UsersAdapter(var users: MutableList<User> = mutableListOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {

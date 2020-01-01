@@ -34,7 +34,6 @@ object LocaleUtil {
         }
         if (isAutoLanguageChanged(context) ||
                 ((type != "Auto") && config.locales[0].language != type)) {
-            config.setLocale(locales[0])
             config.setLocales(locales)
             config.setLayoutDirection(locales[0])
         }

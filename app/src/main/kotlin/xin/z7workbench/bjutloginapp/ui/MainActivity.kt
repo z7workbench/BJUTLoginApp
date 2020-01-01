@@ -2,13 +2,12 @@ package xin.z7workbench.bjutloginapp.ui
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.content.res.Configuration
+import android.graphics.PorterDuff
 import android.net.TrafficStats
 import android.os.Bundle
 import android.os.Handler
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -25,7 +24,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : LoginAppActivity() {
     val tag = "MainActivity"
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val handler = Handler()
@@ -245,7 +244,8 @@ class MainActivity : AppCompatActivity() {
                 editor.apply()
             }
             Snackbar.make(binding.constraint, getString(R.string.main_hint_hide), Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.undo){
+                    .setBackgroundTintMode(PorterDuff.Mode.ADD)
+                    .setAction(R.string.undo) {
                         hideOrNot(true)
                     }.show()
 
@@ -258,7 +258,8 @@ class MainActivity : AppCompatActivity() {
                 editor.apply()
             }
             Snackbar.make(binding.constraint, getString(R.string.main_hint_reveal), Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.undo){
+                    .setBackgroundTintMode(PorterDuff.Mode.ADD)
+                    .setAction(R.string.undo) {
                         hideOrNot(true)
                     }.show()
         }
@@ -383,13 +384,5 @@ class MainActivity : AppCompatActivity() {
         })
 
         Log.d("$tag e", emsg)
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleUtil.wrap(newBase))
-    }
-
-    override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
-        super.applyOverrideConfiguration(baseContext.resources.configuration)
     }
 }

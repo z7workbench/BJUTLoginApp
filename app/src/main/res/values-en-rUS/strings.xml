@@ -38,7 +38,7 @@
     <string name="settings_category_language">Language</string>
     <string name="settings_category_user">User Settings</string>
     <string name="settings_default_vc">Stable</string>
-    <string name="settings_language_title">Change language</string>
+    <string name="settings_language_title">Change Language</string>
     <string name="settings_language_summary">Select your language here</string>
     <string name="settings_pack">Package</string>
     <string name="settings_pack_summary">Select package here</string>
@@ -55,6 +55,7 @@
     <string name="settings_web_on">Wireless Gateway (WLGN)</string>
     <string name="settings_web_off">Wired Gateway (LGN)</string>
     <string name="settings_web_title">Website</string>
+    <string name="settings_theme_title">Change Theme</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_syncing">Syncing</string>

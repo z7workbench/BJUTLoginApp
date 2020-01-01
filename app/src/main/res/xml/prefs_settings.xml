@@ -14,6 +14,14 @@
             android:summaryOff="@string/settings_web_off"
             android:summaryOn="@string/settings_web_on"
             android:title="@string/settings_web_title" />
+
+        <ListPreference
+            android:key="theme_index"
+            android:layout="@layout/layout_prefs"
+            android:summary="@string/settings_users_summary"
+            android:title="@string/settings_theme_title"
+            android:entries="@array/themes"
+            android:entryValues="@array/theme_index" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_language">
 

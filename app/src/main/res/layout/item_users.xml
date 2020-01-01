@@ -9,13 +9,14 @@
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:padding="8dp"
-    app:cardBackgroundColor="?attr/colorPrimaryDark"
+    app:cardBackgroundColor="?attr/appBackground"
     app:cardCornerRadius="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:gravity="center_vertical"
         android:background="?attr/colorPrimary">
 
         <CheckedTextView
@@ -23,16 +24,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_toStartOf="@+id/buttons"
             android:drawablePadding="20dp"
             android:drawableStart="?android:attr/listChoiceIndicatorSingle"
             android:drawableTint="?attr/colorAccent"
             android:textColor="?attr/appTextColor"
             android:gravity="center_vertical"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_size_xl" />
 
         <LinearLayout
             android:id="@id/buttons"

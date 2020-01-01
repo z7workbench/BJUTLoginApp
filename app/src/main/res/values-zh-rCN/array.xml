@@ -29,4 +29,20 @@
         <item>en_US</item>
         <item>zh_TW</item>
     </string-array>
+
+    <string-array name="themes">
+        <item>ZeroGo紫（默认主题）</item>
+        <item>纯白（亮色主题）</item>
+        <item>琥珀金（亮色主题）</item>
+        <item>极致黑（暗色主题）</item>
+        <item>蓝绿（暗色主题）</item>
+    </string-array>
+
+    <string-array name="theme_index">
+        <item>ZGP</item>
+        <item>WL</item>
+        <item>AL</item>
+        <item>PD</item>
+        <item>TD</item>
+    </string-array>
 </resources>

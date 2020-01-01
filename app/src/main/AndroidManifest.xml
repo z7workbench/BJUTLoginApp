@@ -2,47 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xin.z7workbench.bjutloginapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="cyanogenmod.permission.PUBLISH_CUSTOM_TILE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".LoginApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_login_stable"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_login_stable"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/AppTheme.Light.White">
-        <activity
-            android:name=".ui.MainActivity"
-            android:label=" " />
+        android:theme="@style/AppTheme.Dark.ZeroGoPurple">
+        <activity android:name=".ui.MainActivity" />
         <activity
             android:name=".ui.SettingsActivity"
-            android:label="@string/action_settings">
-
-            <intent-filter>
-                <action android:name="xin.z7workbench.bjutloginapp.SETTINGS_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="forceTouch"
-                android:value="force" />
-        </activity>
-
-        <activity-alias
-            android:name=".ui.SettingsActivityAlias"
-            android:targetActivity=".ui.SettingsActivity">
-            <intent-filter>
-                <action android:name="xin.z7workbench.bjutloginapp.SETTINGS_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="forceTouch"
-                android:value="force" />
-        </activity-alias>
+            android:label="@string/action_settings" />
 
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
@@ -57,22 +34,8 @@
 
         <activity
             android:name=".ui.UsersActivity"
-            android:label="@string/action_users">
-            <intent-filter>
-                <action android:name="xin.z7workbench.bjutloginapp.USERS_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/action_users" />
 
-        <activity-alias
-            android:name=".ui.UsersActivity"
-            android:targetActivity=".ui.UsersActivity">
-            <intent-filter>
-                <action android:name="xin.z7workbench.bjutloginapp.USERS_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity-alias>
-
+        <activity android:name=".ui.LoginAppActivity" />
     </application>
-
 </manifest>
