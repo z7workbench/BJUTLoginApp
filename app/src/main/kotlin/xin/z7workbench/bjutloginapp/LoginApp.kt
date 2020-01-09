@@ -2,12 +2,10 @@ package xin.z7workbench.bjutloginapp
 
 import android.app.Application
 import android.content.*
-import android.content.res.Configuration
 import android.content.res.Resources
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.room.Room
-import org.jetbrains.anko.defaultSharedPreferences
-import org.jetbrains.anko.intentFor
 import xin.z7workbench.bjutloginapp.database.AppDatabase
 import xin.z7workbench.bjutloginapp.util.LocaleUtil
 
@@ -25,7 +23,7 @@ class LoginApp : Application() {
         res = resources
         appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "login.db").allowMainThreadQueries().build()
         if (prefs.getString("theme_index", null).isNullOrEmpty()) {
-            prefs.edit().putString("theme_index", "ZGP").apply()
+            prefs.edit { putString("theme_index", "ZGP") }
         }
     }
 

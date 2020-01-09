@@ -15,13 +15,13 @@
     </string-array>
 
     <string-array name="themes">
-        <item>ZeroGo紫（默认主题）</item>
-        <item>纯白（亮色主题）</item>
-        <item>琥珀金（亮色主题）</item>
-        <item>Yun亮绿（亮色主题）</item>
-        <item>极致黑（暗色主题）</item>
-        <item>蓝绿（暗色主题）</item>
-        <item>少女粉（暗色主题）</item>
+        <item>ZeroGo紫（默认）</item>
+        <item>皎月白（亮色）</item>
+        <item>琥珀金（亮色）</item>
+        <item>Yun亮绿（亮色）</item>
+        <item>极致黑（暗色）</item>
+        <item>水鸭青（暗色）</item>
+        <item>少女粉（暗色）</item>
     </string-array>
 
     <string-array name="theme_index">

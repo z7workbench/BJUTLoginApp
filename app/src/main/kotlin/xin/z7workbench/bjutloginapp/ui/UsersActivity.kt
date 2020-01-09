@@ -3,12 +3,13 @@ package xin.z7workbench.bjutloginapp.ui
 import android.os.Bundle
 import android.view.*
 import android.widget.SeekBar
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.jetbrains.anko.alert
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityUsersBinding
 import xin.z7workbench.bjutloginapp.databinding.DialogUserBinding
@@ -34,17 +35,15 @@ class UsersActivity : LoginAppActivity() {
 
         val users = userDao.all()
         users.observe(this, Observer {
-            it?.apply {
-                val diffUtil = DiffUtil.calculateDiff(UserDiffCallback(usersAdapter.users, it))
-                usersAdapter.users = it
-                diffUtil.dispatchUpdatesTo(usersAdapter)
-                if (it.isEmpty()) {
-                    binding.placeholder1.visibility = View.VISIBLE
-                    binding.placeholder2.visibility = View.VISIBLE
-                } else {
-                    binding.placeholder1.visibility = View.GONE
-                    binding.placeholder2.visibility = View.GONE
-                }
+            val diffUtil = DiffUtil.calculateDiff(UserDiffCallback(usersAdapter.users, it))
+            usersAdapter.users = it
+            diffUtil.dispatchUpdatesTo(usersAdapter)
+            if (it.isEmpty()) {
+                binding.placeholder1.visibility = View.VISIBLE
+                binding.placeholder2.visibility = View.VISIBLE
+            } else {
+                binding.placeholder1.visibility = View.GONE
+                binding.placeholder2.visibility = View.GONE
             }
         })
 
@@ -67,7 +66,6 @@ class UsersActivity : LoginAppActivity() {
     fun openUserDialog(newUser: Boolean, user: User) {
         var currentPackage = 8
         val dialogBinding = DialogUserBinding.inflate(layoutInflater)
-//        val view: View = layoutInflater.inflate(R.layout.dialog_user, null, false)
         dialogBinding.name.setText(user.name)
         dialogBinding.name.setSelection(user.name.length)
         dialogBinding.password.setText(user.password)
@@ -91,20 +89,20 @@ class UsersActivity : LoginAppActivity() {
 
         })
 
-        alert {
-            customView = dialogBinding.root
-            positiveButton(R.string.OK) { _ ->
-                user.name = dialogBinding.name.text.toString()
-                user.password = dialogBinding.password.text.toString()
-                user.pack = currentPackage
-                if (!newUser) {
-                    userDao.update(user)
-                } else {
-                    userDao.insert(user)
+        AlertDialog.Builder(this)
+                .setView(dialogBinding.root)
+                .setPositiveButton(R.string.OK) { _, _ ->
+                    user.name = dialogBinding.name.text.toString()
+                    user.password = dialogBinding.password.text.toString()
+                    user.pack = currentPackage
+                    if (!newUser) {
+                        userDao.update(user)
+                    } else {
+                        userDao.insert(user)
+                    }
                 }
-            }
-            negativeButton(R.string.cancel) {}
-        }.show()
+                .setNegativeButton(R.string.cancel) { _, _ -> }
+                .show()
     }
 
     inner class UsersAdapter(var users: MutableList<User> = mutableListOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
@@ -117,7 +115,7 @@ class UsersActivity : LoginAppActivity() {
             val user = users[holder.adapterPosition]
 
             holder.itemView.setOnClickListener {
-                prefs.edit().putInt("current_user", user.id).apply()
+                prefs.edit { putInt("current_user", user.id) }
                 this@UsersActivity.finish()
             }
             holder.binding.user.text = user.name

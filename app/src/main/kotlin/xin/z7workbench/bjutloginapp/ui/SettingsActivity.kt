@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import org.jetbrains.anko.startActivity
 import xin.z7workbench.bjutloginapp.BuildConfig
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityPrefsBinding
@@ -50,7 +49,8 @@ class SettingsActivity : LoginAppActivity() {
             setPreferencesFromResource(R.xml.prefs_settings, rootKey)
 
             usersPreference?.setOnPreferenceClickListener {
-                activity?.startActivity<UsersActivity>()
+                val intent = Intent(activity as SettingsActivity, UsersActivity::class.java)
+                activity?.startActivity(intent)
                 true
             }
 
@@ -105,7 +105,8 @@ class SettingsActivity : LoginAppActivity() {
             })
 
             versionPreference?.setOnPreferenceClickListener {
-                activity?.startActivity<VersionActivity>()
+                val intent = Intent(activity as SettingsActivity, VersionActivity::class.java)
+                activity?.startActivity(intent)
                 true
             }
 
@@ -131,9 +132,10 @@ class SettingsActivity : LoginAppActivity() {
 
         private fun restart() {
             val intent = Intent(activity as SettingsActivity, MainActivity::class.java)
+            val intent2 = Intent(activity as SettingsActivity, SettingsActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
-            (activity as SettingsActivity).startActivity<SettingsActivity>()
+            startActivity(intent2)
         }
     }
 }
