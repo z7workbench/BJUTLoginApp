@@ -85,7 +85,7 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
-                var string = p1.body()?.string()
+                var string = p1.body?.string()
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
@@ -118,7 +118,7 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
-                var string = p1.body()?.string()
+                var string = p1.body?.string()
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
@@ -151,7 +151,7 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
-                var string = p1.body()?.string()
+                var string = p1.body?.string()
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
@@ -177,7 +177,7 @@ object NetworkUtils {
             }
 
             override fun onResponse(p0: Call, p1: Response) {
-                val string = p1.body()?.string()
+                val string = p1.body?.string()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
                     uiBlock.onFinished()
