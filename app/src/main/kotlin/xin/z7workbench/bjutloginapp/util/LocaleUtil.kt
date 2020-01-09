@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
 import android.os.LocaleList
-import org.jetbrains.anko.configuration
-import org.jetbrains.anko.defaultSharedPreferences
+import androidx.core.content.edit
 import java.util.*
 
 object LocaleUtil {
@@ -21,7 +20,7 @@ object LocaleUtil {
         val config = context.resources.configuration
         val type = context.defaultSharedPreferences.getString("language", null)
         if (type == null) {
-            context.defaultSharedPreferences.edit().putString("language", "0").apply()
+            context.defaultSharedPreferences.edit { putString("language", "Auto").apply() }
         }
         val locales = when (type) {
             "Auto" -> Resources.getSystem().configuration.locales
@@ -29,8 +28,8 @@ object LocaleUtil {
             "en_US" -> LocaleList(Locale.US)
             "zh_TW" -> LocaleList(Locale.TRADITIONAL_CHINESE)
             else -> {
-                context.defaultSharedPreferences.edit().putString("language", "Auto").apply()
-                context.configuration.locales
+                context.defaultSharedPreferences.edit { putString("language", "Auto").apply() }
+                context.resources.configuration.locales
             }
         }
         if (isAutoLanguageChanged(context) ||

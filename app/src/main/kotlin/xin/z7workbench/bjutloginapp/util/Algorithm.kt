@@ -1,7 +1,7 @@
 package xin.z7workbench.bjutloginapp.util
 
 import android.os.Bundle
-import org.jetbrains.anko.bundleOf
+import androidx.core.os.bundleOf
 import kotlin.math.absoluteValue
 import kotlin.math.round
 

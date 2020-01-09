@@ -2,6 +2,7 @@ package xin.z7workbench.bjutloginapp.ui
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.net.TrafficStats
 import android.os.Bundle
@@ -15,7 +16,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.TextView
-import org.jetbrains.anko.startActivity
+import androidx.core.content.edit
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityMainBinding
 import xin.z7workbench.bjutloginapp.model.User
@@ -76,7 +77,7 @@ class MainActivity : LoginAppActivity() {
             if (currentUser.isEmpty()) {
                 Snackbar.make(binding.mainLayout, R.string.user_password_not_set, 3000)
                         .setAction(resources.getString(R.string.goto_settings)) {
-                            startActivity<UsersActivity>()
+                            startActivity(Intent(this, UsersActivity::class.java))
                         }
                         .show()
                 return@setOnClickListener
@@ -196,7 +197,7 @@ class MainActivity : LoginAppActivity() {
 
         when (id) {
             R.id.action_settings -> {
-                startActivity<SettingsActivity>()
+                startActivity(Intent(this, SettingsActivity::class.java))
             }
 //            TODO design action help
 //            R.id.action_help -> {
@@ -239,9 +240,7 @@ class MainActivity : LoginAppActivity() {
             binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_show)
             binding.toolbar.title = "${getString(R.string.main_user)}${getString(R.string.main_hide)}"
             if (edit) {
-                val editor = app.prefs.edit()
-                editor.putBoolean("hide", true)
-                editor.apply()
+                app.prefs.edit { putBoolean("hide", true) }
             }
             Snackbar.make(binding.constraint, getString(R.string.main_hint_hide), Snackbar.LENGTH_SHORT)
                     .setBackgroundTintMode(PorterDuff.Mode.ADD)
@@ -253,9 +252,7 @@ class MainActivity : LoginAppActivity() {
             binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_hide)
             binding.toolbar.title = "${getString(R.string.main_user)}${currentName}"
             if (edit) {
-                val editor = app.prefs.edit()
-                editor.putBoolean("hide", false)
-                editor.apply()
+                app.prefs.edit { putBoolean("hide", false) }
             }
             Snackbar.make(binding.constraint, getString(R.string.main_hint_reveal), Snackbar.LENGTH_SHORT)
                     .setBackgroundTintMode(PorterDuff.Mode.ADD)

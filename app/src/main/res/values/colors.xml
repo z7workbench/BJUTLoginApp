@@ -35,7 +35,7 @@
     <color name="colorBackgroundZGPurple">@color/colorPrimaryZGPurple</color>
     <color name="colorSubTextZGPurple">#DDDDDD</color>
 
-    <color name="colorAccentTeal">#FFEB3B</color>
+    <color name="colorAccentTeal">#FFCC00</color>
     <color name="colorAccentBackgroundTeal">#333333</color>
     <color name="colorPrimaryTeal">#008080</color>
     <color name="colorTextTeal">@android:color/white</color>

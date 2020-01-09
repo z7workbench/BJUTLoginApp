@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import okhttp3.*
-import org.jetbrains.anko.runOnUiThread
 import xin.z7workbench.bjutloginapp.Constants
 import xin.z7workbench.bjutloginapp.model.User
 import java.io.IOException
@@ -75,17 +74,17 @@ object NetworkUtils {
                     .build()
         }
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(p0: Call, p1: IOException) {
+            override fun onFailure(call: Call, e: IOException) {
                 println("Failure")
-                p1.printStackTrace()
+                e.printStackTrace()
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onFailure(p1)
+                    uiBlock.onFailure(e)
                     uiBlock.onFinished()
                 }
             }
 
-            override fun onResponse(p0: Call, p1: Response) {
-                var string = p1.body?.string()
+            override fun onResponse(call: Call, response: Response) {
+                var string = response.body?.string()
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
@@ -108,17 +107,17 @@ object NetworkUtils {
                     .build()
         }
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(p0: Call, p1: IOException) {
+            override fun onFailure(call: Call, e: IOException) {
                 println("Failure")
-                p1.printStackTrace()
+                e.printStackTrace()
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onFailure(p1)
+                    uiBlock.onFailure(e)
                     uiBlock.onFinished()
                 }
             }
 
-            override fun onResponse(p0: Call, p1: Response) {
-                var string = p1.body?.string()
+            override fun onResponse(call: Call, response: Response) {
+                var string = response.body?.string()
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
@@ -142,16 +141,16 @@ object NetworkUtils {
         }
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(p0: Call, p1: IOException) {
-                p1.printStackTrace()
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onFailure(p1)
+                    uiBlock.onFailure(e)
                     uiBlock.onFinished()
                 }
             }
 
-            override fun onResponse(p0: Call, p1: Response) {
-                var string = p1.body?.string()
+            override fun onResponse(call: Call, response: Response) {
+                var string = response.body?.string()
                 string = string?.replace(" ", "")
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
@@ -168,16 +167,16 @@ object NetworkUtils {
                 .url(Constants.CHECK_URL)
                 .build()
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(p0: Call, p1: IOException) {
-                p1.printStackTrace()
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
                 uiBlock.context.runOnUiThread {
-                    uiBlock.onFailure(p1)
+                    uiBlock.onFailure(e)
                     uiBlock.onFinished()
                 }
             }
 
-            override fun onResponse(p0: Call, p1: Response) {
-                val string = p1.body?.string()
+            override fun onResponse(call: Call, response: Response) {
+                val string = response.body?.string()
                 uiBlock.context.runOnUiThread {
                     uiBlock.onResponse(string)
                     uiBlock.onFinished()

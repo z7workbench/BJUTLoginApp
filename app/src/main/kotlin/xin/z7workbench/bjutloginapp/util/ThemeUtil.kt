@@ -1,7 +1,7 @@
 package xin.z7workbench.bjutloginapp.util
 
 import android.content.Context
-import org.jetbrains.anko.defaultSharedPreferences
+import androidx.core.content.edit
 import xin.z7workbench.bjutloginapp.R
 
 object ThemeUtil {
@@ -16,7 +16,7 @@ object ThemeUtil {
             themeIndexes[5] -> context.setTheme(R.style.AppTheme_Dark_Teal)
             themeIndexes[6] -> context.setTheme(R.style.AppTheme_Dark_Pink)
             else -> {
-                context.defaultSharedPreferences.edit().putString("theme_index", "ZGP").apply()
+                context.defaultSharedPreferences.edit { putString("theme_index", "ZGP").apply() }
                 context.setTheme(R.style.AppTheme_Dark_ZeroGoPurple)
             }
         }
