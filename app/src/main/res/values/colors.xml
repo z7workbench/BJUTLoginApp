@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorDefaultSubText">#888888</color>
+    <color name="colorDefaultTextDark">@android:color/white</color>
+    <color name="colorDefaultTextLight">@android:color/black</color>
 
     <color name="colorAccentPure">#FFCC00</color>
     <color name="colorAccentBackgroundPure">#8686FF</color>
     <color name="colorPrimaryPure">@android:color/black</color>
-    <color name="colorTextPure">@android:color/white</color>
     <color name="colorBackgroundPure">@color/colorPrimaryPure</color>
 
     <color name="colorAccentWhite">#FF4081</color>
     <color name="colorAccentBackgroundWhite">#8686FF</color>
     <color name="colorPrimaryWhite">@android:color/white</color>
-    <color name="colorTextWhite">@android:color/black</color>
     <color name="colorBackgroundWhite">@color/colorPrimaryWhite</color>
 
     <color name="colorAccentAmber">#FB7299</color>
     <color name="colorAccentBackgroundAmber">@android:color/white</color>
     <color name="colorPrimaryAmber">#FFD54F</color>
-    <color name="colorTextAmber">@android:color/black</color>
     <color name="colorBackgroundAmber">#FFD54F</color>
     <color name="colorSubTextAmber">#555555</color>
 
     <color name="colorAccentYun">#2196F3</color>
     <color name="colorAccentBackgroundYun">@android:color/white</color>
     <color name="colorPrimaryYun">#66ffa6</color>
-    <color name="colorTextYun">@android:color/black</color>
     <color name="colorBackgroundYun">@color/colorPrimaryYun</color>
     <color name="colorSubTextYun">#555555</color>
 
     <color name="colorAccentZGPurple">#FFCC00</color>
     <color name="colorAccentBackgroundZGPurple">@android:color/white</color>
     <color name="colorPrimaryZGPurple">#8686FF</color>
-    <color name="colorTextZGPurple">@android:color/white</color>
     <color name="colorBackgroundZGPurple">@color/colorPrimaryZGPurple</color>
     <color name="colorSubTextZGPurple">#DDDDDD</color>
 
     <color name="colorAccentTeal">#FFCC00</color>
     <color name="colorAccentBackgroundTeal">#333333</color>
     <color name="colorPrimaryTeal">#008080</color>
-    <color name="colorTextTeal">@android:color/white</color>
     <color name="colorBackgroundTeal">@color/colorPrimaryTeal</color>
     <color name="colorSubTextTeal">#DDDDDD</color>
 
     <color name="colorAccentPink">#26C6DA</color>
     <color name="colorAccentBackgroundPink">#333333</color>
     <color name="colorPrimaryPink">#FB7299</color>
-    <color name="colorTextPink">@android:color/white</color>
     <color name="colorBackgroundPink">@color/colorPrimaryPink</color>
     <color name="colorSubTextPink">#DDDDDD</color>
 

@@ -6,11 +6,13 @@
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="appTextColor">@color/colorDefaultTextDark</item>
     </style>
 
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="appTextColor">@color/colorDefaultTextLight</item>
     </style>
 
     <style name="AppTheme.Dark.Pure">
@@ -19,7 +21,6 @@
         <item name="colorPrimary">@color/colorPrimaryPure</item>
         <item name="colorPrimaryDark">@color/colorPrimaryPure</item>
         <item name="appBackground">@color/colorBackgroundPure</item>
-        <item name="appTextColor">@color/colorTextPure</item>
     </style>
 
     <style name="AppTheme.Light.White">
@@ -28,7 +29,6 @@
         <item name="colorPrimary">@color/colorPrimaryWhite</item>
         <item name="colorPrimaryDark">@color/colorPrimaryWhite</item>
         <item name="appBackground">@color/colorBackgroundWhite</item>
-        <item name="appTextColor">@color/colorTextWhite</item>
     </style>
 
     <style name="AppTheme.Light.Amber">
@@ -37,7 +37,6 @@
         <item name="colorPrimary">@color/colorPrimaryAmber</item>
         <item name="colorPrimaryDark">@color/colorPrimaryAmber</item>
         <item name="appBackground">@color/colorBackgroundAmber</item>
-        <item name="appTextColor">@color/colorTextAmber</item>
         <item name="appSubTextColor">@color/colorSubTextAmber</item>
     </style>
 
@@ -47,7 +46,6 @@
         <item name="colorPrimary">@color/colorPrimaryYun</item>
         <item name="colorPrimaryDark">@color/colorPrimaryYun</item>
         <item name="appBackground">@color/colorBackgroundYun</item>
-        <item name="appTextColor">@color/colorTextYun</item>
         <item name="appSubTextColor">@color/colorSubTextYun</item>
     </style>
 
@@ -57,7 +55,6 @@
         <item name="colorPrimary">@color/colorPrimaryZGPurple</item>
         <item name="colorPrimaryDark">@color/colorPrimaryZGPurple</item>
         <item name="appBackground">@color/colorBackgroundZGPurple</item>
-        <item name="appTextColor">@color/colorTextZGPurple</item>
         <item name="appSubTextColor">@color/colorSubTextZGPurple</item>
     </style>
 
@@ -67,7 +64,6 @@
         <item name="colorPrimary">@color/colorPrimaryTeal</item>
         <item name="colorPrimaryDark">@color/colorPrimaryTeal</item>
         <item name="appBackground">@color/colorBackgroundTeal</item>
-        <item name="appTextColor">@color/colorTextTeal</item>
         <item name="appSubTextColor">@color/colorSubTextTeal</item>
     </style>
 
@@ -77,7 +73,6 @@
         <item name="colorPrimary">@color/colorPrimaryPink</item>
         <item name="colorPrimaryDark">@color/colorPrimaryPink</item>
         <item name="appBackground">@color/colorBackgroundPink</item>
-        <item name="appTextColor">@color/colorTextPink</item>
         <item name="appSubTextColor">@color/colorSubTextPink</item>
     </style>
 
