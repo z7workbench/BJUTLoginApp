@@ -2,7 +2,7 @@
 # By default, the flags in this file are appended to flags specified
 # in F:\Softwares\Android\android-sdk/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
+# directive in build.gradle.kts.
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
@@ -23,7 +23,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
 
 -keep class butterknife.*
 -keepclasseswithmembernames class * { @butterknife.* <methods>; }
