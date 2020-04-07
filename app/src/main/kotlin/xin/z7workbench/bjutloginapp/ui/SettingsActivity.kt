@@ -131,11 +131,9 @@ class SettingsActivity : LoginAppActivity() {
         }
 
         private fun restart() {
-            val intent = Intent(activity as SettingsActivity, MainActivity::class.java)
-            val intent2 = Intent(activity as SettingsActivity, SettingsActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            startActivity(intent2)
+            val intents = arrayOf(Intent(activity as SettingsActivity, MainActivity::class.java), Intent(activity as SettingsActivity, SettingsActivity::class.java))
+            intents[0].flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            activity?.startActivities(intents)
         }
     }
 }
