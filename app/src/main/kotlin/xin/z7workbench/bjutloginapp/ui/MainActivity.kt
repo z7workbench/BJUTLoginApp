@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityMainBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
@@ -71,6 +72,9 @@ class MainActivity : LoginAppActivity() {
         viewModel.currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         viewModel.currentPack = currentUser.firstOrNull()?.pack ?: -1
         binding.pack.text = "${viewModel.currentPack} GB"
+        viewModel.status.observe(this, Observer {
+            binding.statusView.text = resources.getString(it.description)
+        })
 
         binding.login.setOnClickListener {
             if (currentUser.isEmpty()) {
@@ -88,7 +92,7 @@ class MainActivity : LoginAppActivity() {
 
                 override fun onFailure(exception: IOException) {
                     viewModel.emsg = exception.message ?: ""
-                    viewModel.status = LogStatus.ERROR
+                    viewModel.error()
                     binding.apply {
                         errMsg.visibility = View.VISIBLE
                         nowFlux.text = resources.getString(R.string.unknown)
@@ -96,7 +100,6 @@ class MainActivity : LoginAppActivity() {
                         feeView.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
                         numberBar.progress = 0
-                        statusView.text = resources.getString(viewModel.status.description)
                         lastView.text
                         login.isEnabled = true
                         sync.isEnabled = true
@@ -134,9 +137,8 @@ class MainActivity : LoginAppActivity() {
                 }
 
                 override fun onResponse(bodyString: String?) {
-                    viewModel.status = LogStatus.OFFLINE
+                    viewModel.offline()
                     binding.apply {
-                        statusView.text = resources.getString(viewModel.status.description)
                         progress.percent = 0F
                         numberBar.progress = 0
                         login.isEnabled = true
@@ -216,7 +218,7 @@ class MainActivity : LoginAppActivity() {
 
     private fun onPrepared() {
         viewModel.emsg = ""
-        viewModel.status = LogStatus.SYNCING
+        viewModel.syncing()
         binding.apply {
             errMsg.visibility = View.GONE
             nowFlux.text = resources.getString(R.string.unknown)
@@ -224,7 +226,6 @@ class MainActivity : LoginAppActivity() {
             feeView.text = resources.getString(R.string.unknown)
             progress.percent = 0F
             numberBar.progress = 0
-            statusView.text = resources.getString(viewModel.status.description)
             login.isEnabled = false
             logout.isEnabled = false
             sync.isEnabled = false
@@ -269,7 +270,7 @@ class MainActivity : LoginAppActivity() {
 
             override fun onFailure(exception: IOException) {
                 viewModel.emsg = exception.message ?: ""
-                viewModel.status = LogStatus.ERROR
+                viewModel.error()
                 binding.apply {
                     errMsg.visibility = View.VISIBLE
                     nowFlux.text = resources.getString(R.string.unknown)
@@ -277,7 +278,6 @@ class MainActivity : LoginAppActivity() {
                     feeView.text = resources.getString(R.string.unknown)
                     progress.percent = 0F
                     numberBar.progress = 0
-                    statusView.text = resources.getString(viewModel.status.description)
                     lastView.text
                     login.isEnabled = true
                     sync.isEnabled = true
@@ -289,20 +289,18 @@ class MainActivity : LoginAppActivity() {
             override fun onResponse(bodyString: String?) {
                 val regex = """time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'""".toRegex()
                 if (bodyString == null) {
+                    viewModel.error()
                     binding.apply {
                         nowFlux.text = resources.getString(R.string.unknown)
                         timeView.text = resources.getString(R.string.unknown)
                         feeView.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
                         numberBar.progress = 0
-                        statusView.text = resources.getString(viewModel.status.description)
                         login.isEnabled = true
                         sync.isEnabled = true
                         exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
                         remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
                     }
-
-                    viewModel.status = LogStatus.ERROR
                 } else {
                     val result = regex.find(bodyString)
                     if (result == null || result.groups.isEmpty()) {
@@ -317,11 +315,9 @@ class MainActivity : LoginAppActivity() {
                         }
 
                         if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm""")) {
-                            viewModel.status = LogStatus.ERROR
-                            binding.statusView.text = resources.getString(viewModel.status.description)
+                            viewModel.error()
                         } else {
-                            viewModel.status = LogStatus.OFFLINE
-                            binding.statusView.text = resources.getString(viewModel.status.description)
+                            viewModel.offline()
                         }
                         binding.login.isEnabled = true
                         binding.sync.isEnabled = true
@@ -329,7 +325,7 @@ class MainActivity : LoginAppActivity() {
                         val time = result.groups[1]?.value?.toInt() ?: -1
                         val flow = result.groups[2]?.value?.toLong() ?: -1L
                         val fee = result.groups[3]?.value?.toFloat() ?: -1F
-                        viewModel.status = LogStatus.ONLINE
+                        viewModel.online()
                         val bundle = exceededByteSizeBundle(flow, viewModel.currentPack, fee)
                         val numberBarProgress = bundle["percent"] as Int
                         val exceededFlow = bundle["exceeded"] as String
@@ -339,7 +335,6 @@ class MainActivity : LoginAppActivity() {
                             nowFlux.text = formatByteSize(flow * 1024)
                             timeView.text = "$time ${getString(R.string.minutes)}"
                             feeView.text = """￥${fee / 10000}"""
-                            statusView.text = resources.getString(viewModel.status.description)
                             exceeded.text = "${getString(R.string.exceeded)}$exceededFlow"
                             remained.text = "${getString(R.string.remaining)}$remainedFlow"
                             logout.isEnabled = true

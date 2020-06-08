@@ -5,7 +5,7 @@ plugins {
     kotlin("kapt")
     kotlin("plugin.serialization") version "1.3.72"
 }
-
+val lifecycleVersion = "2.2.0"
 val gitCommitCount= ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
 android {
     compileSdkVersion(29)
@@ -71,9 +71,16 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
-    // ViewModel and LiveData
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    kapt("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    // Saved state module for ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
+    // Annotation processor
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
     // Room
     implementation("androidx.room:room-runtime:2.2.5")
     kapt("androidx.room:room-compiler:2.2.5")
