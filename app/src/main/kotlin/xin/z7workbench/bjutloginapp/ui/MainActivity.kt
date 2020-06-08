@@ -17,8 +17,10 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.edit
+import androidx.lifecycle.ViewModelProvider
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityMainBinding
+import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.model.User
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
@@ -26,17 +28,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : LoginAppActivity() {
-    val tag = "MainActivity"
+    val viewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val handler = Handler()
-    var status = LogStatus.OFFLINE
     var oldUp = TrafficStats.getTotalTxBytes()
     var oldDown = TrafficStats.getTotalRxBytes()
     var oldTime = System.currentTimeMillis()
-    var emsg = ""
-    var currentId = -1
-    var currentName = ""
-    var currentPack = -1
     lateinit var currentUser: MutableList<User>
     lateinit var binding: ActivityMainBinding
     private val task = object : TimerTask() {
@@ -67,11 +66,11 @@ class MainActivity : LoginAppActivity() {
             hideOrNot(true)
         }
 
-        currentId = app.prefs.getInt("current_user", -1)
-        currentUser = app.appDatabase.userDao().find(currentId)
-        currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
-        currentPack = currentUser.firstOrNull()?.pack ?: -1
-        binding.pack.text = "$currentPack GB"
+        viewModel.currentId = app.prefs.getInt("current_user", -1)
+        currentUser = app.appDatabase.userDao().find(viewModel.currentId)
+        viewModel.currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
+        viewModel.currentPack = currentUser.firstOrNull()?.pack ?: -1
+        binding.pack.text = "${viewModel.currentPack} GB"
 
         binding.login.setOnClickListener {
             if (currentUser.isEmpty()) {
@@ -88,8 +87,8 @@ class MainActivity : LoginAppActivity() {
                 override fun onPrepare() = this@MainActivity.onPrepared()
 
                 override fun onFailure(exception: IOException) {
-                    emsg = exception.message ?: ""
-                    status = LogStatus.ERROR
+                    viewModel.emsg = exception.message ?: ""
+                    viewModel.status = LogStatus.ERROR
                     binding.apply {
                         errMsg.visibility = View.VISIBLE
                         nowFlux.text = resources.getString(R.string.unknown)
@@ -97,7 +96,7 @@ class MainActivity : LoginAppActivity() {
                         feeView.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
                         numberBar.progress = 0
-                        statusView.text = resources.getString(status.description)
+                        statusView.text = resources.getString(viewModel.status.description)
                         lastView.text
                         login.isEnabled = true
                         sync.isEnabled = true
@@ -129,15 +128,15 @@ class MainActivity : LoginAppActivity() {
                 override fun onPrepare() = this@MainActivity.onPrepared()
 
                 override fun onFailure(exception: IOException) {
-                    emsg = exception.message ?: ""
+                    viewModel.emsg = exception.message ?: ""
                     binding.errMsg.visibility = View.VISIBLE
                     syncing()
                 }
 
                 override fun onResponse(bodyString: String?) {
-                    status = LogStatus.OFFLINE
+                    viewModel.status = LogStatus.OFFLINE
                     binding.apply {
-                        statusView.text = resources.getString(status.description)
+                        statusView.text = resources.getString(viewModel.status.description)
                         progress.percent = 0F
                         numberBar.progress = 0
                         login.isEnabled = true
@@ -160,7 +159,7 @@ class MainActivity : LoginAppActivity() {
             window?.setContentView(R.layout.dialog_error)
             val tv = window?.findViewById<TextView>(R.id.dialog_message)
             val btn = window?.findViewById<Button>(R.id.dialog_ok)
-            tv?.text = emsg
+            tv?.text = viewModel.emsg
             btn?.setOnClickListener {
                 alertDialog.dismiss()
             }
@@ -173,11 +172,11 @@ class MainActivity : LoginAppActivity() {
 
     override fun onResume() {
         super.onResume()
-        currentId = app.prefs.getInt("current_user", -1)
-        currentUser = app.appDatabase.userDao().find(currentId)
-        currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
-        currentPack = currentUser.firstOrNull()?.pack ?: -1
-        binding.pack.text = "$currentPack ${ByteSize.GB.display}"
+        viewModel.currentId = app.prefs.getInt("current_user", -1)
+        currentUser = app.appDatabase.userDao().find(viewModel.currentId)
+        viewModel.currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
+        viewModel.currentPack = currentUser.firstOrNull()?.pack ?: -1
+        binding.pack.text = "${viewModel.currentPack} ${ByteSize.GB.display}"
 
         syncing()
         hideOrNot(false)
@@ -216,8 +215,8 @@ class MainActivity : LoginAppActivity() {
     }
 
     private fun onPrepared() {
-        emsg = ""
-        status = LogStatus.SYNCING
+        viewModel.emsg = ""
+        viewModel.status = LogStatus.SYNCING
         binding.apply {
             errMsg.visibility = View.GONE
             nowFlux.text = resources.getString(R.string.unknown)
@@ -225,7 +224,7 @@ class MainActivity : LoginAppActivity() {
             feeView.text = resources.getString(R.string.unknown)
             progress.percent = 0F
             numberBar.progress = 0
-            statusView.text = resources.getString(status.description)
+            statusView.text = resources.getString(viewModel.status.description)
             login.isEnabled = false
             logout.isEnabled = false
             sync.isEnabled = false
@@ -250,7 +249,7 @@ class MainActivity : LoginAppActivity() {
 
         } else {
             binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_hide)
-            binding.toolbar.title = "${getString(R.string.main_user)}${currentName}"
+            binding.toolbar.title = "${getString(R.string.main_user)}${viewModel.currentName}"
             if (edit) {
                 app.prefs.edit { putBoolean("hide", false) }
             }
@@ -269,8 +268,8 @@ class MainActivity : LoginAppActivity() {
             override fun onPrepare() = this@MainActivity.onPrepared()
 
             override fun onFailure(exception: IOException) {
-                emsg = exception.message ?: ""
-                status = LogStatus.ERROR
+                viewModel.emsg = exception.message ?: ""
+                viewModel.status = LogStatus.ERROR
                 binding.apply {
                     errMsg.visibility = View.VISIBLE
                     nowFlux.text = resources.getString(R.string.unknown)
@@ -278,7 +277,7 @@ class MainActivity : LoginAppActivity() {
                     feeView.text = resources.getString(R.string.unknown)
                     progress.percent = 0F
                     numberBar.progress = 0
-                    statusView.text = resources.getString(status.description)
+                    statusView.text = resources.getString(viewModel.status.description)
                     lastView.text
                     login.isEnabled = true
                     sync.isEnabled = true
@@ -296,14 +295,14 @@ class MainActivity : LoginAppActivity() {
                         feeView.text = resources.getString(R.string.unknown)
                         progress.percent = 0F
                         numberBar.progress = 0
-                        statusView.text = resources.getString(status.description)
+                        statusView.text = resources.getString(viewModel.status.description)
                         login.isEnabled = true
                         sync.isEnabled = true
                         exceeded.text = "${getString(R.string.exceeded)}${getString(R.string.unknown)}"
                         remained.text = "${getString(R.string.remaining)}${getString(R.string.unknown)}"
                     }
 
-                    status = LogStatus.ERROR
+                    viewModel.status = LogStatus.ERROR
                 } else {
                     val result = regex.find(bodyString)
                     if (result == null || result.groups.isEmpty()) {
@@ -318,11 +317,11 @@ class MainActivity : LoginAppActivity() {
                         }
 
                         if (!bodyString.contains("""location.href="https://wlgn.bjut.edu.cn/0.htm""")) {
-                            status = LogStatus.ERROR
-                            binding.statusView.text = resources.getString(status.description)
+                            viewModel.status = LogStatus.ERROR
+                            binding.statusView.text = resources.getString(viewModel.status.description)
                         } else {
-                            status = LogStatus.OFFLINE
-                            binding.statusView.text = resources.getString(status.description)
+                            viewModel.status = LogStatus.OFFLINE
+                            binding.statusView.text = resources.getString(viewModel.status.description)
                         }
                         binding.login.isEnabled = true
                         binding.sync.isEnabled = true
@@ -330,8 +329,8 @@ class MainActivity : LoginAppActivity() {
                         val time = result.groups[1]?.value?.toInt() ?: -1
                         val flow = result.groups[2]?.value?.toLong() ?: -1L
                         val fee = result.groups[3]?.value?.toFloat() ?: -1F
-                        status = LogStatus.ONLINE
-                        val bundle = exceededByteSizeBundle(flow, currentPack, fee)
+                        viewModel.status = LogStatus.ONLINE
+                        val bundle = exceededByteSizeBundle(flow, viewModel.currentPack, fee)
                         val numberBarProgress = bundle["percent"] as Int
                         val exceededFlow = bundle["exceeded"] as String
                         val remainedFlow = bundle["remained"] as String
@@ -340,14 +339,14 @@ class MainActivity : LoginAppActivity() {
                             nowFlux.text = formatByteSize(flow * 1024)
                             timeView.text = "$time ${getString(R.string.minutes)}"
                             feeView.text = """￥${fee / 10000}"""
-                            statusView.text = resources.getString(status.description)
+                            statusView.text = resources.getString(viewModel.status.description)
                             exceeded.text = "${getString(R.string.exceeded)}$exceededFlow"
                             remained.text = "${getString(R.string.remaining)}$remainedFlow"
                             logout.isEnabled = true
                             sync.isEnabled = true
                         }
                         // Deal with ColorfulRingProgressView and NumberProgressBar
-                        val fl = currentPack.toFloat()
+                        val fl = viewModel.currentPack.toFloat()
                         if (fl >= 0F && flow >= 0L) {
                             var percent = flow.toFloat() / (fl * 1024 * 1024) * 100
                             if (percent > 100F) {
@@ -380,6 +379,6 @@ class MainActivity : LoginAppActivity() {
             }
         })
 
-        Log.d("$tag e", emsg)
+        Log.d("${viewModel.tag} e", viewModel.emsg)
     }
 }

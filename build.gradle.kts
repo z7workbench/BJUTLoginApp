@@ -2,16 +2,16 @@
 
 buildscript {
     repositories {
-        maven("https://maven.aliyun.com/repository/central")
-        maven("https://maven.aliyun.com/repository/jcenter")
-        maven("https://maven.aliyun.com/repository/google")
+//        maven("https://maven.aliyun.com/repository/central")
+//        maven("https://maven.aliyun.com/repository/jcenter")
+//        maven("https://maven.aliyun.com/repository/google")
         mavenCentral()
         jcenter()
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.0-beta03")
-        classpath(kotlin("gradle-plugin", version = "1.3.70"))
+        classpath("com.android.tools.build:gradle:4.1.0-alpha10")
+        classpath(kotlin("gradle-plugin", version = "1.3.72"))
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -20,9 +20,9 @@ buildscript {
 
 allprojects {
     repositories {
-        maven("https://maven.aliyun.com/repository/central")
-        maven("https://maven.aliyun.com/repository/jcenter")
-        maven("https://maven.aliyun.com/repository/google")
+//        maven("https://maven.aliyun.com/repository/central")
+//        maven("https://maven.aliyun.com/repository/jcenter")
+//        maven("https://maven.aliyun.com/repository/google")
         mavenCentral()
         jcenter()
         google()
