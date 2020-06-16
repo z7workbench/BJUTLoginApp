@@ -16,7 +16,7 @@ import xin.z7workbench.bjutloginapp.databinding.DialogUserBinding
 import xin.z7workbench.bjutloginapp.databinding.ItemUsersBinding
 import xin.z7workbench.bjutloginapp.model.User
 
-class UsersActivity : LoginAppActivity() {
+class UsersActivity : BasicActivity() {
     private var currentId = 0
     val prefs by lazy { app.prefs }
     private val userDao by lazy { app.appDatabase.userDao() }

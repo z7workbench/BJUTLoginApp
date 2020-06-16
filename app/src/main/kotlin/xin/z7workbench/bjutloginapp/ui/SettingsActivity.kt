@@ -15,7 +15,7 @@ import java.io.IOException
  * Created by ZeroGo on 2017.2.22.
  */
 
-class SettingsActivity : LoginAppActivity() {
+class SettingsActivity : BasicActivity() {
     lateinit var language: String
     lateinit var binding: ActivityPrefsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +34,8 @@ class SettingsActivity : LoginAppActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         private val themeIndex by lazy { prefs.getString("theme_index", null) ?: "ZGP" }
         private val language by lazy { prefs.getString("language", null) ?: "Auto" }
-        private val prefs by lazy { (activity as LoginAppActivity).app.prefs }
-        private val userDao by lazy { (activity as LoginAppActivity).app.appDatabase.userDao() }
+        private val prefs by lazy { (activity as BasicActivity).app.prefs }
+        private val userDao by lazy { (activity as BasicActivity).app.appDatabase.userDao() }
         private val languagePreference by lazy { findPreference<ListPreference>("language") }
         private val versionPreference by lazy { findPreference<Preference>("version") }
         private val usersPreference by lazy { findPreference<Preference>("users") }

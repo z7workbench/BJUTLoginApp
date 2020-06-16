@@ -28,7 +28,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : LoginAppActivity() {
+class MainActivity : BasicActivity() {
     val viewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }

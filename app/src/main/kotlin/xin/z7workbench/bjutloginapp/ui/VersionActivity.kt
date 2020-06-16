@@ -8,7 +8,7 @@ import xin.z7workbench.bjutloginapp.databinding.ActivityVersionBinding
 /**
  * Created by ZeroGo on 2017/11/12.
  */
-class VersionActivity : LoginAppActivity() {
+class VersionActivity : BasicActivity() {
     private lateinit var binding: ActivityVersionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

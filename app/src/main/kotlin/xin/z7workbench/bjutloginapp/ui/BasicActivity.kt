@@ -9,7 +9,7 @@ import xin.z7workbench.bjutloginapp.util.LocaleUtil
 import xin.z7workbench.bjutloginapp.util.ThemeUtil
 
 
-open class LoginAppActivity: AppCompatActivity() {
+open class BasicActivity: AppCompatActivity() {
     val app by lazy { application as LoginApp }
 
     override fun onCreate(savedInstanceState: Bundle?) {

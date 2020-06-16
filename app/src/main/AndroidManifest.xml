@@ -36,6 +36,6 @@
             android:name=".ui.UsersActivity"
             android:label="@string/action_users" />
 
-        <activity android:name=".ui.LoginAppActivity" />
+        <activity android:name=".ui.BasicActivity" />
     </application>
 </manifest>

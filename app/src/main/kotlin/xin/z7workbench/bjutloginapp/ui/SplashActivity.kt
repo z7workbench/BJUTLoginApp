@@ -8,7 +8,7 @@ import xin.z7workbench.bjutloginapp.BuildConfig
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivitySplashBinding
 
-class SplashActivity : LoginAppActivity() {
+class SplashActivity : BasicActivity() {
     private val delays = 750L
     lateinit var binding: ActivitySplashBinding
 
