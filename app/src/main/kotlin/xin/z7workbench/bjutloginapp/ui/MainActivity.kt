@@ -18,7 +18,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ActivityMainBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
@@ -72,9 +72,9 @@ class MainActivity : LoginAppActivity() {
         viewModel.currentName = currentUser.firstOrNull()?.name ?: getString(R.string.unknown)
         viewModel.currentPack = currentUser.firstOrNull()?.pack ?: -1
         binding.pack.text = "${viewModel.currentPack} GB"
-        viewModel.status.observe(this, Observer {
+        viewModel.status.observe(this) {
             binding.statusView.text = resources.getString(it.description)
-        })
+        }
 
         binding.login.setOnClickListener {
             if (currentUser.isEmpty()) {

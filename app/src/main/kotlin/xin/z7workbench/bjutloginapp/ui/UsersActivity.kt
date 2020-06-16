@@ -5,7 +5,7 @@ import android.view.*
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +34,7 @@ class UsersActivity : LoginAppActivity() {
         llm.orientation = LinearLayoutManager.VERTICAL
 
         val users = userDao.all()
-        users.observe(this, Observer {
+        users.observe(this) {
             val diffUtil = DiffUtil.calculateDiff(UserDiffCallback(usersAdapter.users, it))
             usersAdapter.users = it
             diffUtil.dispatchUpdatesTo(usersAdapter)
@@ -45,7 +45,7 @@ class UsersActivity : LoginAppActivity() {
                 binding.placeholder1.visibility = View.GONE
                 binding.placeholder2.visibility = View.GONE
             }
-        })
+        }
 
         binding.recycler.apply {
             adapter = usersAdapter
