@@ -67,4 +67,5 @@
     <string name="minutes">分鐘</string>
     <string name="main_login_successful">登錄成功！同步數據中&#8230;</string>
     <string name="settings_theme_title">更換應用主題</string>
+    <string name="note_fail_text">同步錯誤</string>
 </resources>

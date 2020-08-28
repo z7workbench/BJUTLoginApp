@@ -1,18 +1,18 @@
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
+val lifecycleVersion = "2.2.0"
+val gitCommitCount= ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    kotlin("plugin.serialization") version "1.3.72"
+    kotlin("plugin.serialization") version "1.4.0"
 }
-val lifecycleVersion = "2.2.0"
-val gitCommitCount= ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
         applicationId = "xin.z7workbench.bjutloginapp"
         minSdkVersion(26)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 5
         versionName = "5.0.4"
         versionNameSuffix = " (${gitCommitCount})"
@@ -47,30 +47,29 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+    implementation(kotlin("stdlib", "1.4.0"))
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0-alpha1") {
         exclude("com.android.support", "support-annotations")
     }
-    implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.core:core-ktx:1.3.0")
+    implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.preference:preference:1.1.1")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-rc01")
-    implementation("com.google.android.material:material:1.3.0-alpha01")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta6")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0")
     implementation("com.github.medyo:fancybuttons:1.8.4")
     implementation("com.timqi.sectorprogressview:library:2.0.1")
     implementation("com.github.jorgecastilloprz:fabprogresscircle:1.01@aar")
     implementation("com.daimajia.numberprogressbar:library:1.4@aar")
     implementation("com.airbnb.android:lottie:3.3.1")
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("com.jrummyapps:colorpicker:2.1.7")
     implementation("com.squareup.okhttp3:okhttp:4.3.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // LiveData

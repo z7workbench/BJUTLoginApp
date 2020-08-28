@@ -30,3 +30,13 @@
 -keep class * {
     public private *;
 }
+
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class xin.z7workbench.bjutloginapp.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class xin.z7workbench.bjutloginapp.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class xin.z7workbench.bjutloginapp.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}
