@@ -13,8 +13,8 @@ android {
         applicationId = "xin.z7workbench.bjutloginapp"
         minSdkVersion(26)
         targetSdkVersion(30)
-        versionCode = 5
-        versionName = "5.0.4"
+        versionCode = 6
+        versionName = "6.0.0-alpha1"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":library"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", "1.4.0"))
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0-alpha1") {
