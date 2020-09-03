@@ -14,7 +14,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-alpha1"
+        versionName = "6.0.0-alpha2"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,7 +59,7 @@ dependencies {
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.google.android.material:material:1.3.0-alpha02")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     implementation("com.github.medyo:fancybuttons:1.8.4")
     implementation("com.timqi.sectorprogressview:library:2.0.1")
     implementation("com.github.jorgecastilloprz:fabprogresscircle:1.01@aar")

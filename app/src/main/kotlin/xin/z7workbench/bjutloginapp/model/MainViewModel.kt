@@ -12,11 +12,6 @@ class MainViewModel: ViewModel() {
     private val _status = MutableLiveData<LogStatus>()
     val status : LiveData<LogStatus>
         get() = _status
-    var emsg = ""
-    var currentId = -1
-    var currentName = ""
-    var currentPack = -1
-
     init {
         _status.value = LogStatus.OFFLINE
     }

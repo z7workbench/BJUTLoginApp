@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/constraint">
 
-        <xin.z7workbench.arcbar.ArcBar
+        <xin.z7workbench.zeropercent.ArcPercentBar
             android:id="@+id/arcBar"
             android:layout_width="270dp"
             android:layout_height="270dp"
@@ -20,18 +20,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:arcBackStrokeType="thin"
             app:arcBackColor="#888888"
-            app:arcPercent="80"
+            app:arcPercent="50"
+            app:arcOrientation="bottom"
             app:arcFrontColor="#8686FF" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="270dp"
-            android:layout_height="270dp"
-            android:background="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/arcBar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

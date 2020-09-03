@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ArcBar">
-        <attr name="arcFrontColor" format="color"/>
+    <declare-styleable name="ArcPercentBar">
+        <attr name="arcFrontColor" format="color" />
         <attr name="arcBackColor" format="color" />
         <attr name="arcPercent" format="float" />
         <attr name="arcRange" format="float" />
         <attr name="arcText" format="string" />
-        <attr name="arcStroke" format="dimension" />
+        <attr name="arcStrokeWidth" format="dimension" />
+        <attr name="arcBackStrokeType" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="thin" value="1" />
+        </attr>
+        <attr name="arcOrientation" format="enum">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="left" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="WavePercentView">
+        <attr name="waveCommonColor" format="color" />
+        <attr name="waveWarningColor" format="color" />
+        <attr name="wavePercent" format="float" />
+        <attr name="waveTextLocation" format="enum">
+            <enum name="top" value="0" />
+            <enum name="center" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
     </declare-styleable>
 </resources>
