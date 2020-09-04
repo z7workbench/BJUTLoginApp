@@ -6,10 +6,14 @@
         <attr name="arcPercent" format="float" />
         <attr name="arcRange" format="float" />
         <attr name="arcText" format="string" />
+        <attr name="arcTextColor" format="color" />
+        <attr name="arcTextSize" format="dimension" />
+        <attr name="arcAutoText" format="boolean" />
         <attr name="arcStrokeWidth" format="dimension" />
         <attr name="arcBackStrokeType" format="enum">
             <enum name="normal" value="0" />
             <enum name="thin" value="1" />
+            <enum name="thick" value="2" />
         </attr>
         <attr name="arcOrientation" format="enum">
             <enum name="top" value="0" />
