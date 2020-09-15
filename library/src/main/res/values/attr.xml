@@ -24,9 +24,10 @@
     </declare-styleable>
 
     <declare-styleable name="WavePercentView">
-        <attr name="waveCommonColor" format="color" />
-        <attr name="waveWarningColor" format="color" />
+        <attr name="waveAmplitude" format="float" />
+        <attr name="waveBackColor" format="color" />
         <attr name="wavePercent" format="float" />
+        <attr name="waveLevelColors" format="reference" />
         <attr name="waveTextLocation" format="enum">
             <enum name="top" value="0" />
             <enum name="center" value="1" />
