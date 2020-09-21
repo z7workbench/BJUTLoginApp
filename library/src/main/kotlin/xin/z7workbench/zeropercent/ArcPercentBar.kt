@@ -67,6 +67,7 @@ class ArcPercentBar(private val _context: Context, attrs: AttributeSet) : View(_
 
         if (text.isNotEmpty()) {
             val top = textPaint.measureText(text)
+            textPaint.color = textColor
             canvas.drawText(text, (width - top) / 2,
                     height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
         }
