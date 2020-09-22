@@ -9,7 +9,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1
-        versionName = "0.4.1"
+        versionName = "0.4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

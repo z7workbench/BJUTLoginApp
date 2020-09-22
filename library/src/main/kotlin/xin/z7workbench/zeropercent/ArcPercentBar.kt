@@ -11,7 +11,7 @@ class ArcPercentBar(private val _context: Context, attrs: AttributeSet) : View(_
     var percent = 0F
         set(value) {
             field = value.coerceAtLeast(0F).coerceAtMost(100F)
-            if (autoText) text = "${percent.toBigDecimal().setScale(2)}%"
+            if (autoText) text = "${percent.toBigDecimal().setScale(1)}%"
         }
     var range = 220F
     var text = "Text"
@@ -19,7 +19,7 @@ class ArcPercentBar(private val _context: Context, attrs: AttributeSet) : View(_
     var frontColor = 0x8686ff
     var orientation = 0
     var autoText = true
-    var textSize = _context.sp2px(10F)
+    var textSize = _context.sp2px(12F)
         set(value) {
             field = _context.sp2px(value.toFloat())
             textPaint.textSize = textSize.toFloat()
@@ -103,9 +103,9 @@ class ArcPercentBar(private val _context: Context, attrs: AttributeSet) : View(_
         backColor = array.getColor(R.styleable.ArcPercentBar_arcBackColor, 0x888888)
         frontColor = array.getColor(R.styleable.ArcPercentBar_arcFrontColor, 0x8686ff)
         text = if (!autoText) array.getString(R.styleable.ArcPercentBar_arcText)
-                ?: "${percent.toBigDecimal().setScale(2)}%"
-        else "${percent.toBigDecimal().setScale(2)}%"
-        textSize = array.getDimensionPixelSize(R.styleable.ArcPercentBar_arcTextSize, _context.sp2px(10F))
+                ?: "${percent.toBigDecimal().setScale(1)}%"
+        else "${percent.toBigDecimal().setScale(1)}%"
+        textSize = array.getDimensionPixelSize(R.styleable.ArcPercentBar_arcTextSize, _context.sp2px(12F))
         textColor = array.getColor(R.styleable.ArcPercentBar_arcTextColor, 0xCDCDCD)
         range = array.getFloat(R.styleable.ArcPercentBar_arcRange, 220F)
         strokeWidth = array.getDimensionPixelSize(R.styleable.ArcPercentBar_arcStrokeWidth, _context.dp2px(7F))
