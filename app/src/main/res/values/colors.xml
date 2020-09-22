@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
+    <color name="materialGrey">#ff424242</color>
     <color name="colorDefaultSubText">#888888</color>
     <color name="colorDefaultTextDark">@android:color/white</color>
     <color name="colorDefaultTextLight">@android:color/black</color>

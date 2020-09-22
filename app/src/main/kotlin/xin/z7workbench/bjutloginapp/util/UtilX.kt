@@ -25,3 +25,11 @@ private object ContextHelper {
     val handler = Handler(Looper.getMainLooper())
     val mainThread = Looper.getMainLooper().thread
 }
+
+fun String.buildString(vararg strings: String): String {
+    var string = this
+    for (s in strings) {
+        string += s
+    }
+    return string
+}

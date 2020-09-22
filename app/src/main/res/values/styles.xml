@@ -3,16 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" />
 
-    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="appTextColor">@color/colorDefaultTextDark</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
+        </item>
+        <item name="appBackground">@color/materialGrey</item>
+        <item name="colorSurface">@color/materialGrey</item>
     </style>
 
-    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="appTextColor">@color/colorDefaultTextLight</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
+        </item>
+        <item name="appBackground">@android:color/white</item>
+        <item name="colorSurface">@android:color/white</item>
     </style>
 
     <style name="AppTheme.Dark.Pure">
@@ -21,6 +29,8 @@
         <item name="colorPrimary">@color/colorPrimaryPure</item>
         <item name="colorPrimaryDark">@color/colorPrimaryPure</item>
         <item name="appBackground">@color/colorBackgroundPure</item>
+        <item name="colorSurface">@color/colorPrimaryPure</item>
+        <item name="colorOnSurface">@color/colorAccentPure</item>
     </style>
 
     <style name="AppTheme.Light.White">
@@ -29,6 +39,8 @@
         <item name="colorPrimary">@color/colorPrimaryWhite</item>
         <item name="colorPrimaryDark">@color/colorPrimaryWhite</item>
         <item name="appBackground">@color/colorBackgroundWhite</item>
+        <item name="colorSurface">@color/colorPrimaryWhite</item>
+        <item name="colorOnSurface">@color/colorAccentWhite</item>
     </style>
 
     <style name="AppTheme.Light.Amber">
@@ -38,6 +50,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryAmber</item>
         <item name="appBackground">@color/colorBackgroundAmber</item>
         <item name="appSubTextColor">@color/colorSubTextAmber</item>
+        <item name="colorSurface">@color/colorPrimaryAmber</item>
+        <item name="colorOnSurface">@color/colorAccentAmber</item>
     </style>
 
     <style name="AppTheme.Light.Yun">
@@ -47,6 +61,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryYun</item>
         <item name="appBackground">@color/colorBackgroundYun</item>
         <item name="appSubTextColor">@color/colorSubTextYun</item>
+        <item name="colorSurface">@color/colorPrimaryYun</item>
+        <item name="colorOnSurface">@color/colorAccentYun</item>
     </style>
 
     <style name="AppTheme.Dark.ZeroGoPurple">
@@ -56,6 +72,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryZGPurple</item>
         <item name="appBackground">@color/colorBackgroundZGPurple</item>
         <item name="appSubTextColor">@color/colorSubTextZGPurple</item>
+        <item name="colorSurface">@color/colorPrimaryZGPurple</item>
+        <item name="colorOnSurface">@color/colorAccentZGPurple</item>
     </style>
 
     <style name="AppTheme.Dark.Teal">
@@ -65,6 +83,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryTeal</item>
         <item name="appBackground">@color/colorBackgroundTeal</item>
         <item name="appSubTextColor">@color/colorSubTextTeal</item>
+        <item name="colorSurface">@color/colorPrimaryTeal</item>
+        <item name="colorOnSurface">@color/colorAccentTeal</item>
     </style>
 
     <style name="AppTheme.Dark.Pink">
@@ -74,11 +94,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryPink</item>
         <item name="appBackground">@color/colorBackgroundPink</item>
         <item name="appSubTextColor">@color/colorSubTextPink</item>
+        <item name="colorSurface">@color/colorPrimaryPink</item>
+        <item name="colorOnSurface">@color/colorAccentPink</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="elevation">10dp</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="elevation">10dp</item>
+    </style>
 
     <style name="AppTheme.PageLayout">
         <item name="android:layout_width">match_parent</item>
@@ -93,18 +119,25 @@
         <item name="android:background">?attr/appBackground</item>
     </style>
 
-    <style name="ToolBarStyle">
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    </style>
-
-    <style name="ToolBarStyle.Event" parent="ToolBarStyle">
+    <style name="AppTheme.ToolBarStyle">
         <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
     <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <!--Any text styling can be done here-->
-        <item name="android:textSize">@dimen/text_size_xxl</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:textColor">?attr/appTextColor</item>
+    </style>
+
+    <style name="AppTheme.Button.OutlinedIcon" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="strokeColor">?attr/colorAccent</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="iconTint">?attr/colorAccent</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">24dp</item>
     </style>
 </resources>
