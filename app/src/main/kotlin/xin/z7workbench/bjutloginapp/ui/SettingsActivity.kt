@@ -112,10 +112,10 @@ class SettingsActivity : BasicActivity() {
 
             val currentId = prefs.getInt("current_user", -1)
             val result = userDao.find(currentId)
-            if (result.isEmpty()) {
+            if (result == null) {
                 usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
             } else {
-                usersPreference?.summary = getString(R.string.settings_users_summary) + result.first().name
+                usersPreference?.summary = getString(R.string.settings_users_summary) + result.name
             }
         }
 
@@ -123,10 +123,10 @@ class SettingsActivity : BasicActivity() {
             super.onResume()
             val currentId = prefs.getInt("current_user", -1)
             val result = userDao.find(currentId)
-            if (result.isEmpty()) {
+            if (result == null) {
                 usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
             } else {
-                usersPreference?.summary = getString(R.string.settings_users_summary) + result.first().name
+                usersPreference?.summary = getString(R.string.settings_users_summary) + result.name
             }
         }
 
