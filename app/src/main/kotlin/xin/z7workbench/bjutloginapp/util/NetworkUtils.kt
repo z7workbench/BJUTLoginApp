@@ -23,8 +23,8 @@ object NetworkUtils {
     val STATE_OTHER_WIFI = 3
 
     fun getNetworkState(context: Context): Int {
-        val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val info = connManager.activeNetworkInfo
+        val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val info = manager.activeNetworkInfo
         return if (info != null && info.isConnectedOrConnecting) {
             when (info.type) {
                 ConnectivityManager.TYPE_MOBILE -> STATE_MOBILE

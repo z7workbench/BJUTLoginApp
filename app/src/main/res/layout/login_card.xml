@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AppTheme.Card"
     android:id="@+id/loginCard"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:background="?attr/colorPrimary"
-    android:checkable="true"
-    android:clickable="true"
-    android:focusable="true"
-    android:longClickable="true"
-    android:padding="8dp"
-    app:cardElevation="3dp"
-    app:cardPreventCornerOverlap="false"
-    app:strokeWidth="1dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/outlinedButton"
+            android:id="@+id/userButton"
             style="@style/AppTheme.Button.OutlinedIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,18 +42,13 @@
             app:layout_constraintTop_toTopOf="@id/title" />
 
         <TextView
+            style="@style/AppTheme.TextView.Big"
             android:id="@+id/user"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:text="TextView"
-            android:maxLines="1"
-            android:textColor="?attr/appTextColor"
-            android:textSize="@dimen/text_size_xxl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/percentBar"
             app:layout_constraintTop_toBottomOf="@id/status"
@@ -72,17 +57,12 @@
 
         <TextView
             android:id="@+id/flux"
+            style="@style/AppTheme.TextView.Normal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:text="TextViewTextViewTextViewTextView"
-            android:maxLines="1"
-            android:textColor="?attr/appTextColor"
-            android:textSize="@dimen/text_size_xl"
             app:layout_constraintBottom_toBottomOf="@id/percentBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/percentBar"
@@ -90,16 +70,11 @@
 
         <TextView
             android:id="@+id/status"
+            style="@style/AppTheme.TextView.Normal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:text="TextView"
-            android:maxLines="1"
-            android:textColor="?attr/appTextColor"
-            android:textSize="@dimen/text_size_xl"
             app:layout_constraintBottom_toTopOf="@id/flux"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/percentBar"
@@ -108,14 +83,13 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/AppTheme.TextView.Normal"
+            android:textSize="@dimen/text_size_h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
-            android:text="TextView"
-            android:textColor="?attr/appTextColor"
-            android:textSize="@dimen/text_size_h"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

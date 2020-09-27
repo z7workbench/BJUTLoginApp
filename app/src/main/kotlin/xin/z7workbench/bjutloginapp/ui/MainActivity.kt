@@ -40,9 +40,9 @@ class MainActivity : BasicActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.bottomAppBar)
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
-        binding.swipeRefresh.setDistanceToTriggerSync(150)
+        binding.swipeRefresh.setDistanceToTriggerSync(200)
 
         binding.swipeRefresh.setOnRefreshListener {
 //            TODO("refresh")
@@ -54,9 +54,9 @@ class MainActivity : BasicActivity() {
 //            override fun canScrollVertically() = false
 //        }
 
-//        Snackbar.make(binding.swipeRefresh, "Yes", Snackbar.LENGTH_LONG)
+        Snackbar.make(binding.swipeRefresh, NetworkUtils.getWifiSSID(this), Snackbar.LENGTH_LONG)
 //                .setAnchorView(binding.bottomAppBar)
-//                .show()
+                .show()
     }
 
     override fun onResume() {

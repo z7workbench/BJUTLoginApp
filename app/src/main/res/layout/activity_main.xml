@@ -1,57 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
     style="@style/AppTheme.PageLayout"
-    android:orientation="vertical"
-    android:id="@+id/mainLayout">
+    android:orientation="vertical">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/AppTheme.AppBarOverlay"-->
-<!--        app:elevation="10dp">-->
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:theme="@style/AppTheme.AppBarOverlay"-->
+    <!--        app:elevation="10dp">-->
 
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            style="@style/AppTheme.ToolBarStyle"-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
+    <!--        <androidx.appcompat.widget.Toolbar-->
+    <!--            style="@style/AppTheme.ToolBarStyle"-->
+    <!--            android:id="@+id/toolbar"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="?attr/actionBarSize"-->
+    <!--            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+    <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
-        android:layout_width="match_parent"
-        android:clipToPadding="false"
-        android:layout_height="match_parent">
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:scrollbarDefaultDelayBeforeFade="500"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <include
-                    layout="@layout/login_card"/>
-                <include
-                    layout="@layout/login_card"/>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:layout_behavior=".util.MoveUpwardBehavior"
+        android:orientation="vertical"
         android:visibility="gone"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/space"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/appTextColor" />
+        app:layout_behavior=".util.MoveUpwardBehavior">
 
         <LinearLayout
             android:id="@+id/bottom_layout"
@@ -92,15 +66,57 @@
                 android:textColor="?attr/appTextColor"
                 android:textSize="@dimen/text_size_xl" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/appTextColor" />
     </LinearLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarDefaultDelayBeforeFade="500">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Small"
+                    android:id="@+id/syncTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:gravity="center"
+                    android:text="lastsync" />
+
+                <include layout="@layout/login_card" />
+
+                <include layout="@layout/control_card" />
+
+                <include layout="@layout/flux_card" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        style="@style/Widget.MaterialComponents.BottomAppBar"
-        app:hideOnScroll="true"
-        />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <!--        app:navigationIcon="@drawable/ic_menu_24dp"-->
+        android:backgroundTint="?attr/appTextColor"
+        app:hideOnScroll="true" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout><!--        app:navigationIcon="@drawable/ic_menu_24dp"-->
     <!--        app:menu="@menu/bottom_app_bar"-->
