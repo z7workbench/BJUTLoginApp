@@ -13,4 +13,4 @@ data class User(
         var id: Int = 0,
         var name: String = "",
         var password: String = "",
-        var pack: Int = 8)
+        var pack: Int = 30)

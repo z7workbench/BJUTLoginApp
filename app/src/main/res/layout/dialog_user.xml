@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="?attr/colorPrimarySurface"
     android:padding="24dp">
     <TextView
         android:layout_width="match_parent"
@@ -68,10 +69,10 @@
         android:id="@+id/seek_pack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="26"
-        android:min="1"
+        android:max="50"
+        android:min="12"
         android:padding="0dp"
-        android:progress="8" />
+        android:progress="30" />
 
 </LinearLayout>
 

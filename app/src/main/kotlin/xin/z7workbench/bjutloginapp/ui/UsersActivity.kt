@@ -64,7 +64,7 @@ class UsersActivity : BasicActivity() {
     }
 
     fun openUserDialog(newUser: Boolean, user: User) {
-        var currentPackage = 8
+        var currentPackage = 30
         val dialogBinding = DialogUserBinding.inflate(layoutInflater)
         dialogBinding.name.setText(user.name)
         dialogBinding.name.setSelection(user.name.length)
