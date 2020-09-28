@@ -7,8 +7,9 @@
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="appTextColor">@color/colorDefaultTextDark</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
-        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.Large</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.Medium</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
         <item name="appBackground">@color/materialGrey</item>
         <item name="colorSurface">@color/materialGrey</item>
     </style>
@@ -17,8 +18,8 @@
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="appTextColor">@color/colorDefaultTextLight</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
-        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.Medium</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
         <item name="appBackground">@android:color/white</item>
         <item name="colorSurface">@android:color/white</item>
     </style>
@@ -136,9 +137,19 @@
         <item name="iconTint">?attr/colorAccent</item>
     </style>
 
-    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <style name="ShapeAppearance.App.Large" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">24dp</item>
+        <item name="cornerSize">5%</item>
+    </style>
+
+    <style name="ShapeAppearance.App.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="ShapeAppearance.App.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="AppTheme.TextView">
@@ -171,5 +182,20 @@
         <item name="cardElevation">4dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="strokeWidth">1dp</item>
+    </style>
+    <style name="Widget.App.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomAppBar</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomAppBar" parent="">
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
+    </style>
+
+    <style name="ThemeOverlay.App.FloatingActionButton" parent="">
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
     </style>
 </resources>
