@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import android.view.*
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import xin.z7workbench.bjutloginapp.R
@@ -25,9 +26,9 @@ class MainActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        supportFragmentManager.commit {
-            replace(R.id.mainContainer, MainFragment::class.java, Bundle())
-        }
+//        supportFragmentManager.commit {
+//            replace(R.id.mainContainer, MainFragment::class.java, Bundle())
+//        }
 
     }
 

@@ -2,12 +2,15 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainLayout"
-    style="@style/AppTheme.PageLayout"
+    style="@style/AppTheme.Layout.Activity"
     android:orientation="vertical">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainContainer"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main_graph" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout><!--        app:navigationIcon="@drawable/ic_menu_24dp"-->
     <!--        app:menu="@menu/bottom_app_bar"-->

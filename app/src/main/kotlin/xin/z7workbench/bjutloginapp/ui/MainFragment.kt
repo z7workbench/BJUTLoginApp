@@ -1,16 +1,24 @@
 package xin.z7workbench.bjutloginapp.ui
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import xin.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ControlCardBinding
 import xin.z7workbench.bjutloginapp.databinding.FluxCardBinding
@@ -19,13 +27,9 @@ import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
 
 
-class MainFragment : Fragment() {
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
-
+class MainFragment : BasicFragment<FragmentMainBinding>() {
+    val userFragment = UserFragment()
+    override fun initView() {
 //        requireActivity().setActionBar(binding.bottomAppBar)
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
         binding.swipeRefresh.setDistanceToTriggerSync(200)
@@ -54,20 +58,36 @@ class MainFragment : Fragment() {
         background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
                 .setTopEdge(topEdge).build()
 
-        Snackbar.make(binding.swipeRefresh, NetworkUtils.getWifiSSID(requireContext()), Snackbar.LENGTH_LONG)
-                .setAnchorView(binding.fab)
-                .show()
-        return binding.root
-    }
+        makeSnack(NetworkUtils.getWifiSSID(requireContext()))
+        binding.bottomAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_mode -> startActivity(Intent(requireContext(), SettingsActivity::class.java))
+                R.id.action_user -> {
+                    makeSnack("yes")
+                }
+            }
+            true
+        }
 
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
+        val transform = MaterialContainerTransform()
+        transform.duration = 1000L
+        userFragment.sharedElementEnterTransition = transform
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        exitTransition = MaterialElevationScale(/* growing= */ false)
+        reenterTransition = MaterialElevationScale(/* growing= */ true)
     }
+
+    private fun makeSnack(text: CharSequence) {
+        var snack = Snackbar.make(binding.mainLayout, text, Snackbar.LENGTH_SHORT)
+        snack = snack.setAnchorView(binding.fab.id)
+        snack.show()
+    }
+
+    override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
+            FragmentMainBinding.inflate(inflater, container, false)
 
     inner class MainRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -95,10 +115,15 @@ class MainFragment : Fragment() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is LoginCardViewHolder -> {
-
+                    holder.binding.userButton.setOnClickListener {
+                        val extras = FragmentNavigatorExtras(
+                                holder.binding.userButton to "user_transition"
+                        )
+                        findNavController().navigate(R.id.action_main_to_userFragment, null, null, extras)
+                    }
                 }
                 is ControlCardViewHolder -> {
-
+                    holder.binding.wifiSSID.text = NetworkUtils.getWifiSSID(requireContext())
                 }
                 is FluxCardViewHolder -> {
 
