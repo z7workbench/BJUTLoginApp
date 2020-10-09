@@ -87,11 +87,11 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
             currentPackage = user.pack
             dialogBinding.seekPack.progress = user.pack
         }
-        dialogBinding.textPack.text = """$currentPackage GB"""
+        dialogBinding.packText.text = """$currentPackage GB"""
 
         dialogBinding.seekPack.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                dialogBinding.textPack.text = """${dialogBinding.seekPack.progress} GB"""
+                dialogBinding.packText.text = """${dialogBinding.seekPack.progress} GB"""
                 currentPackage = dialogBinding.seekPack.progress
             }
 

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="?attr/colorPrimarySurface"
     android:padding="24dp">
     <TextView
         android:layout_width="match_parent"
@@ -54,23 +53,28 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:text="@string/settings_pack"
         android:textColor="?attr/appTextColor"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/text_pack"
+        android:id="@+id/pack_text"
         android:textColor="?attr/appSubTextColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp" />
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"/>
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seek_pack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:max="50"
         android:min="12"
         android:padding="0dp"
