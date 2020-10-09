@@ -91,7 +91,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         val currentId = prefs.getInt("current_user", -1)
-        val result = userDao.find(currentId).value
+        val result = userDao.find(currentId)
         if (result == null) {
             usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
         } else {
@@ -102,7 +102,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
         val currentId = prefs.getInt("current_user", -1)
-        val result = userDao.find(currentId).value
+        val result = userDao.find(currentId)
         if (result == null) {
             usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
         } else {

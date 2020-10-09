@@ -111,6 +111,7 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
                     user.pack = currentPackage
                     if (!newUser) {
                         viewModel.updateUser(user)
+                        viewModel.refreshUserId()
                     } else {
                         viewModel.insertUser(user)
                     }
@@ -129,7 +130,6 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
             val user = users[holder.adapterPosition]
 
             holder.itemView.setOnClickListener {
-                Log.d("user", "click")
                 app.prefs.edit { putInt("current_user", user.id) }
                 viewModel.refreshUserId()
 //                this@UserFragment.finish()

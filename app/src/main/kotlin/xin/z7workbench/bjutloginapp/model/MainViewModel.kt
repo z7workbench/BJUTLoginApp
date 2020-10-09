@@ -16,19 +16,22 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
     private val dao = getApplication<LoginApp>().appDatabase.userDao()
     private val _status = MutableLiveData<LogStatus>()
-    private val _currentId = MutableLiveData<Int>()
+    private val _currentId = MutableLiveData<Int>().apply {
+        value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
+    }
+    private val _user = MutableLiveData<User>()
+
     val status: LiveData<LogStatus>
         get() = _status
     val currentId: LiveData<Int>
         get() = _currentId
-    val users = getApplication<LoginApp>().appDatabase.userDao().all()
-
-    val user by lazy { dao.find(_currentId.value!!) }
-//    val user = dao.find(_currentId.value!!)
+    val users = dao.all()
+    val user: LiveData<User>
+        get() = _user
 
     init {
         _status.value = LogStatus.OFFLINE
-        _currentId.value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
+        _user.value = dao.find(_currentId.value!!)
     }
 
     fun offline() {
@@ -55,6 +58,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun refreshUserId() {
         _currentId.value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
-        Log.d(tag, user.value.toString())
+        _user.value = dao.find(_currentId.value!!)
     }
 }
