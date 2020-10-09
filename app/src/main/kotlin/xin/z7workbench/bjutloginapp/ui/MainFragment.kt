@@ -7,8 +7,10 @@ import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,13 +26,16 @@ import xin.z7workbench.bjutloginapp.databinding.ControlCardBinding
 import xin.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import xin.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
+import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
 
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
-    val userFragment = UserFragment()
+    val viewModel by lazy {
+        ViewModelProvider(requireActivity())[MainViewModel::class.java]
+    }
+
     override fun initView() {
-//        requireActivity().setActionBar(binding.bottomAppBar)
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
         binding.swipeRefresh.setDistanceToTriggerSync(200)
 
@@ -68,16 +73,12 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
             }
             true
         }
-
-        val transform = MaterialContainerTransform()
-        transform.duration = 1000L
-        userFragment.sharedElementEnterTransition = transform
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        exitTransition = MaterialElevationScale(/* growing= */ false)
-        reenterTransition = MaterialElevationScale(/* growing= */ true)
+        exitTransition = MaterialElevationScale(false)
+        reenterTransition = MaterialElevationScale(false)
     }
 
     private fun makeSnack(text: CharSequence) {
@@ -120,6 +121,10 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 holder.binding.userButton to "user_transition"
                         )
                         findNavController().navigate(R.id.action_main_to_userFragment, null, null, extras)
+                    }
+                    viewModel.user.observe(this@MainFragment) {
+                        holder.binding.user.text = it.name
+                        holder.binding.flux.text = it.pack.toString() + " GB"
                     }
                 }
                 is ControlCardViewHolder -> {

@@ -10,10 +10,10 @@ import xin.z7workbench.bjutloginapp.model.User
 @Dao
 interface UserDao {
     @Query("select * from user order by id")
-    fun all(): LiveData<MutableList<User>>
+    fun all(): LiveData<List<User>>
 
     @Query("select * from user where id = :id")
-    fun find(id: Int): User?
+    fun find(id: Int): LiveData<User>
 
     @Insert
     fun insert(user: User)

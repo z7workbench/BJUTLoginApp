@@ -118,6 +118,7 @@
     </style>
 
     <style name="AppTheme.Layout.Fragment">
+        <item name="android:transitionGroup">true</item>
         <item name="android:layout_height">match_parent</item>
     </style>
 

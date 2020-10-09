@@ -11,7 +11,6 @@ import xin.z7workbench.bjutloginapp.util.NetworkUtils
 import xin.z7workbench.bjutloginapp.util.UIBlock
 import java.io.IOException
 
-
 class SettingsFragment : PreferenceFragmentCompat() {
     private val themeIndex by lazy { prefs.getString("theme_index", null) ?: "ZGP" }
     private val language by lazy { prefs.getString("language", null) ?: "Auto" }
@@ -92,7 +91,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         val currentId = prefs.getInt("current_user", -1)
-        val result = userDao.find(currentId)
+        val result = userDao.find(currentId).value
         if (result == null) {
             usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
         } else {
@@ -103,7 +102,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
         val currentId = prefs.getInt("current_user", -1)
-        val result = userDao.find(currentId)
+        val result = userDao.find(currentId).value
         if (result == null) {
             usersPreference?.summary = getString(R.string.settings_users_summary) + getString(R.string.unknown)
         } else {

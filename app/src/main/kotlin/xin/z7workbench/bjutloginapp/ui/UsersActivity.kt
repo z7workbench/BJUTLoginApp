@@ -105,7 +105,7 @@ class UsersActivity : BasicActivity() {
                 .show()
     }
 
-    inner class UsersAdapter(var users: MutableList<User> = mutableListOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
+    inner class UsersAdapter(var users: List<User> = listOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
                 UsersViewHolder(ItemUsersBinding.inflate(layoutInflater))
 

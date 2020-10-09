@@ -1,13 +1,13 @@
 package xin.z7workbench.bjutloginapp.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
-import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.lifecycle.observe
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -17,16 +17,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialContainerTransform
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.*
+import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.model.User
 
 class UserFragment : BasicFragment<FragmentUserBinding>() {
-    private var currentId = 0
-    val prefs by lazy { app.prefs }
-    private val userDao by lazy { app.appDatabase.userDao() }
+    private val viewModel by lazy { ViewModelProvider(requireActivity())[MainViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform()
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.mainContainer
+            scrimColor = Color.TRANSPARENT
+        }
     }
 
     override fun initView() {
@@ -44,8 +46,7 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
         val llm = LinearLayoutManager(requireContext())
         llm.orientation = LinearLayoutManager.VERTICAL
 
-        val users = userDao.all()
-        users.observe(this) {
+        viewModel.users.observe(this) {
             val diffUtil = DiffUtil.calculateDiff(UserDiffCallback(usersAdapter.users, it))
             usersAdapter.users = it
             diffUtil.dispatchUpdatesTo(usersAdapter)
@@ -64,7 +65,6 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
             itemAnimator = DefaultItemAnimator()
         }
 
-        currentId = app.prefs.getInt("current_user", 0)
     }
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -110,16 +110,16 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
                     user.password = dialogBinding.password.text.toString()
                     user.pack = currentPackage
                     if (!newUser) {
-                        userDao.update(user)
+                        viewModel.updateUser(user)
                     } else {
-                        userDao.insert(user)
+                        viewModel.insertUser(user)
                     }
                 }
                 .setNegativeButton(R.string.cancel) { _, _ -> }
                 .show()
     }
 
-    inner class UsersAdapter(var users: MutableList<User> = mutableListOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
+    inner class UsersAdapter(var users: List<User> = listOf()) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
                 UsersViewHolder(ItemUsersBinding.inflate(layoutInflater))
 
@@ -129,7 +129,9 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
             val user = users[holder.adapterPosition]
 
             holder.itemView.setOnClickListener {
-                prefs.edit { putInt("current_user", user.id) }
+                Log.d("user", "click")
+                app.prefs.edit { putInt("current_user", user.id) }
+                viewModel.refreshUserId()
 //                this@UserFragment.finish()
             }
             holder.binding.user.text = user.name
@@ -137,10 +139,17 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
                 openUserDialog(false, user.copy())
             }
             holder.binding.trash.setOnClickListener {
-                userDao.delete(user)
+                viewModel.deleteUser(user)
+                viewModel.refreshUserId()
             }
-            if (currentId == user.id) {
-                holder.binding.user.toggle()
+            viewModel.currentId.observe(this@UserFragment) {
+                if (it == user.id) {
+                    if (!holder.binding.user.isChecked)
+                        holder.binding.user.toggle()
+                } else {
+                    if (holder.binding.user.isChecked)
+                        holder.binding.user.isChecked = false
+                }
             }
         }
 
