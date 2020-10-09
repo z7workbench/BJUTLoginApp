@@ -61,7 +61,6 @@
                 android:layout_weight="1"
                 android:drawableStart="@drawable/ic_arrow_downward_24dp"
                 android:drawablePadding="8dp"
-
                 android:text="@string/unknown"
                 android:textColor="?attr/appTextColor"
                 android:textSize="@dimen/text_size_xl" />
@@ -69,11 +68,11 @@
 
         <TextView
             android:id="@+id/description"
-            style="@style/AppTheme.TextView.Small"
+            style="@style/AppTheme.TextView.Normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/flux" />
 
@@ -93,11 +92,11 @@
 
         <TextView
             android:id="@+id/flux"
-            style="@style/AppTheme.TextView.Normal"
+            style="@style/AppTheme.TextView.Big"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

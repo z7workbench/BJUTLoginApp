@@ -3,23 +3,20 @@ package xin.z7workbench.bjutloginapp.ui
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnPreDraw
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.core.content.edit
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import xin.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.Hold
-import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialElevationScale
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ControlCardBinding
@@ -66,7 +63,9 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         makeSnack(NetworkUtils.getWifiSSID(requireContext()))
         binding.bottomAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.action_mode -> startActivity(Intent(requireContext(), SettingsActivity::class.java))
+                R.id.action_theme -> {
+
+                }
                 R.id.action_user -> {
                     makeSnack("yes")
                 }
@@ -128,7 +127,22 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                 }
                 is ControlCardViewHolder -> {
+                    if (app.prefs.getInt("ip_mode", -1) < 0) {
+                        app.prefs.edit { putInt("ip_mode", holder.binding.ipv4Chip.id) }
+                    }
+                    holder.binding.ipModeGroup.run {
+                        clearCheck()
+                        check(app.prefs.getInt("ip_mode", -1))
+                        setOnCheckedChangeListener { _, i ->
+                            if (i < 0) holder.binding.ipModeGroup.check(app.prefs.getInt("ip_mode", -1))
+                            else viewModel.changeIpMode(i)
+                        }
+                    }
                     holder.binding.wifiSSID.text = NetworkUtils.getWifiSSID(requireContext())
+                    viewModel.ipMode.observe(this@MainFragment) {
+                        if (holder.binding.ipModeGroup.checkedChipId != it)
+                            holder.binding.ipModeGroup.check(it)
+                    }
                 }
                 is FluxCardViewHolder -> {
 

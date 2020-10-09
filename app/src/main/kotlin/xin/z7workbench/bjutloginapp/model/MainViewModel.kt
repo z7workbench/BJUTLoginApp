@@ -1,16 +1,12 @@
 package xin.z7workbench.bjutloginapp.model
 
 import android.app.Application
-import android.util.Log
+import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import xin.z7workbench.bjutloginapp.LoginApp
-import xin.z7workbench.bjutloginapp.database.UserDao
 import xin.z7workbench.bjutloginapp.util.LogStatus
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
@@ -20,6 +16,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
     }
     private val _user = MutableLiveData<User>()
+    private val _ipMode = MutableLiveData<Int>().apply {
+        value = getApplication<LoginApp>().prefs.getInt("ip_mode", 0)
+    }
 
     val status: LiveData<LogStatus>
         get() = _status
@@ -28,6 +27,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     val users = dao.all()
     val user: LiveData<User>
         get() = _user
+    val ipMode: LiveData<Int>
+        get() = _ipMode
 
     init {
         _status.value = LogStatus.OFFLINE
@@ -59,5 +60,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun refreshUserId() {
         _currentId.value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
         _user.value = dao.find(_currentId.value!!)
+    }
+
+    fun changeIpMode(mode: Int) {
+        getApplication<LoginApp>().prefs.edit { putInt("ip_mode", mode) }
+        _ipMode.value = getApplication<LoginApp>().prefs.getInt("ip_mode", -1)
     }
 }

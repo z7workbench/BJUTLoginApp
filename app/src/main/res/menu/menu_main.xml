@@ -15,8 +15,8 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_mode"
-        android:icon="@drawable/ic_wifi_24dp"
+        android:id="@+id/action_theme"
+        android:icon="@drawable/ic_theme"
         android:orderInCategory="2"
         android:title="IPMode"
         app:showAsAction="ifRoom" />
