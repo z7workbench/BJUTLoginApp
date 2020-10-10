@@ -31,8 +31,10 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
         }
     }
 
-    override fun initView() {
-        NavigationUI.setupWithNavController(binding.toolbar, findNavController())
+    override fun initViewAfterViewCreated() {
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.toolbar.title = getString(R.string.action_users)
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

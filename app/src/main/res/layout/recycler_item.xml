@@ -19,7 +19,7 @@
         android:background="?attr/colorPrimary">
 
         <CheckedTextView
-            android:id="@+id/theme_title"
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -29,6 +29,9 @@
             android:drawableStart="?android:attr/listChoiceIndicatorSingle"
             android:drawableTint="?attr/colorAccent"
             android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="20dp"
             android:text="TextView"
             android:textColor="?attr/appTextColor"
             android:textSize="@dimen/text_size_xl" />

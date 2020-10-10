@@ -12,5 +12,26 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_main_graph" />
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.App.BottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="?attr/colorSecondary"
+        app:fabAlignmentMode="end"
+        app:fabCradleMargin="6dp"
+        app:hideOnScroll="true"
+        app:menu="@menu/menu_main" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/Widget.App.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/bottomAppBar"
+        android:src="@drawable/ic_wifi_24dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout><!--        app:navigationIcon="@drawable/ic_menu_24dp"-->
     <!--        app:menu="@menu/bottom_app_bar"-->

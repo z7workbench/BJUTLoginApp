@@ -25,6 +25,7 @@ import xin.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.util.defaultSharedPreferences
 
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
@@ -32,7 +33,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         ViewModelProvider(requireActivity())[MainViewModel::class.java]
     }
 
-    override fun initView() {
+    override fun initViewAfterViewCreated() {
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
         binding.swipeRefresh.setDistanceToTriggerSync(200)
 
@@ -51,39 +52,13 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         binding.recycler.layoutManager = llm
         binding.recycler.addItemDecoration(CardsDecoration())
 
-        val topEdge = BottomAppBarCutCradleTopEdge(
-                binding.bottomAppBar.fabCradleMargin,
-                binding.bottomAppBar.fabCradleRoundedCornerRadius,
-                binding.bottomAppBar.cradleVerticalOffset
-        )
-        val background = binding.bottomAppBar.background as MaterialShapeDrawable
-        background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
-                .setTopEdge(topEdge).build()
-
-        makeSnack(NetworkUtils.getWifiSSID(requireContext()))
-        binding.bottomAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_theme -> {
-
-                }
-                R.id.action_user -> {
-                    makeSnack("yes")
-                }
-            }
-            true
-        }
+        (requireActivity() as MainActivity).makeSnack(NetworkUtils.getWifiSSID(requireContext()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         exitTransition = MaterialElevationScale(false)
         reenterTransition = MaterialElevationScale(false)
-    }
-
-    private fun makeSnack(text: CharSequence) {
-        var snack = Snackbar.make(binding.mainLayout, text, Snackbar.LENGTH_SHORT)
-        snack = snack.setAnchorView(binding.fab.id)
-        snack.show()
     }
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -127,14 +102,16 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                 }
                 is ControlCardViewHolder -> {
-                    if (app.prefs.getInt("ip_mode", -1) < 0) {
-                        app.prefs.edit { putInt("ip_mode", holder.binding.ipv4Chip.id) }
+                    if (defaultSharedPreferences.getInt("ip_mode", -1) < 0) {
+                        defaultSharedPreferences.edit { putInt("ip_mode", holder.binding.ipv4Chip.id) }
                     }
                     holder.binding.ipModeGroup.run {
                         clearCheck()
-                        check(app.prefs.getInt("ip_mode", -1))
+                        check(defaultSharedPreferences.getInt("ip_mode", -1))
                         setOnCheckedChangeListener { _, i ->
-                            if (i < 0) holder.binding.ipModeGroup.check(app.prefs.getInt("ip_mode", -1))
+                            if (i < 0) holder.binding.ipModeGroup.check(
+                                    defaultSharedPreferences.getInt("ip_mode", -1)
+                            )
                             else viewModel.changeIpMode(i)
                         }
                     }

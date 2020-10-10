@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import xin.z7workbench.bjutloginapp.LoginApp
-import xin.z7workbench.bjutloginapp.databinding.FragmentUserBinding
 
 abstract class BasicFragment<T : ViewBinding> : Fragment() {
     val app by lazy { requireActivity().application as LoginApp }
@@ -19,19 +16,19 @@ abstract class BasicFragment<T : ViewBinding> : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = initBinding(inflater, container)
-        initView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewAfterViewCreated()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     abstract fun initBinding(inflater: LayoutInflater, container: ViewGroup?): T
 
-    abstract fun initView()
+    abstract fun initViewAfterViewCreated()
 
     override fun onDestroyView() {
         _binding = null

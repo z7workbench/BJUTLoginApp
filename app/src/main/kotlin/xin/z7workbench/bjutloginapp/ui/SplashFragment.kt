@@ -21,7 +21,7 @@ class SplashFragment : BasicFragment<FragmentSplashBinding>() {
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
             FragmentSplashBinding.inflate(inflater, container, false)
 
-    override fun initView() {
+    override fun initViewAfterViewCreated() {
         binding.splashTvVersion.text = "${getString(R.string.action_version)} ${BuildConfig.VERSION_NAME}"
     }
 
@@ -30,7 +30,7 @@ class SplashFragment : BasicFragment<FragmentSplashBinding>() {
 
         Handler(Looper.myLooper()!!).postDelayed(delays) {
             childFragmentManager.commit {
-                findNavController().navigate(R.id.action_splash_to_main)
+//                findNavController().navigate(R.id.action_splash_to_main)
             }
         }
     }

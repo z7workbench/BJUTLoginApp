@@ -18,7 +18,7 @@ fun Context.runOnUiThread(f: Context.() -> Unit) {
 }
 
 inline fun Fragment.runOnUiThread(crossinline f: () -> Unit) {
-    activity?.runOnUiThread { f() }
+    requireActivity().runOnUiThread { f() }
 }
 
 private object ContextHelper {

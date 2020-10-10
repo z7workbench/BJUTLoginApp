@@ -16,7 +16,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-alpha13"
+        versionName = "6.0.0-alpha14"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,13 +57,13 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
     implementation("com.daimajia.numberprogressbar:library:1.4@aar")
-    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("com.google.android.material:material:1.3.0-alpha03")
     implementation("com.github.jorgecastilloprz:fabprogresscircle:1.01@aar")
     testImplementation("junit:junit:4.13")
     implementation("com.squareup.okhttp3:okhttp:4.3.1")
