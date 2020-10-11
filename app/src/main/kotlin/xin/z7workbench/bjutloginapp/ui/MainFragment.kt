@@ -24,6 +24,7 @@ import xin.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import xin.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
+import xin.z7workbench.bjutloginapp.util.LogStatus
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
 import xin.z7workbench.bjutloginapp.util.defaultSharedPreferences
 
@@ -39,18 +40,20 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //            TODO("refresh")
+            viewModel.syncing()
             binding.swipeRefresh.isRefreshing = false
         }
 
-        val adapter = MainRecyclerAdapter()
 //        prevent recycler from scrolling
-        val llm = object : LinearLayoutManager(requireContext()) {
+        val llm = object : LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false) {
             override fun canScrollVertically() = false
         }
-        llm.orientation = LinearLayoutManager.VERTICAL
-        binding.recycler.adapter = adapter
-        binding.recycler.layoutManager = llm
-        binding.recycler.addItemDecoration(CardsDecoration())
+        binding.recycler.run {
+            adapter = MainRecyclerAdapter()
+            layoutManager = llm
+            addItemDecoration(CardsDecoration())
+
+        }
 
         (requireActivity() as MainActivity).makeSnack(NetworkUtils.getWifiSSID(requireContext()))
     }
@@ -99,6 +102,14 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     viewModel.user.observe(this@MainFragment) {
                         holder.binding.user.text = it.name
                         holder.binding.flux.text = it.pack.toString() + " GB"
+                    }
+                    viewModel.status.observe(this@MainFragment) {
+                        holder.binding.status.text = when (it!!) {
+                            LogStatus.ERROR -> resources.getString(R.string.status_error)
+                            LogStatus.OFFLINE -> resources.getString(R.string.status_offline)
+                            LogStatus.ONLINE -> resources.getString(R.string.status_online)
+                            LogStatus.SYNCING -> resources.getString(R.string.status_syncing)
+                        }
                     }
                 }
                 is ControlCardViewHolder -> {

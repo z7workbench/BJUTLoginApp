@@ -25,6 +25,9 @@ class LoginApp : Application() {
         if (prefs.getString("theme_index", null).isNullOrEmpty()) {
             prefs.edit { putString("theme_index", "ZGP") }
         }
+        if (prefs.getString("language", null).isNullOrEmpty()) {
+            prefs.edit { putString("language", "Auto") }
+        }
     }
 
     override fun attachBaseContext(base: Context) {

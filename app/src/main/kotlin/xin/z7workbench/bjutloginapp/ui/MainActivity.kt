@@ -76,8 +76,12 @@ class MainActivity : BasicActivity() {
                     }
                     controller.navigate(R.id.action_global_themeFragment)
                 }
-                R.id.action_user -> {
-                    makeSnack("yes")
+                R.id.action_lang -> {
+                    currentNavigationFragment?.apply {
+                        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+                        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+                    }
+                    controller.navigate(R.id.action_global_localeFragment)
                 }
             }
             true

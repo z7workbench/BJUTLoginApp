@@ -7,17 +7,21 @@
 <!--        android:orderInCategory="3"-->
 <!--        android:title="@string/action_help"-->
 <!--        app:showAsAction="ifRoom" />-->
-    <item
-        android:id="@+id/action_user"
-        android:icon="@drawable/ic_group_small"
-        android:orderInCategory="1"
-        android:title="User"
-        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_theme"
         android:icon="@drawable/ic_theme"
-        android:orderInCategory="2"
-        android:title="IPMode"
+        android:orderInCategory="3"
+        android:iconTint="?attr/appTextColor"
+        android:title="theme"
+        app:showAsAction="ifRoom" />
+
+
+    <item
+        android:id="@+id/action_lang"
+        android:icon="@drawable/ic_multi_language"
+        android:orderInCategory="3"
+        android:iconTint="?attr/appTextColor"
+        android:title="theme"
         app:showAsAction="ifRoom" />
 </menu>

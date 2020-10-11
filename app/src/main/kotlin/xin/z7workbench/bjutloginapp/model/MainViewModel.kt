@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import xin.z7workbench.bjutloginapp.LoginApp
 import xin.z7workbench.bjutloginapp.util.LogStatus
+import xin.z7workbench.bjutloginapp.util.NetworkUtils
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
