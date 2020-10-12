@@ -85,8 +85,7 @@ class MainActivity : BasicActivity() {
                     controller.navigate(R.id.action_global_localeFragment)
                 }
                 R.id.action_debug -> {
-//                    makeSnack((viewModel.data.value)?.toString() ?: "hahaha")
-//                    makeSnack(NetworkUtils.getIpv6Address())
+                    makeSnack(NetworkUtils.getIpv6Address())
                 }
             }
             true

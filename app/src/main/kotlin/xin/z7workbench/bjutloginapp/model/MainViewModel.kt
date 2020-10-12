@@ -61,10 +61,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun refreshUserId() {
         _currentId.value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
         val temp = dao.find(_currentId.value!!)
-//        if (temp != null) {
-//            _user.value = temp
-//        } else _user.value = User()
-        _user.postValue(temp)
+        if (temp != null) {
+            _user.value = temp
+        } else _user.value = User()
+//        _user.postValue(temp)
     }
 
     fun changeIpMode(mode: Int) {
