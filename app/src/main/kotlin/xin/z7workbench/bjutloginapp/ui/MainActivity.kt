@@ -14,6 +14,7 @@ import com.google.android.material.transition.MaterialSharedAxis
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.*
 import xin.z7workbench.bjutloginapp.model.MainViewModel
+import xin.z7workbench.bjutloginapp.util.NetworkUtils
 import xin.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
 
 class MainActivity : BasicActivity() {
@@ -82,6 +83,10 @@ class MainActivity : BasicActivity() {
                         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
                     }
                     controller.navigate(R.id.action_global_localeFragment)
+                }
+                R.id.action_debug -> {
+//                    makeSnack((viewModel.data.value)?.toString() ?: "hahaha")
+//                    makeSnack(NetworkUtils.getIpv6Address())
                 }
             }
             true

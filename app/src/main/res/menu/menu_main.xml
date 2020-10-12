@@ -1,27 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--   <item-->
-<!--        android:id="@+id/action_help"-->
-<!--        android:icon="@drawable/ic_help_outline_24dp"-->
-<!--        android:orderInCategory="3"-->
-<!--        android:title="@string/action_help"-->
-<!--        app:showAsAction="ifRoom" />-->
-
     <item
         android:id="@+id/action_theme"
         android:icon="@drawable/ic_theme"
-        android:orderInCategory="3"
+        android:orderInCategory="1"
         android:iconTint="?attr/appTextColor"
         android:title="theme"
         app:showAsAction="ifRoom" />
-
 
     <item
         android:id="@+id/action_lang"
         android:icon="@drawable/ic_multi_language"
-        android:orderInCategory="3"
+        android:orderInCategory="2"
         android:iconTint="?attr/appTextColor"
         android:title="theme"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_debug"
+        android:icon="@drawable/ic_warning"
+        android:orderInCategory="2"
+        android:iconTint="?attr/appTextColor"
+        android:title="debug"
+        app:showAsAction="ifRoom" />
+
 </menu>

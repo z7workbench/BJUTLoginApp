@@ -28,6 +28,9 @@ class LoginApp : Application() {
         if (prefs.getString("language", null).isNullOrEmpty()) {
             prefs.edit { putString("language", "Auto") }
         }
+        if (prefs.getInt("ip_mode", -1) < 0) {
+            prefs.edit { putInt("ip_mode", 0) }
+        }
     }
 
     override fun attachBaseContext(base: Context) {

@@ -1,22 +1,15 @@
 package xin.z7workbench.bjutloginapp.ui
 
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.edit
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.chip.Chip
-import xin.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialElevationScale
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.ControlCardBinding
@@ -24,9 +17,9 @@ import xin.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import xin.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
+import xin.z7workbench.bjutloginapp.util.IpMode
 import xin.z7workbench.bjutloginapp.util.LogStatus
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
-import xin.z7workbench.bjutloginapp.util.defaultSharedPreferences
 
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
@@ -100,8 +93,8 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         findNavController().navigate(R.id.action_main_to_userFragment, null, null, extras)
                     }
                     viewModel.user.observe(this@MainFragment) {
-                        holder.binding.user.text = it.name
-                        holder.binding.flux.text = it.pack.toString() + " GB"
+                        holder.binding.user.text = it.name ?: ""
+                        holder.binding.flux.text = it.pack.toString() + " GB" ?: ""
                     }
                     viewModel.status.observe(this@MainFragment) {
                         holder.binding.status.text = when (it!!) {
@@ -113,23 +106,28 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                 }
                 is ControlCardViewHolder -> {
-                    if (defaultSharedPreferences.getInt("ip_mode", -1) < 0) {
-                        defaultSharedPreferences.edit { putInt("ip_mode", holder.binding.ipv4Chip.id) }
-                    }
-                    holder.binding.ipModeGroup.run {
-                        clearCheck()
-                        check(defaultSharedPreferences.getInt("ip_mode", -1))
-                        setOnCheckedChangeListener { _, i ->
-                            if (i < 0) holder.binding.ipModeGroup.check(
-                                    defaultSharedPreferences.getInt("ip_mode", -1)
-                            )
-                            else viewModel.changeIpMode(i)
-                        }
-                    }
                     holder.binding.wifiSSID.text = NetworkUtils.getWifiSSID(requireContext())
+                    holder.binding.ipWLgnChip.setOnClickListener {
+                        viewModel.changeIpMode(0)
+                    }
+                    holder.binding.ipv4Chip.setOnClickListener {
+                        viewModel.changeIpMode(1)
+                    }
+                    holder.binding.ipv6Chip.setOnClickListener {
+                        viewModel.changeIpMode(2)
+                    }
+                    holder.binding.ipBothChip.setOnClickListener {
+                        viewModel.changeIpMode(3)
+                    }
                     viewModel.ipMode.observe(this@MainFragment) {
-                        if (holder.binding.ipModeGroup.checkedChipId != it)
-                            holder.binding.ipModeGroup.check(it)
+                        holder.binding.ipModeGroup.check(-1)
+                        when (it) {
+                            IpMode.WIRED_BOTH -> holder.binding.ipBothChip.isChecked = true
+                            IpMode.WIRED_IPV6 -> holder.binding.ipv6Chip.isChecked = true
+                            IpMode.WIRED_IPV4 -> holder.binding.ipv4Chip.isChecked = true
+                            else -> holder.binding.ipWLgnChip.isChecked = true
+
+                        }
                     }
                 }
                 is FluxCardViewHolder -> {

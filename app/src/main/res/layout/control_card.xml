@@ -27,6 +27,19 @@
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/ipWLgnChip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="WLGN"
+                    android:textSize="@dimen/text_size_l"
+                    app:checkedIcon="@drawable/ic_wifi_24dp"
+                    app:checkedIconEnabled="true"
+                    app:chipEndPadding="12dp"
+                    app:chipIconTint="?attr/colorAccent"
+                    app:chipStartPadding="12dp" />
+
+                <com.google.android.material.chip.Chip
                     android:id="@+id/ipv4Chip"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
@@ -58,19 +71,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="both"
-                    android:textSize="@dimen/text_size_l"
-                    app:checkedIcon="@drawable/ic_wifi_24dp"
-                    app:checkedIconEnabled="true"
-                    app:chipEndPadding="12dp"
-                    app:chipIconTint="?attr/colorAccent"
-                    app:chipStartPadding="12dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/ipWLgnChip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="WLGN"
                     android:textSize="@dimen/text_size_l"
                     app:checkedIcon="@drawable/ic_wifi_24dp"
                     app:checkedIconEnabled="true"
