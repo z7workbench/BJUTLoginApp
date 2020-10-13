@@ -12,7 +12,7 @@ jobs:
     - uses: actions/setup-ruby@v1
     - name: build apk
       run: |
-        openssl aes-256-cbc -salt -pbkdf2 -in z7-login-keystore.jks.enc -out z7-login-keystore.jks -k $key -iv $iv -d
+        openssl enc -d --aes-256-cbc -iv $iv -K $key -in z7-login-keystore.jks.enc -out z7-login-keystore.jks -salt -pbkdf2
         chmod +x gradlew
         ./gradlew assembleRelease
       env:
