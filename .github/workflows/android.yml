@@ -1,0 +1,31 @@
+name: Android CI
+
+on: [push, pull_request]
+
+jobs:
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-ruby@v1
+    - name: build apk
+      run: |
+        openssl aes-256-cbc -salt -pbkdf2 -in z7-login-keystore.jks.enc -out z7-login-keystore.jks -k $key -iv $iv -d
+        chmod +x gradlew
+        ./gradlew assembleRelease
+      env:
+        key: ${{ secrets.key }}
+        iv: ${{ secrets.iv }}
+        store_psd: ${{ secrets.store_psd }}
+        alias: ${{ secrets.alias }}
+        key_psd: ${{ secrets.key_psd }}
+    - name: publish to fir.im
+      run: |
+        gem install fir-cli
+        fir login $token
+        fir p app/build/outputs/apk/release/app-release.apk
+      env: 
+        token: ${{ secrets.fir_token }}
+      continue-on-error: true

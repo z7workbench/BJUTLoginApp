@@ -22,10 +22,10 @@ android {
     }
     signingConfigs {
         create("github") {
-            storeFile = file("../zero-own-keystore.jks")
-            storePassword = System.getenv("STORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+            storeFile = file("../z7-login-keystore.jks")
+            storePassword = System.getenv("store_psd")
+            keyAlias = System.getenv("key_alias")
+            keyPassword = System.getenv("key_psd")
         }
     }
     buildTypes {
