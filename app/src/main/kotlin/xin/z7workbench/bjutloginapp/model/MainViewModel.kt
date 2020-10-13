@@ -43,9 +43,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _status.value = LogStatus.OFFLINE
         refreshUserId()
         setUpIpMode()
-//        updateSyncedTime(true)
-        _time.value = app.resources.getString(R.string.main_last) +
-                        app.resources.getString(R.string.unknown)
+        _time.value = app.resources.getString(R.string.main_last) + app.resources.getString(R.string.unknown)
     }
 
     fun offline() {
@@ -58,7 +56,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 _status.value = LogStatus.OFFLINE
             }
 
-            override fun onFinished() = updateSyncedTime(false)
+            override fun onFinished() = updateSyncedTime()
         })
     }
 
@@ -67,21 +65,39 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun online() {
+        NetworkUtils.login(_user.value as User, _ipMode.value as IpMode, object : DataProcessBlock {
+            override fun onFailure(exception: IOException) {
+                _status.postValue(LogStatus.ERROR)
+            }
+
+            override fun onResponse(bodyString: String?) {
+                syncing()
+            }
+
+            override fun onFinished() = updateSyncedTime()
+        })
         _status.value = LogStatus.ONLINE
     }
 
     fun syncing() {
-        _status.value = LogStatus.SYNCING
+        _status.postValue(LogStatus.SYNCING)
         NetworkUtils.sync(_ipMode.value as IpMode, object : DataProcessBlock {
             override fun onFailure(exception: IOException) {
                 _status.postValue(LogStatus.ERROR)
             }
 
             override fun onResponse(bodyString: String?) {
-                _status.postValue(LogStatus.ONLINE)
+                if (bodyString == null) _status.postValue(LogStatus.ERROR)
+                else {
+                    val regex = """time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'""".toRegex()
+                    val result = regex.find(bodyString)
+                    if (result == null || result.groups.isEmpty()) {
+                        _status.postValue(LogStatus.OFFLINE)
+                    } else _status.postValue(LogStatus.ONLINE)
+                }
             }
 
-            override fun onFinished() = updateSyncedTime(false)
+            override fun onFinished() = updateSyncedTime()
         })
     }
 
@@ -115,17 +131,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private fun updateSyncedTime(isUnknown: Boolean) {
+    private fun updateSyncedTime() {
         val time = System.currentTimeMillis()
         val date = Date(time)
         // use MutableLiveData#postValue instead of MutableLiveData#setValue in asynchronous process
-        if (!isUnknown) _time.postValue(
-                getApplication<LoginApp>().resources.getString(R.string.main_last) +
-                        sdf.format(date)
-        )
-//        else _time.postValue(
-//                getApplication<LoginApp>().resources.getString(R.string.main_last) +
-//                        getApplication<LoginApp>().resources.getString(R.string.unknown)
-//        )
+        _time.postValue(getApplication<LoginApp>().resources.getString(R.string.main_last) + sdf.format(date))
     }
+
+    val currentStatus = _status.value
 }

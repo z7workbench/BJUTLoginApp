@@ -14,7 +14,9 @@ import com.google.android.material.transition.MaterialSharedAxis
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.*
 import xin.z7workbench.bjutloginapp.model.MainViewModel
+import xin.z7workbench.bjutloginapp.util.LogStatus
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.util.nothing
 import xin.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
 
 class MainActivity : BasicActivity() {
@@ -58,6 +60,15 @@ class MainActivity : BasicActivity() {
             setShowMotionSpecResource(R.animator.fab_show)
             setHideMotionSpecResource(R.animator.fab_hide)
             setOnClickListener {
+                when (viewModel.currentStatus) {
+                    LogStatus.OFFLINE, LogStatus.ERROR -> {
+                        viewModel.online()
+                    }
+                    LogStatus.ONLINE -> {
+                        viewModel.offline()
+                    }
+                    else -> nothing()
+                }
             }
         }
 

@@ -33,3 +33,5 @@ fun String.buildString(vararg strings: String): String {
     }
     return string
 }
+
+fun nothing() {}
