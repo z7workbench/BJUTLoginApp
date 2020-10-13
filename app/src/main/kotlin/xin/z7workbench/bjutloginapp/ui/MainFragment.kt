@@ -49,6 +49,10 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         }
 
         (requireActivity() as MainActivity).makeSnack(NetworkUtils.getWifiSSID(requireContext()))
+
+        viewModel.time.observe(this) {
+            binding.syncTime.text = it
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,7 +101,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         holder.binding.flux.text = it.pack.toString() + " GB" ?: ""
                     }
                     viewModel.status.observe(this@MainFragment) {
-                        holder.binding.status.text = when (it!!) {
+                        holder.binding.status.text = when (it as LogStatus) {
                             LogStatus.ERROR -> resources.getString(R.string.status_error)
                             LogStatus.OFFLINE -> resources.getString(R.string.status_offline)
                             LogStatus.ONLINE -> resources.getString(R.string.status_online)
@@ -121,12 +125,11 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                     viewModel.ipMode.observe(this@MainFragment) {
                         holder.binding.ipModeGroup.check(-1)
-                        when (it) {
+                        when (it as IpMode) {
                             IpMode.WIRED_BOTH -> holder.binding.ipBothChip.isChecked = true
                             IpMode.WIRED_IPV6 -> holder.binding.ipv6Chip.isChecked = true
                             IpMode.WIRED_IPV4 -> holder.binding.ipv4Chip.isChecked = true
-                            else -> holder.binding.ipWLgnChip.isChecked = true
-
+                            IpMode.WIRELESS -> holder.binding.ipWLgnChip.isChecked = true
                         }
                     }
                 }

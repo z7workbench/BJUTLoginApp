@@ -27,7 +27,7 @@ class MainActivity : BasicActivity() {
     private val controller by lazy {
         (supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment).navController
     }
-    val currentNavigationFragment: Fragment?
+    private val currentNavigationFragment: Fragment?
         get() = supportFragmentManager.findFragmentById(R.id.mainContainer)
                 ?.childFragmentManager
                 ?.fragments
@@ -37,7 +37,7 @@ class MainActivity : BasicActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.run {
-            controller.addOnDestinationChangedListener { controller, destination, bundle ->
+            controller.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
                     R.id.themeFragment, R.id.localeFragment -> {
                         hideBottomAppBar()
@@ -57,6 +57,8 @@ class MainActivity : BasicActivity() {
         binding.fab.run {
             setShowMotionSpecResource(R.animator.fab_show)
             setHideMotionSpecResource(R.animator.fab_hide)
+            setOnClickListener {
+            }
         }
 
         val topEdge = BottomAppBarCutCradleTopEdge(

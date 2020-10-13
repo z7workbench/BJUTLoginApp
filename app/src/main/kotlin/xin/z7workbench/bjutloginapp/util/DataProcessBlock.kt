@@ -1,12 +1,8 @@
 package xin.z7workbench.bjutloginapp.util
 
-import android.content.Context
 import java.io.IOException
 
-interface UIBlock {
-    val context: Context
-
-    fun onPrepare()
+interface DataProcessBlock {
     fun onFailure(exception: IOException)
     fun onResponse(bodyString: String?)
     fun onFinished()

@@ -8,7 +8,7 @@ import androidx.preference.PreferenceFragmentCompat
 import xin.z7workbench.bjutloginapp.BuildConfig
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.util.NetworkUtils
-import xin.z7workbench.bjutloginapp.util.UIBlock
+import xin.z7workbench.bjutloginapp.util.DataProcessBlock
 import java.io.IOException
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -50,11 +50,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        NetworkUtils.checkNewVersion(object : UIBlock {
-            override val context = activity!!
-
-            override fun onPrepare() {
-            }
+        NetworkUtils.checkNewVersion(object : DataProcessBlock {
+//            override val context = activity!!
+//
+//            override fun onPrepare() {
+//            }
 
             override fun onFailure(exception: IOException) {
                 versionPreference?.summary = BuildConfig.VERSION_NAME

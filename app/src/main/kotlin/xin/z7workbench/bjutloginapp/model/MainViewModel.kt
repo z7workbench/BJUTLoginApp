@@ -6,8 +6,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import xin.z7workbench.bjutloginapp.LoginApp
+import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.util.DataProcessBlock
 import xin.z7workbench.bjutloginapp.util.IpMode
 import xin.z7workbench.bjutloginapp.util.LogStatus
+import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
@@ -18,7 +24,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
     private val _user = MutableLiveData<User>()
     private val _ipMode = MutableLiveData<IpMode>()
-    val data = MutableLiveData<Int>()
+    private val _time = MutableLiveData<String>()
+    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
     val status: LiveData<LogStatus>
         get() = _status
@@ -29,18 +36,33 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         get() = _user
     val ipMode: LiveData<IpMode>
         get() = _ipMode
+    val time: LiveData<String>
+        get() = _time
 
     init {
         _status.value = LogStatus.OFFLINE
         refreshUserId()
         setUpIpMode()
+//        updateSyncedTime(true)
+        _time.value = app.resources.getString(R.string.main_last) +
+                        app.resources.getString(R.string.unknown)
     }
 
     fun offline() {
-        _status.value = LogStatus.OFFLINE
+        NetworkUtils.sync(_ipMode.value as IpMode, object : DataProcessBlock {
+            override fun onFailure(exception: IOException) {
+                error()
+            }
+
+            override fun onResponse(bodyString: String?) {
+                _status.value = LogStatus.OFFLINE
+            }
+
+            override fun onFinished() = updateSyncedTime(false)
+        })
     }
 
-    fun error() {
+    private fun error() {
         _status.value = LogStatus.ERROR
     }
 
@@ -50,6 +72,17 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun syncing() {
         _status.value = LogStatus.SYNCING
+        NetworkUtils.sync(_ipMode.value as IpMode, object : DataProcessBlock {
+            override fun onFailure(exception: IOException) {
+                _status.postValue(LogStatus.ERROR)
+            }
+
+            override fun onResponse(bodyString: String?) {
+                _status.postValue(LogStatus.ONLINE)
+            }
+
+            override fun onFinished() = updateSyncedTime(false)
+        })
     }
 
     fun insertUser(user: User) = dao.insert(user)
@@ -61,10 +94,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun refreshUserId() {
         _currentId.value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
         val temp = dao.find(_currentId.value!!)
+        // if data in database is null, use a new value to replace it
         if (temp != null) {
             _user.value = temp
         } else _user.value = User()
-//        _user.postValue(temp)
     }
 
     fun changeIpMode(mode: Int) {
@@ -80,5 +113,19 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             3 -> IpMode.WIRED_BOTH
             else -> IpMode.WIRELESS
         }
+    }
+
+    private fun updateSyncedTime(isUnknown: Boolean) {
+        val time = System.currentTimeMillis()
+        val date = Date(time)
+        // use MutableLiveData#postValue instead of MutableLiveData#setValue in asynchronous process
+        if (!isUnknown) _time.postValue(
+                getApplication<LoginApp>().resources.getString(R.string.main_last) +
+                        sdf.format(date)
+        )
+//        else _time.postValue(
+//                getApplication<LoginApp>().resources.getString(R.string.main_last) +
+//                        getApplication<LoginApp>().resources.getString(R.string.unknown)
+//        )
     }
 }
