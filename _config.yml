@@ -1,1 +1,6 @@
-theme: jekyll-theme-architect
+theme: jekyll-text-theme
+text_skin: ocean
+highlight_theme: tomorrow-night-eighties
+title: BJUTLoginApp / BJUT网关登录 | ZeroGo's Workbench🔨 / 小Z的工作台
+description: >
+  BJUT Login App for Android created by ZeroGoYoosee, not VPN
