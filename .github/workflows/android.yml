@@ -10,6 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-ruby@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '11.0.9' # The JDK version to make available on the path.
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
     - name: build apk
       run: |
         openssl enc -d --aes-256-cbc -iv $iv -K $key -in z7-login-keystore.jks.enc -out z7-login-keystore.jks -salt -pbkdf2
