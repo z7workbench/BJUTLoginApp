@@ -1,8 +1,11 @@
 package xin.z7workbench.bjutloginapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.edit
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -11,13 +14,12 @@ import com.google.android.material.transition.MaterialSharedAxis
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.RecyclerBinding
 import xin.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
+import xin.z7workbench.bjutloginapp.model.MainViewModel
 
 class ThemeFragment : BasicFragment<RecyclerBinding>() {
-    private val values by lazy {
-        resources.getStringArray(R.array.theme_index)
+    private val viewModel by lazy {
+        ViewModelProvider(requireActivity())[MainViewModel::class.java]
     }
-    val setting: String
-        get() = app.prefs.getString("theme_index", values.first())!!
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
             RecyclerBinding.inflate(inflater, container, false)
@@ -47,7 +49,18 @@ class ThemeFragment : BasicFragment<RecyclerBinding>() {
 
         override fun onBindViewHolder(holder: ThemesViewHolder, position: Int) {
             holder.binding.text.text = themes[position]
-
+            val current = viewModel.themeIndies.indexOf(app.prefs.getString("theme_index", viewModel.themeIndies.first()))
+            if (current == position){
+                holder.binding.text.toggle()
+            }
+            holder.itemView.setOnClickListener {
+                if (current != position) {
+                    app.prefs.edit { putString("theme_index", viewModel.themeIndies[position]) }
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    requireContext().startActivity(intent)
+                    requireActivity().finish()
+                }
+            }
         }
 
         inner class ThemesViewHolder(val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root)

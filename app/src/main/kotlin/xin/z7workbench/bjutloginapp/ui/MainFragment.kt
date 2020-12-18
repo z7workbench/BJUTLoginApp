@@ -33,8 +33,9 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //            TODO("refresh")
-            viewModel.syncing()
-            binding.swipeRefresh.isRefreshing = false
+            viewModel.syncing(requireContext()) {
+                binding.swipeRefresh.isRefreshing = false
+            }
         }
 
 //        prevent recycler from scrolling
@@ -47,8 +48,6 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
             addItemDecoration(CardsDecoration())
 
         }
-
-        (requireActivity() as MainActivity).makeSnack(NetworkUtils.getWifiSSID(requireContext()))
 
         viewModel.time.observe(this) {
             binding.syncTime.text = it

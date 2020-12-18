@@ -6,6 +6,7 @@ package xin.z7workbench.bjutloginapp
 object Constants {
     val WLGN_URL = "https://wlgn.bjut.edu.cn/"
     val LGN_URL = "http://lgn.bjut.edu.cn/"
+    val IPV6_URL = "http://lgn6.bjut.edu.cn/"
 //    val LOGIN_TAIL = "0.htm"
     val QUIT_TAIL = "F.htm"
     val VERSION_URL = "http://d.firim.vip/BJUTLoginApp"

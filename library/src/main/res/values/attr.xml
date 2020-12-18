@@ -28,6 +28,7 @@
         <attr name="waveBackColor" format="color" />
         <attr name="wavePercent" format="float" />
         <attr name="waveLevelColors" format="reference" />
+        <attr name="waveStrokeWidth" format="dimension" />
         <attr name="waveTextLocation" format="enum">
             <enum name="top" value="0" />
             <enum name="center" value="1" />

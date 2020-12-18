@@ -72,43 +72,43 @@ class MainActivity : BasicActivity() {
             }
         }
 
-        val topEdge = BottomAppBarCutCradleTopEdge(
-                binding.bottomAppBar.fabCradleMargin,
-                binding.bottomAppBar.fabCradleRoundedCornerRadius,
-                binding.bottomAppBar.cradleVerticalOffset
-        )
-        val background = binding.bottomAppBar.background as MaterialShapeDrawable
-        background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
-                .setTopEdge(topEdge).build()
+        binding.bottomAppBar.run {
+            val topEdge = BottomAppBarCutCradleTopEdge(
+                    fabCradleMargin, fabCradleRoundedCornerRadius, cradleVerticalOffset
+            )
+            val background = background as MaterialShapeDrawable
+            background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
+                    .setTopEdge(topEdge).build()
 
-        binding.bottomAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_theme -> {
-                    currentNavigationFragment?.apply {
-                        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-                        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_theme -> {
+                        currentNavigationFragment?.run {
+                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+                        }
+                        controller.navigate(R.id.action_global_themeFragment)
                     }
-                    controller.navigate(R.id.action_global_themeFragment)
-                }
-                R.id.action_lang -> {
-                    currentNavigationFragment?.apply {
-                        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-                        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+                    R.id.action_lang -> {
+                        currentNavigationFragment?.run {
+                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+                        }
+                        controller.navigate(R.id.action_global_localeFragment)
                     }
-                    controller.navigate(R.id.action_global_localeFragment)
+                    R.id.action_debug -> {
+                        makeSnack(NetworkUtils.getIpv6Address())
+                    }
                 }
-                R.id.action_debug -> {
-                    makeSnack(NetworkUtils.getIpv6Address())
-                }
+                true
             }
-            true
         }
     }
 
     private fun showBottomAppBar() {
-        binding.run {
-            bottomAppBar.visibility = View.VISIBLE
-            bottomAppBar.performShow()
+        binding.bottomAppBar.run {
+            visibility = View.VISIBLE
+            performShow()
         }
     }
 

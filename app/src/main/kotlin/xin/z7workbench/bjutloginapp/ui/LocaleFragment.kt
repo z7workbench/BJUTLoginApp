@@ -1,8 +1,11 @@
 package xin.z7workbench.bjutloginapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.edit
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,14 +13,13 @@ import com.google.android.material.transition.MaterialSharedAxis
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.RecyclerBinding
 import xin.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
+import xin.z7workbench.bjutloginapp.model.MainViewModel
 import java.text.FieldPosition
 
 class LocaleFragment : BasicFragment<RecyclerBinding>() {
-    private val values by lazy {
-        resources.getStringArray(R.array.language_values)
+    private val viewModel by lazy {
+        ViewModelProvider(requireActivity())[MainViewModel::class.java]
     }
-    val setting: String
-        get() = app.prefs.getString("language", values.first())!!
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
             RecyclerBinding.inflate(inflater, container, false)
@@ -48,8 +50,17 @@ class LocaleFragment : BasicFragment<RecyclerBinding>() {
 
         override fun onBindViewHolder(holder: LocalesViewHolder, position: Int) {
             holder.binding.text.text = locales[position]
+            val current = viewModel.localeIndies.indexOf(app.prefs.getString("language", viewModel.localeIndies.first()))
+            if (current == position){
+                holder.binding.text.toggle()
+            }
             holder.itemView.setOnClickListener {
-
+                if (current != position) {
+                    app.prefs.edit { putString("language", viewModel.localeIndies[position]) }
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    requireContext().startActivity(intent)
+                    requireActivity().finish()
+                }
             }
         }
 

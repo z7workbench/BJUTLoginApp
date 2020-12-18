@@ -20,17 +20,9 @@
     <string name="settings_version_title">版本</string>
     <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/z7workbench</string>
     <string name="action_help">帮助</string>
-    <string name="action_rn">更新日志</string>
-    <string name="help_alert_button">懂了！</string>
-    <string name="help_alert_des">此应用用于登陆[bjut_wifi]的WiFi网络。\n你可以按右上角的设置按钮来修改登录所用的用户名和密码。</string>
-    <string name="help_alert_title">帮助</string>
     <string name="unknown">未知</string>
     <string name="settings_pack">套餐</string>
     <string name="settings_pack_summary">在此选择套餐</string>
-    <string name="force_rn_title">更新日志</string>
-    <string name="force_rn_desc">打开日志</string>
-    <string name="force_settings_title">设置</string>
-    <string name="force_settings_desc">打开设置</string>
     <string name="main_fee">余额：</string>
     <string name="main_last">上次同步：</string>
     <string name="main_time">已用时间：</string>
@@ -49,8 +41,6 @@
     <string name="goto_settings">转到设置</string>
     <string name="action_users">用户</string>
     <string name="cancel">取消</string>
-    <string name="force_user_title">用户</string>
-    <string name="force_user_desc">编辑或选择用户</string>
     <string name="settings_users_title">选择用户</string>
     <string name="settings_users_summary">当前账号：</string>
     <string name="users_placeholder">尴尬，这里是空的哟！</string>

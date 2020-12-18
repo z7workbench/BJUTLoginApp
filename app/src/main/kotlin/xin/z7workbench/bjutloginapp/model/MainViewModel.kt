@@ -1,16 +1,14 @@
 package xin.z7workbench.bjutloginapp.model
 
 import android.app.Application
+import android.content.Context
 import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import xin.z7workbench.bjutloginapp.LoginApp
 import xin.z7workbench.bjutloginapp.R
-import xin.z7workbench.bjutloginapp.util.DataProcessBlock
-import xin.z7workbench.bjutloginapp.util.IpMode
-import xin.z7workbench.bjutloginapp.util.LogStatus
-import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,12 +36,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         get() = _ipMode
     val time: LiveData<String>
         get() = _time
+    val themeIndies: List<String>
+    val localeIndies: List<String>
 
     init {
         _status.value = LogStatus.OFFLINE
+        themeIndies = app.resources.getStringArray(R.array.theme_index).toList()
+        localeIndies = app.resources.getStringArray(R.array.language_values).toList()
         refreshUserId()
         setUpIpMode()
-        _time.value = app.resources.getString(R.string.main_last) + app.resources.getString(R.string.unknown)
     }
 
     fun offline() {
@@ -79,11 +80,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _status.value = LogStatus.ONLINE
     }
 
-    fun syncing() {
+    fun syncing(context: Context? = null, block: () -> Unit = {}) {
         _status.postValue(LogStatus.SYNCING)
         NetworkUtils.sync(_ipMode.value as IpMode, object : DataProcessBlock {
             override fun onFailure(exception: IOException) {
                 _status.postValue(LogStatus.ERROR)
+                context?.runOnUiThread { block() }
             }
 
             override fun onResponse(bodyString: String?) {
@@ -95,6 +97,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                         _status.postValue(LogStatus.OFFLINE)
                     } else _status.postValue(LogStatus.ONLINE)
                 }
+                context?.runOnUiThread { block() }
             }
 
             override fun onFinished() = updateSyncedTime()
@@ -135,7 +138,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val time = System.currentTimeMillis()
         val date = Date(time)
         // use MutableLiveData#postValue instead of MutableLiveData#setValue in asynchronous process
-        _time.postValue(getApplication<LoginApp>().resources.getString(R.string.main_last) + sdf.format(date))
+        _time.postValue(sdf.format(date))
     }
 
     val currentStatus = _status.value

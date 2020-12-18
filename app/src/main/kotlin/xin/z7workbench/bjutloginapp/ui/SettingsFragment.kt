@@ -29,8 +29,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.prefs_settings, rootKey)
 
         usersPreference?.setOnPreferenceClickListener {
-            val intent = Intent(activity as SettingsActivity, UsersActivity::class.java)
-            activity?.startActivity(intent)
+//            val intent = Intent(activity as SettingsActivity, UsersActivity::class.java)
+//            activity?.startActivity(intent)
             true
         }
 
@@ -85,8 +85,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         })
 
         versionPreference?.setOnPreferenceClickListener {
-            val intent = Intent(activity as SettingsActivity, VersionActivity::class.java)
-            activity?.startActivity(intent)
+//            val intent = Intent(activity as SettingsActivity, VersionActivity::class.java)
+//            activity?.startActivity(intent)
             true
         }
 
@@ -111,8 +111,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun restart() {
-        val intents = arrayOf(Intent(activity as SettingsActivity, MainActivity::class.java), Intent(activity as SettingsActivity, SettingsActivity::class.java))
-        intents[0].flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        activity?.startActivities(intents)
+//        val intents = arrayOf(Intent(activity as SettingsActivity, MainActivity::class.java), Intent(activity as SettingsActivity, SettingsActivity::class.java))
+//        intents[0].flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//        activity?.startActivities(intents)
     }
 }

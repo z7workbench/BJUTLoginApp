@@ -4,19 +4,11 @@
     <string name="action_help">Help</string>
     <string name="action_login">Login</string>
     <string name="action_logout">Logout</string>
-    <string name="action_rn">Release Note</string>
     <string name="action_settings">Settings</string>
     <string name="action_sync">Sync</string>
     <string name="action_version">Version</string>
     <string name="action_users">Users</string>
     <string name="action_add">Add</string>
-
-    <string name="force_rn_title">Release Note</string>
-    <string name="force_rn_desc">Open Release Note</string>
-    <string name="force_settings_title">Settings</string>
-    <string name="force_settings_desc">Open Settings</string>
-    <string name="force_user_title">User</string>
-    <string name="force_user_desc">Edit or Select User</string>
 
     <string name="main_fee">Fee -&#160;</string>
     <string name="main_last">Last sync -&#160;</string>
@@ -24,10 +16,6 @@
     <string name="main_user">User -&#160;</string>
     <string name="main_hide">Hidden</string>
     <string name="main_login_successful">Log in complete, syncing&#8230;</string>
-
-    <string name="help_alert_title">Help</string>
-    <string name="help_alert_des">This App is a Login Application for [bjut_wifi] network. \nYou can press Settings button in the upper right corner to change the user name and password.</string>
-    <string name="help_alert_button">Got it! </string>
 
     <string name="OK">OK</string>
     <string name="cancel">Cancel</string>

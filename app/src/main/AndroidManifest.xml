@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xin.z7workbench.bjutloginapp">
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="cyanogenmod.permission.PUBLISH_CUSTOM_TILE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".LoginApp"
@@ -17,25 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Dark.ZeroGoPurple">
         <activity android:name=".ui.MainActivity" />
-        <activity
-            android:name=".ui.SettingsActivity"
-            android:label="@string/action_settings" />
-
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".ui.VersionActivity"
-            android:label="@string/action_version" />
-
-        <activity
-            android:name=".ui.UsersActivity"
-            android:label="@string/action_users" />
-
         <activity android:name=".ui.BasicActivity" />
     </application>
 </manifest>

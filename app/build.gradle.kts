@@ -16,7 +16,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-beta1"
+        versionName = "6.0.0-beta2"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -84,17 +84,12 @@ dependencies {
     kapt("androidx.room:room-compiler:2.2.5")
     // Paging
     implementation("androidx.paging:paging-runtime:2.1.2")
-
-    // Java language implementation
-    implementation("androidx.navigation:navigation-fragment:$navVersion")
-    implementation("androidx.navigation:navigation-ui:$navVersion")
-
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-alpha03")
 }
 repositories {
     mavenCentral()
