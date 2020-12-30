@@ -1,4 +1,4 @@
-package xin.z7workbench.bjutloginapp.util
+package xin.z7workbench.bjutloginapp.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,11 +7,11 @@ import android.util.Log
 import okhttp3.*
 import xin.z7workbench.bjutloginapp.Constants
 import xin.z7workbench.bjutloginapp.model.User
+import xin.z7workbench.bjutloginapp.util.IpMode
 import java.io.IOException
 import java.net.Inet6Address
 import java.net.NetworkInterface
 import java.net.SocketException
-import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
@@ -19,7 +19,7 @@ import java.util.regex.Pattern
  * Created by ZeroGo on 2017.2.28.
  */
 
-object NetworkUtils {
+object OkHttpNetwork {
     private val client = OkHttpClient.Builder()
             .cache(null)
             .readTimeout(10, TimeUnit.SECONDS)
@@ -128,7 +128,7 @@ object NetworkUtils {
         return wifiManager.connectionInfo.ssid
     }
 
-    fun login(user: User, mode: IpMode, block: DataProcessBlock) {
+    fun login(user: User, mode: IpMode, block: OkHttpDataBlock) {
         val request = Request.Builder()
                 .post(body(mode, user))
                 .url(url(mode, true))
@@ -151,7 +151,7 @@ object NetworkUtils {
         })
     }
 
-    fun sync(mode: IpMode, block: DataProcessBlock) {
+    fun sync(mode: IpMode, block: OkHttpDataBlock) {
         val request = Request.Builder()
                 .get()
                 .url(url(mode, true))
@@ -173,7 +173,7 @@ object NetworkUtils {
         })
     }
 
-    fun logout(mode: IpMode, block: DataProcessBlock) {
+    fun logout(mode: IpMode, block: OkHttpDataBlock) {
         val request = Request.Builder()
                 .get()
                 .url(url(mode, false))
@@ -192,27 +192,6 @@ object NetworkUtils {
                 block.onResponse(string)
                 block.onFinished()
 
-            }
-        })
-    }
-
-    @Deprecated("Do not use this.")
-    fun checkNewVersion(block: DataProcessBlock) {
-        val request = Request.Builder()
-                .get()
-                .url(Constants.CHECK_URL)
-                .build()
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-                block.onFailure(e)
-                block.onFinished()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val string = response.body?.string()
-                block.onResponse(string)
-                block.onFinished()
             }
         })
     }

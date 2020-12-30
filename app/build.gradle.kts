@@ -2,6 +2,7 @@ import org.codehaus.groovy.runtime.ProcessGroovyMethods
 
 val lifecycleVersion = "2.2.0"
 val navVersion = "2.3.0"
+val roomVersion = "2.3.0-alpha04"
 val gitCommitCount = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
 plugins {
     id("com.android.application")
@@ -16,7 +17,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-beta2"
+        versionName = "6.0.0-beta3"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,11 +40,7 @@ android {
         }
     }
     sourceSets["main"].java.srcDir("src/main/kotlin")
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
     buildFeatures.viewBinding = true
 }
 
@@ -54,21 +51,18 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0-alpha1") {
         exclude("com.android.support", "support-annotations")
     }
+    // AndroidX
     implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.core:core-ktx:1.3.2")
+    // Preference
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
+    // Layouts
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.2")
-    implementation("com.daimajia.numberprogressbar:library:1.4@aar")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("com.google.android.material:material:1.3.0-alpha03")
-    implementation("com.github.jorgecastilloprz:fabprogresscircle:1.01@aar")
-    testImplementation("junit:junit:4.13")
-    implementation("com.squareup.okhttp3:okhttp:4.3.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.5.0")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // LiveData
@@ -80,16 +74,24 @@ dependencies {
     // Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
     // Room
-    implementation("androidx.room:room-runtime:2.2.5")
-    kapt("androidx.room:room-compiler:2.2.5")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
     // Paging
-    implementation("androidx.paging:paging-runtime:2.1.2")
+    implementation("androidx.paging:paging-runtime:3.0.0-alpha11")
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
-    implementation("androidx.datastore:datastore-preferences:1.0.0-alpha03")
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0-alpha05")
+
+    implementation("com.android.volley:volley:1.1.1")
+    implementation("com.squareup.okhttp3:okhttp:4.3.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.5.0")
+    implementation("com.daimajia.numberprogressbar:library:1.4@aar")
 }
 repositories {
     mavenCentral()

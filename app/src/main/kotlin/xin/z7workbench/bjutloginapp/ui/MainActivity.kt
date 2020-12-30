@@ -4,10 +4,9 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
@@ -15,14 +14,12 @@ import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.*
 import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.util.LogStatus
-import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
 import xin.z7workbench.bjutloginapp.util.nothing
 import xin.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
 
 class MainActivity : BasicActivity() {
-    val viewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
+    val viewModel by viewModels<MainViewModel>()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -97,7 +94,7 @@ class MainActivity : BasicActivity() {
                         controller.navigate(R.id.action_global_localeFragment)
                     }
                     R.id.action_debug -> {
-                        makeSnack(NetworkUtils.getIpv6Address())
+                        makeSnack(OkHttpNetwork.getIpv6Address())
                     }
                 }
                 true

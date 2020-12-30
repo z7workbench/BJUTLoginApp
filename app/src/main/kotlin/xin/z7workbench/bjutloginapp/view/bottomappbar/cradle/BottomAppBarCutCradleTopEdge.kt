@@ -9,7 +9,7 @@ class BottomAppBarCutCradleTopEdge(
         private val cradleVerticalOffset: Float
 ) : BottomAppBarTopEdgeTreatment(fabMargin, roundedCornerRadius, cradleVerticalOffset) {
 
-//    @SuppressWarnings("RestrictTo")
+    @SuppressWarnings("RestrictTo")
     override fun getEdgePath(length: Float, center: Float, interpolation: Float, shapePath: ShapePath) {
         val fabDiameter = fabDiameter
         if (fabDiameter == 0f) {

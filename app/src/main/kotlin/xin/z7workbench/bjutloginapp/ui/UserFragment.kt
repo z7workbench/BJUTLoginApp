@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -21,7 +22,7 @@ import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.model.User
 
 class UserFragment : BasicFragment<FragmentUserBinding>() {
-    private val viewModel by lazy { ViewModelProvider(requireActivity())[MainViewModel::class.java] }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,7 +114,6 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
                     user.pack = currentPackage
                     if (!newUser) {
                         viewModel.updateUser(user)
-                        viewModel.refreshUserId()
                     } else {
                         viewModel.insertUser(user)
                     }
@@ -132,9 +132,7 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
             val user = users[holder.adapterPosition]
 
             holder.itemView.setOnClickListener {
-                app.prefs.edit { putInt("current_user", user.id) }
-                viewModel.refreshUserId()
-//                this@UserFragment.finish()
+                viewModel.changeUserId(user.id)
             }
             holder.binding.user.text = user.name
             holder.binding.edit.setOnClickListener {
@@ -142,7 +140,6 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
             }
             holder.binding.trash.setOnClickListener {
                 viewModel.deleteUser(user)
-                viewModel.refreshUserId()
             }
             viewModel.currentId.observe(this@UserFragment) {
                 if (it == user.id) {

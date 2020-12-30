@@ -21,10 +21,6 @@
         android:name="xin.z7workbench.bjutloginapp.ui.UserFragment"
         android:label="UserFragment" />
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="xin.z7workbench.bjutloginapp.ui.SettingsFragment"
-        android:label="SettingsFragment" />
-    <fragment
         android:id="@+id/themeFragment"
         android:name="xin.z7workbench.bjutloginapp.ui.ThemeFragment"
         android:label="ThemeFragment" />

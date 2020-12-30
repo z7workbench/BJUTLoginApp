@@ -17,6 +17,10 @@ enum class IpMode : Serializable {
     WIRED_IPV4, WIRED_IPV6, WIRED_BOTH, WIRELESS
 }
 
-enum class WarningLevel(val info: String): Serializable {
+enum class WarningLevel(val info: String) : Serializable {
     FATAL("[F]"), WARNING("[W]"), INFO("[I]")
+}
+
+enum class NetFramework : Serializable {
+    OKHTTP, VOLLEY
 }

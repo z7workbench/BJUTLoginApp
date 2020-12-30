@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,13 +19,12 @@ import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
 import xin.z7workbench.bjutloginapp.util.IpMode
 import xin.z7workbench.bjutloginapp.util.LogStatus
-import xin.z7workbench.bjutloginapp.util.NetworkUtils
+import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
+import xin.z7workbench.bjutloginapp.util.toast
 
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
-    val viewModel by lazy {
-        ViewModelProvider(requireActivity())[MainViewModel::class.java]
-    }
+    val viewModel by activityViewModels<MainViewModel>()
 
     override fun initViewAfterViewCreated() {
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
@@ -51,6 +50,17 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         viewModel.time.observe(this) {
             binding.syncTime.text = it
+        }
+
+        viewModel.currentId.observe(requireActivity()) {
+            requireContext().toast("id:$it")
+        }
+
+        viewModel.ipMode.observe(requireActivity()) {
+            requireContext().toast("ip:$it")
+        }
+        viewModel.user.observe(requireActivity()) {
+            requireContext().toast("ip:$it")
         }
     }
 
@@ -96,8 +106,8 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         findNavController().navigate(R.id.action_main_to_userFragment, null, null, extras)
                     }
                     viewModel.user.observe(this@MainFragment) {
-                        holder.binding.user.text = it.name ?: ""
-                        holder.binding.flux.text = it.pack.toString() + " GB" ?: ""
+                        holder.binding.user.text = it.name
+                        holder.binding.flux.text = it.pack.toString() + " GB"
                     }
                     viewModel.status.observe(this@MainFragment) {
                         holder.binding.status.text = when (it as LogStatus) {
@@ -109,18 +119,18 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                 }
                 is ControlCardViewHolder -> {
-                    holder.binding.wifiSSID.text = NetworkUtils.getWifiSSID(requireContext())
+                    holder.binding.wifiSSID.text = OkHttpNetwork.getWifiSSID(requireContext())
                     holder.binding.ipWLgnChip.setOnClickListener {
-                        viewModel.changeIpMode(0)
+                        viewModel.changeIpMode(IpMode.WIRELESS)
                     }
                     holder.binding.ipv4Chip.setOnClickListener {
-                        viewModel.changeIpMode(1)
+                        viewModel.changeIpMode(IpMode.WIRED_IPV4)
                     }
                     holder.binding.ipv6Chip.setOnClickListener {
-                        viewModel.changeIpMode(2)
+                        viewModel.changeIpMode(IpMode.WIRED_IPV6)
                     }
                     holder.binding.ipBothChip.setOnClickListener {
-                        viewModel.changeIpMode(3)
+                        viewModel.changeIpMode(IpMode.WIRED_BOTH)
                     }
                     viewModel.ipMode.observe(this@MainFragment) {
                         holder.binding.ipModeGroup.check(-1)

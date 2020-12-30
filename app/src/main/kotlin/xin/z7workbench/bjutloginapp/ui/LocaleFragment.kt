@@ -14,7 +14,6 @@ import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.RecyclerBinding
 import xin.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
-import java.text.FieldPosition
 
 class LocaleFragment : BasicFragment<RecyclerBinding>() {
     private val viewModel by lazy {
@@ -50,13 +49,13 @@ class LocaleFragment : BasicFragment<RecyclerBinding>() {
 
         override fun onBindViewHolder(holder: LocalesViewHolder, position: Int) {
             holder.binding.text.text = locales[position]
-            val current = viewModel.localeIndies.indexOf(app.prefs.getString("language", viewModel.localeIndies.first()))
+            val current = viewModel.langIndies.indexOf(app.prefs.getString("language", viewModel.langIndies.first()))
             if (current == position){
                 holder.binding.text.toggle()
             }
             holder.itemView.setOnClickListener {
                 if (current != position) {
-                    app.prefs.edit { putString("language", viewModel.localeIndies[position]) }
+                    app.prefs.edit { putString("language", viewModel.langIndies[position]) }
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     requireContext().startActivity(intent)
                     requireActivity().finish()

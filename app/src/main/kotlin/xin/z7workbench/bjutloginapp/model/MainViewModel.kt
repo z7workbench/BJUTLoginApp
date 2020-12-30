@@ -2,12 +2,16 @@ package xin.z7workbench.bjutloginapp.model
 
 import android.app.Application
 import android.content.Context
-import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import xin.z7workbench.bjutloginapp.LoginApp
 import xin.z7workbench.bjutloginapp.R
+import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
+import xin.z7workbench.bjutloginapp.network.OkHttpDataBlock
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -17,13 +21,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
     private val dao = getApplication<LoginApp>().appDatabase.userDao()
     private val _status = MutableLiveData<LogStatus>()
-    private val _currentId = MutableLiveData<Int>().apply {
-        value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
-    }
+    private val _currentId = MutableLiveData<Int>()
     private val _user = MutableLiveData<User>()
     private val _ipMode = MutableLiveData<IpMode>()
     private val _time = MutableLiveData<String>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val operator = getApplication<LoginApp>().operator
 
     val status: LiveData<LogStatus>
         get() = _status
@@ -36,19 +39,18 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         get() = _ipMode
     val time: LiveData<String>
         get() = _time
-    val themeIndies: List<String>
-    val localeIndies: List<String>
+    val themeIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.theme_index) }
+    val langIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.language_values) }
 
     init {
+        viewModelScope.launch {
+            updateUserSettings(true)
+        }
         _status.value = LogStatus.OFFLINE
-        themeIndies = app.resources.getStringArray(R.array.theme_index).toList()
-        localeIndies = app.resources.getStringArray(R.array.language_values).toList()
-        refreshUserId()
-        setUpIpMode()
     }
 
     fun offline() {
-        NetworkUtils.sync(_ipMode.value as IpMode, object : DataProcessBlock {
+        OkHttpNetwork.sync(_ipMode.value as IpMode, object : OkHttpDataBlock {
             override fun onFailure(exception: IOException) {
                 error()
             }
@@ -66,7 +68,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun online() {
-        NetworkUtils.login(_user.value as User, _ipMode.value as IpMode, object : DataProcessBlock {
+        OkHttpNetwork.login(_user.value as User, _ipMode.value as IpMode, object : OkHttpDataBlock {
             override fun onFailure(exception: IOException) {
                 _status.postValue(LogStatus.ERROR)
             }
@@ -82,7 +84,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun syncing(context: Context? = null, block: () -> Unit = {}) {
         _status.postValue(LogStatus.SYNCING)
-        NetworkUtils.sync(_ipMode.value as IpMode, object : DataProcessBlock {
+        OkHttpNetwork.sync(_ipMode.value as IpMode, object : OkHttpDataBlock {
             override fun onFailure(exception: IOException) {
                 _status.postValue(LogStatus.ERROR)
                 context?.runOnUiThread { block() }
@@ -104,33 +106,46 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         })
     }
 
-    fun insertUser(user: User) = dao.insert(user)
-
-    fun updateUser(user: User) = dao.update(user)
-
-    fun deleteUser(user: User) = dao.delete(user)
-
-    fun refreshUserId() {
-        _currentId.value = getApplication<LoginApp>().prefs.getInt("current_user", -1)
-        val temp = dao.find(_currentId.value!!)
-        // if data in database is null, use a new value to replace it
-        if (temp != null) {
-            _user.value = temp
-        } else _user.value = User()
+    fun insertUser(user: User) {
+        viewModelScope.launch {
+            dao.insert(user)
+            updateUserSettings()
+        }
     }
 
-    fun changeIpMode(mode: Int) {
-        getApplication<LoginApp>().prefs.edit { putInt("ip_mode", mode) }
-        setUpIpMode()
+    fun updateUser(user: User) {
+        viewModelScope.launch {
+            dao.update(user)
+            updateUserSettings()
+        }
     }
 
-    private fun setUpIpMode() {
-        val option = getApplication<LoginApp>().prefs.getInt("ip_mode", 0)
-        _ipMode.value = when (option) {
-            1 -> IpMode.WIRED_IPV4
-            2 -> IpMode.WIRED_IPV6
-            3 -> IpMode.WIRED_BOTH
-            else -> IpMode.WIRELESS
+    fun deleteUser(user: User) {
+        viewModelScope.launch {
+            dao.delete(user)
+            updateUserSettings()
+        }
+    }
+
+    fun changeUserId(id: Int) {
+        viewModelScope.launch {
+            operator.setCurrentId(id)
+            updateUserSettings(true)
+        }
+    }
+
+    fun changeIpMode(mode: IpMode) {
+        viewModelScope.launch {
+            operator.setIpMode(mode)
+            updateUserSettings()
+        }
+    }
+
+    private suspend fun updateUserSettings(isRefreshUser: Boolean = false) {
+        operator.userSettings.collect {
+            _ipMode.postValue(it.ipMode)
+            _currentId.postValue(it.current)
+            if (isRefreshUser) _user.postValue(dao.find(it.current))
         }
     }
 
@@ -142,4 +157,5 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     val currentStatus = _status.value
+    fun doNothing() = nothing()
 }

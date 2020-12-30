@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +18,7 @@ import xin.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
 
 class ThemeFragment : BasicFragment<RecyclerBinding>() {
-    private val viewModel by lazy {
-        ViewModelProvider(requireActivity())[MainViewModel::class.java]
-    }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
             RecyclerBinding.inflate(inflater, container, false)
