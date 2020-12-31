@@ -13,6 +13,7 @@ import com.google.android.material.transition.MaterialSharedAxis
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.databinding.*
 import xin.z7workbench.bjutloginapp.model.MainViewModel
+import xin.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import xin.z7workbench.bjutloginapp.util.LogStatus
 import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
 import xin.z7workbench.bjutloginapp.util.nothing
@@ -94,7 +95,7 @@ class MainActivity : BasicActivity() {
                         controller.navigate(R.id.action_global_localeFragment)
                     }
                     R.id.action_debug -> {
-                        makeSnack(OkHttpNetwork.getIpv6Address())
+                        makeSnack(NetworkGlobalObject.getIpv6Address())
                     }
                 }
                 true

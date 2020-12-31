@@ -46,6 +46,7 @@
     <string name="settings_theme_title">Change Theme</string>
 
     <string name="status_offline">Offline</string>
+    <string name="status_logging">Logging in</string>
     <string name="status_syncing">Syncing</string>
     <string name="status_error">Error</string>
     <string name="status_online">Online</string>
@@ -63,4 +64,6 @@
     <string name="main_hint_hide">User name has been hidden.</string>
     <string name="minutes">min</string>
     <string name="note_fail_text">Sync failed</string>
+    <string name="used_time">Time you used:&#160;</string>
+    <string name="fee">Fee you left:&#160;</string>
 </resources>

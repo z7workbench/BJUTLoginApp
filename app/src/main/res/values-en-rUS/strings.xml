@@ -63,4 +63,7 @@
     <string name="main_hint_hide">User name has been hidden.</string>
     <string name="minutes">min</string>
     <string name="note_fail_text">Sync failed</string>
+    <string name="status_logging">Logging in</string>
+    <string name="used_time">Time you used:&#160;</string>
+    <string name="fee">Fee you left:&#160;</string>
 </resources>

@@ -58,4 +58,7 @@
     <string name="main_login_successful">登录成功！同步数据中&#8230;</string>
     <string name="settings_theme_title">更换应用主题</string>
     <string name="note_fail_text">同步失败</string>
+    <string name="status_logging">登录中</string>
+    <string name="used_time">你已使用时间：</string>
+    <string name="fee">你剩余金额：</string>
 </resources>

@@ -9,7 +9,7 @@ object Constants {
     const val WLGN_URL = "https://wlgn.bjut.edu.cn/"
     const val LGN_URL = "http://lgn.bjut.edu.cn/"
     const val IPV6_URL = "http://lgn6.bjut.edu.cn/"
-    //   const val LOGIN_TAIL = "0.htm"
+    const val LOGIN_TAIL = "0.htm"
     const val QUIT_TAIL = "F.htm"
     const val VERSION_URL = "http://d.firim.vip/BJUTLoginApp"
     const val CHECK_URL = "https://download.fir.im/BJUTLoginApp"

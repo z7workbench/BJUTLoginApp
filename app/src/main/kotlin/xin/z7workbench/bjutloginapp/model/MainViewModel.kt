@@ -2,6 +2,7 @@ package xin.z7workbench.bjutloginapp.model
 
 import android.app.Application
 import android.content.Context
+import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 import xin.z7workbench.bjutloginapp.LoginApp
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
-import xin.z7workbench.bjutloginapp.network.OkHttpDataBlock
+import xin.z7workbench.bjutloginapp.network.DataProcessBlock
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -25,6 +26,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val _user = MutableLiveData<User>()
     private val _ipMode = MutableLiveData<IpMode>()
     private val _time = MutableLiveData<String>()
+    private val _usedTime = MutableLiveData<Int>()
+    private val _flux = MutableLiveData<String>()
+    private val _fee = MutableLiveData<Float>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val operator = getApplication<LoginApp>().operator
 
@@ -39,6 +43,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         get() = _ipMode
     val time: LiveData<String>
         get() = _time
+    val usedTime: LiveData<Int>
+        get() = _usedTime
+    val flux: LiveData<String>
+        get() = _flux
+    val fee: LiveData<Float>
+        get() = _fee
     val themeIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.theme_index) }
     val langIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.language_values) }
 
@@ -46,64 +56,17 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             updateUserSettings(true)
         }
+        _usedTime.value = -1
+        _flux.value = ""
+        _fee.value = -1F
         _status.value = LogStatus.OFFLINE
     }
 
-    fun offline() {
-        OkHttpNetwork.sync(_ipMode.value as IpMode, object : OkHttpDataBlock {
-            override fun onFailure(exception: IOException) {
-                error()
-            }
-
-            override fun onResponse(bodyString: String?) {
-                _status.value = LogStatus.OFFLINE
-            }
-
-            override fun onFinished() = updateSyncedTime()
-        })
-    }
-
     private fun error() {
+        _usedTime.value = -1
+        _flux.value = ""
+        _fee.value = -1F
         _status.value = LogStatus.ERROR
-    }
-
-    fun online() {
-        OkHttpNetwork.login(_user.value as User, _ipMode.value as IpMode, object : OkHttpDataBlock {
-            override fun onFailure(exception: IOException) {
-                _status.postValue(LogStatus.ERROR)
-            }
-
-            override fun onResponse(bodyString: String?) {
-                syncing()
-            }
-
-            override fun onFinished() = updateSyncedTime()
-        })
-        _status.value = LogStatus.ONLINE
-    }
-
-    fun syncing(context: Context? = null, block: () -> Unit = {}) {
-        _status.postValue(LogStatus.SYNCING)
-        OkHttpNetwork.sync(_ipMode.value as IpMode, object : OkHttpDataBlock {
-            override fun onFailure(exception: IOException) {
-                _status.postValue(LogStatus.ERROR)
-                context?.runOnUiThread { block() }
-            }
-
-            override fun onResponse(bodyString: String?) {
-                if (bodyString == null) _status.postValue(LogStatus.ERROR)
-                else {
-                    val regex = """time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'""".toRegex()
-                    val result = regex.find(bodyString)
-                    if (result == null || result.groups.isEmpty()) {
-                        _status.postValue(LogStatus.OFFLINE)
-                    } else _status.postValue(LogStatus.ONLINE)
-                }
-                context?.runOnUiThread { block() }
-            }
-
-            override fun onFinished() = updateSyncedTime()
-        })
     }
 
     fun insertUser(user: User) {
@@ -158,4 +121,60 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     val currentStatus = _status.value
     fun doNothing() = nothing()
+
+    fun online() {
+        _status.value = LogStatus.LOGGING
+        val block = object : DataProcessBlock {
+            override fun onFailure(exception: IOException) {
+                _status.postValue(LogStatus.ERROR)
+            }
+
+            override fun onResponse(bundle: Bundle) {
+                syncing()
+            }
+
+            override fun onFinished() = updateSyncedTime()
+        }
+        OkHttpNetwork.login(_user.value as User, _ipMode.value as IpMode, block)
+    }
+
+    fun syncing(context: Context? = null, block: () -> Unit = {}) {
+        _status.postValue(LogStatus.SYNCING)
+        val block = object : DataProcessBlock {
+            override fun onFailure(exception: IOException) {
+                _status.postValue(LogStatus.ERROR)
+                context?.runOnUiThread { block() }
+            }
+
+            override fun onResponse(bundle: Bundle) {
+                if (bundle["status"] as Boolean) {
+                    _usedTime.postValue(bundle["time"] as Int)
+                    _flux.postValue(formatByteSize(bundle["flow"] as Long * 1024))
+                    _fee.postValue(bundle["fee"] as Float)
+                    _status.postValue(LogStatus.ONLINE)
+                } else {
+                    _status.postValue(LogStatus.OFFLINE)
+                }
+                context?.runOnUiThread { block() }
+            }
+
+            override fun onFinished() = updateSyncedTime()
+        }
+        OkHttpNetwork.sync(_ipMode.value as IpMode, block)
+    }
+
+    fun offline() {
+        val block = object : DataProcessBlock {
+            override fun onFailure(exception: IOException) {
+                error()
+            }
+
+            override fun onResponse(bundle: Bundle) {
+                _status.value = LogStatus.OFFLINE
+            }
+
+            override fun onFinished() = updateSyncedTime()
+        }
+        OkHttpNetwork.sync(_ipMode.value as IpMode, block)
+    }
 }

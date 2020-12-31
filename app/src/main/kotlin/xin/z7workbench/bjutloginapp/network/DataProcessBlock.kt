@@ -1,9 +1,10 @@
 package xin.z7workbench.bjutloginapp.network
 
+import android.os.Bundle
 import java.io.IOException
 
-interface OkHttpDataBlock {
+interface DataProcessBlock {
     fun onFailure(exception: IOException)
-    fun onResponse(bodyString: String?)
+    fun onResponse(bundle: Bundle)
     fun onFinished()
 }

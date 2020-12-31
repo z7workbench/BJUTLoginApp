@@ -8,6 +8,7 @@ import java.io.Serializable
  */
 enum class LogStatus(val description: Int) : Serializable {
     OFFLINE(R.string.status_offline),
+    LOGGING(R.string.status_logging),
     SYNCING(R.string.status_syncing),
     ERROR(R.string.status_error),
     ONLINE(R.string.status_online)
@@ -22,5 +23,5 @@ enum class WarningLevel(val info: String) : Serializable {
 }
 
 enum class NetFramework : Serializable {
-    OKHTTP, VOLLEY
+    OKHTTP, VOLLEY, RETROFIT
 }

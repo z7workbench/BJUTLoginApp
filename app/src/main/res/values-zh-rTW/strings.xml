@@ -58,4 +58,7 @@
     <string name="main_login_successful">登錄成功！同步數據中&#8230;</string>
     <string name="settings_theme_title">更換應用主題</string>
     <string name="note_fail_text">同步錯誤</string>
+    <string name="status_logging">登錄中</string>
+    <string name="used_time">你已使用時間：</string>
+    <string name="fee">你剩餘金額：</string>
 </resources>

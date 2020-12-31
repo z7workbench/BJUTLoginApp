@@ -17,6 +17,7 @@ import xin.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import xin.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import xin.z7workbench.bjutloginapp.databinding.LoginCardBinding
 import xin.z7workbench.bjutloginapp.model.MainViewModel
+import xin.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import xin.z7workbench.bjutloginapp.util.IpMode
 import xin.z7workbench.bjutloginapp.util.LogStatus
 import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
@@ -110,16 +111,24 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         holder.binding.flux.text = it.pack.toString() + " GB"
                     }
                     viewModel.status.observe(this@MainFragment) {
-                        holder.binding.status.text = when (it as LogStatus) {
-                            LogStatus.ERROR -> resources.getString(R.string.status_error)
-                            LogStatus.OFFLINE -> resources.getString(R.string.status_offline)
-                            LogStatus.ONLINE -> resources.getString(R.string.status_online)
-                            LogStatus.SYNCING -> resources.getString(R.string.status_syncing)
-                        }
+                        holder.binding.status.text = resources.getString(it.description)
+                    }
+                    viewModel.usedTime.observe(this@MainFragment) {
+                        holder.binding.usedTime.text = if (it != null && it >=0)
+                            "${resources.getString(R.string.used_time)}$it ${resources.getString(R.string.minutes)}"
+                        else "${resources.getString(R.string.used_time)}${resources.getString(R.string.unknown)}"
+                    }
+                    viewModel.flux.observe(this@MainFragment) {
+                        holder.binding.flux.text = if (it != null && it != "")
+                            it else resources.getString(R.string.unknown)
+                    }
+                    viewModel.fee.observe(this@MainFragment) {
+                        holder.binding.fee.text = if (it != null && it >= 0F) "${resources.getString(R.string.used_time)}￥$it" else
+                            "${resources.getString(R.string.fee)}${resources.getString(R.string.unknown)}"
                     }
                 }
                 is ControlCardViewHolder -> {
-                    holder.binding.wifiSSID.text = OkHttpNetwork.getWifiSSID(requireContext())
+                    holder.binding.wifiSSID.text = NetworkGlobalObject.getWifiSSID(requireContext())
                     holder.binding.ipWLgnChip.setOnClickListener {
                         viewModel.changeIpMode(IpMode.WIRELESS)
                     }

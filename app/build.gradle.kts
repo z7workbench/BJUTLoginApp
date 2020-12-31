@@ -1,14 +1,14 @@
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
 
-val lifecycleVersion = "2.2.0"
-val navVersion = "2.3.0"
+val lifecycleVersion = "2.3.0-rc01"
+val navVersion = "2.3.2"
 val roomVersion = "2.3.0-alpha04"
 val gitCommitCount = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    kotlin("plugin.serialization") version "1.4.0"
+//    kotlin("plugin.serialization") version "1.4.10"
 }
 android {
     compileSdkVersion(30)
@@ -17,7 +17,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-beta3"
+        versionName = "6.0.0-beta4"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,17 +52,17 @@ dependencies {
         exclude("com.android.support", "support-annotations")
     }
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.core:core-ktx:1.3.2")
+    implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
+    implementation("androidx.core:core-ktx:1.5.0-alpha05")
     // Preference
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     // Layouts
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0-alpha2")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("com.google.android.material:material:1.3.0-alpha03")
+    implementation("androidx.recyclerview:recyclerview:1.2.0-beta01")
+    implementation("com.google.android.material:material:1.3.0-beta01")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // LiveData
@@ -88,10 +88,14 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0-alpha05")
 
     implementation("com.android.volley:volley:1.1.1")
-    implementation("com.squareup.okhttp3:okhttp:4.3.1")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.5.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
     implementation("com.daimajia.numberprogressbar:library:1.4@aar")
+    implementation("com.squareup.moshi:moshi:1.11.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.11.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
 }
 repositories {
     mavenCentral()
