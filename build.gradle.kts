@@ -5,11 +5,10 @@ buildscript {
 //        maven("https://maven.aliyun.com/repository/central")
 //        maven("https://maven.aliyun.com/repository/google")
         mavenCentral()
-        jcenter()
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.0-alpha09")
+        classpath("com.android.tools.build:gradle:7.0.0-alpha08")
         classpath(kotlin("gradle-plugin", version = "1.4.31"))
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -22,7 +21,6 @@ allprojects {
 //        maven("https://maven.aliyun.com/repository/central")
 //        maven("https://maven.aliyun.com/repository/google")
         mavenCentral()
-        jcenter()
         google()
     }
 }
