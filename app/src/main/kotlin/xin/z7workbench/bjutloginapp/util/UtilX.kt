@@ -7,11 +7,13 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import xin.z7workbench.bjutloginapp.Constants
 
 inline val Context.defaultSharedPreferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(this)
@@ -40,7 +42,7 @@ fun String.buildString(vararg strings: String): String {
     return string
 }
 
-fun nothing() {}
+fun nothing() = Unit
 
 inline fun <reified T> DataStore<Preferences>.valueFlow(key: Preferences.Key<T>, defValue: T): Flow<T> =
         this.data.mapNotNull {
@@ -48,3 +50,5 @@ inline fun <reified T> DataStore<Preferences>.valueFlow(key: Preferences.Key<T>,
         }
 
 fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(Constants.DATASTORE_NAME)

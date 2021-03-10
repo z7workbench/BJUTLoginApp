@@ -4,11 +4,16 @@ import android.app.Application
 import android.content.*
 import android.content.res.Resources
 import androidx.core.content.edit
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.room.Room
 import xin.z7workbench.bjutloginapp.database.AppDatabase
+import xin.z7workbench.bjutloginapp.database.migration1To2
 import xin.z7workbench.bjutloginapp.prefs.AppSettingsOperator
 import xin.z7workbench.bjutloginapp.util.LocaleUtil
+import xin.z7workbench.bjutloginapp.util.dataStore
 
 /**
  * Created by ZeroGo on 2017/11/2.
@@ -17,8 +22,9 @@ class LoginApp : Application() {
     private lateinit var _appDatabase: AppDatabase
     val appDatabase: AppDatabase
         get() = _appDatabase
-    val operator: AppSettingsOperator
-        get() = AppSettingsOperator.instant(applicationContext)
+    private lateinit var _dataStore: DataStore<Preferences>
+    val dataStore : DataStore<Preferences>
+    get() = _dataStore
     val res: Resources by lazy { resources }
     lateinit var prefs: SharedPreferences
 
@@ -37,6 +43,7 @@ class LoginApp : Application() {
         if (prefs.getInt("ip_mode", -1) < 0) {
             prefs.edit { putInt("ip_mode", 0) }
         }
+        _dataStore = applicationContext.dataStore
     }
 
     override fun attachBaseContext(base: Context) {

@@ -3,16 +3,20 @@ package xin.z7workbench.bjutloginapp.model
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import xin.z7workbench.bjutloginapp.LoginApp
 import xin.z7workbench.bjutloginapp.R
 import xin.z7workbench.bjutloginapp.network.OkHttpNetwork
 import xin.z7workbench.bjutloginapp.network.DataProcessBlock
+import xin.z7workbench.bjutloginapp.prefs.AppSettingsOperator
+import xin.z7workbench.bjutloginapp.prefs.Keys
 import xin.z7workbench.bjutloginapp.util.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -30,7 +34,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val _flux = MutableLiveData<String>()
     private val _fee = MutableLiveData<Float>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    val operator = getApplication<LoginApp>().operator
+//    val operator = getApplication<LoginApp>().operator
+    val dataStore = getApplication<LoginApp>().dataStore
 
     val status: LiveData<LogStatus>
         get() = _status
@@ -92,20 +97,20 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun changeUserId(id: Int) {
         viewModelScope.launch {
-            operator.setCurrentId(id)
+            AppSettingsOperator.setCurrentId(dataStore, id)
             updateUserSettings(true)
         }
     }
 
     fun changeIpMode(mode: IpMode) {
         viewModelScope.launch {
-            operator.setIpMode(mode)
+            AppSettingsOperator.setIpMode(dataStore, mode)
             updateUserSettings()
         }
     }
 
     private suspend fun updateUserSettings(isRefreshUser: Boolean = false) {
-        operator.userSettings.collect {
+        AppSettingsOperator.userSettings(dataStore).collect {
             _ipMode.postValue(it.ipMode)
             _currentId.postValue(it.current)
             if (isRefreshUser) _user.postValue(dao.find(it.current))
@@ -126,7 +131,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _status.value = LogStatus.LOGGING
         val block = object : DataProcessBlock {
             override fun onFailure(exception: IOException) {
-                _status.postValue(LogStatus.ERROR)
+                error()
             }
 
             override fun onResponse(bundle: Bundle) {
@@ -140,9 +145,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun syncing(context: Context? = null, block: () -> Unit = {}) {
         _status.postValue(LogStatus.SYNCING)
-        val block = object : DataProcessBlock {
+        val bl = object : DataProcessBlock {
             override fun onFailure(exception: IOException) {
-                _status.postValue(LogStatus.ERROR)
+                error()
                 context?.runOnUiThread { block() }
             }
 
@@ -160,7 +165,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
             override fun onFinished() = updateSyncedTime()
         }
-        OkHttpNetwork.sync(_ipMode.value as IpMode, block)
+        OkHttpNetwork.sync(_ipMode.value as IpMode, bl)
     }
 
     fun offline() {
