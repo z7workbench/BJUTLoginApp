@@ -98,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <xin.z7workbench.zeropercent.ArcPercentBar
+        <top.z7workbench.zeropercent.ArcPercentBar
             android:id="@+id/percentBar"
             android:layout_width="140dp"
             android:layout_height="140dp"

@@ -6,11 +6,11 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="xin.z7workbench.bjutloginapp.ui.SplashFragment"
+        android:name="top.z7workbench.bjutloginapp.ui.SplashFragment"
         android:label="SplashFragment"/>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="xin.z7workbench.bjutloginapp.ui.MainFragment"
+        android:name="top.z7workbench.bjutloginapp.ui.MainFragment"
         android:label="MainFragment">
         <action
             android:id="@+id/action_main_to_userFragment"
@@ -18,15 +18,15 @@
     </fragment>
     <fragment
         android:id="@+id/userFragment"
-        android:name="xin.z7workbench.bjutloginapp.ui.UserFragment"
+        android:name="top.z7workbench.bjutloginapp.ui.UserFragment"
         android:label="UserFragment" />
     <fragment
         android:id="@+id/themeFragment"
-        android:name="xin.z7workbench.bjutloginapp.ui.ThemeFragment"
+        android:name="top.z7workbench.bjutloginapp.ui.ThemeFragment"
         android:label="ThemeFragment" />
     <fragment
         android:id="@+id/localeFragment"
-        android:name="xin.z7workbench.bjutloginapp.ui.LocaleFragment"
+        android:name="top.z7workbench.bjutloginapp.ui.LocaleFragment"
         android:label="LocaleFragment" />
     <action
         android:id="@+id/action_global_themeFragment"
