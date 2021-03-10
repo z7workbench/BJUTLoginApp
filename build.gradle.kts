@@ -5,6 +5,7 @@ buildscript {
 //        maven("https://maven.aliyun.com/repository/central")
 //        maven("https://maven.aliyun.com/repository/google")
         mavenCentral()
+        jcenter()
         google()
     }
     dependencies {
@@ -21,6 +22,7 @@ allprojects {
 //        maven("https://maven.aliyun.com/repository/central")
 //        maven("https://maven.aliyun.com/repository/google")
         mavenCentral()
+        jcenter()
         google()
     }
 }
