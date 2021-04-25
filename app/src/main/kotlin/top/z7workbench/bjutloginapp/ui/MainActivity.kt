@@ -39,14 +39,15 @@ class MainActivity : BasicActivity() {
             controller.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
                     R.id.themeFragment, R.id.localeFragment -> {
-                        hideBottomAppBar()
+//                        hideBottomAppBar()
+                        fab.hide()
                     }
                     R.id.userFragment -> {
-                        hideBottomAppBar()
+//                        hideBottomAppBar()
                         fab.hide()
                     }
                     R.id.mainFragment -> {
-                        showBottomAppBar()
+//                        showBottomAppBar()
                         fab.show()
                     }
                 }
@@ -69,68 +70,68 @@ class MainActivity : BasicActivity() {
             }
         }
 
-        binding.bottomAppBar.run {
-            val topEdge = BottomAppBarCutCradleTopEdge(
-                    fabCradleMargin, fabCradleRoundedCornerRadius, cradleVerticalOffset
-            )
-            val background = background as MaterialShapeDrawable
-            background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
-                    .setTopEdge(topEdge).build()
-
-            setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.action_theme -> {
-                        currentNavigationFragment?.run {
-                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
-                        }
-                        controller.navigate(R.id.action_global_themeFragment)
-                    }
-                    R.id.action_lang -> {
-                        currentNavigationFragment?.run {
-                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
-                        }
-                        controller.navigate(R.id.action_global_localeFragment)
-                    }
-                    R.id.action_debug -> {
-                        makeSnack(NetworkGlobalObject.getIpv6Address())
-                    }
-                }
-                true
-            }
-        }
+//        binding.bottomAppBar.run {
+//            val topEdge = BottomAppBarCutCradleTopEdge(
+//                    fabCradleMargin, fabCradleRoundedCornerRadius, cradleVerticalOffset
+//            )
+//            val background = background as MaterialShapeDrawable
+//            background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
+//                    .setTopEdge(topEdge).build()
+//
+//            setOnMenuItemClickListener {
+//                when (it.itemId) {
+//                    R.id.action_theme -> {
+//                        currentNavigationFragment?.run {
+//                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+//                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+//                        }
+//                        controller.navigate(R.id.action_global_themeFragment)
+//                    }
+//                    R.id.action_lang -> {
+//                        currentNavigationFragment?.run {
+//                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+//                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+//                        }
+//                        controller.navigate(R.id.action_global_localeFragment)
+//                    }
+//                    R.id.action_debug -> {
+//                        makeSnack(NetworkGlobalObject.getIpv6Address())
+//                    }
+//                }
+//                true
+//            }
+//        }
     }
 
-    private fun showBottomAppBar() {
-        binding.bottomAppBar.run {
-            visibility = View.VISIBLE
-            performShow()
-        }
-    }
+//    private fun showBottomAppBar() {
+//        binding.bottomAppBar.run {
+//            visibility = View.VISIBLE
+//            performShow()
+//        }
+//    }
 
-    private fun hideBottomAppBar() {
-        binding.run {
-            bottomAppBar.performHide()
-            // Get a handle on the animator that hides the bottom app bar so we can wait to hide
-            // the fab and bottom app bar until after it's exit animation finishes.
-            bottomAppBar.animate().setListener(object : AnimatorListenerAdapter() {
-                var isCanceled = false
-                override fun onAnimationEnd(animation: Animator?) {
-                    if (isCanceled) return
-
-                    // Hide the BottomAppBar to avoid it showing above the keyboard
-                    // when composing a new email.
-                    bottomAppBar.visibility = View.GONE
-                    fab.visibility = View.INVISIBLE
-                }
-
-                override fun onAnimationCancel(animation: Animator?) {
-                    isCanceled = true
-                }
-            })
-        }
-    }
+//    private fun hideBottomAppBar() {
+//        binding.run {
+//            bottomAppBar.performHide()
+//            // Get a handle on the animator that hides the bottom app bar so we can wait to hide
+//            // the fab and bottom app bar until after it's exit animation finishes.
+//            bottomAppBar.animate().setListener(object : AnimatorListenerAdapter() {
+//                var isCanceled = false
+//                override fun onAnimationEnd(animation: Animator?) {
+//                    if (isCanceled) return
+//
+//                    // Hide the BottomAppBar to avoid it showing above the keyboard
+//                    // when composing a new email.
+//                    bottomAppBar.visibility = View.GONE
+//                    fab.visibility = View.INVISIBLE
+//                }
+//
+//                override fun onAnimationCancel(animation: Animator?) {
+//                    isCanceled = true
+//                }
+//            })
+//        }
+//    }
 
     fun makeSnack(text: CharSequence) {
         var snack = Snackbar.make(binding.mainLayout, text, Snackbar.LENGTH_SHORT)

@@ -5,16 +5,18 @@
     app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="top.z7workbench.bjutloginapp.ui.SplashFragment"
-        android:label="SplashFragment"/>
-    <fragment
         android:id="@+id/mainFragment"
         android:name="top.z7workbench.bjutloginapp.ui.MainFragment"
         android:label="MainFragment">
         <action
             android:id="@+id/action_main_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_themeFragment"
+            app:destination="@id/themeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_localeFragment"
+            app:destination="@id/localeFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -28,7 +30,4 @@
         android:id="@+id/localeFragment"
         android:name="top.z7workbench.bjutloginapp.ui.LocaleFragment"
         android:label="LocaleFragment" />
-    <action
-        android:id="@+id/action_global_themeFragment"
-        app:destination="@id/themeFragment" /><action android:id="@+id/action_global_localeFragment" app:destination="@id/localeFragment"/>
 </navigation>

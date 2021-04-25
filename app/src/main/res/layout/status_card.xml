@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginCard"
     style="@style/AppTheme.Layout.Card">
 
@@ -9,25 +8,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/login_card_transition">
-
-        <Button
-            android:id="@+id/userButton"
-            style="@style/AppTheme.Button.OutlinedIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="User"
-            android:textColor="?attr/colorAccent"
-            android:transitionName="user_transition"
-            app:icon="@drawable/ic_group_small"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fee" />
+        app:layoutDescription="@xml/status_card_transition">
 
         <ImageButton
             android:id="@+id/collapse"
@@ -51,39 +32,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/status"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/percentBar"
-            app:layout_constraintTop_toBottomOf="@id/status"
-            app:layout_constraintTop_toTopOf="@id/percentBar"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <TextView
-            android:id="@+id/flux"
-            style="@style/AppTheme.TextView.Normal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/percentBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/percentBar"
-            app:layout_constraintTop_toBottomOf="@+id/status"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <TextView
-            android:id="@+id/status"
-            style="@style/AppTheme.TextView.Normal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@id/flux"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/percentBar"
-            app:layout_constraintTop_toBottomOf="@id/user"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percentBar" />
 
         <TextView
             android:id="@+id/title"
@@ -91,31 +43,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="12dp"
             android:textSize="@dimen/text_size_h"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <top.z7workbench.zeropercent.ArcPercentBar
             android:id="@+id/percentBar"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             app:arcBackColor="?attr/appAccentBackground"
             app:arcFrontColor="?attr/colorAccent"
             app:arcOrientation="left"
             app:arcRange="280"
-            app:arcStrokeWidth="6dp"
+            app:arcStrokeWidth="10dp"
             app:arcTextColor="?attr/colorAccent"
-            app:arcTextSize="@dimen/text_size_xs"
+            app:arcTextSize="@dimen/text_size_l"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            app:layout_constraintTop_toBottomOf="@id/wifiSSID" />
 
         <TextView
-            android:id="@+id/fee"
+            android:id="@+id/plan"
             style="@style/AppTheme.TextView.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -138,8 +90,34 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/percentBar" />
+            app:layout_constraintTop_toBottomOf="@id/user" />
 
+        <TextView
+            android:id="@+id/wifiSSID"
+            style="@style/AppTheme.TextView.Big"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/ipMode"
+            style="@style/AppTheme.TextView.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/plan" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
-
 </com.google.android.material.card.MaterialCardView>

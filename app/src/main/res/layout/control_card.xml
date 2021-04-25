@@ -8,78 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ipMode">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/ipModeGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:singleLine="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/ipWLgnChip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="WLGN"
-                    android:textSize="@dimen/text_size_l"
-                    app:checkedIcon="@drawable/ic_wifi_24dp"
-                    app:checkedIconEnabled="true"
-                    app:chipEndPadding="12dp"
-                    app:chipIconTint="?attr/colorAccent"
-                    app:chipStartPadding="12dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/ipv4Chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="ipv4"
-                    android:textSize="@dimen/text_size_l"
-                    app:checkedIcon="@drawable/ic_wifi_24dp"
-                    app:checkedIconEnabled="true"
-                    app:chipEndPadding="12dp"
-                    app:chipIconTint="?attr/colorAccent"
-                    app:chipStartPadding="12dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/ipv6Chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="ipv6"
-                    android:textSize="@dimen/text_size_l"
-                    app:checkedIcon="@drawable/ic_wifi_24dp"
-                    app:checkedIconEnabled="true"
-                    app:chipEndPadding="12dp"
-                    app:chipIconTint="?attr/colorAccent"
-                    app:chipStartPadding="12dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/ipBothChip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="both"
-                    android:textSize="@dimen/text_size_l"
-                    app:checkedIcon="@drawable/ic_wifi_24dp"
-                    app:checkedIconEnabled="true"
-                    app:chipEndPadding="12dp"
-                    app:chipIconTint="?attr/colorAccent"
-                    app:chipStartPadding="12dp" />
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
         <ImageButton
             android:id="@+id/collapse"
             android:layout_width="wrap_content"
@@ -95,41 +23,144 @@
             app:layout_constraintTop_toTopOf="@id/title" />
 
         <TextView
-            android:id="@+id/wifiSSID"
-            style="@style/AppTheme.TextView.Big"
-            android:ellipsize="end"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <TextView
-            android:id="@+id/ipMode"
-            style="@style/AppTheme.TextView.Normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wifiSSID" />
-
-        <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="12dp"
             android:text="TextView"
             android:textColor="?attr/appTextColor"
             android:textSize="@dimen/text_size_h"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/changeUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp"
+            android:transitionName="user_transition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <TextView
+                style="@style/AppTheme.TextView.Normal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Change User" />
+
+            <TextView
+                android:id="@+id/user"
+                style="@style/AppTheme.TextView.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/changeIpMode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/changeUser">
+
+            <TextView
+                style="@style/AppTheme.TextView.Normal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Change Wifi Mode" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/ipSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/changeTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp"
+            android:transitionName="transition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/changeIpMode">
+
+            <TextView
+                style="@style/AppTheme.TextView.Normal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Change Theme" />
+
+            <TextView
+                android:id="@+id/theme"
+                style="@style/AppTheme.TextView.Small"
+                android:layout_width="0dp"
+                android:transitionName="theme"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/changeLang"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp"
+            android:transitionName="transition"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/changeTheme">
+
+            <TextView
+                style="@style/AppTheme.TextView.Normal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Change Language" />
+
+            <TextView
+                android:id="@+id/language"
+                style="@style/AppTheme.TextView.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:gravity="end" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

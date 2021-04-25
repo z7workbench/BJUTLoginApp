@@ -30,6 +30,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val _usedTime = MutableLiveData<Int>()
     private val _flux = MutableLiveData<String>()
     private val _fee = MutableLiveData<Float>()
+    private val _themeIndex = MutableLiveData<String>()
+    private val _localeIndex = MutableLiveData<String>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 //    val operator = getApplication<LoginApp>().operator
     val dataStore = getApplication<LoginApp>().dataStore
@@ -51,6 +53,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         get() = _flux
     val fee: LiveData<Float>
         get() = _fee
+    val theme: LiveData<String>
+        get() = _themeIndex
+    val locale: LiveData<String>
+        get() = _localeIndex
     val themeIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.theme_index) }
     val langIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.language_values) }
 

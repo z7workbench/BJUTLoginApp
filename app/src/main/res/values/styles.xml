@@ -127,16 +127,16 @@
     </style>
 
     <style name="AppTheme.Layout.Card" parent="AppTheme.Layout.Dialog">
-        <item name="android:layout_margin">16dp</item>
-        <item name="background">?attr/colorPrimarySurface</item>
+        <item name="android:layout_margin">2dp</item>
+<!--        <item name="background">?attr/colorPrimarySurface</item>-->
         <item name="android:checkable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:longClickable">true</item>
-        <item name="android:padding">8dp</item>
-        <item name="cardElevation">4dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="cardElevation">0dp</item>
         <item name="cardPreventCornerOverlap">false</item>
-        <item name="strokeWidth">1dp</item>
+        <item name="strokeWidth">0.1dp</item>
     </style>
 
     <style name="AppTheme.ToolBarStyle">
@@ -158,17 +158,17 @@
 
     <style name="ShapeAppearance.App.Large" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">5%</item>
+        <item name="cornerSize">24dp</item>
     </style>
 
     <style name="ShapeAppearance.App.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">10%</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
     <style name="ShapeAppearance.App.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">50%</item>
+        <item name="cornerSize">10dp</item>
     </style>
 
     <style name="AppTheme.TextView">
