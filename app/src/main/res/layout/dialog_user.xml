@@ -23,7 +23,7 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/settings_user_title"
+            android:hint="@string/user_number"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions|textVisiblePassword"
             android:maxLines="1"
@@ -41,7 +41,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/settings_password_title"
+            android:hint="@string/password"
             android:imeOptions="actionDone"
             android:inputType="textNoSuggestions|textPassword"
             android:maxLines="1"
@@ -57,7 +57,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:text="@string/settings_pack"
+        android:text="@string/pack"
         android:textColor="?attr/appTextColor"
         android:textSize="16sp" />
 

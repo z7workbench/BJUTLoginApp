@@ -33,4 +33,13 @@
         <item>TD</item>
         <item>PNK</item>
     </string-array>
+
+    <string-array name="ip_mode">
+        <item>WLGN+IPv4</item>
+        <item>WLGN+IPv4+IPv6</item>
+        <item>LGN+IPv4</item>
+        <item>LGN+IPv6</item>
+        <item>LGN+IPv4+IPv6(All)</item>
+        <item>LGN+IPv4+IPv6(Separated)</item>
+    </string-array>
 </resources>

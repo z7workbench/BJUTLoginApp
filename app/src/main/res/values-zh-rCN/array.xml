@@ -33,4 +33,13 @@
         <item>TD</item>
         <item>PNK</item>
     </string-array>
+
+    <string-array name="ip_mode">
+        <item>无线+IPv4</item>
+        <item>无线+IPv4+IPv6</item>
+        <item>有线+IPv4</item>
+        <item>有线+IPv6</item>
+        <item>有线+同时登录v4v6</item>
+        <item>有线+分开登录v4v6</item>
+    </string-array>
 </resources>

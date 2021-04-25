@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
-            android:text="TextView"
+            android:text="@string/control_card"
             android:textColor="?attr/appTextColor"
             android:textSize="@dimen/text_size_h"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Change User" />
+                android:text="@string/change_user" />
 
             <TextView
                 android:id="@+id/user"
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Change Wifi Mode" />
+                android:text="@string/change_mode" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/ipSpinner"
@@ -115,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Change Theme" />
+                android:text="@string/change_theme" />
 
             <TextView
                 android:id="@+id/theme"
@@ -150,7 +150,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Change Language" />
+                android:text="@string/change_language" />
 
             <TextView
                 android:id="@+id/language"

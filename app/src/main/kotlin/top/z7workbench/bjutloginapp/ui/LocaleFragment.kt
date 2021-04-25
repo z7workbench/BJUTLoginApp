@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialSharedAxis
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.RecyclerBinding
 import top.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
@@ -34,7 +33,7 @@ class LocaleFragment : BasicFragment<RecyclerBinding>() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
-        binding.recyclerToolbar.title = getString(R.string.settings_language_title)
+        binding.recyclerToolbar.title = getString(R.string.change_language)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

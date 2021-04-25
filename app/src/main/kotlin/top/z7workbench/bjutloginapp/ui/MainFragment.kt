@@ -185,7 +185,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         R.array.ip_mode,
                         R.layout.spinner_item
                     ).also {
-                        it.setDropDownViewResource(R.layout.spinner_dropdown_item)
+                        it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         holder.binding.ipSpinner.adapter = it
                     }
 
@@ -205,7 +205,8 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         if (it != null) {
                             holder.binding.language.text = it
                         } else {
-                            holder.binding.language.text = resources.getStringArray(R.array.language)[0]
+                            holder.binding.language.text =
+                                resources.getStringArray(R.array.language)[0]
                         }
                     }
 

@@ -30,7 +30,7 @@
                         style="@style/AppTheme.TextView.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/main_last"
+                        android:text="@string/last_sync"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/syncTime"
                         app:layout_constraintHorizontal_bias="0.5"

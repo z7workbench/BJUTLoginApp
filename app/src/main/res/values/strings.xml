@@ -1,69 +1,33 @@
 <resources>
     <string name="app_name">BJUT Login App</string>
     <string name="app_designer">Designed by ZeroGo</string>
-    <string name="action_help">Help</string>
-    <string name="action_login">Login</string>
-    <string name="action_logout">Logout</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_sync">Sync</string>
-    <string name="action_version">Version</string>
-    <string name="action_users">Users</string>
+
     <string name="action_add">Add</string>
+    <string name="action_users">Users</string>
+    <string name="action_version">Version</string>
 
-    <string name="main_fee">Fee -&#160;</string>
-    <string name="main_last">Last sync -&#160;</string>
-    <string name="main_time">Time -&#160;</string>
-    <string name="main_user">User -&#160;</string>
-    <string name="main_hide">Hidden</string>
-    <string name="main_login_successful">Log in complete, syncing&#8230;</string>
-
+    <string name="user_number">User Number</string>
+    <string name="password">Password</string>
+    <string name="pack">Package</string>
+    <string name="unknown">Unknown</string>
     <string name="OK">OK</string>
     <string name="cancel">Cancel</string>
 
-    <string name="settings_about_content">ZeroGoYoosee\n@GitHub: https://github.com/z7workbench</string>
-    <string name="settings_about_title">About me</string>
-    <string name="settings_category_about">About</string>
-    <string name="settings_category_language">Language</string>
-    <string name="settings_category_user">User Settings</string>
-    <string name="settings_default_vc">Stable</string>
-    <string name="settings_language_title">Change Language</string>
-    <string name="settings_language_summary">Select your language here</string>
-    <string name="settings_pack">Package</string>
-    <string name="settings_pack_summary">Select package here</string>
-    <string name="settings_password_hint">Enter password here</string>
-    <string name="settings_password_title">Password</string>
-    <string name="settings_title">Settings</string>
-    <string name="settings_user_hint">Enter user name here</string>
-    <string name="settings_user_title">User Number</string>
-    <string name="settings_version_loading">Loading&#8230;</string>
-    <string name="settings_version_new">Update available:</string>
-    <string name="settings_version_title">Version</string>
-    <string name="settings_users_title">Select User</string>
-    <string name="settings_users_summary">Current:\u0020</string>
-    <string name="settings_web_on">Wireless Gateway (WLGN)</string>
-    <string name="settings_web_off">Wired Gateway (LGN)</string>
-    <string name="settings_web_title">Website</string>
-    <string name="settings_theme_title">Change Theme</string>
+    <string name="last_sync">Last sync -&#160;</string>
+    <string name="placeholder">Whoops, it is empty!</string>
+    <string name="change_language">Change Language</string>
+    <string name="change_user">Change User</string>
+    <string name="used_time">Time you used:&#160;</string>
+    <string name="minutes">Min.</string>
+    <string name="change_mode">Change Wifi Mode</string>
+    <string name="status_card">Status Panel</string>
+    <string name="control_card">Control Panel</string>
+    <string name="flux_card">Flux Panel</string>
+    <string name="change_theme">Change Theme</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_logging">Logging in</string>
     <string name="status_syncing">Syncing</string>
     <string name="status_error">Error</string>
     <string name="status_online">Online</string>
-
-    <string name="unknown">Unknown</string>
-    <string name="users_placeholder">Whoops, it is empty!</string>
-
-    <string name="user_password_not_set">User or password isn\'t set yet! </string>
-    <string name="goto_settings">Go to</string>
-    <string name="save_changes">Press back button to save the change</string>
-    <string name="undo">Undo</string>
-    <string name="exceeded">Exceeded -&#160;</string>
-    <string name="remaining">Remaining -&#160;</string>
-    <string name="main_hint_reveal">User name has been revealed.</string>
-    <string name="main_hint_hide">User name has been hidden.</string>
-    <string name="minutes">min</string>
-    <string name="note_fail_text">Sync failed</string>
-    <string name="used_time">Time you used:&#160;</string>
-    <string name="fee">Fee you left:&#160;</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="language">     
+    <string-array name="language">
         <item>跟隨系統語言</item>
         <item>简体中文</item>
         <item>English (United States)</item>
@@ -14,17 +14,17 @@
         <item>zh_TW</item>
     </string-array>
 
-    <string-array name="themes">        
+    <string-array name="themes">
         <item>ZeroGo紫（默認）</item>
         <item>皎月白（亮色）</item>
-        <item>琥珀金（亮色）</item> 
-        <item>Yun亮綠（亮色）</item>       
+        <item>琥珀金（亮色）</item>
+        <item>Yun亮綠（亮色）</item>
         <item>極致黑（暗色）</item>
         <item>水鴨青（暗色）</item>
         <item>少女粉（暗色）</item>
     </string-array>
-        
-    <string-array name="theme_index">        
+
+    <string-array name="theme_index">
         <item>ZGP</item>
         <item>WL</item>
         <item>AL</item>
@@ -32,5 +32,14 @@
         <item>PD</item>
         <item>TD</item>
         <item>PNK</item>
+    </string-array>
+
+    <string-array name="ip_mode">
+        <item>無綫+IPv4</item>
+        <item>無綫+IPv4+IPv6</item>
+        <item>有綫+IPv4</item>
+        <item>有綫+IPv6</item>
+        <item>有綫+同時登錄v4v6</item>
+        <item>有綫+分開登錄v4v6</item>
     </string-array>
 </resources>
