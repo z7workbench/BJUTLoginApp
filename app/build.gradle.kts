@@ -1,8 +1,8 @@
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
 
-val lifecycleVersion = "2.3.0"
-val navVersion = "2.3.3"
-val roomVersion = "2.3.0-beta02"
+val lifecycleVersion = "2.4.0-alpha01"
+val navVersion = "2.3.5"
+val roomVersion = "2.4.0-alpha01"
 val gitCommitCount = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
 plugins {
     id("com.android.application")
@@ -49,16 +49,17 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", "1.4.31"))
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.3.0-beta01")
-    implementation("androidx.core:core-ktx:1.5.0-beta02")
+    implementation("androidx.appcompat:appcompat:1.3.0-rc01")
+    implementation("androidx.core:core-ktx:1.6.0-alpha02")
     // Preference
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     // Layouts
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0-alpha2")
-    implementation("androidx.recyclerview:recyclerview:1.2.0-beta02")
-    implementation("com.google.android.material:material:1.4.0-alpha01")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0-beta01")
+    implementation("androidx.recyclerview:recyclerview:1.2.0")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation("com.google.android.material:material:1.4.0-alpha02")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // LiveData
@@ -74,16 +75,16 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     // Paging
-    implementation("androidx.paging:paging-runtime:3.0.0-beta01")
+    implementation("androidx.paging:paging-runtime:3.0.0-rc01")
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0-alpha07")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-beta01")
 
-    implementation("com.android.volley:volley:1.2.0-rc1")
+    implementation("com.android.volley:volley:1.2.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
