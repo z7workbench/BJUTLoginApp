@@ -6,7 +6,7 @@
     <string name="action_users">Users</string>
     <string name="action_version">Version</string>
 
-    <string name="user_number">User Number</string>
+    <string name="user">User</string>
     <string name="password">Password</string>
     <string name="pack">Package</string>
     <string name="unknown">Unknown</string>
@@ -17,13 +17,15 @@
     <string name="placeholder">Whoops, it is empty!</string>
     <string name="change_language">Change Language</string>
     <string name="change_user">Change User</string>
-    <string name="used_time">Time you used:&#160;</string>
+    <string name="used_time">Time you used</string>
     <string name="minutes">Min.</string>
     <string name="change_mode">Change Wifi Mode</string>
-    <string name="status_card">Status Panel</string>
+    <string name="status_card">Status -&#160;</string>
     <string name="control_card">Control Panel</string>
     <string name="flux_card">Flux Panel</string>
     <string name="change_theme">Change Theme</string>
+    <string name="fee">Remained Fee</string>
+    <string name="colon">:&#160;</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_logging">Logging in</string>

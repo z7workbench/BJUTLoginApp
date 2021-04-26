@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -20,7 +21,7 @@ import top.z7workbench.bjutloginapp.databinding.StatusCardBinding
 import top.z7workbench.bjutloginapp.model.MainViewModel
 import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.IpMode
-import top.z7workbench.bjutloginapp.util.toast
+import top.z7workbench.bjutloginapp.util.buildString
 
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
@@ -40,7 +41,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
 //        prevent recycler from scrolling
         val llm =
-            object : LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false) {
+            object : LinearLayoutManager(requireContext(), VERTICAL, false) {
                 override fun canScrollVertically() = false
             }
         binding.recycler.run {
@@ -52,18 +53,6 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         viewModel.time.observe(this) {
             binding.syncTime.text = it
-        }
-
-        viewModel.currentId.observe(requireActivity()) {
-            requireContext().toast("id:$it")
-        }
-
-        viewModel.ipMode.observe(requireActivity()) {
-            requireContext().toast("ip:$it")
-        }
-
-        viewModel.user.observe(requireActivity()) {
-            requireContext().toast("ip:$it")
         }
     }
 
@@ -111,28 +100,55 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     holder.binding.wifiSSID.text = NetworkGlobalObject.getWifiSSID(requireContext())
                     viewModel.user.observe(this@MainFragment) {
                         if (it != null) {
-                            holder.binding.user.text = it.name
-                            holder.binding.plan.text = it.pack.toString() + " GB"
+                            holder.binding.user.text = resources.getString(R.string.user)
+                                .buildString(resources.getString(R.string.colon), it.name)
+                            holder.binding.plan.text = resources.getString(R.string.pack)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    it.pack.toString(),
+                                    " GB"
+                                )
                         } else {
-                            holder.binding.user.text = ""
-                            holder.binding.plan.text = "0 GB"
+                            holder.binding.user.text = resources.getString(R.string.user)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    resources.getString(R.string.unknown)
+                                )
+                            holder.binding.plan.text = resources.getString(R.string.pack)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    resources.getString(R.string.unknown)
+                                )
+                        }
+                    }
+                    viewModel.fee.observe(this@MainFragment) {
+                        if (it != null && it > 0) {
+                            holder.binding.fee.text = resources.getString(R.string.fee)
+                                .buildString(resources.getString(R.string.colon), it.toString())
+                        } else {
+                            holder.binding.fee.text = resources.getString(R.string.fee)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    resources.getString(R.string.unknown)
+                                )
                         }
                     }
                     viewModel.status.observe(this@MainFragment) {
-//                        holder.binding.status.text = resources.getString(it.description)
+                        holder.binding.title.text = resources.getString(R.string.status_card)
+                            .buildString(resources.getString(it.description))
                     }
                     viewModel.usedTime.observe(this@MainFragment) {
                         holder.binding.usedTime.text = if (it != null && it >= 0)
-                            "${resources.getString(R.string.used_time)}$it ${resources.getString(R.string.minutes)}"
-                        else "${resources.getString(R.string.used_time)}${resources.getString(R.string.unknown)}"
-                    }
-                    viewModel.flux.observe(this@MainFragment) {
-//                        holder.binding.flux.text = if (it != null && it != "")
-//                            it else resources.getString(R.string.unknown)
-                    }
-                    viewModel.fee.observe(this@MainFragment) {
-//                        holder.binding.fee.text = if (it != null && it >= 0F) "${resources.getString(R.string.used_time)}￥$it" else
-//                            "${resources.getString(R.string.fee)}${resources.getString(R.string.unknown)}"
+                            resources.getString(R.string.used_time).buildString(
+                                resources.getString(R.string.colon),
+                                it.toString(),
+                                resources.getString(R.string.minutes)
+                            )
+                        else
+                            resources.getString(R.string.used_time).buildString(
+                                resources.getString(R.string.colon),
+                                resources.getString(R.string.unknown)
+                            )
                     }
                 }
                 is ControlCardViewHolder -> {
@@ -140,10 +156,9 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         if (it != null) {
                             holder.binding.user.text = it.name
                         } else {
-                            holder.binding.user.text = ""
+                            holder.binding.user.text = resources.getString(R.string.unknown)
                         }
                     }
-
                     holder.binding.changeUser.setOnClickListener {
                         val extras = FragmentNavigatorExtras(
                             holder.binding.changeUser to "user_transition"
@@ -155,7 +170,6 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             extras
                         )
                     }
-
                     holder.binding.changeLang.setOnClickListener {
                         val extras = FragmentNavigatorExtras(
                             holder.binding.changeLang to "transition"
@@ -167,7 +181,6 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             extras
                         )
                     }
-
                     holder.binding.changeTheme.setOnClickListener {
                         val extras = FragmentNavigatorExtras(
                             holder.binding.changeTheme to "transition"
@@ -179,7 +192,6 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             extras
                         )
                     }
-
                     ArrayAdapter.createFromResource(
                         requireContext(),
                         R.array.ip_mode,
@@ -188,20 +200,51 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         holder.binding.ipSpinner.adapter = it
                     }
+                    viewModel.ipMode.observe(this@MainFragment) {
+                        when (it) {
+                            IpMode.WIRELESS -> holder.binding.ipSpinner.setSelection(0)
+                            IpMode.WIRED_IPV4 -> holder.binding.ipSpinner.setSelection(1)
+                            IpMode.WIRED_IPV6 -> holder.binding.ipSpinner.setSelection(2)
+                            IpMode.WIRED_BOTH -> holder.binding.ipSpinner.setSelection(3)
+                            else -> holder.binding.ipSpinner.setSelection(0)
+                        }
+                    }
+                    holder.binding.ipSpinner.onItemSelectedListener =
+                        object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                parent: AdapterView<*>?,
+                                view: View?,
+                                position: Int,
+                                id: Long
+                            ) {
+                                when (position) {
+                                    0 -> {
+                                        viewModel.changeIpMode(IpMode.WIRELESS)
+                                    }
+                                    1 -> {
+                                        viewModel.changeIpMode(IpMode.WIRED_IPV4)
+                                    }
+                                    2 -> {
+                                        viewModel.changeIpMode(IpMode.WIRED_IPV6)
+                                    }
+                                    3 -> {
+                                        viewModel.changeIpMode(IpMode.WIRED_BOTH)
+                                    }
+                                }
+                            }
 
-//                    holder.binding.ipSpinner.setOnItemClickListener { parent, view, position, id ->
-//
-//                    }
-
-                    viewModel.theme.observe(requireActivity()) {
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                holder.binding.ipSpinner.setSelection(0)
+                            }
+                        }
+                    viewModel.theme.observe(this@MainFragment) {
                         if (it != null) {
                             holder.binding.theme.text = it
                         } else {
                             holder.binding.theme.text = resources.getStringArray(R.array.themes)[0]
                         }
                     }
-
-                    viewModel.locale.observe(requireActivity()) {
+                    viewModel.locale.observe(this@MainFragment) {
                         if (it != null) {
                             holder.binding.language.text = it
                         } else {
@@ -209,29 +252,6 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 resources.getStringArray(R.array.language)[0]
                         }
                     }
-
-
-//                    holder.binding.ipWLgnChip.setOnClickListener {
-//                        viewModel.changeIpMode(IpMode.WIRELESS)
-//                    }
-//                    holder.binding.ipv4Chip.setOnClickListener {
-//                        viewModel.changeIpMode(IpMode.WIRED_IPV4)
-//                    }
-//                    holder.binding.ipv6Chip.setOnClickListener {
-//                        viewModel.changeIpMode(IpMode.WIRED_IPV6)
-//                    }
-//                    holder.binding.ipBothChip.setOnClickListener {
-//                        viewModel.changeIpMode(IpMode.WIRED_BOTH)
-//                    }
-//                    viewModel.ipMode.observe(this@MainFragment) {
-//                        holder.binding.ipModeGroup.check(-1)
-//                        when (it as IpMode) {
-//                            IpMode.WIRED_BOTH -> holder.binding.ipBothChip.isChecked = true
-//                            IpMode.WIRED_IPV6 -> holder.binding.ipv6Chip.isChecked = true
-//                            IpMode.WIRED_IPV4 -> holder.binding.ipv4Chip.isChecked = true
-//                            IpMode.WIRELESS -> holder.binding.ipWLgnChip.isChecked = true
-//                        }
-//                    }
                 }
                 is FluxCardViewHolder -> {
 

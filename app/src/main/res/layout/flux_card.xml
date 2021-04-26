@@ -25,14 +25,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/title" />
 
-
         <LinearLayout
             android:id="@+id/speeds"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,24 +45,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableStart="@drawable/ic_arrow_upward_24dp"
                 android:drawablePadding="8dp"
+                android:gravity="center_vertical"
                 android:text="@string/unknown"
                 android:textColor="?attr/appTextColor"
-                android:textSize="@dimen/text_size_xl" />
+                android:textSize="@dimen/text_size_l"
+                app:drawableStartCompat="@drawable/ic_arrow_upward_24dp" />
 
             <TextView
                 android:id="@+id/downSpeed"
-                android:layout_width="0dp"
                 style="@style/AppTheme.TextView.Normal"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
-                android:drawableStart="@drawable/ic_arrow_downward_24dp"
                 android:drawablePadding="8dp"
+                android:gravity="center_vertical"
                 android:text="@string/unknown"
                 android:textColor="?attr/appTextColor"
-                android:textSize="@dimen/text_size_xl" />
+                android:textSize="@dimen/text_size_l"
+                app:drawableStartCompat="@drawable/ic_arrow_downward_24dp" />
         </LinearLayout>
 
         <TextView

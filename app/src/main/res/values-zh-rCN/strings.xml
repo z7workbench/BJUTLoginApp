@@ -6,10 +6,10 @@
     <string name="action_users">用户</string>
     <string name="action_version">版本</string>
 
-    <string name="user_number">用户</string>
+    <string name="user">用户</string>
     <string name="password">密码</string>
     <string name="pack">套餐</string>
-    <string name="unknown">内容缺失</string>
+    <string name="unknown">未知</string>
     <string name="OK">好！</string>
     <string name="cancel">取消</string>
 
@@ -17,13 +17,15 @@
     <string name="placeholder">啊哦，这里是空的哟！</string>
     <string name="change_language">更换语言</string>
     <string name="change_user">更换用户</string>
-    <string name="used_time">使用时间：</string>
+    <string name="used_time">使用时间</string>
     <string name="minutes">分钟</string>
     <string name="change_mode">更换上网模式</string>
-    <string name="status_card">状态面板</string>
+    <string name="status_card">状态：</string>
     <string name="control_card">控制面板</string>
     <string name="flux_card">流量面板</string>
     <string name="change_theme">更换主题</string>
+    <string name="fee">剩余费用</string>
+    <string name="colon">：</string>
 
     <string name="status_offline">离线</string>
     <string name="status_logging">登录中</string>

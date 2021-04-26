@@ -6,7 +6,7 @@
     <string name="action_users">用戶</string>
     <string name="action_version">版本</string>
 
-    <string name="user_number">用戶</string>
+    <string name="user">用戶</string>
     <string name="password">密碼</string>
     <string name="pack">套餐</string>
     <string name="unknown">未知</string>
@@ -17,13 +17,15 @@
     <string name="placeholder">呃，找不到内容了！</string>
     <string name="change_language">更改語言</string>
     <string name="change_user">更改用戶</string>
-    <string name="used_time">使用過的時間：</string>
+    <string name="used_time">使用過的時間</string>
     <string name="minutes">Min.</string>
     <string name="change_mode">更改上網模式</string>
-    <string name="status_card">狀態面板</string>
+    <string name="status_card">狀態：</string>
     <string name="control_card">控制面板</string>
     <string name="flux_card">流量面板</string>
     <string name="change_theme">更改主題</string>
+    <string name="fee">剩餘費用</string>
+    <string name="colon">：</string>
 
     <string name="status_offline">離綫</string>
     <string name="status_logging">登錄中</string>

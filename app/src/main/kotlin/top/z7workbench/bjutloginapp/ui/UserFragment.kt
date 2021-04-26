@@ -125,7 +125,7 @@ class UserFragment : BasicFragment<FragmentUserBinding>() {
         override fun getItemCount() = users.size
 
         override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
-            val user = users[holder.adapterPosition]
+            val user = users[holder.bindingAdapterPosition]
 
             holder.itemView.setOnClickListener {
                 viewModel.changeUserId(user.id)
