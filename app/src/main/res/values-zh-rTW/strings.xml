@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BJUT登錄程式</string>
+    <string name="app_name">BJUT登錄App</string>
     <string name="app_designer">由ZeroGo設計</string>
 
     <string name="action_add">添加</string>
@@ -26,6 +26,8 @@
     <string name="change_theme">更改主題</string>
     <string name="fee">剩餘費用</string>
     <string name="colon">：</string>
+    <string name="change_to_flux">→流量</string>
+    <string name="exceeded">超出套餐</string>
 
     <string name="status_offline">離綫</string>
     <string name="status_logging">登錄中</string>

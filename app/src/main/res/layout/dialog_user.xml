@@ -75,10 +75,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:max="50"
+        android:max="80"
         android:min="12"
         android:padding="0dp"
         android:progress="30" />
-
 </LinearLayout>
 

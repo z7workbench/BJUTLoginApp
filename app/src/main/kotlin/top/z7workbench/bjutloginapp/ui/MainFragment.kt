@@ -18,14 +18,14 @@ import top.z7workbench.bjutloginapp.databinding.ControlCardBinding
 import top.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import top.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import top.z7workbench.bjutloginapp.databinding.StatusCardBinding
-import top.z7workbench.bjutloginapp.model.MainViewModel
+import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.buildString
 
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
-    val viewModel by activityViewModels<MainViewModel>()
+    val viewModel by activityViewModels<UserViewModel>()
 
     override fun initViewAfterViewCreated() {
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
@@ -124,7 +124,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     viewModel.fee.observe(this@MainFragment) {
                         if (it != null && it > 0) {
                             holder.binding.fee.text = resources.getString(R.string.fee)
-                                .buildString(resources.getString(R.string.colon), it.toString())
+                                .buildString(resources.getString(R.string.colon), "￥", it.toString())
                         } else {
                             holder.binding.fee.text = resources.getString(R.string.fee)
                                 .buildString(
@@ -237,24 +237,26 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 holder.binding.ipSpinner.setSelection(0)
                             }
                         }
-                    viewModel.theme.observe(this@MainFragment) {
-                        if (it != null) {
-                            holder.binding.theme.text = it
-                        } else {
-                            holder.binding.theme.text = resources.getStringArray(R.array.themes)[0]
-                        }
-                    }
-                    viewModel.locale.observe(this@MainFragment) {
-                        if (it != null) {
-                            holder.binding.language.text = it
-                        } else {
-                            holder.binding.language.text =
-                                resources.getStringArray(R.array.language)[0]
-                        }
-                    }
+                    holder.binding.theme.text = resources.getStringArray(R.array.themes)[app.prefs.getInt("theme_index", 0)]
+                    holder.binding.language.text = resources.getStringArray(R.array.language)[app.prefs.getInt("language", 0)]
                 }
                 is FluxCardViewHolder -> {
-
+                    viewModel.fee.observe(this@MainFragment) {
+                        if (it != null && it > 0) {
+                            holder.binding.flux.text = resources.getString(R.string.fee)
+                                .buildString(resources.getString(R.string.colon), "￥", it.toString(),
+                                    resources.getString(R.string.change_to_flux), )
+                        } else {
+                            holder.binding.flux.text = resources.getString(R.string.fee)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    resources.getString(R.string.unknown),
+                                    resources.getString(R.string.change_to_flux),
+                                    resources.getString(R.string.unknown)
+                                )
+                        }
+                    }
+                    viewModel.flux
                 }
             }
         }

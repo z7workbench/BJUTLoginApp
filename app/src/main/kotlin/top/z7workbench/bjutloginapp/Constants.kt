@@ -9,8 +9,9 @@ object Constants {
     const val IPV6_URL = "http://lgn6.bjut.edu.cn/"
     const val LOGIN_TAIL = "0.htm"
     const val QUIT_TAIL = "F.htm"
-    const val VERSION_URL = "http://d.firim.vip/BJUTLoginApp"
-    const val CHECK_URL = "https://download.fir.im/BJUTLoginApp"
-    const val GECKO_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0"
+    const val GECKO_WIN_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0"
+    const val EDGE_WIN_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46"
     const val DATASTORE_NAME = "options"
+
+    val locales = arrayListOf("Auto","zh_CN","en_US","zh_TW")
 }

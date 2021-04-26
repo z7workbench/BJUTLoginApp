@@ -26,7 +26,7 @@ object OkHttpNetwork {
                         .addHeader("Accept-Language", "en-US,en;q=0.5")
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Content-type", "text/html; charset=gbk")
-                        .addHeader("User-Agent", Constants.GECKO_AGENT)
+                        .addHeader("User-Agent", Constants.GECKO_WIN_AGENT)
                         .build()
                 it.proceed(request)
             }

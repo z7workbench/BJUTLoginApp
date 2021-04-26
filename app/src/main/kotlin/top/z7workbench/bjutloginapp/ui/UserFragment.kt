@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialContainerTransform
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.*
-import top.z7workbench.bjutloginapp.model.MainViewModel
+import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.model.User
 
 class UserFragment : BasicFragment<FragmentUserBinding>() {
-    private val viewModel by activityViewModels<MainViewModel>()
+    private val viewModel by activityViewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

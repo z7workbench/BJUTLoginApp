@@ -91,7 +91,7 @@
 
         <TextView
             android:id="@+id/flux"
-            style="@style/AppTheme.TextView.Big"
+            style="@style/AppTheme.TextView.Normal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -119,5 +119,4 @@
             custom:progress_unreached_bar_height="3dp"
             custom:progress_unreached_color="?attr/appAccentBackground" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

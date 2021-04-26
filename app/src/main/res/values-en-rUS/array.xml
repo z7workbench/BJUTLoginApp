@@ -7,13 +7,6 @@
         <item>繁體中文</item>
     </string-array>
 
-    <string-array name="language_values">
-        <item>Auto</item>
-        <item>zh_CN</item>
-        <item>en_US</item>
-        <item>zh_TW</item>
-    </string-array>
-
     <string-array name="themes">
         <item>ZeroGo Purple (Default)</item>
         <item>White Light (Light)</item>
@@ -22,16 +15,6 @@
         <item>Pure Dark (Dark)</item>
         <item>Teal Dark (Dark)</item>
         <item>Pink Dark (Dark)</item>
-    </string-array>
-
-    <string-array name="theme_index">
-        <item>ZGP</item>
-        <item>WL</item>
-        <item>AL</item>
-        <item>YUN</item>
-        <item>PD</item>
-        <item>TD</item>
-        <item>PNK</item>
     </string-array>
 
     <string-array name="ip_mode">

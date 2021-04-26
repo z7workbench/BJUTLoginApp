@@ -8,7 +8,6 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-//    kotlin("plugin.serialization") version "1.4.10"
 }
 android {
     compileSdkVersion(30)
@@ -17,7 +16,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-beta9"
+        versionName = "6.0.0-beta10"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

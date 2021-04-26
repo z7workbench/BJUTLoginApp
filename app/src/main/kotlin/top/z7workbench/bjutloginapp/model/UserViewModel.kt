@@ -19,7 +19,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainViewModel(app: Application) : AndroidViewModel(app) {
+class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
     private val dao = getApplication<LoginApp>().appDatabase.userDao()
     private val _status = MutableLiveData<LogStatus>()
@@ -57,8 +57,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         get() = _themeIndex
     val locale: LiveData<String>
         get() = _localeIndex
-    val themeIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.theme_index) }
-    val langIndies by lazy { getApplication<LoginApp>().resources.getStringArray(R.array.language_values) }
 
     init {
         viewModelScope.launch {
@@ -128,7 +126,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     val currentStatus = _status.value
-    fun doNothing() = nothing()
 
     fun online() {
         _status.value = LogStatus.LOGGING

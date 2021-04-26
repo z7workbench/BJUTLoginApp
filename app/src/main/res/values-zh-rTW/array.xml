@@ -7,13 +7,6 @@
         <item>繁體中文</item>
     </string-array>
 
-    <string-array name="language_values">
-        <item>Auto</item>
-        <item>zh_CN</item>
-        <item>en_US</item>
-        <item>zh_TW</item>
-    </string-array>
-
     <string-array name="themes">
         <item>ZeroGo紫（默認）</item>
         <item>皎月白（亮色）</item>
@@ -22,16 +15,6 @@
         <item>極致黑（暗色）</item>
         <item>水鴨青（暗色）</item>
         <item>少女粉（暗色）</item>
-    </string-array>
-
-    <string-array name="theme_index">
-        <item>ZGP</item>
-        <item>WL</item>
-        <item>AL</item>
-        <item>YUN</item>
-        <item>PD</item>
-        <item>TD</item>
-        <item>PNK</item>
     </string-array>
 
     <string-array name="ip_mode">

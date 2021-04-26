@@ -26,6 +26,8 @@
     <string name="change_theme">更换主题</string>
     <string name="fee">剩余费用</string>
     <string name="colon">：</string>
+    <string name="change_to_flux">→流量</string>
+    <string name="exceeded">超出套餐</string>
 
     <string name="status_offline">离线</string>
     <string name="status_logging">登录中</string>

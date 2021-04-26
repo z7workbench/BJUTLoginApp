@@ -1,25 +1,18 @@
 package top.z7workbench.bjutloginapp.ui
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.transition.MaterialSharedAxis
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.*
-import top.z7workbench.bjutloginapp.model.MainViewModel
-import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
+import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
-import top.z7workbench.bjutloginapp.view.bottomappbar.cradle.BottomAppBarCutCradleTopEdge
 
 class MainActivity : BasicActivity() {
-    val viewModel by viewModels<MainViewModel>()
+    val viewModel by viewModels<UserViewModel>()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }

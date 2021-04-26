@@ -20,25 +20,22 @@ class LoginApp : Application() {
     val appDatabase: AppDatabase
         get() = _appDatabase
     private lateinit var _dataStore: DataStore<Preferences>
-    val dataStore : DataStore<Preferences>
-    get() = _dataStore
+    val dataStore: DataStore<Preferences>
+        get() = _dataStore
     val res: Resources by lazy { resources }
     lateinit var prefs: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
         _appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "login.db")
-                .allowMainThreadQueries()
-                .build()
+            .allowMainThreadQueries()
+            .build()
         prefs = getDefaultSharedPreferences(this)
-        if (prefs.getString("theme_index", null).isNullOrEmpty()) {
-            prefs.edit { putString("theme_index", "ZGP") }
+        if (prefs.getInt("theme_index", -1) < 0) {
+            prefs.edit { putInt("theme_index", 0) }
         }
-        if (prefs.getString("language", null).isNullOrEmpty()) {
-            prefs.edit { putString("language", "Auto") }
-        }
-        if (prefs.getInt("ip_mode", -1) < 0) {
-            prefs.edit { putInt("ip_mode", 0) }
+        if (prefs.getInt("language", -1) < 0) {
+            prefs.edit { putInt("language", 0) }
         }
         _dataStore = applicationContext.dataStore
     }
