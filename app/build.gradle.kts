@@ -16,7 +16,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-beta10"
+        versionName = "6.0.0-beta11"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

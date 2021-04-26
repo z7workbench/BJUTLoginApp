@@ -68,13 +68,28 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/description"
-            style="@style/AppTheme.TextView.Normal"
+            android:id="@+id/exceeded"
+            style="@style/AppTheme.TextView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/remained"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flux" />
+
+        <TextView
+            android:id="@+id/remained"
+            style="@style/AppTheme.TextView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/exceeded"
             app:layout_constraintTop_toBottomOf="@id/flux" />
 
         <TextView
@@ -91,6 +106,7 @@
 
         <TextView
             android:id="@+id/flux"
+            android:gravity="center"
             style="@style/AppTheme.TextView.Normal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -108,7 +124,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintTop_toBottomOf="@id/exceeded"
             custom:progress_max="100"
             custom:progress_reached_bar_height="3dp"
             custom:progress_reached_color="?attr/colorAccent"

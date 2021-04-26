@@ -28,6 +28,7 @@
     <string name="colon">：</string>
     <string name="change_to_flux">→流量</string>
     <string name="exceeded">超出套餐</string>
+    <string name="remained">剩余额度</string>
 
     <string name="status_offline">离线</string>
     <string name="status_logging">登录中</string>

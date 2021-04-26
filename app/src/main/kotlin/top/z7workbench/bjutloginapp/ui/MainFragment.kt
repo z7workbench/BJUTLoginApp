@@ -124,7 +124,11 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     viewModel.fee.observe(this@MainFragment) {
                         if (it != null && it > 0) {
                             holder.binding.fee.text = resources.getString(R.string.fee)
-                                .buildString(resources.getString(R.string.colon), "￥", it.toString())
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    "￥",
+                                    it.toString()
+                                )
                         } else {
                             holder.binding.fee.text = resources.getString(R.string.fee)
                                 .buildString(
@@ -237,26 +241,70 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 holder.binding.ipSpinner.setSelection(0)
                             }
                         }
-                    holder.binding.theme.text = resources.getStringArray(R.array.themes)[app.prefs.getInt("theme_index", 0)]
-                    holder.binding.language.text = resources.getStringArray(R.array.language)[app.prefs.getInt("language", 0)]
+                    holder.binding.theme.text =
+                        resources.getStringArray(R.array.themes)[app.prefs.getInt("theme_index", 0)]
+                    holder.binding.language.text =
+                        resources.getStringArray(R.array.language)[app.prefs.getInt("language", 0)]
                 }
                 is FluxCardViewHolder -> {
                     viewModel.fee.observe(this@MainFragment) {
                         if (it != null && it > 0) {
                             holder.binding.flux.text = resources.getString(R.string.fee)
-                                .buildString(resources.getString(R.string.colon), "￥", it.toString(),
-                                    resources.getString(R.string.change_to_flux), )
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    "￥",
+                                    it.toString(),
+                                    resources.getString(R.string.change_to_flux),
+                                    resources.getString(R.string.colon),
+                                )
                         } else {
                             holder.binding.flux.text = resources.getString(R.string.fee)
                                 .buildString(
                                     resources.getString(R.string.colon),
                                     resources.getString(R.string.unknown),
                                     resources.getString(R.string.change_to_flux),
+                                    resources.getString(R.string.colon),
                                     resources.getString(R.string.unknown)
                                 )
                         }
                     }
-                    viewModel.flux
+                    viewModel.exceeded.observe(this@MainFragment) {
+                        if (it == null) {
+                            holder.binding.exceeded.text = resources.getString(R.string.exceeded)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    resources.getString(R.string.unknown)
+                                )
+                        } else {
+                            holder.binding.exceeded.text = resources.getString(R.string.exceeded)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    it
+                                )
+                        }
+                    }
+                    viewModel.remained.observe(this@MainFragment) {
+                        if (it == null) {
+                            holder.binding.remained.text = resources.getString(R.string.remained)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    resources.getString(R.string.unknown)
+                                )
+                        } else {
+                            holder.binding.remained.text = resources.getString(R.string.remained)
+                                .buildString(
+                                    resources.getString(R.string.colon),
+                                    it
+                                )
+                        }
+                    }
+                    viewModel.percent.observe(this@MainFragment) {
+                        if (it == null) {
+                            holder.binding.progressBar.progress = 0
+                        } else {
+                            holder.binding.progressBar.progress = it
+                        }
+                    }
                 }
             }
         }

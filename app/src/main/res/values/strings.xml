@@ -28,6 +28,7 @@
     <string name="colon">:&#160;</string>
     <string name="change_to_flux">→Flux</string>
     <string name="exceeded">Exceeded</string>
+    <string name="remained">Remained</string>
 
     <string name="status_offline">Offline</string>
     <string name="status_logging">Logging in</string>
