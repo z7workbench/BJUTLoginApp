@@ -16,7 +16,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 6
-        versionName = "6.0.0-beta11"
+        versionName = "6.0.0-rc01"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -86,7 +86,7 @@ dependencies {
     implementation("com.android.volley:volley:1.2.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
     implementation("com.daimajia.numberprogressbar:library:1.4@aar")
     implementation("com.squareup.moshi:moshi:1.11.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.11.0")

@@ -61,7 +61,7 @@
             app:arcRange="280"
             app:arcStrokeWidth="10dp"
             app:arcTextColor="?attr/colorAccent"
-            app:arcTextSize="@dimen/text_size_l"
+            app:arcTextSize="@dimen/text_size_xl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/wifiSSID" />

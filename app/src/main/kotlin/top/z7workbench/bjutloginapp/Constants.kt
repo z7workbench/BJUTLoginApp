@@ -4,7 +4,9 @@ package top.z7workbench.bjutloginapp
  * Created by ZeroGo on 2017/10/24.
  */
 object Constants {
-    const val WLGN_URL = "https://wlgn.bjut.edu.cn/"
+    const val WLGN_URL = "https://wlgn.bjut.edu.cn/drcom/"
+    const val WLGN_LOGIN_TAIL = "login"
+    const val WLGN_LOGOUT_TAIL = "logout"
     const val LGN_URL = "http://lgn.bjut.edu.cn/"
     const val IPV6_URL = "http://lgn6.bjut.edu.cn/"
     const val LOGIN_TAIL = "0.htm"

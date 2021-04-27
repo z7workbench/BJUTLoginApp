@@ -1,7 +1,10 @@
 package top.z7workbench.bjutloginapp.ui
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.fragment.NavHostFragment
@@ -10,6 +13,7 @@ import top.z7workbench.bjutloginapp.databinding.*
 import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
+import top.z7workbench.bjutloginapp.util.toast
 
 class MainActivity : BasicActivity() {
     val viewModel by viewModels<UserViewModel>()
@@ -57,82 +61,34 @@ class MainActivity : BasicActivity() {
                     }
                     LogStatus.ONLINE -> {
                         viewModel.offline()
+                        context.toast("345")
                     }
                     else -> nothing()
                 }
             }
+
+            viewModel.status.observe(this@MainActivity) {
+                when (viewModel.currentStatus) {
+                    LogStatus.OFFLINE, LogStatus.ERROR -> {
+                        icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_online, theme)
+                        text = resources.getString(R.string.connect)
+                    }
+                    LogStatus.ONLINE -> {
+                        icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_offline, theme)
+                        text = resources.getString(R.string.disconnect)
+                    }
+                    else -> {
+                        icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_loading, theme)
+                        text = resources.getString(R.string.status_logging)
+                    }
+                }
+            }
         }
 
-//        binding.bottomAppBar.run {
-//            val topEdge = BottomAppBarCutCradleTopEdge(
-//                    fabCradleMargin, fabCradleRoundedCornerRadius, cradleVerticalOffset
-//            )
-//            val background = background as MaterialShapeDrawable
-//            background.shapeAppearanceModel = background.shapeAppearanceModel.toBuilder()
-//                    .setTopEdge(topEdge).build()
-//
-//            setOnMenuItemClickListener {
-//                when (it.itemId) {
-//                    R.id.action_theme -> {
-//                        currentNavigationFragment?.run {
-//                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-//                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
-//                        }
-//                        controller.navigate(R.id.action_global_themeFragment)
-//                    }
-//                    R.id.action_lang -> {
-//                        currentNavigationFragment?.run {
-//                            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-//                            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
-//                        }
-//                        controller.navigate(R.id.action_global_localeFragment)
-//                    }
-//                    R.id.action_debug -> {
-//                        makeSnack(NetworkGlobalObject.getIpv6Address())
-//                    }
-//                }
-//                true
-//            }
-//        }
     }
-
-//    private fun showBottomAppBar() {
-//        binding.bottomAppBar.run {
-//            visibility = View.VISIBLE
-//            performShow()
-//        }
-//    }
-
-//    private fun hideBottomAppBar() {
-//        binding.run {
-//            bottomAppBar.performHide()
-//            // Get a handle on the animator that hides the bottom app bar so we can wait to hide
-//            // the fab and bottom app bar until after it's exit animation finishes.
-//            bottomAppBar.animate().setListener(object : AnimatorListenerAdapter() {
-//                var isCanceled = false
-//                override fun onAnimationEnd(animation: Animator?) {
-//                    if (isCanceled) return
-//
-//                    // Hide the BottomAppBar to avoid it showing above the keyboard
-//                    // when composing a new email.
-//                    bottomAppBar.visibility = View.GONE
-//                    fab.visibility = View.INVISIBLE
-//                }
-//
-//                override fun onAnimationCancel(animation: Animator?) {
-//                    isCanceled = true
-//                }
-//            })
-//        }
-//    }
-
     fun makeSnack(text: CharSequence) {
         var snack = Snackbar.make(binding.mainLayout, text, Snackbar.LENGTH_SHORT)
         snack = snack.setAnchorView(binding.fab.id)
         snack.show()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 }

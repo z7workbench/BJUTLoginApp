@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialContainerTransform
 import top.z7workbench.bjutloginapp.R
-import top.z7workbench.bjutloginapp.databinding.RecyclerBinding
 import top.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
+import top.z7workbench.bjutloginapp.databinding.ThemesBinding
 
-class ThemeFragment : BasicFragment<RecyclerBinding>() {
+class ThemeFragment : BasicFragment<ThemesBinding>() {
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        RecyclerBinding.inflate(inflater, container, false)
+        ThemesBinding.inflate(inflater, container, false)
 
     override fun initViewAfterViewCreated() {
         binding.recyclerToolbar.setNavigationOnClickListener {

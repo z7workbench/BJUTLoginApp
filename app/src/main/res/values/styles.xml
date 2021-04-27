@@ -12,16 +12,19 @@
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
         <item name="appBackground">@color/materialGrey</item>
         <item name="colorSurface">@color/materialGrey</item>
+        <item name="appStrokeColor">@android:color/white</item>
     </style>
 
     <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="appTextColor">@color/colorDefaultTextLight</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.Large</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.Medium</item>
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
         <item name="appBackground">@android:color/white</item>
         <item name="colorSurface">@android:color/white</item>
+        <item name="appStrokeColor">@android:color/black</item>
     </style>
 
     <style name="AppTheme.Dark.Pure">
@@ -128,7 +131,6 @@
 
     <style name="AppTheme.Layout.Card" parent="AppTheme.Layout.Dialog">
         <item name="android:layout_margin">2dp</item>
-<!--        <item name="background">?attr/colorPrimarySurface</item>-->
         <item name="android:checkable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
@@ -136,6 +138,7 @@
         <item name="android:padding">2dp</item>
         <item name="cardElevation">0dp</item>
         <item name="cardPreventCornerOverlap">false</item>
+        <item name="strokeColor">?attr/appStrokeColor</item>
         <item name="strokeWidth">0.1dp</item>
     </style>
 
@@ -168,7 +171,7 @@
 
     <style name="ShapeAppearance.App.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">10dp</item>
+        <item name="cornerSize">5%</item>
     </style>
 
     <style name="AppTheme.TextView">

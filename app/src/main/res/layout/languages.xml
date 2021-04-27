@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/themeLayout"
     style="@style/AppTheme.Layout.Fragment"
-    android:transitionName="transition">
+    android:transitionName="lang_transition">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

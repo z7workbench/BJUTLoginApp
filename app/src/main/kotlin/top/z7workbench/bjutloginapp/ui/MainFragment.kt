@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialElevationScale
+import top.z7workbench.bjutloginapp.BuildConfig
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.ControlCardBinding
 import top.z7workbench.bjutloginapp.databinding.FluxCardBinding
@@ -33,10 +34,11 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //            TODO("refresh")
-            binding.swipeRefresh.isRefreshing = false
-//            viewModel.syncing(requireContext()) {
-//                binding.swipeRefresh.isRefreshing = false
-//            }
+            viewModel.sync()
+        }
+
+        viewModel.swipe.observe(this) {
+            if (it) binding.swipeRefresh.isRefreshing = false
         }
 
 //        prevent recycler from scrolling
@@ -176,7 +178,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                     holder.binding.changeLang.setOnClickListener {
                         val extras = FragmentNavigatorExtras(
-                            holder.binding.changeLang to "transition"
+                            holder.binding.changeLang to "lang_transition"
                         )
                         findNavController().navigate(
                             R.id.action_mainFragment_to_localeFragment,
@@ -187,7 +189,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     }
                     holder.binding.changeTheme.setOnClickListener {
                         val extras = FragmentNavigatorExtras(
-                            holder.binding.changeTheme to "transition"
+                            holder.binding.changeTheme to "theme_transition"
                         )
                         findNavController().navigate(
                             R.id.action_mainFragment_to_themeFragment,
@@ -238,13 +240,13 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             }
 
                             override fun onNothingSelected(parent: AdapterView<*>?) {
-                                holder.binding.ipSpinner.setSelection(0)
                             }
                         }
                     holder.binding.theme.text =
                         resources.getStringArray(R.array.themes)[app.prefs.getInt("theme_index", 0)]
                     holder.binding.language.text =
                         resources.getStringArray(R.array.language)[app.prefs.getInt("language", 0)]
+                    holder.binding.version.text = BuildConfig.VERSION_NAME
                 }
                 is FluxCardViewHolder -> {
                     viewModel.fee.observe(this@MainFragment) {
@@ -256,6 +258,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                     it.toString(),
                                     resources.getString(R.string.change_to_flux),
                                     resources.getString(R.string.colon),
+                                    viewModel.remained.value ?: "0GB"
                                 )
                         } else {
                             holder.binding.flux.text = resources.getString(R.string.fee)

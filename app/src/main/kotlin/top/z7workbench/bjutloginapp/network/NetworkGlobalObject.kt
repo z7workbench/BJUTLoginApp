@@ -5,15 +5,36 @@ import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.util.Log
 import okhttp3.FormBody
+import okhttp3.OkHttpClient
 import top.z7workbench.bjutloginapp.Constants
 import top.z7workbench.bjutloginapp.model.User
 import top.z7workbench.bjutloginapp.util.IpMode
 import java.net.Inet6Address
 import java.net.NetworkInterface
 import java.net.SocketException
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 object NetworkGlobalObject {
+    val client = OkHttpClient.Builder()
+        .cache(null)
+        .readTimeout(5, TimeUnit.SECONDS)
+        .writeTimeout(5, TimeUnit.SECONDS)
+        .connectTimeout(5, TimeUnit.SECONDS)
+        .addInterceptor {
+            val request = it.request()
+                .newBuilder()
+                .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+                .addHeader("Accept-Encoding", "gzip, deflate")
+                .addHeader("Accept-Language", "en-US,en;q=0.5")
+                .addHeader("Connection", "keep-alive")
+                .addHeader("Content-type", "text/html; charset=gbk")
+                .addHeader("User-Agent", Constants.GECKO_WIN_AGENT)
+                .build()
+            it.proceed(request)
+        }
+        .build()
+
     fun body(mode: IpMode, user: User) = when (mode) {
         IpMode.WIRED_IPV4, IpMode.WIRELESS -> FormBody.Builder()
                 .add("DDDDD", user.name)

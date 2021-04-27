@@ -3,6 +3,7 @@ package top.z7workbench.bjutloginapp.model
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,8 +12,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import top.z7workbench.bjutloginapp.LoginApp
 import top.z7workbench.bjutloginapp.R
-import top.z7workbench.bjutloginapp.network.OkHttpNetwork
-import top.z7workbench.bjutloginapp.network.DataProcessBlock
+import top.z7workbench.bjutloginapp.network.*
+import top.z7workbench.bjutloginapp.network.NetworkGlobalObject.body
 import top.z7workbench.bjutloginapp.prefs.AppSettingsOperator
 import top.z7workbench.bjutloginapp.util.*
 import java.io.IOException
@@ -35,6 +36,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val _percent = MutableLiveData<Int>()
     private val _themeIndex = MutableLiveData<String>()
     private val _localeIndex = MutableLiveData<String>()
+    private val _swipe = MutableLiveData<Boolean>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val dataStore = getApplication<LoginApp>().dataStore
 
@@ -61,11 +63,16 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         get() = _exceeded
     val percent: LiveData<Int>
         get() = _percent
+    val swipe: LiveData<Boolean>
+        get() = _swipe
+
+    private val mode get() = ipMode.value ?: IpMode.WIRELESS
 
     init {
         viewModelScope.launch {
             updateUserSettings(true)
         }
+        _swipe.value = true
         _usedTime.value = -1
         _flux.value = ""
         _fee.value = -1F
@@ -76,10 +83,13 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun error() {
-        _usedTime.value = -1
-        _flux.value = ""
-        _fee.value = -1F
-        _status.value = LogStatus.ERROR
+        _usedTime.postValue(-1)
+        _flux.postValue("")
+        _fee.postValue(-1F)
+        _status.postValue(LogStatus.ERROR)
+        _exceeded.postValue("0 GB")
+        _remained.postValue("0 GB")
+        _percent.postValue(0)
     }
 
     fun insertUser(user: User) {
@@ -132,78 +142,93 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         _time.postValue(sdf.format(date))
     }
 
-    val currentStatus = _status.value
+    val currentStatus get() = _status.value
 
     fun online() {
         _status.value = LogStatus.LOGGING
-        val block = object : DataProcessBlock {
-            override fun onFailure(exception: IOException) {
-                _remained.postValue("0 GB")
-                _exceeded.postValue("0 GB")
-                _percent.postValue(0)
-                error()
+        viewModelScope.launch {
+            exception {
+                when (mode) {
+                    IpMode.WIRELESS -> {
+                        val service = WirelessService.service
+                        service.login(user.value?.name ?: "", user.value?.password ?: "")
+                    }
+                    IpMode.WIRED_IPV6 -> {
+                        val service = Wired6Service.service
+                        service.login(body(mode, user.value ?: User()))
+                    }
+                    else -> {
+                        val service = Wired4Service.service
+                        service.login(body(mode, user.value ?: User()))
+                    }
+                }
             }
-
-            override fun onResponse(bundle: Bundle) {
-                syncing()
-            }
-
-            override fun onFinished() = updateSyncedTime()
+            syncing()
         }
-        OkHttpNetwork.login(_user.value as User, _ipMode.value as IpMode, block)
     }
 
-    fun syncing(context: Context? = null, block: () -> Unit = {}) {
-        _status.postValue(LogStatus.SYNCING)
-        val bl = object : DataProcessBlock {
-            override fun onFailure(exception: IOException) {
-                error()
-                context?.runOnUiThread { block() }
-                _remained.postValue("0 GB")
-                _exceeded.postValue("0 GB")
-                _percent.postValue(0)
-            }
-
-            override fun onResponse(bundle: Bundle) {
-                if (bundle["status"] as Boolean) {
-                    _usedTime.postValue(bundle["time"] as Int)
-                    _flux.postValue(formatByteSize(bundle["flow"] as Long * 1024))
-                    _fee.postValue(bundle["fee"] as Float)
-                    _status.postValue(LogStatus.ONLINE)
-                    val exBundle = exceededByteSizeBundle(
-                        bundle["flow"] as Long,
-                        _user.value?.pack ?: 30,
-                        bundle["fee"] as Float
-                    )
-                    _remained.postValue(exBundle["remained"] as String)
-                    _exceeded.postValue(exBundle["exceeded"] as String)
-                    _percent.postValue(exBundle["percent"] as Int)
-                } else {
-                    _status.postValue(LogStatus.OFFLINE)
-                }
-                context?.runOnUiThread { block() }
-            }
-
-            override fun onFinished() = updateSyncedTime()
+    fun sync() {
+        _status.value = LogStatus.SYNCING
+        _swipe.value = false
+        viewModelScope.launch {
+            syncing()
+            _swipe.postValue(true)
         }
-        OkHttpNetwork.sync(_ipMode.value as IpMode, bl)
+    }
+
+    private suspend fun syncing() {
+        exception {
+            val returnBody = when (mode) {
+                IpMode.WIRED_IPV6 -> {
+                    Wired6Service.service.sync()
+                }
+                else -> {
+                    Wired4Service.service.sync()
+                }
+            }
+//        returnBody.collect {
+            val bundle = processSyncData(returnBody, user.value?.pack ?: 30)
+            val statusCode = bundle.getBoolean("status")
+            if (statusCode) {
+                _remained.postValue(bundle.getString("remained"))
+                _exceeded.postValue(bundle.getString("exceeded"))
+                _percent.postValue(bundle.getInt("percent"))
+                _usedTime.postValue(bundle.getInt("time"))
+                _fee.postValue(bundle.getFloat("fee"))
+                _flux.postValue(formatByteSize(bundle.getLong("flow")))
+                _status.postValue(LogStatus.ONLINE)
+            } else error()
+//        }
+        }
     }
 
     fun offline() {
-        val block = object : DataProcessBlock {
-            override fun onFailure(exception: IOException) {
-                error()
-                _remained.postValue("0 GB")
-                _exceeded.postValue("0 GB")
-                _percent.postValue(0)
+        _status.value = LogStatus.OFFLINE
+        viewModelScope.launch {
+            exception {
+                when (mode) {
+                    IpMode.WIRELESS -> {
+                        val service = WirelessService.service
+                        service.logout()
+                    }
+                    IpMode.WIRED_IPV6 -> {
+                        val service = Wired6Service.service
+                        service.logout()
+                    }
+                    else -> {
+                        val service = Wired4Service.service
+                        service.logout()
+                    }
+                }
             }
-
-            override fun onResponse(bundle: Bundle) {
-                _status.value = LogStatus.OFFLINE
-            }
-
-            override fun onFinished() = updateSyncedTime()
         }
-        OkHttpNetwork.sync(_ipMode.value as IpMode, block)
+    }
+
+    suspend fun exception (f: suspend ()->Unit){
+        try {
+            f()
+        } catch (e:Exception) {
+            error()
+        }
     }
 }

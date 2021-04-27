@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialContainerTransform
 import top.z7workbench.bjutloginapp.R
-import top.z7workbench.bjutloginapp.databinding.RecyclerBinding
+import top.z7workbench.bjutloginapp.databinding.LanguagesBinding
 import top.z7workbench.bjutloginapp.databinding.RecyclerItemBinding
 
-class LocaleFragment : BasicFragment<RecyclerBinding>() {
+class LocaleFragment : BasicFragment<LanguagesBinding>() {
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        RecyclerBinding.inflate(inflater, container, false)
+        LanguagesBinding.inflate(inflater, container, false)
 
     override fun initViewAfterViewCreated() {
         binding.recyclerToolbar.setNavigationOnClickListener {

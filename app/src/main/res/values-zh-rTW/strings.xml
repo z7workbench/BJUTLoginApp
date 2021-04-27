@@ -29,6 +29,8 @@
     <string name="change_to_flux">→流量</string>
     <string name="exceeded">超出套餐</string>
     <string name="remained">剩餘額度</string>
+    <string name="disconnect">斷開連接</string>
+    <string name="connect">連接</string>
 
     <string name="status_offline">離綫</string>
     <string name="status_logging">登錄中</string>

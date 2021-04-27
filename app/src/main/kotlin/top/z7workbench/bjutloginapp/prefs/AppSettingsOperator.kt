@@ -44,12 +44,6 @@ object AppSettingsOperator {
     suspend fun setIpMode(dataStore: DataStore<Preferences>, ipMode: IpMode) =
         setValue(dataStore, Keys.IP_MODE, ipMode.name)
 
-    suspend fun setLanguage(dataStore: DataStore<Preferences>, language: Int) =
-        setValue(dataStore, Keys.LANGUAGE, language)
-
-    suspend fun setTheme(dataStore: DataStore<Preferences>, theme: Int) =
-        setValue(dataStore, Keys.THEME_IDX, theme)
-
     suspend fun setNetFramework(dataStore: DataStore<Preferences>, net: NetFramework) =
         setValue(dataStore, Keys.NET_FRAMEWORK, net.name)
 
