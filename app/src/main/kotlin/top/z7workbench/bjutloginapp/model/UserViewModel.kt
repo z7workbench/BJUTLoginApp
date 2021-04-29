@@ -224,10 +224,11 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    suspend fun exception (f: suspend ()->Unit){
+    private suspend fun exception (f: suspend ()->Unit){
         try {
             f()
         } catch (e:Exception) {
+            e.printStackTrace()
             error()
         }
     }
