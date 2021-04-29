@@ -26,6 +26,11 @@ jobs:
         store_psd: ${{ secrets.store_psd }}
         key_alias: ${{ secrets.key_alias }}
         key_psd: ${{ secrets.key_psd }}
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-apk
+        path: app/build/outputs/apk/release/app-release.apk
     - name: publish to fir.im
       run: |
         gem install fir-cli

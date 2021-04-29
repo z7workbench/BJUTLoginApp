@@ -103,7 +103,7 @@
             android:focusable="true"
             android:orientation="horizontal"
             android:paddingVertical="12dp"
-            android:transitionName="transition"
+            android:transitionName="theme_transition"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/changeIpMode">
@@ -119,11 +119,11 @@
                 android:id="@+id/theme"
                 style="@style/AppTheme.TextView.Small"
                 android:layout_width="0dp"
-                android:transitionName="theme"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
                 android:layout_weight="1"
-                android:gravity="end" />
+                android:gravity="end"
+                android:transitionName="theme" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,6 +136,7 @@
             android:focusable="true"
             android:orientation="horizontal"
             android:paddingVertical="12dp"
+            android:transitionName="lang_transition"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/changeTheme">
