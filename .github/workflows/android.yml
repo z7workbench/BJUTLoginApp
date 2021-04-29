@@ -59,7 +59,7 @@ jobs:
       - name: create release
         id: create_release
         if: steps.prepare_release.outputs.tag_name
-        uses: marvinpinto/action-automatic-releases@v1
+        uses: marvinpinto/action-automatic-releases@v1.1.2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
