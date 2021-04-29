@@ -5,6 +5,7 @@ on:
     tags:
       - "v*"
 
+jobs:
   deploy:
     name: Deploy when tags created
     needs: android
