@@ -34,9 +34,8 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val _remained = MutableLiveData<String>()
     private val _exceeded = MutableLiveData<String>()
     private val _percent = MutableLiveData<Int>()
-    private val _themeIndex = MutableLiveData<String>()
-    private val _localeIndex = MutableLiveData<String>()
     private val _swipe = MutableLiveData<Boolean>()
+    private val _float = MutableLiveData<Double>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val dataStore = getApplication<LoginApp>().dataStore
 
@@ -65,6 +64,8 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         get() = _percent
     val swipe: LiveData<Boolean>
         get() = _swipe
+    val float: LiveData<Double>
+        get() = _float
 
     private val mode get() = ipMode.value ?: IpMode.WIRELESS
 
@@ -80,6 +81,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         _remained.value = "0 GB"
         _percent.value = 0
         _status.value = LogStatus.OFFLINE
+        _float.value = 0.0
     }
 
     private fun error() {
@@ -90,6 +92,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         _exceeded.postValue("0 GB")
         _remained.postValue("0 GB")
         _percent.postValue(0)
+        _float.postValue(0.0)
     }
 
     fun insertUser(user: User) {
@@ -196,6 +199,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                 _usedTime.postValue(bundle.getInt("time"))
                 _fee.postValue(bundle.getFloat("fee"))
                 _flux.postValue(formatByteSize(bundle.getLong("flow")))
+                _float.postValue(percentOfPackage(bundle.getLong("flow"), _user.value?.pack ?: 30))
                 _status.postValue(LogStatus.ONLINE)
             } else error()
 //        }
@@ -224,10 +228,10 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private suspend fun exception (f: suspend ()->Unit){
+    private suspend fun exception(f: suspend () -> Unit) {
         try {
             f()
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
             error()
         }

@@ -156,6 +156,9 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 resources.getString(R.string.unknown)
                             )
                     }
+                    viewModel.float.observe(this@MainFragment) {
+                        holder.binding.percentBar.percent = it.toFloat()
+                    }
                 }
                 is ControlCardViewHolder -> {
                     viewModel.user.observe(this@MainFragment) {

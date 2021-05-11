@@ -68,10 +68,13 @@ fun processSyncData(string: String, pack: Int): Bundle {
             sizeOfUsedExtraInByte * 100L / (sizeOfMoneyInByte + sizeOfUsedExtraInByte) else 0L
         bundle.putString("remained", stringOfMoneyByte)
         bundle.putString("exceeded", stringOfUsedExtraByte)
-        bundle.putInt("percent",  percent.toInt())
+        bundle.putInt("percent", percent.toInt())
         bundle.putInt("time", time)
         bundle.putFloat("fee", fee)
         bundle.putLong("flow", flow)
     }
     return bundle
 }
+
+fun percentOfPackage(flow: Long, pack: Int): Double =
+    if (flow >= 0) (flow.toDouble() / 1024 / 1024 / 1024) / pack * 100 else 0.0
