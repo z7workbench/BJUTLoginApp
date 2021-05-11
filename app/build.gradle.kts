@@ -2,19 +2,21 @@ import org.codehaus.groovy.runtime.ProcessGroovyMethods
 
 val lifecycleVersion = "2.4.0-alpha01"
 val navVersion = "2.3.5"
-val roomVersion = "2.4.0-alpha01"
-val gitCommitCount = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count")).trim()
+val roomVersion = "2.4.0-alpha02"
+val gitCommitCount =
+    ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count"))
+        .trim()
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
 }
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "top.z7workbench.bjutloginapp"
-        minSdkVersion(26)
-        targetSdkVersion(30)
+        minSdk = 26
+        targetSdk = 30
         versionCode = 6
         versionName = "6.0.0-rc02"
         versionNameSuffix = " (${gitCommitCount})"
@@ -49,16 +51,16 @@ dependencies {
     implementation(kotlin("stdlib", "1.4.31"))
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.3.0-rc01")
-    implementation("androidx.core:core-ktx:1.6.0-alpha02")
+    implementation("androidx.core:core-ktx:1.6.0-alpha03")
     // Preference
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     // Layouts
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0-beta01")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0-beta02")
     implementation("androidx.recyclerview:recyclerview:1.2.0")
-    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-    implementation("com.google.android.material:material:1.4.0-alpha02")
+    implementation("androidx.recyclerview:recyclerview-selection:1.2.0-alpha01")
+    implementation("com.google.android.material:material:1.4.0-beta01")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // LiveData
@@ -74,7 +76,7 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     // Paging
-    implementation("androidx.paging:paging-runtime:3.0.0-rc01")
+    implementation("androidx.paging:paging-runtime:3.0.0")
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
