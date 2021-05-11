@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
 }
-val kotlinVersion = "1.4.0"
+val kotlinVersion = "1.5.0"
 android {
     compileSdkVersion(30)
     defaultConfig {
