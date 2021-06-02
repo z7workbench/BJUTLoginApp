@@ -1,5 +1,6 @@
 package top.z7workbench.bjutloginapp.ui
 
+import android.Manifest
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialElevationScale
+import permissions.dispatcher.NeedsPermission
+import permissions.dispatcher.RuntimePermissions
 import top.z7workbench.bjutloginapp.BuildConfig
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.ControlCardBinding
@@ -24,7 +27,7 @@ import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.buildString
 
-
+@RuntimePermissions
 class MainFragment : BasicFragment<FragmentMainBinding>() {
     val viewModel by activityViewModels<UserViewModel>()
 
@@ -33,15 +36,15 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         binding.swipeRefresh.setDistanceToTriggerSync(200)
 
         binding.swipeRefresh.setOnRefreshListener {
-//            TODO("refresh")
-            viewModel.sync()
+//          TODO("refresh")
+            sync()
         }
 
         viewModel.swipe.observe(this) {
             if (it) binding.swipeRefresh.isRefreshing = false
         }
 
-//        prevent recycler from scrolling
+//      prevent recycler from scrolling
         val llm =
             object : LinearLayoutManager(requireContext(), VERTICAL, false) {
                 override fun canScrollVertically() = false
@@ -63,6 +66,9 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         exitTransition = MaterialElevationScale(false)
         reenterTransition = MaterialElevationScale(false)
     }
+
+    @NeedsPermission(Manifest.permission.INTERNET)
+    fun sync() = viewModel.sync()
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentMainBinding.inflate(inflater, container, false)
