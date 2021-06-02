@@ -129,41 +129,34 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 )
                         }
                     }
-                    viewModel.fee.observe(this@MainFragment) {
-                        if (it != null && it > 0) {
-                            holder.binding.fee.text = resources.getString(R.string.fee)
+                    viewModel.stats.observe(this@MainFragment) {
+                        holder.binding.usedTime.text = if (it != null && it.time >= 0)
+                            resources.getString(R.string.used_time).buildString(
+                                resources.getString(R.string.colon),
+                                it.time.toString(),
+                                resources.getString(R.string.minutes)
+                            )
+                        else resources.getString(R.string.used_time).buildString(
+                            resources.getString(R.string.colon),
+                            resources.getString(R.string.unknown)
+                        )
+                        holder.binding.fee.text = if (it != null && it.fee > 0)
+                            resources.getString(R.string.fee)
                                 .buildString(
                                     resources.getString(R.string.colon),
                                     "￥",
-                                    it.toString()
+                                    it.fee.toString()
                                 )
-                        } else {
-                            holder.binding.fee.text = resources.getString(R.string.fee)
-                                .buildString(
-                                    resources.getString(R.string.colon),
-                                    resources.getString(R.string.unknown)
-                                )
-                        }
+                        else resources.getString(R.string.fee)
+                            .buildString(
+                                resources.getString(R.string.colon),
+                                resources.getString(R.string.unknown)
+                            )
+
                     }
                     viewModel.status.observe(this@MainFragment) {
                         holder.binding.title.text = resources.getString(R.string.status_card)
                             .buildString(resources.getString(it.description))
-                    }
-                    viewModel.usedTime.observe(this@MainFragment) {
-                        holder.binding.usedTime.text = if (it != null && it >= 0)
-                            resources.getString(R.string.used_time).buildString(
-                                resources.getString(R.string.colon),
-                                it.toString(),
-                                resources.getString(R.string.minutes)
-                            )
-                        else
-                            resources.getString(R.string.used_time).buildString(
-                                resources.getString(R.string.colon),
-                                resources.getString(R.string.unknown)
-                            )
-                    }
-                    viewModel.float.observe(this@MainFragment) {
-                        holder.binding.percentBar.percent = it.toFloat()
                     }
                 }
                 is ControlCardViewHolder -> {
@@ -258,63 +251,52 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     holder.binding.version.text = BuildConfig.VERSION_NAME
                 }
                 is FluxCardViewHolder -> {
-                    viewModel.fee.observe(this@MainFragment) {
-                        if (it != null && it > 0) {
-                            holder.binding.flux.text = resources.getString(R.string.fee)
+                    viewModel.stats.observe(this@MainFragment) {
+                        holder.binding.flux.text = if (it != null && it.fee > 0)
+                            resources.getString(R.string.fee)
                                 .buildString(
                                     resources.getString(R.string.colon),
                                     "￥",
-                                    it.toString(),
+                                    it.fee.toString(),
                                     resources.getString(R.string.change_to_flux),
                                     resources.getString(R.string.colon),
-                                    viewModel.remained.value ?: "0GB"
+                                    it.remained
                                 )
-                        } else {
-                            holder.binding.flux.text = resources.getString(R.string.fee)
-                                .buildString(
-                                    resources.getString(R.string.colon),
-                                    resources.getString(R.string.unknown),
-                                    resources.getString(R.string.change_to_flux),
-                                    resources.getString(R.string.colon),
-                                    resources.getString(R.string.unknown)
-                                )
-                        }
-                    }
-                    viewModel.exceeded.observe(this@MainFragment) {
-                        if (it == null) {
+                        else resources.getString(R.string.fee)
+                            .buildString(
+                                resources.getString(R.string.colon),
+                                resources.getString(R.string.unknown),
+                                resources.getString(R.string.change_to_flux),
+                                resources.getString(R.string.colon),
+                                resources.getString(R.string.unknown)
+                            )
+                        if (it == null)
                             holder.binding.exceeded.text = resources.getString(R.string.exceeded)
                                 .buildString(
                                     resources.getString(R.string.colon),
                                     resources.getString(R.string.unknown)
                                 )
-                        } else {
-                            holder.binding.exceeded.text = resources.getString(R.string.exceeded)
-                                .buildString(
-                                    resources.getString(R.string.colon),
-                                    it
-                                )
-                        }
-                    }
-                    viewModel.remained.observe(this@MainFragment) {
-                        if (it == null) {
-                            holder.binding.remained.text = resources.getString(R.string.remained)
+                        else holder.binding.exceeded.text = resources.getString(R.string.exceeded)
+                            .buildString(
+                                resources.getString(R.string.colon),
+                                it.exceeded
+                            )
+
+                        holder.binding.remained.text = if (it == null)
+                            resources.getString(R.string.remained)
                                 .buildString(
                                     resources.getString(R.string.colon),
                                     resources.getString(R.string.unknown)
                                 )
-                        } else {
-                            holder.binding.remained.text = resources.getString(R.string.remained)
-                                .buildString(
-                                    resources.getString(R.string.colon),
-                                    it
-                                )
-                        }
-                    }
-                    viewModel.percent.observe(this@MainFragment) {
+                        else resources.getString(R.string.remained)
+                            .buildString(
+                                resources.getString(R.string.colon),
+                                it.remained
+                            )
                         if (it == null) {
                             holder.binding.progressBar.progress = 0
                         } else {
-                            holder.binding.progressBar.progress = it
+                            holder.binding.progressBar.progress = it.percent
                         }
                     }
                 }

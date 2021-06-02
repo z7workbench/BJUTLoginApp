@@ -2,6 +2,7 @@ package top.z7workbench.bjutloginapp.util
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import top.z7workbench.bjutloginapp.model.NetData
 import kotlin.math.absoluteValue
 import kotlin.math.round
 
@@ -66,6 +67,10 @@ fun processSyncData(string: String, pack: Int): Bundle {
         val stringOfUsedExtraByte = formatByteSize(sizeOfUsedExtraInByte * 1024)
         val percent = if (sizeOfMoneyInByte + sizeOfUsedExtraInByte != 0L)
             sizeOfUsedExtraInByte * 100L / (sizeOfMoneyInByte + sizeOfUsedExtraInByte) else 0L
+        val data = NetData(
+            time, flow, fee, stringOfMoneyByte, stringOfUsedExtraByte, percent.toInt()
+        )
+        bundle.putParcelable("data", data)
         bundle.putString("remained", stringOfMoneyByte)
         bundle.putString("exceeded", stringOfUsedExtraByte)
         bundle.putInt("percent", percent.toInt())

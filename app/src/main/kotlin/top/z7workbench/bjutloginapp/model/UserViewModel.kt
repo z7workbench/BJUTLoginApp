@@ -1,9 +1,6 @@
 package top.z7workbench.bjutloginapp.model
 
 import android.app.Application
-import android.content.Context
-import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,12 +8,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import top.z7workbench.bjutloginapp.LoginApp
-import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.network.*
 import top.z7workbench.bjutloginapp.network.NetworkGlobalObject.body
 import top.z7workbench.bjutloginapp.prefs.AppSettingsOperator
 import top.z7workbench.bjutloginapp.util.*
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,12 +23,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val _user = MutableLiveData<User>()
     private val _ipMode = MutableLiveData<IpMode>()
     private val _time = MutableLiveData<String>()
-    private val _usedTime = MutableLiveData<Int>()
-    private val _flux = MutableLiveData<String>()
-    private val _fee = MutableLiveData<Float>()
-    private val _remained = MutableLiveData<String>()
-    private val _exceeded = MutableLiveData<String>()
-    private val _percent = MutableLiveData<Int>()
+    private val _stats = MutableLiveData<NetData>()
     private val _swipe = MutableLiveData<Boolean>()
     private val _float = MutableLiveData<Double>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -50,49 +40,30 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         get() = _ipMode
     val time: LiveData<String>
         get() = _time
-    val usedTime: LiveData<Int>
-        get() = _usedTime
-    val flux: LiveData<String>
-        get() = _flux
-    val fee: LiveData<Float>
-        get() = _fee
-    val remained: LiveData<String>
-        get() = _remained
-    val exceeded: LiveData<String>
-        get() = _exceeded
-    val percent: LiveData<Int>
-        get() = _percent
+    val stats: LiveData<NetData>
+        get() = _stats
     val swipe: LiveData<Boolean>
         get() = _swipe
     val float: LiveData<Double>
         get() = _float
 
     private val mode get() = ipMode.value ?: IpMode.WIRELESS
+    private val default = NetData()
 
     init {
         viewModelScope.launch {
             updateUserSettings(true)
         }
         _swipe.value = true
-        _usedTime.value = -1
-        _flux.value = ""
-        _fee.value = -1F
-        _exceeded.value = "0 GB"
-        _remained.value = "0 GB"
-        _percent.value = 0
+        _stats.value = default
         _status.value = LogStatus.OFFLINE
         _float.value = 0.0
     }
 
     private fun error() {
-        _usedTime.postValue(-1)
-        _flux.postValue("")
-        _fee.postValue(-1F)
         _status.postValue(LogStatus.ERROR)
-        _exceeded.postValue("0 GB")
-        _remained.postValue("0 GB")
-        _percent.postValue(0)
         _float.postValue(0.0)
+        _stats.postValue(default)
     }
 
     fun insertUser(user: User) {
@@ -193,13 +164,13 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             val bundle = processSyncData(returnBody, user.value?.pack ?: 30)
             val statusCode = bundle.getBoolean("status")
             if (statusCode) {
-                _remained.postValue(bundle.getString("remained"))
-                _exceeded.postValue(bundle.getString("exceeded"))
-                _percent.postValue(bundle.getInt("percent"))
-                _usedTime.postValue(bundle.getInt("time"))
-                _fee.postValue(bundle.getFloat("fee"))
-                _flux.postValue(formatByteSize(bundle.getLong("flow")))
-                _float.postValue(percentOfPackage(bundle.getLong("flow"), _user.value?.pack ?: 30))
+                _stats.postValue(bundle.getParcelable("data"))
+                _float.postValue(
+                    percentOfPackage(
+                        ((bundle.getParcelable("data") as NetData?) ?: default).flow,
+                        _user.value?.pack ?: 30
+                    )
+                )
                 _status.postValue(LogStatus.ONLINE)
             } else error()
 //        }
