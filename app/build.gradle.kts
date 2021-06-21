@@ -4,8 +4,8 @@ val lifecycleVersion = "2.4.0-alpha01"
 val navVersion = "2.3.5"
 val roomVersion = "2.4.0-alpha02"
 val permissionsdispatcher = "4.8.0"
-val fragmentVersion = "1.3.3"
-val activityVersion = "1.3.0-alpha08"
+val fragmentVersion = "1.3.5"
+val activityVersion = "1.3.0-beta02"
 val gitCommitCount =
     ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count"))
         .trim()
@@ -53,9 +53,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", "1.5.10"))
     // AndroidX
-//    implementation("androidx.appcompat:appcompat:1.4.0-alpha01")
-    implementation("androidx.annotation:annotation:1.3.0-alpha01")
-    implementation("androidx.appcompat:appcompat:1.3.0-rc01")
+    implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
     implementation("androidx.core:core-ktx:1.6.0-beta01")
     // Preference
     implementation("androidx.preference:preference:1.1.1")
@@ -94,26 +92,26 @@ dependencies {
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0-beta01")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-beta02")
 
-//    // Jetpack Compose UI
-//    implementation("androidx.compose.ui:ui:1.0.0-beta07")
-//    // Tooling support (Previews, etc.)
-//    implementation("androidx.compose.ui:ui-tooling:1.0.0-beta07")
-//    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-//    implementation("androidx.compose.foundation:foundation:1.0.0-beta07")
-//    // Material Design
-//    implementation("androidx.compose.material:material:1.0.0-beta07")
-//    // Material design icons
-//    implementation("androidx.compose.material:material-icons-core:1.0.0-beta07")
-//    implementation("androidx.compose.material:material-icons-extended:1.0.0-beta07")
-//    // Integration with activities
-//    implementation("androidx.activity:activity-compose:1.3.0-alpha08")
-//    // Integration with ViewModels
-//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha05")
-//    // Integration with observables
-//    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta07")
-//    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.0-beta07")
+    // Jetpack Compose UI
+    implementation("androidx.compose.ui:ui:1.0.0-beta09")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation("androidx.compose.foundation:foundation:1.0.0-beta09")
+    // Material Design
+    implementation("androidx.compose.material:material:1.0.0-beta09")
+    // Material design icons
+    implementation("androidx.compose.material:material-icons-core:1.0.0-beta09")
+    implementation("androidx.compose.material:material-icons-extended:1.0.0-beta09")
+    // Integration with activities
+    implementation("androidx.activity:activity-compose:1.3.0-beta02")
+    // Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
+    // Integration with observables
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta09")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.0-beta09")
 
     implementation("com.android.volley:volley:1.2.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
