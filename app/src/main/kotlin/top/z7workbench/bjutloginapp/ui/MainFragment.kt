@@ -37,7 +37,9 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //          TODO("refresh")
-            sync()
+            NetworkGlobalObject.getWifiSSID(requireContext())
+//            sync()
+            binding.swipeRefresh.isRefreshing = false
         }
 
         viewModel.swipe.observe(this) {

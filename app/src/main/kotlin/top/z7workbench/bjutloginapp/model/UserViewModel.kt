@@ -1,6 +1,12 @@
 package top.z7workbench.bjutloginapp.model
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.wifi.WifiInfo
+import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +32,7 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val _stats = MutableLiveData<NetData>()
     private val _swipe = MutableLiveData<Boolean>()
     private val _float = MutableLiveData<Double>()
+    private val _ssid = MutableLiveData<String>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val dataStore = getApplication<LoginApp>().dataStore
 

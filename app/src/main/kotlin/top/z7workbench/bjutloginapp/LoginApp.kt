@@ -3,12 +3,18 @@ package top.z7workbench.bjutloginapp
 import android.app.Application
 import android.content.*
 import android.content.res.Resources
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.wifi.WifiInfo
+import android.os.Build
 import androidx.core.content.edit
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.room.Room
 import top.z7workbench.bjutloginapp.database.AppDatabase
+import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.LocaleUtil
 import top.z7workbench.bjutloginapp.util.dataStore
 

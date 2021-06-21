@@ -54,6 +54,7 @@ dependencies {
     implementation(kotlin("stdlib", "1.5.10"))
     // AndroidX
 //    implementation("androidx.appcompat:appcompat:1.4.0-alpha01")
+    implementation("androidx.annotation:annotation:1.3.0-alpha01")
     implementation("androidx.appcompat:appcompat:1.3.0-rc01")
     implementation("androidx.core:core-ktx:1.6.0-beta01")
     // Preference

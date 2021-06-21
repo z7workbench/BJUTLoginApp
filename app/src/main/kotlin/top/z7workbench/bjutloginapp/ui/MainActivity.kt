@@ -12,8 +12,10 @@ import permissions.dispatcher.RuntimePermissions
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.*
 import top.z7workbench.bjutloginapp.model.UserViewModel
+import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
+import top.z7workbench.bjutloginapp.util.toast
 
 @RuntimePermissions
 class MainActivity : BasicActivity() {
@@ -55,6 +57,7 @@ class MainActivity : BasicActivity() {
         binding.fab.run {
             setShowMotionSpecResource(R.animator.fab_show)
             setHideMotionSpecResource(R.animator.fab_hide)
+//            setOnClickListener { toast(getSSID()) }
             setOnClickListener { fabAction() }
 
             viewModel.status.observe(this@MainActivity) {
@@ -94,5 +97,15 @@ class MainActivity : BasicActivity() {
             }
             else -> nothing()
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // NOTE: delegate the permission handling to generated method
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 }
