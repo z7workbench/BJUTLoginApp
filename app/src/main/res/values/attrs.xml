@@ -2,6 +2,7 @@
 <resources>
     <attr name="appBackground" format="color|reference" />
     <attr name="appTextColor" format="color|reference" />
+    <attr name="appTextSecondaryColor" format="color|reference" />
     <attr name="appSubTextColor" format="color|reference" />
     <attr name="appAccentBackground" format="color|reference" />
     <attr name="appStrokeColor" format="color|reference" />

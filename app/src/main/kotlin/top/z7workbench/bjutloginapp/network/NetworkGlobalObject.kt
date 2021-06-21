@@ -8,9 +8,11 @@ import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.net.wifi.aware.WifiAwareNetworkInfo
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
+import androidx.core.os.bundleOf
 import kotlinx.coroutines.newFixedThreadPoolContext
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -18,6 +20,7 @@ import permissions.dispatcher.NeedsPermission
 import top.z7workbench.bjutloginapp.Constants
 import top.z7workbench.bjutloginapp.model.User
 import top.z7workbench.bjutloginapp.util.IpMode
+import top.z7workbench.bjutloginapp.util.NetworkState
 import top.z7workbench.bjutloginapp.util.toast
 import java.net.Inet6Address
 import java.net.NetworkInterface
@@ -172,15 +175,25 @@ object NetworkGlobalObject {
         return ""
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    fun networkState(context: Context) {
+    fun networkState(context: Context): Bundle {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = manager.activeNetwork
         val capabilities = manager.getNetworkCapabilities(network)
         if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-
+            val state = when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> NetworkState.WIFI
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> NetworkState.CELLULAR
+                else -> NetworkState.OTHER
             }
+            val vpn = capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+            val validate = capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+            return bundleOf(
+                "status" to true,
+                "state" to state,
+                "vpn" to vpn,
+                "validate" to validate
+            )
         }
+        return bundleOf("status" to false)
     }
 }

@@ -13,6 +13,7 @@
         <item name="appBackground">@color/materialGrey</item>
         <item name="colorSurface">@color/materialGrey</item>
         <item name="appStrokeColor">@android:color/white</item>
+        <item name="appTextSecondaryColor">@color/colorDefaultTextLight</item>
     </style>
 
     <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -25,6 +26,7 @@
         <item name="appBackground">@android:color/white</item>
         <item name="colorSurface">@android:color/white</item>
         <item name="appStrokeColor">@android:color/black</item>
+        <item name="appTextSecondaryColor">@color/colorDefaultTextDark</item>
     </style>
 
     <style name="AppTheme.Dark.Pure">
@@ -35,6 +37,8 @@
         <item name="appBackground">@color/colorBackgroundPure</item>
         <item name="colorSurface">@color/colorPrimaryPure</item>
         <item name="colorOnSurface">@color/colorAccentPure</item>
+        <item name="colorSecondary">@color/colorSecondaryPure</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantPure</item>
     </style>
 
     <style name="AppTheme.Light.White">
@@ -45,6 +49,8 @@
         <item name="appBackground">@color/colorBackgroundWhite</item>
         <item name="colorSurface">@color/colorPrimaryWhite</item>
         <item name="colorOnSurface">@color/colorAccentWhite</item>
+        <item name="colorSecondary">@color/colorSecondaryWhite</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantWhite</item>
     </style>
 
     <style name="AppTheme.Light.Amber">
@@ -56,6 +62,8 @@
         <item name="appSubTextColor">@color/colorSubTextAmber</item>
         <item name="colorSurface">@color/colorPrimaryAmber</item>
         <item name="colorOnSurface">@color/colorAccentAmber</item>
+        <item name="colorSecondary">@color/colorSecondaryAmber</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantAmber</item>
     </style>
 
     <style name="AppTheme.Light.Yun">
@@ -66,7 +74,9 @@
         <item name="appBackground">@color/colorBackgroundYun</item>
         <item name="appSubTextColor">@color/colorSubTextYun</item>
         <item name="colorSurface">@color/colorPrimaryYun</item>
-        <item name="colorOnSurface">@color/colorAccentYun</item>
+        <item name="colorOnSurface">@color/colorSecondaryVariantYun</item>
+        <item name="colorSecondary">@color/colorSecondaryYun</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantYun</item>
     </style>
 
     <style name="AppTheme.Dark.ZeroGoPurple">
@@ -77,7 +87,9 @@
         <item name="appBackground">@color/colorBackgroundZGPurple</item>
         <item name="appSubTextColor">@color/colorSubTextZGPurple</item>
         <item name="colorSurface">@color/colorPrimaryZGPurple</item>
-        <item name="colorOnSurface">@color/colorAccentZGPurple</item>
+        <item name="colorOnSurface">@color/colorSecondaryVariantZGPurple</item>
+        <item name="colorSecondary">@color/colorSecondaryZGPurple</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantZGPurple</item>
     </style>
 
     <style name="AppTheme.Dark.Teal">
@@ -89,6 +101,8 @@
         <item name="appSubTextColor">@color/colorSubTextTeal</item>
         <item name="colorSurface">@color/colorPrimaryTeal</item>
         <item name="colorOnSurface">@color/colorAccentTeal</item>
+        <item name="colorSecondary">@color/colorSecondaryTeal</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantTeal</item>
     </style>
 
     <style name="AppTheme.Dark.Pink">
@@ -100,6 +114,8 @@
         <item name="appSubTextColor">@color/colorSubTextPink</item>
         <item name="colorSurface">@color/colorPrimaryPink</item>
         <item name="colorOnSurface">@color/colorAccentPink</item>
+        <item name="colorSecondary">@color/colorSecondaryPink</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantPink</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar">
@@ -142,6 +158,11 @@
         <item name="strokeWidth">0.1dp</item>
     </style>
 
+    <style name="AppTheme.Layout.Card.Warning">
+        <item name="strokeWidth">0dp</item>
+        <item name="cardBackgroundColor">?attr/colorAccent</item>
+    </style>
+
     <style name="AppTheme.ToolBarStyle">
         <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
         <item name="android:background">?attr/colorPrimary</item>
@@ -161,17 +182,17 @@
 
     <style name="ShapeAppearance.App.Large" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">24dp</item>
+        <item name="cornerSize">20dp</item>
     </style>
 
     <style name="ShapeAppearance.App.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">15dp</item>
+        <item name="cornerSize">12dp</item>
     </style>
 
     <style name="ShapeAppearance.App.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">cut</item>
-        <item name="cornerSize">5%</item>
+        <item name="cornerSize">1dp</item>
     </style>
 
     <style name="AppTheme.TextView">
@@ -191,6 +212,11 @@
 
     <style name="AppTheme.TextView.Small">
         <item name="android:textSize">@dimen/text_size_m</item>
+    </style>
+
+    <style name="AppTheme.TextView.SuperSmall">
+        <item name="android:textSize">@dimen/text_size_s</item>
+        <item name="android:textColor">?attr/appTextSecondaryColor</item>
     </style>
 
     <style name="Widget.App.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">

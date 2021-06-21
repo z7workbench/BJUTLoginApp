@@ -54,16 +54,15 @@ dependencies {
     implementation(kotlin("stdlib", "1.5.10"))
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
-    implementation("androidx.core:core-ktx:1.6.0-beta01")
+    implementation("androidx.core:core-ktx:1.6.0-rc01")
     // Preference
     implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     // Layouts
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0-beta02")
-    implementation("androidx.recyclerview:recyclerview:1.2.0")
-    implementation("androidx.recyclerview:recyclerview-selection:1.2.0-alpha01")
-    implementation("com.google.android.material:material:1.4.0-beta01")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("com.google.android.material:material:1.4.0-rc01")
     // Activity
     implementation("androidx.activity:activity:$activityVersion")
     implementation("androidx.activity:activity-ktx:$activityVersion")

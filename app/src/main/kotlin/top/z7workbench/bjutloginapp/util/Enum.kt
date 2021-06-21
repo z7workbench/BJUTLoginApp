@@ -25,3 +25,7 @@ enum class WarningLevel(val info: String) : Serializable {
 enum class NetFramework : Serializable {
     OKHTTP, VOLLEY, RETROFIT
 }
+
+enum class NetworkState : Serializable {
+    CELLULAR, WIFI, OTHER
+}

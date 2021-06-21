@@ -10,41 +10,55 @@
     <color name="colorAccentBackgroundPure">#8686FF</color>
     <color name="colorPrimaryPure">@android:color/black</color>
     <color name="colorBackgroundPure">@color/colorPrimaryPure</color>
+    <color name="colorSecondaryPure">#ffab91</color>
+    <color name="colorSecondaryVariantPure">#ffddc1</color>
 
     <color name="colorAccentWhite">#FF4081</color>
     <color name="colorAccentBackgroundWhite">#8686FF</color>
     <color name="colorPrimaryWhite">@android:color/white</color>
     <color name="colorBackgroundWhite">@color/colorPrimaryWhite</color>
+    <color name="colorSecondaryWhite">#ce93d8</color>
+    <color name="colorSecondaryVariantWhite">#ffc4ff</color>
 
     <color name="colorAccentAmber">#FB7299</color>
     <color name="colorAccentBackgroundAmber">@android:color/white</color>
     <color name="colorPrimaryAmber">#FFD54F</color>
     <color name="colorBackgroundAmber">#FFD54F</color>
     <color name="colorSubTextAmber">#555555</color>
+    <color name="colorSecondaryAmber">#80deea</color>
+    <color name="colorSecondaryVariantAmber">#b4ffff</color>
 
     <color name="colorAccentYun">#2196F3</color>
     <color name="colorAccentBackgroundYun">@android:color/white</color>
     <color name="colorPrimaryYun">#66ffa6</color>
     <color name="colorBackgroundYun">@color/colorPrimaryYun</color>
     <color name="colorSubTextYun">#555555</color>
+    <color name="colorSecondaryYun">#ffab91</color>
+    <color name="colorSecondaryVariantYun">#ffddc1</color>
 
     <color name="colorAccentZGPurple">#FFCC00</color>
     <color name="colorAccentBackgroundZGPurple">@android:color/white</color>
     <color name="colorPrimaryZGPurple">#8686FF</color>
     <color name="colorBackgroundZGPurple">@color/colorPrimaryZGPurple</color>
     <color name="colorSubTextZGPurple">#DDDDDD</color>
+    <color name="colorSecondaryZGPurple">#f48fb1</color>
+    <color name="colorSecondaryVariantZGPurple">#ffc1e3</color>
 
     <color name="colorAccentTeal">#FFCC00</color>
     <color name="colorAccentBackgroundTeal">#333333</color>
     <color name="colorPrimaryTeal">#008080</color>
     <color name="colorBackgroundTeal">@color/colorPrimaryTeal</color>
     <color name="colorSubTextTeal">#DDDDDD</color>
+    <color name="colorSecondaryTeal">#fff176</color>
+    <color name="colorSecondaryVariantTeal">#ffffa8</color>
 
     <color name="colorAccentPink">#26C6DA</color>
     <color name="colorAccentBackgroundPink">#333333</color>
     <color name="colorPrimaryPink">#FB7299</color>
     <color name="colorBackgroundPink">@color/colorPrimaryPink</color>
     <color name="colorSubTextPink">#DDDDDD</color>
+    <color name="colorSecondaryPink">#5c6bc0</color>
+    <color name="colorSecondaryVariantPink">#8e99f3</color>
 
     <color name="login_default">#7ab800</color>
     <color name="login_focused">#9bd823</color>
