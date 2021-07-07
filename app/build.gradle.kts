@@ -2,7 +2,7 @@ import org.codehaus.groovy.runtime.ProcessGroovyMethods
 
 val lifecycleVersion = "2.4.0-alpha01"
 val navVersion = "2.3.5"
-val roomVersion = "2.4.0-alpha02"
+val roomVersion = "2.4.0-alpha03"
 val permissionsdispatcher = "4.8.0"
 val fragmentVersion = "1.3.5"
 val activityVersion = "1.3.0-beta02"
@@ -51,7 +51,7 @@ android {
 dependencies {
     implementation(project(":library"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(kotlin("stdlib", "1.5.10"))
+    implementation(kotlin("stdlib", "1.5.20"))
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
     implementation("androidx.core:core-ktx:1.6.0-rc01")
