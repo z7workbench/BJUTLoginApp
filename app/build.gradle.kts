@@ -51,7 +51,7 @@ android {
 dependencies {
     implementation(project(":library"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(kotlin("stdlib", "1.5.20"))
+    implementation(kotlin("stdlib", "1.5.21"))
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
     implementation("androidx.core:core-ktx:1.7.0-alpha01")
@@ -94,23 +94,22 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0-rc01")
 
     // Jetpack Compose UI
-    implementation("androidx.compose.ui:ui:1.0.0-rc01")
+    implementation("androidx.compose.ui:ui:1.0.0-rc02")
     // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:1.0.0-rc01")
+    implementation("androidx.compose.ui:ui-tooling:1.0.0-rc02")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:1.0.0-rc01")
+    implementation("androidx.compose.foundation:foundation:1.0.0-rc02")
     // Material Design
-    implementation("androidx.compose.material:material:1.0.0-rc01")
+    implementation("androidx.compose.material:material:1.0.0-rc02")
     // Material design icons
-    implementation("androidx.compose.material:material-icons-core:1.0.0-rc01")
-    implementation("androidx.compose.material:material-icons-extended:1.0.0-rc01")
+    implementation("androidx.compose.material:material-icons-core:1.0.0-rc02")
+    implementation("androidx.compose.material:material-icons-extended:1.0.0-rc02")
     // Integration with activities
-    implementation("androidx.activity:activity-compose:1.3.0-rc01")
+    implementation("androidx.activity:activity-compose:1.3.0-rc02")
     // Integration with ViewModels
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
     // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-rc01")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.0-rc01")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-rc02")
 
     implementation("com.android.volley:volley:1.2.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
