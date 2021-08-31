@@ -37,4 +37,7 @@
     <string name="status_syncing">Syncing</string>
     <string name="status_error">Error</string>
     <string name="status_online">Online</string>
+
+    <string name="validated">You are online</string>
+    <string name="not_validated">You are offline</string>
 </resources>

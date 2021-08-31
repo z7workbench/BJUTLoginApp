@@ -18,6 +18,7 @@ import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import top.z7workbench.bjutloginapp.Constants
 import top.z7workbench.bjutloginapp.model.User
+import top.z7workbench.bjutloginapp.util.BundledState
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.NetworkState
 import top.z7workbench.bjutloginapp.util.toast
@@ -174,25 +175,4 @@ object NetworkGlobalObject {
         return ""
     }
 
-    fun networkState(context: Context): Bundle {
-        val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = manager.activeNetwork
-        val capabilities = manager.getNetworkCapabilities(network)
-        if (capabilities != null) {
-            val state = when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> NetworkState.WIFI
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> NetworkState.CELLULAR
-                else -> NetworkState.OTHER
-            }
-            val vpn = capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
-            val validate = capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-            return bundleOf(
-                "status" to true,
-                "state" to state,
-                "vpn" to vpn,
-                "validate" to validate
-            )
-        }
-        return bundleOf("status" to false)
-    }
 }

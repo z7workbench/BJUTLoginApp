@@ -3,7 +3,6 @@ import org.codehaus.groovy.runtime.ProcessGroovyMethods
 val lifecycleVersion = "2.4.0-alpha02"
 val navVersion = "2.3.5"
 val roomVersion = "2.4.0-alpha03"
-val permissionsdispatcher = "4.8.0"
 val fragmentVersion = "1.3.5"
 val activityVersion = "1.3.0-beta02"
 val gitCommitCount =
@@ -99,6 +98,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
     implementation("com.daimajia.numberprogressbar:library:1.4@aar")
+    implementation("io.coil-kt:coil:1.3.2")
 }
 repositories {
     mavenCentral()

@@ -37,4 +37,7 @@
     <string name="status_syncing">同步中</string>
     <string name="status_error">錯誤</string>
     <string name="status_online">在綫</string>
+
+    <string name="validated">你已聯網</string>
+    <string name="not_validated">網路斷開</string>
 </resources>

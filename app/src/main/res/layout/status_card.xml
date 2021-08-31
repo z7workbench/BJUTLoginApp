@@ -58,13 +58,14 @@
             app:arcBackColor="?attr/appAccentBackground"
             app:arcFrontColor="?attr/colorAccent"
             app:arcOrientation="left"
+            app:arcPercent="0"
             app:arcRange="280"
             app:arcStrokeWidth="10dp"
             app:arcTextColor="?attr/colorAccent"
             app:arcTextSize="@dimen/text_size_xl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wifiSSID" />
+            app:layout_constraintTop_toBottomOf="@id/validate" />
 
         <TextView
             android:id="@+id/plan"
@@ -93,13 +94,13 @@
             app:layout_constraintTop_toBottomOf="@id/user" />
 
         <TextView
-            android:id="@+id/wifiSSID"
-            style="@style/AppTheme.TextView.Big"
+            android:id="@+id/validate"
+            style="@style/AppTheme.TextView.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,5 +120,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/plan" />
+
+        <ImageView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_baseline_disabled_by_default_24"
+            app:layout_constraintEnd_toEndOf="@+id/percentBar"
+            app:layout_constraintTop_toTopOf="@+id/percentBar"
+            app:tint="?attr/appTextColor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

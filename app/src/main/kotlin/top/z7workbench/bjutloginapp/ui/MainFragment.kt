@@ -1,6 +1,5 @@
 package top.z7workbench.bjutloginapp.ui
 
-import android.Manifest
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.google.android.material.transition.MaterialElevationScale
 import top.z7workbench.bjutloginapp.BuildConfig
 import top.z7workbench.bjutloginapp.R
@@ -20,14 +20,15 @@ import top.z7workbench.bjutloginapp.databinding.ControlCardBinding
 import top.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import top.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import top.z7workbench.bjutloginapp.databinding.StatusCardBinding
+import top.z7workbench.bjutloginapp.model.StatusViewModel
 import top.z7workbench.bjutloginapp.model.UserViewModel
-import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.IpMode
+import top.z7workbench.bjutloginapp.util.NetworkState
 import top.z7workbench.bjutloginapp.util.buildString
 
-//@RuntimePermissions
 class MainFragment : BasicFragment<FragmentMainBinding>() {
     val viewModel by activityViewModels<UserViewModel>()
+    val statusViewModel by activityViewModels<StatusViewModel>()
 
     override fun initViewAfterViewCreated() {
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
@@ -35,7 +36,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //          TODO("refresh")
-            NetworkGlobalObject.getWifiSSID(requireContext())
+            statusViewModel.networkState(requireContext())
 //            sync()
             binding.swipeRefresh.isRefreshing = false
         }
@@ -67,7 +68,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         reenterTransition = MaterialElevationScale(false)
     }
 
-//    @NeedsPermission(Manifest.permission.INTERNET)
+    //    @NeedsPermission(Manifest.permission.INTERNET)
     fun sync() = viewModel.sync()
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -105,7 +106,26 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is StatusCardViewHolder -> {
-                    holder.binding.wifiSSID.text = NetworkGlobalObject.getWifiSSID(requireContext())
+                    statusViewModel.status.observe(this@MainFragment) {
+                        if (it.state != NetworkState.OTHER) {
+                            val id = when {
+                                it.state == NetworkState.CELLULAR && it.validate ->
+                                    R.drawable.ic_baseline_signal_cellular_4_bar_24
+                                it.state == NetworkState.CELLULAR && !it.validate ->
+                                    R.drawable.ic_baseline_signal_cellular_off_24
+                                it.state == NetworkState.WIFI && it.validate ->
+                                    R.drawable.ic_wifi_24dp
+                                else -> R.drawable.ic_baseline_wifi_off_24
+                            }
+                            holder.binding.status.load(id)
+                            holder.binding.validate.text =
+                                if (it.validate) resources.getString(R.string.validated)
+                                else resources.getString(R.string.not_validated)
+                        } else {
+                            holder.binding.status.load(R.drawable.ic_baseline_disabled_by_default_24)
+                            holder.binding.validate.text = ""
+                        }
+                    }
                     viewModel.user.observe(this@MainFragment) {
                         if (it != null) {
                             holder.binding.user.text = resources.getString(R.string.user)

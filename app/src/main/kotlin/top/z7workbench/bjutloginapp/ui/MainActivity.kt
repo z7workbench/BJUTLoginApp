@@ -3,16 +3,21 @@ package top.z7workbench.bjutloginapp.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.fragment.NavHostFragment
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.*
+import top.z7workbench.bjutloginapp.model.StatusViewModel
 import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
 
 class MainActivity : BasicActivity() {
-    val viewModel by viewModels<UserViewModel>()
+    private val viewModel by viewModels<UserViewModel>()
+    private val status by viewModels<StatusViewModel>()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -23,6 +28,11 @@ class MainActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                if (event == Lifecycle.Event.ON_RESUME) status.networkState(this@MainActivity)
+            }
+        })
         binding.run {
             controller.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
@@ -68,13 +78,12 @@ class MainActivity : BasicActivity() {
 
     }
 
-    fun makeSnack(text: CharSequence) {
-        var snack = Snackbar.make(binding.mainLayout, text, Snackbar.LENGTH_SHORT)
-        snack = snack.setAnchorView(binding.fab.id)
-        snack.show()
-    }
+    fun makeSnack(text: CharSequence) =
+        Snackbar.make(binding.mainLayout, text, Snackbar.LENGTH_SHORT)
+            .setAnchorView(binding.fab.id)
+            .show()
 
-    fun fabAction() {
+    private fun fabAction() {
         when (viewModel.currentStatus) {
             LogStatus.OFFLINE, LogStatus.ERROR -> {
                 viewModel.online()
