@@ -44,13 +44,11 @@ fun formatByteSize(byte: Long): String {
     return "${round(absByte * 1000) / 1000} ${byteSize.display}"
 }
 
-fun processSyncData(string: String, pack: Int): Bundle {
+fun processSyncData(string: String, pack: Int): BundledSyncData {
     val bundle = bundleOf()
     val regex = """time='(.*?)';flow='(.*?)';fsele=1;fee='(.*?)'""".toRegex()
     val result = regex.find(string)
-    if (result == null || result.groups.isEmpty()) {
-        bundle.putBoolean("status", false)
-    } else {
+    if (result != null && result.groups.isNotEmpty()) {
         bundle.putBoolean("status", true)
         val time = result.groups[1]?.value?.toInt() ?: -1
         val flow = (result.groups[2]?.value?.toLong() ?: -1L) * 1024
@@ -70,15 +68,10 @@ fun processSyncData(string: String, pack: Int): Bundle {
         val data = NetData(
             time, flow, fee, stringOfMoneyByte, stringOfUsedExtraByte, percent.toInt()
         )
-        bundle.putParcelable("data", data)
-        bundle.putString("remained", stringOfMoneyByte)
-        bundle.putString("exceeded", stringOfUsedExtraByte)
-        bundle.putInt("percent", percent.toInt())
-        bundle.putInt("time", time)
-        bundle.putFloat("fee", fee)
-        bundle.putLong("flow", flow)
+        return BundledSyncData(true, data)
+    } else {
+        return BundledSyncData()
     }
-    return bundle
 }
 
 fun percentOfPackage(flow: Long, pack: Int): Double =

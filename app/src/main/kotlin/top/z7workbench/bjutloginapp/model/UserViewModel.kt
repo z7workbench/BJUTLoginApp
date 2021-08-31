@@ -1,16 +1,9 @@
 package top.z7workbench.bjutloginapp.model
 
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
 import android.net.wifi.WifiInfo
 import android.os.Build
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import top.z7workbench.bjutloginapp.LoginApp
@@ -24,20 +17,18 @@ import java.util.*
 class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
     private val dao = getApplication<LoginApp>().appDatabase.userDao()
-    private val _status = MutableLiveData<LogStatus>()
+    private val _status = MutableStateFlow(LogStatus.OFFLINE)
     private val _currentId = MutableLiveData<Int>()
     private val _user = MutableLiveData<User>()
     private val _ipMode = MutableLiveData<IpMode>()
     private val _time = MutableLiveData<String>()
-    private val _stats = MutableLiveData<NetData>()
+    private val _stats = MutableStateFlow(NetData())
     private val _swipe = MutableLiveData<Boolean>()
-    private val _float = MutableLiveData<Double>()
     private val _ssid = MutableLiveData<String>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val dataStore = getApplication<LoginApp>().dataStore
 
-    val status: LiveData<LogStatus>
-        get() = _status
+    val status = _status.debounce(200L).asLiveData()
     val currentId: LiveData<Int>
         get() = _currentId
     val users = dao.all()
@@ -47,12 +38,9 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         get() = _ipMode
     val time: LiveData<String>
         get() = _time
-    val stats: LiveData<NetData>
-        get() = _stats
+    val stats = _stats.debounce(200L).asLiveData()
     val swipe: LiveData<Boolean>
         get() = _swipe
-    val float: LiveData<Double>
-        get() = _float
 
     private val mode get() = ipMode.value ?: IpMode.WIRELESS
     private val default = NetData()
@@ -64,13 +52,11 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         _swipe.value = true
         _stats.value = default
         _status.value = LogStatus.OFFLINE
-        _float.value = 0.0
     }
 
     private fun error() {
-        _status.postValue(LogStatus.ERROR)
-        _float.postValue(0.0)
-        _stats.postValue(default)
+        _status.value = LogStatus.ERROR
+        _stats.value = default
     }
 
     fun insertUser(user: User) {
@@ -169,16 +155,10 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             }
 //        returnBody.collect {
             val bundle = processSyncData(returnBody, user.value?.pack ?: 30)
-            val statusCode = bundle.getBoolean("status")
+            val statusCode = bundle.status
             if (statusCode) {
-                _stats.postValue(bundle.getParcelable("data"))
-                _float.postValue(
-                    percentOfPackage(
-                        ((bundle.getParcelable("data") as NetData?) ?: default).flow,
-                        _user.value?.pack ?: 30
-                    )
-                )
-                _status.postValue(LogStatus.ONLINE)
+                _stats.value = bundle.data
+                _status.value = LogStatus.ONLINE
             } else error()
 //        }
         }
