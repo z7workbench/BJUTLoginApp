@@ -14,8 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialElevationScale
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.RuntimePermissions
 import top.z7workbench.bjutloginapp.BuildConfig
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.ControlCardBinding
@@ -27,7 +25,7 @@ import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.buildString
 
-@RuntimePermissions
+//@RuntimePermissions
 class MainFragment : BasicFragment<FragmentMainBinding>() {
     val viewModel by activityViewModels<UserViewModel>()
 
@@ -69,7 +67,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         reenterTransition = MaterialElevationScale(false)
     }
 
-    @NeedsPermission(Manifest.permission.INTERNET)
+//    @NeedsPermission(Manifest.permission.INTERNET)
     fun sync() = viewModel.sync()
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =

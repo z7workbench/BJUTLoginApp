@@ -1,23 +1,16 @@
 package top.z7workbench.bjutloginapp.ui
 
-import android.Manifest
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.fragment.NavHostFragment
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.RuntimePermissions
 import top.z7workbench.bjutloginapp.R
 import top.z7workbench.bjutloginapp.databinding.*
 import top.z7workbench.bjutloginapp.model.UserViewModel
-import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
-import top.z7workbench.bjutloginapp.util.toast
 
-@RuntimePermissions
 class MainActivity : BasicActivity() {
     val viewModel by viewModels<UserViewModel>()
     private val binding by lazy {
@@ -26,11 +19,6 @@ class MainActivity : BasicActivity() {
     private val controller by lazy {
         (supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment).navController
     }
-    private val currentNavigationFragment: Fragment?
-        get() = supportFragmentManager.findFragmentById(R.id.mainContainer)
-            ?.childFragmentManager
-            ?.fragments
-            ?.first()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +74,6 @@ class MainActivity : BasicActivity() {
         snack.show()
     }
 
-    @NeedsPermission(Manifest.permission.INTERNET)
     fun fabAction() {
         when (viewModel.currentStatus) {
             LogStatus.OFFLINE, LogStatus.ERROR -> {
@@ -97,15 +84,5 @@ class MainActivity : BasicActivity() {
             }
             else -> nothing()
         }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        // NOTE: delegate the permission handling to generated method
-        onRequestPermissionsResult(requestCode, grantResults)
     }
 }
