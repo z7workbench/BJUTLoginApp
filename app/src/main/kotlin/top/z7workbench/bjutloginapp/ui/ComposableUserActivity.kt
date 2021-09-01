@@ -13,6 +13,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -65,6 +66,7 @@ fun UserCard(user: String, isSelected: Boolean) {
                 selected = isSelected,
                 onClick = null,
                 modifier = Modifier.padding(all = 8.dp)
+                    .align(Alignment.CenterVertically)
             )
             Text(
                 text = user,
@@ -72,7 +74,8 @@ fun UserCard(user: String, isSelected: Boolean) {
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .align(Alignment.CenterVertically),
                 fontSize = 16.sp
             )
         }
@@ -92,6 +95,5 @@ fun UserList(usernames: List<String>, currentId: Int) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-//    UserCard(user = "dadfa", isSelected = true)
     UserList(usernames = listOf("123", "456", "789"), currentId = 2)
 }

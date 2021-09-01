@@ -1,27 +1,18 @@
 package top.z7workbench.bjutloginapp.network
 
-import android.Manifest
 import android.content.Context
 import android.location.LocationManager
 import android.net.*
 import android.net.wifi.WifiInfo
-import android.net.wifi.WifiManager
-import android.net.wifi.aware.WifiAwareNetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.annotation.RequiresPermission
-import androidx.core.os.bundleOf
-import kotlinx.coroutines.newFixedThreadPoolContext
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import top.z7workbench.bjutloginapp.Constants
 import top.z7workbench.bjutloginapp.model.User
-import top.z7workbench.bjutloginapp.util.BundledState
 import top.z7workbench.bjutloginapp.util.IpMode
-import top.z7workbench.bjutloginapp.util.NetworkState
-import top.z7workbench.bjutloginapp.util.toast
 import java.net.Inet6Address
 import java.net.NetworkInterface
 import java.net.SocketException

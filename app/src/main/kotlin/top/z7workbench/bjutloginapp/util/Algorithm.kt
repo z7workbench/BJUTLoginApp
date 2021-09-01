@@ -2,6 +2,7 @@ package top.z7workbench.bjutloginapp.util
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import top.z7workbench.bjutloginapp.model.BundledSyncData
 import top.z7workbench.bjutloginapp.model.NetData
 import kotlin.math.absoluteValue
 import kotlin.math.round

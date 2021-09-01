@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
-import top.z7workbench.bjutloginapp.util.BundledState
 import top.z7workbench.bjutloginapp.util.NetworkState
 
 class StatusViewModel : ViewModel() {
