@@ -11,7 +11,7 @@ val gitCommitCount =
 plugins {
     id("com.android.application")
     // Add ksp
-    id("com.google.devtools.ksp") version "1.5.30-1.0.0-beta08"
+    id("com.google.devtools.ksp") version "1.5.21-1.0.0-beta07"
     kotlin("android")
 //    kotlin("kapt")
 }
@@ -25,6 +25,9 @@ android {
         versionName = "6.0.0-rc04"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
     signingConfigs {
         create("github") {
@@ -46,13 +49,24 @@ android {
     }
     sourceSets["main"].java.srcDir("src/main/kotlin")
     kotlinOptions.jvmTarget = "11"
+    buildFeatures {
+        compose = true
+    }
     buildFeatures.viewBinding = true
+    composeOptions {
+        kotlinCompilerExtensionVersion = rootProject.extra["compose"] as String
+    }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
     implementation(project(":library"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(kotlin("stdlib", "1.5.30"))
+    implementation(kotlin("stdlib", rootProject.extra["ktVersion"] as String))
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
     implementation("androidx.core:core-ktx:1.6.0")
@@ -81,6 +95,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.compose.ui:ui:${rootProject.extra["compose"]}")
+    implementation("androidx.compose.material:material:${rootProject.extra["compose"]}")
+    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose"]}")
+    implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose"]}")
+    implementation("androidx.activity:activity-compose:1.3.1")
+    implementation("com.google.android.material:compose-theme-adapter:${rootProject.extra["compose"]}")
+    implementation("com.google.accompanist:accompanist-appcompat-theme:0.17.0")
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     // Paging

@@ -1,8 +1,6 @@
 package top.z7workbench.bjutloginapp.model
 
 import android.app.Application
-import android.net.wifi.WifiInfo
-import android.os.Build
 import androidx.lifecycle.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,19 +16,20 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val tag = "MainViewModel"
     private val dao = getApplication<LoginApp>().appDatabase.userDao()
     private val _status = MutableStateFlow(LogStatus.OFFLINE)
+    private val _userData = MutableStateFlow(BundledUser())
     private val _currentId = MutableLiveData<Int>()
     private val _user = MutableLiveData<User>()
     private val _ipMode = MutableLiveData<IpMode>()
     private val _time = MutableLiveData<String>()
     private val _stats = MutableStateFlow(NetData())
     private val _swipe = MutableLiveData<Boolean>()
-    private val _ssid = MutableLiveData<String>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    val dataStore = getApplication<LoginApp>().dataStore
+    private val dataStore = getApplication<LoginApp>().dataStore
 
     val status = _status.debounce(200L).asLiveData()
     val currentId: LiveData<Int>
         get() = _currentId
+
     val users = dao.all()
     val user: LiveData<User>
         get() = _user
@@ -50,7 +49,6 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             updateUserSettings(true)
         }
         _swipe.value = true
-        _stats.value = default
         _status.value = LogStatus.OFFLINE
     }
 

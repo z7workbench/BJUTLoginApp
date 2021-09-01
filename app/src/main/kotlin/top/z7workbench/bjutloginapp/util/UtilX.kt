@@ -1,10 +1,13 @@
 package top.z7workbench.bjutloginapp.util
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -42,11 +45,17 @@ fun String.buildString(vararg strings: String): String {
 
 fun nothing() = Unit
 
-inline fun <reified T> DataStore<Preferences>.valueFlow(key: Preferences.Key<T>, defValue: T): Flow<T> =
-        this.data.mapNotNull {
-            it[key] ?: defValue
-        }
+inline fun <reified T> DataStore<Preferences>.valueFlow(
+    key: Preferences.Key<T>,
+    defValue: T
+): Flow<T> =
+    this.data.mapNotNull {
+        it[key] ?: defValue
+    }
 
 fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(Constants.DATASTORE_NAME)
+
+inline fun <reified T : ComponentActivity> Context.startActivity() =
+    this.startActivity(Intent(this, T::class.java))

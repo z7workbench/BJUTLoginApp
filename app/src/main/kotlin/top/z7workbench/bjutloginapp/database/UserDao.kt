@@ -12,6 +12,9 @@ interface UserDao {
     @Query("select * from user order by id")
     fun all(): LiveData<List<User>>
 
+    @Query("select name from user order by id")
+    fun allUsers(): LiveData<List<String>>
+
     @Query("select * from user where id = :id")
     suspend fun find(id: Int): User?
 

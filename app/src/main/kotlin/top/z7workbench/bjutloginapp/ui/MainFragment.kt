@@ -25,6 +25,7 @@ import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.NetworkState
 import top.z7workbench.bjutloginapp.util.buildString
+import top.z7workbench.bjutloginapp.util.startActivity
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
     val viewModel by activityViewModels<UserViewModel>()
@@ -106,6 +107,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is StatusCardViewHolder -> {
+                    holder.binding.status.setOnClickListener { requireContext().startActivity<ComposableUserActivity>() }
                     statusViewModel.status.observe(this@MainFragment) {
                         if (it.state != NetworkState.OTHER) {
                             val id = when {
