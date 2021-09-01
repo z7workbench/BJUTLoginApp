@@ -1,6 +1,6 @@
-package top.z7workbench.bjutloginapp.util
+package top.z7workbench.bjutloginapp.model
 
-import top.z7workbench.bjutloginapp.model.NetData
+import top.z7workbench.bjutloginapp.util.NetworkState
 
 data class BundledState(
     val state: NetworkState = NetworkState.OTHER,
