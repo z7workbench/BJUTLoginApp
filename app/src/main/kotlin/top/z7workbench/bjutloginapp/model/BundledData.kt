@@ -1,5 +1,6 @@
 package top.z7workbench.bjutloginapp.model
 
+import androidx.room.ColumnInfo
 import top.z7workbench.bjutloginapp.util.NetworkState
 
 data class BundledState(
@@ -14,6 +15,8 @@ data class BundledSyncData(
 )
 
 data class BundledUser(
-    val currentID: Int = -1,
-    val username: String = ""
+    @ColumnInfo(name = "id")
+    val id: Int = -1,
+    @ColumnInfo(name = "name")
+    val name: String = ""
 )

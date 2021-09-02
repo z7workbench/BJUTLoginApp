@@ -9,11 +9,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user")
 data class User(
-        @PrimaryKey(autoGenerate = true)
-        var id: Int = 0,
-        var name: String = "",
-        var password: String = "",
-        var pack: Int = 30
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
+    var name: String = "",
+    var password: String = "",
+    var pack: Int = 30
 //        ,
 //        var secret: String = ""
-)
+) {
+    fun asBundledUser() = BundledUser(id, name)
+}

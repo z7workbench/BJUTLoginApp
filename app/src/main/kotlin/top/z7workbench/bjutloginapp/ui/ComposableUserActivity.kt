@@ -3,10 +3,9 @@ package top.z7workbench.bjutloginapp.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.activity.viewModels
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
@@ -15,29 +14,39 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.appcompattheme.AppCompatTheme
+import top.z7workbench.bjutloginapp.LoginApp
+import top.z7workbench.bjutloginapp.R
+import top.z7workbench.bjutloginapp.model.BundledUser
+import top.z7workbench.bjutloginapp.model.UserViewModel
 
 class ComposableUserActivity : ComponentActivity() {
+    val viewModel by viewModels<UserViewModel>()
+    val dao by lazy { (application as LoginApp).appDatabase.userDao() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val users = dao.allUsers()
         setContent {
-            UserFramework()
+            UserFramework(users.value ?: listOf(), -1)
         }
     }
 
     @Composable
-    fun UserFramework() {
+    fun UserFramework(users: List<BundledUser>, currentId: Int) {
         AppCompatTheme {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 topBar = {
                     TopAppBar(
                         title = {
-                            Text("主页")
+                            Text(stringResource(id = R.string.user))
                         },
                         navigationIcon = {
                             IconButton(onClick = {
@@ -48,43 +57,89 @@ class ComposableUserActivity : ComponentActivity() {
                         }
                     )
                 }) {
-                UserList(usernames = listOf(), currentId = 0)
+                if (users.isNotEmpty()) UserList(users, currentId)
+                else UserPlaceholder()
             }
         }
     }
 }
 
 @Composable
-fun UserCard(user: String, isSelected: Boolean) {
+fun UserPlaceholder() {
+    Column(modifier = Modifier.padding(all = 16.dp)) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_group),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(all = 2.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = stringResource(id = R.string.placeholder),
+            modifier = Modifier
+                .padding(4.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+    }
+}
+
+@Composable
+fun UserCard(user: BundledUser, isSelected: Boolean) {
     Surface(
         shape = MaterialTheme.shapes.large,
         elevation = 0.dp,
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Row(modifier = Modifier.padding(all = 8.dp)) {
+        Row(modifier = Modifier.padding(all = 2.dp)) {
             RadioButton(
                 selected = isSelected,
                 onClick = null,
-                modifier = Modifier.padding(all = 8.dp)
+                modifier = Modifier
+                    .padding(all = 12.dp)
                     .align(Alignment.CenterVertically)
+                    .wrapContentWidth(Alignment.Start)
             )
             Text(
-                text = user,
+                text = user.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .fillMaxWidth()
+//                    .fillMaxWidth()
+                    .wrapContentWidth()
                     .align(Alignment.CenterVertically),
                 fontSize = 16.sp
+            )
+//            Divider(
+//                modifier = Modifier
+//                    .padding(all = 1.dp)
+//                    .fillMaxHeight()
+//            )
+            Image(
+                painter = painterResource(
+                    id = R.drawable.ic_edit
+                ),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(24.dp)
+                    .align(Alignment.CenterVertically)
+            )
+            Image(
+                painter = painterResource(
+                    id = R.drawable.ic_delete
+                ),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(24.dp)
+                    .align(Alignment.CenterVertically)
+                    .wrapContentWidth(Alignment.End)
             )
         }
     }
 }
 
-
 @Composable
-fun UserList(usernames: List<String>, currentId: Int) {
+fun UserList(usernames: List<BundledUser>, currentId: Int) {
     LazyColumn {
         items(usernames) {
             UserCard(user = it, isSelected = currentId == usernames.indexOf(it))
@@ -95,5 +150,12 @@ fun UserList(usernames: List<String>, currentId: Int) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    UserList(usernames = listOf("123", "456", "789"), currentId = 2)
+    UserList(
+        usernames = listOf(
+            BundledUser(0, "123"),
+            BundledUser(1, "456"),
+            BundledUser(2, "789")
+        ), currentId = 2
+    )
+//    UserPlaceholder()
 }
