@@ -130,9 +130,9 @@ fun UserCard(user: BundledUser, isSelected: Boolean) {
                 ),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(24.dp)
-                    .align(Alignment.CenterVertically)
                     .wrapContentWidth(Alignment.End)
+                    .align(Alignment.CenterVertically)
+                    .size(24.dp)
             )
         }
     }
