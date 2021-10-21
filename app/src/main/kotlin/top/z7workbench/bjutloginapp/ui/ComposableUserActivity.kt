@@ -66,7 +66,14 @@ class ComposableUserActivity : ComponentActivity() {
 
 @Composable
 fun UserPlaceholder() {
-    Column(modifier = Modifier.padding(all = 16.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(all = 16.dp)
+            .fillMaxHeight()
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
         Image(
             painter = painterResource(id = R.drawable.ic_group),
             contentDescription = null,
@@ -90,50 +97,66 @@ fun UserCard(user: BundledUser, isSelected: Boolean) {
         elevation = 0.dp,
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Row(modifier = Modifier.padding(all = 2.dp)) {
-            RadioButton(
-                selected = isSelected,
-                onClick = null,
-                modifier = Modifier
-                    .padding(all = 12.dp)
-                    .align(Alignment.CenterVertically)
-                    .wrapContentWidth(Alignment.Start)
-            )
-            Text(
-                text = user.name,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .padding(all = 8.dp)
+        Row(
+            modifier = Modifier
+                .padding(all = 2.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(modifier = Modifier.padding(all = 8.dp)) {
+                RadioButton(
+                    selected = isSelected,
+                    onClick = null,
+                    modifier = Modifier
+                        .padding(all = 4.dp)
+                        .align(Alignment.CenterVertically)
+                        .wrapContentWidth(Alignment.Start)
+                )
+                Text(
+                    text = user.name,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
 //                    .fillMaxWidth()
-                    .wrapContentWidth()
-                    .align(Alignment.CenterVertically),
-                fontSize = 16.sp
-            )
+                        .wrapContentWidth()
+                        .align(Alignment.CenterVertically),
+                    fontSize = 16.sp
+                )
+            }
 //            Divider(
 //                modifier = Modifier
 //                    .padding(all = 1.dp)
 //                    .fillMaxHeight()
 //            )
-            Image(
-                painter = painterResource(
-                    id = R.drawable.ic_edit
-                ),
-                contentDescription = null,
+            Spacer(modifier = Modifier.padding(4.dp))
+            Row(
                 modifier = Modifier
-                    .size(24.dp)
-                    .align(Alignment.CenterVertically)
-            )
-            Image(
-                painter = painterResource(
-                    id = R.drawable.ic_delete
-                ),
-                contentDescription = null,
-                modifier = Modifier
-                    .wrapContentWidth(Alignment.End)
-                    .align(Alignment.CenterVertically)
-                    .size(24.dp)
-            )
+                    .padding(8.dp)
+                    .fillMaxHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.ic_edit
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .align(Alignment.CenterVertically)
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.ic_delete
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .wrapContentWidth(Alignment.End)
+                        .align(Alignment.CenterVertically)
+                        .size(24.dp),
+                )
+            }
         }
     }
 }
