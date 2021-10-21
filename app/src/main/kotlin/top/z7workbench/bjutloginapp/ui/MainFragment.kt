@@ -38,7 +38,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
         binding.swipeRefresh.setOnRefreshListener {
 //          TODO("refresh")
             statusViewModel.networkState(requireContext())
-//            sync()
+            sync()
             binding.swipeRefresh.isRefreshing = false
         }
 
