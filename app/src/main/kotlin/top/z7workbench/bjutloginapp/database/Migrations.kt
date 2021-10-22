@@ -4,11 +4,11 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 val migration1To2 = migration(1, 2) {
-    it.execSQL("""alter table user add column secret text""")
+    it.execSQL("""alter table user add column secret text default ''""")
 //    it.execSQL("""create table info(id integer primary key, time long, place text, message text, level text)""")
 }
 
-fun migration(startVersion: Int, endVersion: Int, migrationFunc: (SupportSQLiteDatabase) -> Unit): Migration =
+fun migration(startVersion: Int, endVersion: Int, migrationFunc: (SupportSQLiteDatabase) -> Unit) =
         object : Migration(startVersion, endVersion) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 migrationFunc(database)

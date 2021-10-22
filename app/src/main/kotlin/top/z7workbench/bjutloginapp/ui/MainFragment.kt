@@ -21,6 +21,7 @@ import top.z7workbench.bjutloginapp.databinding.FluxCardBinding
 import top.z7workbench.bjutloginapp.databinding.FragmentMainBinding
 import top.z7workbench.bjutloginapp.databinding.StatusCardBinding
 import top.z7workbench.bjutloginapp.model.StatusViewModel
+import top.z7workbench.bjutloginapp.model.User
 import top.z7workbench.bjutloginapp.model.UserViewModel
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.NetworkState
@@ -28,8 +29,8 @@ import top.z7workbench.bjutloginapp.util.buildString
 import top.z7workbench.bjutloginapp.util.startActivity
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
-    val viewModel by activityViewModels<UserViewModel>()
-    val statusViewModel by activityViewModels<StatusViewModel>()
+    val userModel by activityViewModels<UserViewModel>()
+    val statusModel by activityViewModels<StatusViewModel>()
 
     override fun initViewAfterViewCreated() {
         binding.swipeRefresh.setColorSchemeColors(R.attr.colorAccent)
@@ -37,13 +38,13 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //          TODO("refresh")
-            statusViewModel.networkState(requireContext())
+            statusModel.networkState(requireContext())
             sync()
             binding.swipeRefresh.isRefreshing = false
         }
 
-        viewModel.swipe.observe(this) {
-            if (it) binding.swipeRefresh.isRefreshing = false
+        statusModel.swipe.observe(this) {
+            binding.swipeRefresh.isRefreshing = it ?: false
         }
 
 //      prevent recycler from scrolling
@@ -58,7 +59,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         }
 
-        viewModel.time.observe(this) {
+        statusModel.time.observe(this) {
             binding.syncTime.text = it
         }
     }
@@ -70,7 +71,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
     }
 
     //    @NeedsPermission(Manifest.permission.INTERNET)
-    fun sync() = viewModel.sync()
+    fun sync() = statusModel.sync(userModel.currentUser)
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentMainBinding.inflate(inflater, container, false)
@@ -108,7 +109,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
             when (holder) {
                 is StatusCardViewHolder -> {
                     holder.binding.status.setOnClickListener { requireContext().startActivity<ComposableUserActivity>() }
-                    statusViewModel.status.observe(this@MainFragment) {
+                    statusModel.validatedStatus.observe(this@MainFragment) {
                         if (it.state != NetworkState.OTHER) {
                             val id = when {
                                 it.state == NetworkState.CELLULAR && it.validate ->
@@ -128,7 +129,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             holder.binding.validate.text = ""
                         }
                     }
-                    viewModel.user.observe(this@MainFragment) {
+                    userModel.user.observe(this@MainFragment) {
                         if (it != null) {
                             holder.binding.user.text = resources.getString(R.string.user)
                                 .buildString(resources.getString(R.string.colon), it.name)
@@ -151,7 +152,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                                 )
                         }
                     }
-                    viewModel.stats.observe(this@MainFragment) {
+                    statusModel.stats.observe(this@MainFragment) {
                         holder.binding.usedTime.text = if (it != null && it.time >= 0)
                             resources.getString(R.string.used_time).buildString(
                                 resources.getString(R.string.colon),
@@ -176,13 +177,13 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             )
 
                     }
-                    viewModel.status.observe(this@MainFragment) {
+                    statusModel.status.observe(this@MainFragment) {
                         holder.binding.title.text = resources.getString(R.string.status_card)
                             .buildString(resources.getString(it.description))
                     }
                 }
                 is ControlCardViewHolder -> {
-                    viewModel.user.observe(this@MainFragment) {
+                    userModel.user.observe(this@MainFragment) {
                         if (it != null) {
                             holder.binding.user.text = it.name
                         } else {
@@ -230,7 +231,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                         it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         holder.binding.ipSpinner.adapter = it
                     }
-                    viewModel.ipMode.observe(this@MainFragment) {
+                    statusModel.ipMode.observe(this@MainFragment) {
                         when (it) {
                             IpMode.WIRELESS -> holder.binding.ipSpinner.setSelection(0)
                             IpMode.WIRED_IPV4 -> holder.binding.ipSpinner.setSelection(1)
@@ -249,16 +250,16 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                             ) {
                                 when (position) {
                                     0 -> {
-                                        viewModel.changeIpMode(IpMode.WIRELESS)
+                                        userModel.changeIpMode(IpMode.WIRELESS)
                                     }
                                     1 -> {
-                                        viewModel.changeIpMode(IpMode.WIRED_IPV4)
+                                        userModel.changeIpMode(IpMode.WIRED_IPV4)
                                     }
                                     2 -> {
-                                        viewModel.changeIpMode(IpMode.WIRED_IPV6)
+                                        userModel.changeIpMode(IpMode.WIRED_IPV6)
                                     }
                                     3 -> {
-                                        viewModel.changeIpMode(IpMode.WIRED_BOTH)
+                                        userModel.changeIpMode(IpMode.WIRED_BOTH)
                                     }
                                 }
                             }
@@ -273,7 +274,7 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
                     holder.binding.version.text = BuildConfig.VERSION_NAME
                 }
                 is FluxCardViewHolder -> {
-                    viewModel.stats.observe(this@MainFragment) {
+                    statusModel.stats.observe(this@MainFragment) {
                         holder.binding.flux.text = if (it != null && it.fee > 0)
                             resources.getString(R.string.fee)
                                 .buildString(

@@ -123,8 +123,8 @@
 
         <ImageView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_margin="8dp"
             android:src="@drawable/ic_baseline_disabled_by_default_24"
             app:layout_constraintEnd_toEndOf="@+id/percentBar"

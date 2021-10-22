@@ -14,6 +14,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.room.Room
 import top.z7workbench.bjutloginapp.database.AppDatabase
+import top.z7workbench.bjutloginapp.database.migration1To2
 import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
 import top.z7workbench.bjutloginapp.util.LocaleUtil
 import top.z7workbench.bjutloginapp.util.dataStore
@@ -35,6 +36,7 @@ class LoginApp : Application() {
         super.onCreate()
         _appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "login.db")
             .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
         prefs = getDefaultSharedPreferences(this)
         if (prefs.getInt("theme_index", -1) < 0) {

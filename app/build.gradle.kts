@@ -22,7 +22,7 @@ android {
         minSdk = 26
         targetSdk = 30
         versionCode = 6
-        versionName = "6.0.0-rc04"
+        versionName = "6.0.0-rc05"
         versionNameSuffix = " (${gitCommitCount})"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -68,7 +68,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", rootProject.extra["ktVersion"] as String))
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
+    implementation("androidx.appcompat:appcompat:1.4.0-beta01")
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.core:core-splashscreen:1.0.0-alpha02")
     // Preference

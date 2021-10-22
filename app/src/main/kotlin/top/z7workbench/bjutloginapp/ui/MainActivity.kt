@@ -16,8 +16,8 @@ import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
 
 class MainActivity : BasicActivity() {
-    private val viewModel by viewModels<UserViewModel>()
-    private val status by viewModels<StatusViewModel>()
+    private val userModel by viewModels<UserViewModel>()
+    private val statusModel by viewModels<StatusViewModel>()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -30,7 +30,7 @@ class MainActivity : BasicActivity() {
         setContentView(binding.root)
         lifecycle.addObserver(object : LifecycleEventObserver {
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-                if (event == Lifecycle.Event.ON_RESUME) status.networkState(this@MainActivity)
+                if (event == Lifecycle.Event.ON_RESUME) statusModel.networkState(this@MainActivity)
             }
         })
         binding.run {
@@ -58,8 +58,8 @@ class MainActivity : BasicActivity() {
 //            setOnClickListener { toast(getSSID()) }
             setOnClickListener { fabAction() }
 
-            viewModel.status.observe(this@MainActivity) {
-                when (viewModel.currentStatus) {
+            statusModel.status.observe(this@MainActivity) {
+                when (statusModel.currentStatus) {
                     LogStatus.OFFLINE, LogStatus.ERROR -> {
                         icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_online, theme)
                         text = resources.getString(R.string.connect)
@@ -84,12 +84,12 @@ class MainActivity : BasicActivity() {
             .show()
 
     private fun fabAction() {
-        when (viewModel.currentStatus) {
+        when (statusModel.currentStatus) {
             LogStatus.OFFLINE, LogStatus.ERROR -> {
-                viewModel.online()
+                statusModel.online(userModel.currentUser)
             }
             LogStatus.ONLINE -> {
-                viewModel.offline()
+                statusModel.offline()
             }
             else -> nothing()
         }
