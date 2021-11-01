@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" />
 
-    <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="AppTheme.Dark" parent="Theme.Material3.Dark.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="appTextColor">@color/colorDefaultTextDark</item>
@@ -16,7 +16,7 @@
         <item name="appTextSecondaryColor">@color/colorDefaultTextLight</item>
     </style>
 
-    <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme.Light" parent="Theme.Material3.Light.NoActionBar">
         <item name="appSubTextColor">@color/colorDefaultSubText</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="appTextColor">@color/colorDefaultTextLight</item>
@@ -38,7 +38,7 @@
         <item name="colorSurface">@color/colorPrimaryPure</item>
         <item name="colorOnSurface">@color/colorAccentPure</item>
         <item name="colorSecondary">@color/colorSecondaryPure</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantPure</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantPure</item>
     </style>
 
     <style name="AppTheme.Light.White">
@@ -50,7 +50,7 @@
         <item name="colorSurface">@color/colorPrimaryWhite</item>
         <item name="colorOnSurface">@color/colorAccentWhite</item>
         <item name="colorSecondary">@color/colorSecondaryWhite</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantWhite</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantWhite</item>
     </style>
 
     <style name="AppTheme.Light.Amber">
@@ -63,7 +63,7 @@
         <item name="colorSurface">@color/colorPrimaryAmber</item>
         <item name="colorOnSurface">@color/colorAccentAmber</item>
         <item name="colorSecondary">@color/colorSecondaryAmber</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantAmber</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantAmber</item>
     </style>
 
     <style name="AppTheme.Light.Yun">
@@ -76,7 +76,7 @@
         <item name="colorSurface">@color/colorPrimaryYun</item>
         <item name="colorOnSurface">@color/colorSecondaryVariantYun</item>
         <item name="colorSecondary">@color/colorSecondaryYun</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantYun</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantYun</item>
     </style>
 
     <style name="AppTheme.Dark.ZeroGoPurple">
@@ -89,7 +89,7 @@
         <item name="colorSurface">@color/colorPrimaryZGPurple</item>
         <item name="colorOnSurface">@color/colorSecondaryVariantZGPurple</item>
         <item name="colorSecondary">@color/colorSecondaryZGPurple</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantZGPurple</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantZGPurple</item>
     </style>
 
     <style name="AppTheme.Dark.Teal">
@@ -102,7 +102,7 @@
         <item name="colorSurface">@color/colorPrimaryTeal</item>
         <item name="colorOnSurface">@color/colorAccentTeal</item>
         <item name="colorSecondary">@color/colorSecondaryTeal</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantTeal</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantTeal</item>
     </style>
 
     <style name="AppTheme.Dark.Pink">
@@ -115,14 +115,14 @@
         <item name="colorSurface">@color/colorPrimaryPink</item>
         <item name="colorOnSurface">@color/colorAccentPink</item>
         <item name="colorSecondary">@color/colorSecondaryPink</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantPink</item>
+        <item name="colorTertiary">@color/colorSecondaryVariantPink</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar">
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar">
         <item name="elevation">10dp</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents">
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3">
         <item name="elevation">10dp</item>
     </style>
 
@@ -145,7 +145,8 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AppTheme.Layout.Card" parent="AppTheme.Layout.Dialog">
+    <style name="AppTheme.Layout.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">2dp</item>
         <item name="android:checkable">true</item>
         <item name="android:clickable">true</item>
@@ -174,23 +175,23 @@
         <item name="android:textColor">?attr/appTextColor</item>
     </style>
 
-    <style name="AppTheme.Button.OutlinedIcon" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+    <style name="AppTheme.Button.OutlinedIcon" parent="Widget.Material3.Button.OutlinedButton.Icon">
         <item name="strokeColor">?attr/colorAccent</item>
         <item name="strokeWidth">2dp</item>
         <item name="iconTint">?attr/colorAccent</item>
     </style>
 
-    <style name="ShapeAppearance.App.Large" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+    <style name="ShapeAppearance.App.Large" parent="ShapeAppearance.Material3.LargeComponent">
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">20dp</item>
     </style>
 
-    <style name="ShapeAppearance.App.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <style name="ShapeAppearance.App.Medium" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">12dp</item>
     </style>
 
-    <style name="ShapeAppearance.App.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="ShapeAppearance.App.Small" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">1dp</item>
     </style>
@@ -219,13 +220,13 @@
         <item name="android:textColor">?attr/appTextSecondaryColor</item>
     </style>
 
-    <style name="Widget.App.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+    <style name="Widget.App.BottomAppBar" parent="Widget.Material3.BottomAppBar">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomAppBar</item>
     </style>
 
-    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
-    </style>
+<!--    <style name="Widget.App.FloatingActionButton" parent="Widget.Material3.FloatingActionButton">-->
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>-->
+<!--    </style>-->
 
     <style name="ThemeOverlay.App.BottomAppBar" parent="">
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>

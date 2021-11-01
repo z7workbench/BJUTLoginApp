@@ -10,10 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import top.z7workbench.bjutloginapp.LoginApp
-import top.z7workbench.bjutloginapp.network.NetworkGlobalObject
-import top.z7workbench.bjutloginapp.network.Wired4Service
-import top.z7workbench.bjutloginapp.network.Wired6Service
-import top.z7workbench.bjutloginapp.network.WirelessService
+import top.z7workbench.bjutloginapp.network.*
 import top.z7workbench.bjutloginapp.prefs.AppSettingsOperator
 import top.z7workbench.bjutloginapp.util.IpMode
 import top.z7workbench.bjutloginapp.util.LogStatus
@@ -32,6 +29,7 @@ class StatusViewModel(val app: Application) : AndroidViewModel(app) {
     private val _swipe = MutableStateFlow<Boolean>(false)
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     private val dataStore = getApplication<LoginApp>().dataStore
+    private val service = AllInOneService.service
 
     val validatedStatus = _validatedStatus.debounce(200L)
         .asLiveData()
@@ -89,16 +87,13 @@ class StatusViewModel(val app: Application) : AndroidViewModel(app) {
             exception {
                 when (mode) {
                     IpMode.WIRELESS -> {
-                        val service = WirelessService.service
-                        service.login(user.name, user.password)
+                        service.wirelessLogin(user.name, user.password)
                     }
                     IpMode.WIRED_IPV6 -> {
-                        val service = Wired6Service.service
-                        service.login(NetworkGlobalObject.body(mode, user))
+                        service.wired6Login(NetworkGlobalObject.body(mode, user))
                     }
                     else -> {
-                        val service = Wired4Service.service
-                        service.login(NetworkGlobalObject.body(mode, user))
+                        service.wiredLogin(NetworkGlobalObject.body(mode, user))
                     }
                 }
             }
@@ -119,10 +114,10 @@ class StatusViewModel(val app: Application) : AndroidViewModel(app) {
         exception {
             val returnBody = when (mode) {
                 IpMode.WIRED_IPV6 -> {
-                    Wired6Service.service.sync()
+                    service.wired6Sync()
                 }
                 else -> {
-                    Wired4Service.service.sync()
+                    service.wiredSync()
                 }
             }
 //        returnBody.collect {
@@ -142,16 +137,13 @@ class StatusViewModel(val app: Application) : AndroidViewModel(app) {
             exception {
                 when (mode) {
                     IpMode.WIRELESS -> {
-                        val service = WirelessService.service
-                        service.logout()
+                        service.wirelessLogout()
                     }
                     IpMode.WIRED_IPV6 -> {
-                        val service = Wired6Service.service
-                        service.logout()
+                        service.wired6Logout()
                     }
                     else -> {
-                        val service = Wired4Service.service
-                        service.logout()
+                        service.wiredLogout()
                     }
                 }
             }
