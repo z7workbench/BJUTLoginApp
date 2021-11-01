@@ -68,8 +68,8 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", rootProject.extra["ktVersion"] as String))
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.4.0-beta01")
-    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.appcompat:appcompat:1.4.0-rc01")
+    implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.core:core-splashscreen:1.0.0-alpha02")
     // Preference
     implementation("androidx.preference:preference:1.1.1")
