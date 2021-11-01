@@ -29,7 +29,7 @@ class StatusViewModel(val app: Application) : AndroidViewModel(app) {
     private val _swipe = MutableStateFlow<Boolean>(false)
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     private val dataStore = getApplication<LoginApp>().dataStore
-    private val service = AllInOneService.service
+    private val service by lazy { AllInOneService.service }
 
     val validatedStatus = _validatedStatus.debounce(200L)
         .asLiveData()
