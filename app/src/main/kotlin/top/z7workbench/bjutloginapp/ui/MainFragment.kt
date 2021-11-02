@@ -2,6 +2,7 @@ package top.z7workbench.bjutloginapp.ui
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ import top.z7workbench.bjutloginapp.util.buildString
 import top.z7workbench.bjutloginapp.util.startActivity
 
 class MainFragment : BasicFragment<FragmentMainBinding>() {
+    val tagg = "MainFragment"
     val userModel by activityViewModels<UserViewModel>()
     val statusModel by activityViewModels<StatusViewModel>()
 
@@ -38,9 +40,10 @@ class MainFragment : BasicFragment<FragmentMainBinding>() {
 
         binding.swipeRefresh.setOnRefreshListener {
 //          TODO("refresh")
+            Log.d(tagg, "refresh")
             statusModel.networkState(requireContext())
             sync()
-            binding.swipeRefresh.isRefreshing = false
+//            binding.swipeRefresh.isRefreshing = false
         }
 
         statusModel.swipe.observe(this) {

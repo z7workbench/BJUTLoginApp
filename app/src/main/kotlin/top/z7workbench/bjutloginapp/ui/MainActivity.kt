@@ -1,6 +1,7 @@
 package top.z7workbench.bjutloginapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Lifecycle
@@ -16,6 +17,7 @@ import top.z7workbench.bjutloginapp.util.LogStatus
 import top.z7workbench.bjutloginapp.util.nothing
 
 class MainActivity : BasicActivity() {
+    val tag = "MainActivity"
     private val userModel by viewModels<UserViewModel>()
     private val statusModel by viewModels<StatusViewModel>()
     private val binding by lazy {
@@ -86,9 +88,11 @@ class MainActivity : BasicActivity() {
     private fun fabAction() {
         when (statusModel.currentStatus) {
             LogStatus.OFFLINE, LogStatus.ERROR -> {
+                Log.d(tag, "online")
                 statusModel.online(userModel.currentUser)
             }
             LogStatus.ONLINE -> {
+                Log.d(tag, "offline")
                 statusModel.offline()
             }
             else -> nothing()
