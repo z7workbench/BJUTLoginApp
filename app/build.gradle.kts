@@ -1,10 +1,10 @@
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
 
-val lifecycleVersion = "2.4.0-alpha02"
+val lifecycleVersion = "2.4.0"
 val navVersion = "2.3.5"
 val roomVersion = "2.4.0-alpha03"
-val fragmentVersion = "1.3.5"
-val activityVersion = "1.3.0-beta02"
+val fragmentVersion = "1.3.6"
+val activityVersion = "1.4.0"
 val gitCommitCount =
     ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-list HEAD --count"))
         .trim()

@@ -7,7 +7,7 @@
     <color name="colorDefaultTextLight">@android:color/black</color>
 
     <color name="colorAccentPure">#FFCC00</color>
-    <color name="colorAccentBackgroundPure">#8686FF</color>
+    <color name="colorAccentBackgroundPure">#9774ef</color>
     <color name="colorPrimaryPure">@android:color/black</color>
     <color name="colorBackgroundPure">@color/colorPrimaryPure</color>
     <color name="colorSecondaryPure">#ffab91</color>
@@ -38,7 +38,7 @@
 
     <color name="colorAccentZGPurple">#FFCC00</color>
     <color name="colorAccentBackgroundZGPurple">@android:color/white</color>
-    <color name="colorPrimaryZGPurple">#8686FF</color>
+    <color name="colorPrimaryZGPurple">#9774ef</color>
     <color name="colorBackgroundZGPurple">@color/colorPrimaryZGPurple</color>
     <color name="colorSubTextZGPurple">#DDDDDD</color>
     <color name="colorSecondaryZGPurple">#f48fb1</color>
