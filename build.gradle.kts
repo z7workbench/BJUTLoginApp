@@ -10,7 +10,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.1.0-beta03")
+        classpath("com.android.tools.build:gradle:7.1.0-beta04")
         classpath(kotlin("gradle-plugin", version = rootProject.extra["ktVersion"] as String))
 
         // NOTE: Do not place your application dependencies here; they belong
