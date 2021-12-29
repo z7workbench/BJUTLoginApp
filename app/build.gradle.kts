@@ -10,10 +10,8 @@ val gitCommitCount =
         .trim()
 plugins {
     id("com.android.application")
-    // Add ksp
-    id("com.google.devtools.ksp") version "1.5.31-1.0.0"
+    id("com.google.devtools.ksp") version "1.6.0-1.0.2"
     kotlin("android")
-//    kotlin("kapt")
 }
 android {
     compileSdk = 31
@@ -68,7 +66,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", rootProject.extra["ktVersion"] as String))
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.4.0-rc01")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.core:core-splashscreen:1.0.0-alpha02")
     // Preference
@@ -76,9 +74,9 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.1.1")
     // Layouts
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("com.google.android.material:material:1.5.0-alpha05")
+    implementation("com.google.android.material:material:1.5.0-rc01")
     // Activity
     implementation("androidx.activity:activity:$activityVersion")
     implementation("androidx.activity:activity-ktx:$activityVersion")
@@ -100,12 +98,12 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose"]}")
     implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose"]}")
     implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("com.google.android.material:compose-theme-adapter:1.0.4")
+    implementation("com.google.android.material:compose-theme-adapter:1.1.2")
     implementation("com.google.accompanist:accompanist-appcompat-theme:0.20.0")
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     // Paging
-    implementation("androidx.paging:paging-runtime:3.0.1")
+    implementation("androidx.paging:paging-runtime:3.1.0")
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
